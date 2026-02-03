@@ -3,7 +3,7 @@ import { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import { Bot, Users, Calendar, PenTool, ChevronRight, Check, Star, Menu, X, ArrowRight, Zap, Clock, TrendingUp, ChevronDown, MessageSquare, BarChart3, Shield, Sparkles } from 'lucide-react';
 
 const EXTERNAL_URLS = {
-  appointments: 'https://www.chicagoaigroup.com/appointments',
+  appointments: 'https://calendly.com/matt-chicagoaigroup/30min',
   contact: 'https://www.chicagoaigroup.com/contact',
 };
 
