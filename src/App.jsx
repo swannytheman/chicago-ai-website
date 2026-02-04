@@ -210,8 +210,8 @@ export default function App() {
               <Zap className="w-4 h-4 text-blue-400" aria-hidden="true" /><span>AI That Actually Works for Small Business</span><span className="w-2 h-2 bg-blue-400 rounded-full animate-pulse" aria-hidden="true" />
             </div>
           </FadeInSection>
-          <FadeInSection delay={100}><h1 id="hero-heading" className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 leading-tight tracking-tight">Grow Your Business<br /><span className="text-gradient">Without Growing Your Team</span></h1></FadeInSection>
-          <FadeInSection delay={200}><p className="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-10 leading-relaxed">AI agents that handle customer service, sales, admin, and marketing—so you can focus on what you do best.</p></FadeInSection>
+          <FadeInSection delay={100}><h1 id="hero-heading" className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 leading-tight tracking-tight">Reclaim Your Time<br /><span className="text-gradient">Scale Your Business with AI</span></h1></FadeInSection>
+          <FadeInSection delay={200}><p className="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-10 leading-relaxed">AI agents that handle customer service, sales, admin, and marketing—so you can stop drowning in busywork and focus on growth. Zero tech skills required.</p></FadeInSection>
           <FadeInSection delay={300}>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <button onClick={() => scrollTo('cta')} className="btn-shine group bg-white text-black px-8 py-4 rounded-full font-semibold text-lg hover:bg-gray-100 transition transform hover:scale-105 flex items-center justify-center gap-2" type="button">Book a Free Call <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" aria-hidden="true" /></button>
@@ -247,9 +247,9 @@ export default function App() {
         <div className="max-w-7xl mx-auto px-6">
           <FadeInSection>
             <div className="text-center mb-16">
-              <span className="text-sm uppercase tracking-widest text-gray-500 mb-4 block">The Problem We Solve</span>
-              <h2 id="about-heading" className="text-4xl md:text-5xl font-bold mb-4">You're Doing Too Much</h2>
-              <p className="text-gray-400 max-w-2xl mx-auto">Answering emails. Chasing leads. Scheduling. Posting content. There's a better way.</p>
+              <span className="text-sm uppercase tracking-widest text-gray-500 mb-4 block">Tired of Being Buried in Admin?</span>
+              <h2 id="about-heading" className="text-4xl md:text-5xl font-bold mb-4">Let AI Handle the Grind So You Can Focus on Growth</h2>
+              <p className="text-gray-400 max-w-2xl mx-auto">Answering emails. Chasing leads. Scheduling. Posting content. You didn't start a business to drown in busywork.</p>
             </div>
           </FadeInSection>
           <div className="grid md:grid-cols-3 gap-6">
@@ -297,7 +297,7 @@ export default function App() {
             <div className="text-center mb-16">
               <span className="text-sm uppercase tracking-widest text-gray-500 mb-4 block">AI Agents</span>
               <h2 id="services-heading" className="text-4xl md:text-5xl font-bold mb-4">Pick Your Superpower</h2>
-              <p className="text-gray-400 max-w-2xl mx-auto">Four AI agents. Each one replaces hours of work you hate doing.</p>
+              <p className="text-gray-400 max-w-2xl mx-auto">Join Chicago's smartest small businesses using AI to outpace competitors—starting at just $129/month.</p>
             </div>
           </FadeInSection>
           <FadeInSection delay={100}>
