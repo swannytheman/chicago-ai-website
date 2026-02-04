@@ -486,7 +486,7 @@ export default function App() {
         <div className="absolute top-20 left-10 w-72 h-72 bg-blue-500/10 rounded-full blur-3xl animate-pulse-glow" aria-hidden="true" />
         <div className="absolute bottom-20 right-10 w-96 h-96 bg-white/5 rounded-full blur-3xl animate-pulse-glow" style={{ animationDelay: '-2s' }} aria-hidden="true" />
         <div className="absolute top-1/3 right-1/4 w-48 h-48 bg-blue-400/5 rounded-full blur-3xl animate-pulse-glow" style={{ animationDelay: '-1s' }} aria-hidden="true" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] opacity-30" aria-hidden="true">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] sm:w-[500px] sm:h-[500px] md:w-[800px] md:h-[800px] opacity-30" aria-hidden="true">
           <div className="absolute inset-0 border border-blue-500/20 rounded-full animate-float" />
           <div className="absolute inset-12 border border-white/10 rounded-full animate-float-delayed" />
           <div className="absolute inset-24 border border-blue-500/10 rounded-full animate-float" style={{ animationDelay: '-1.5s' }} />
@@ -497,7 +497,7 @@ export default function App() {
               <Zap className="w-4 h-4 text-blue-400" aria-hidden="true" /><span>AI That Actually Works for Small Business</span><span className="w-2 h-2 bg-blue-400 rounded-full animate-pulse" aria-hidden="true" />
             </div>
           </FadeInSection>
-          <FadeInSection delay={100}><h1 id="hero-heading" className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 leading-tight tracking-tight">Reclaim Your Time<br /><span className="text-gradient">Scale Your Business with AI</span></h1></FadeInSection>
+          <FadeInSection delay={100}><h1 id="hero-heading" className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold mb-6 leading-tight tracking-tight">Reclaim Your Time<br /><span className="text-gradient">Scale Your Business with AI</span></h1></FadeInSection>
           <FadeInSection delay={200}><p className="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-10 leading-relaxed">AI agents that handle customer service, sales, admin, and marketing—so you can stop drowning in busywork and focus on growth. Zero tech skills required.</p></FadeInSection>
           <FadeInSection delay={300}>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -562,15 +562,15 @@ export default function App() {
               <p className="text-gray-400 max-w-2xl mx-auto">We handle everything. You just show up for a few calls.</p>
             </div>
           </FadeInSection>
-          <div className="grid md:grid-cols-4 gap-6 relative">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 relative">
             <div className="hidden md:block absolute top-1/2 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-blue-500/30 to-transparent -translate-y-1/2" aria-hidden="true" />
             {process.map((step, idx) => (
               <FadeInSection key={idx} delay={idx * 150}>
                 <div className="relative text-center group">
-                  <div className="w-20 h-20 glass glow mx-auto rounded-2xl flex items-center justify-center mb-6 transition transform group-hover:scale-110 group-hover:bg-white/20"><step.icon className="w-8 h-8" aria-hidden="true" /></div>
-                  <div className="absolute -top-2 -right-2 w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center font-bold text-sm shadow-lg shadow-blue-500/30" aria-label={`Step ${idx + 1}`}>{idx + 1}</div>
-                  <h3 className="text-xl font-semibold mb-2">{step.title}</h3>
-                  <p className="text-gray-400 text-sm">{step.desc}</p>
+                  <div className="w-16 h-16 sm:w-20 sm:h-20 glass glow mx-auto rounded-2xl flex items-center justify-center mb-4 sm:mb-6 transition transform group-hover:scale-110 group-hover:bg-white/20"><step.icon className="w-7 h-7 sm:w-8 sm:h-8" aria-hidden="true" /></div>
+                  <div className="absolute -top-1 right-1 sm:-top-2 sm:-right-2 w-7 h-7 sm:w-8 sm:h-8 bg-blue-500 text-white rounded-full flex items-center justify-center font-bold text-xs sm:text-sm shadow-lg shadow-blue-500/30" aria-label={`Step ${idx + 1}`}>{idx + 1}</div>
+                  <h3 className="text-base sm:text-xl font-semibold mb-1 sm:mb-2">{step.title}</h3>
+                  <p className="text-gray-400 text-xs sm:text-sm">{step.desc}</p>
                 </div>
               </FadeInSection>
             ))}
@@ -588,17 +588,17 @@ export default function App() {
             </div>
           </FadeInSection>
           <FadeInSection delay={100}>
-            <div className="flex flex-wrap justify-center gap-3 mb-12" role="tablist" aria-label="Product categories">
+            <div className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-12" role="tablist" aria-label="Product categories">
               {products.map((product, idx) => (
-                <button key={idx} onClick={() => setActiveProduct(idx)} className={`flex items-center gap-2 px-6 py-3 rounded-full transition transform hover:scale-105 ${activeProduct === idx ? 'bg-white text-black shadow-lg shadow-blue-500/20' : 'glass glass-hover'}`} type="button" role="tab" aria-selected={activeProduct === idx}>
-                  <product.icon className="w-4 h-4" aria-hidden="true" /><span className="hidden sm:inline">{product.name.split(' ').slice(0, 2).join(' ')}</span>
+                <button key={idx} onClick={() => setActiveProduct(idx)} className={`flex items-center gap-1.5 sm:gap-2 px-3 py-2 sm:px-6 sm:py-3 rounded-full transition transform hover:scale-105 text-sm sm:text-base ${activeProduct === idx ? 'bg-white text-black shadow-lg shadow-blue-500/20' : 'glass glass-hover'}`} type="button" role="tab" aria-selected={activeProduct === idx}>
+                  <product.icon className="w-4 h-4" aria-hidden="true" /><span className="sm:hidden">{product.name.split(' ')[0]}</span><span className="hidden sm:inline">{product.name.split(' ').slice(0, 2).join(' ')}</span>
                 </button>
               ))}
             </div>
           </FadeInSection>
           <FadeInSection delay={200}>
             <div className="glass glow rounded-3xl overflow-hidden" role="tabpanel">
-              <div className="p-8 md:p-12">
+              <div className="p-5 sm:p-8 md:p-12">
                 <div className="flex flex-col md:flex-row md:items-start gap-6 mb-8">
                   <div className="w-16 h-16 bg-gradient-to-br from-white to-gray-300 rounded-2xl flex items-center justify-center flex-shrink-0 shadow-lg shadow-blue-500/20 animate-blue-pulse">
                     {(() => { const Icon = products[activeProduct].icon; return <Icon className="w-8 h-8 text-black" aria-hidden="true" />; })()}
@@ -662,18 +662,18 @@ export default function App() {
           </FadeInSection>
           <FadeInSection delay={100}>
             <div className="relative">
-              <div className="glass glow rounded-3xl p-8 md:p-12 transition-all duration-500">
-                <div className="flex items-center justify-between mb-6">
-                  <div className="flex gap-1" role="img" aria-label="5 star rating">{[...Array(5)].map((_, i) => (<Star key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400" aria-hidden="true" />))}</div>
-                  <div className="bg-blue-500/20 border border-blue-500/30 px-4 py-2 rounded-full text-sm font-semibold text-blue-400">{testimonials[currentTestimonial].metric}</div>
+              <div className="glass glow rounded-3xl p-6 sm:p-8 md:p-12 transition-all duration-500">
+                <div className="flex items-center justify-between mb-4 sm:mb-6">
+                  <div className="flex gap-1" role="img" aria-label="5 star rating">{[...Array(5)].map((_, i) => (<Star key={i} className="w-4 h-4 sm:w-5 sm:h-5 fill-yellow-400 text-yellow-400" aria-hidden="true" />))}</div>
+                  <div className="bg-blue-500/20 border border-blue-500/30 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full text-xs sm:text-sm font-semibold text-blue-400">{testimonials[currentTestimonial].metric}</div>
                 </div>
-                <blockquote className="text-xl md:text-2xl mb-8 leading-relaxed min-h-[140px]">"{testimonials[currentTestimonial].quote}"</blockquote>
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-700 rounded-full flex items-center justify-center font-bold text-lg" aria-hidden="true">{testimonials[currentTestimonial].author.charAt(0)}</div>
-                    <div><div className="font-semibold text-lg">{testimonials[currentTestimonial].author}</div><div className="text-gray-400">{testimonials[currentTestimonial].title}</div></div>
+                <blockquote className="text-base sm:text-xl md:text-2xl mb-6 sm:mb-8 leading-relaxed">"{testimonials[currentTestimonial].quote}"</blockquote>
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+                  <div className="flex items-center gap-3 sm:gap-4">
+                    <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-blue-500 to-blue-700 rounded-full flex items-center justify-center font-bold text-base sm:text-lg flex-shrink-0" aria-hidden="true">{testimonials[currentTestimonial].author.charAt(0)}</div>
+                    <div><div className="font-semibold text-base sm:text-lg">{testimonials[currentTestimonial].author}</div><div className="text-gray-400 text-sm">{testimonials[currentTestimonial].title}</div></div>
                   </div>
-                  <span className="hidden sm:inline-block text-xs uppercase tracking-wider text-gray-500 glass px-3 py-1.5 rounded-full">{testimonials[currentTestimonial].industry}</span>
+                  <span className="text-xs uppercase tracking-wider text-gray-500 glass px-3 py-1.5 rounded-full self-start sm:self-auto">{testimonials[currentTestimonial].industry}</span>
                 </div>
               </div>
               <div className="flex justify-center gap-3 mt-8" role="tablist" aria-label="Testimonial navigation">{testimonials.map((_, idx) => (<button key={idx} onClick={() => setCurrentTestimonial(idx)} className={`w-3 h-3 rounded-full transition-all duration-300 ${currentTestimonial === idx ? 'bg-blue-400 w-8' : 'bg-white/30 hover:bg-white/50'}`} type="button" role="tab" aria-selected={currentTestimonial === idx} aria-label={`View testimonial ${idx + 1}`} />))}</div>
@@ -704,9 +704,9 @@ export default function App() {
                 { name: 'Salesforce', icon: <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 3C7 3 3 7.5 3 12.5S7 21 12 21s9-3.5 9-8.5S17 3 12 3z" /><path d="M8 13l3-3 2 2 3-3" /></svg> },
                 { name: 'Zapier', icon: <Zap className="w-6 h-6" /> }
               ].map((tool, idx) => (
-                <div key={idx} className="glass glass-hover rounded-xl px-6 py-4 flex items-center gap-3 transition transform hover:scale-105 cursor-default">
+                <div key={idx} className="glass glass-hover rounded-xl px-4 py-3 sm:px-6 sm:py-4 flex items-center gap-2 sm:gap-3 transition transform hover:scale-105 cursor-default">
                   <span className="text-gray-300" aria-hidden="true">{tool.icon}</span>
-                  <span className="text-sm font-medium text-gray-300">{tool.name}</span>
+                  <span className="text-xs sm:text-sm font-medium text-gray-300">{tool.name}</span>
                 </div>
               ))}
             </div>
@@ -761,7 +761,7 @@ export default function App() {
       <section id="cta" className="py-24" aria-labelledby="cta-heading">
         <div className="max-w-5xl mx-auto px-6">
           <FadeInSection>
-            <div className="glass glow rounded-3xl p-12 md:p-16 text-center relative overflow-hidden border border-blue-500/20">
+            <div className="glass glow rounded-3xl p-6 sm:p-12 md:p-16 text-center relative overflow-hidden border border-blue-500/20">
               <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-blue-500/10 via-transparent to-transparent" aria-hidden="true" />
               <div className="absolute -top-24 -right-24 w-48 h-48 bg-blue-500/20 rounded-full blur-3xl" aria-hidden="true" />
               <div className="absolute -bottom-24 -left-24 w-48 h-48 bg-blue-500/10 rounded-full blur-3xl" aria-hidden="true" />
@@ -825,10 +825,10 @@ export default function App() {
           </div>
 
           <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-            <div className="text-gray-500 text-sm">&copy; 2025 The Chicago AI Group. All rights reserved.</div>
-            <div className="flex gap-6 text-gray-500 text-sm">
-              <button onClick={() => { goHome(); setShowPrivacy(true); window.scrollTo({ top: 0 }); }} className="hover:text-white transition" type="button">Privacy Policy</button>
-              <button onClick={() => { goHome(); setShowTerms(true); window.scrollTo({ top: 0 }); }} className="hover:text-white transition" type="button">Terms of Service</button>
+            <div className="text-gray-500 text-sm text-center md:text-left">&copy; 2025 The Chicago AI Group. All rights reserved.</div>
+            <div className="flex flex-wrap justify-center gap-4 sm:gap-6 text-gray-500 text-sm">
+              <button onClick={() => { goHome(); setShowPrivacy(true); window.scrollTo({ top: 0 }); }} className="hover:text-white transition" type="button">Privacy</button>
+              <button onClick={() => { goHome(); setShowTerms(true); window.scrollTo({ top: 0 }); }} className="hover:text-white transition" type="button">Terms</button>
               <button onClick={() => { goHome(); setShowCopyright(true); window.scrollTo({ top: 0 }); }} className="hover:text-white transition" type="button">Copyright</button>
               <a href={EXTERNAL_URLS.contact} {...SECURE_LINK_PROPS} className="hover:text-white transition">Contact</a>
             </div>
