@@ -195,6 +195,113 @@ const PrivacyPolicy = ({ onBack }) => (
   </div>
 );
 
+const TermsOfService = ({ onBack }) => (
+  <div className="min-h-screen bg-black text-white pt-32 pb-24">
+    <div className="max-w-3xl mx-auto px-6">
+      <button onClick={onBack} className="text-blue-400 hover:text-blue-300 transition mb-8 flex items-center gap-2" type="button">
+        <ArrowRight className="w-4 h-4 rotate-180" aria-hidden="true" /> Back to Home
+      </button>
+      <h1 className="text-4xl md:text-5xl font-bold mb-4">Terms of Service</h1>
+      <p className="text-gray-400 mb-12">Effective Date: February 4, 2026</p>
+
+      <div className="prose prose-invert max-w-none space-y-8 text-gray-300 leading-relaxed">
+        <p>These Terms of Service (&quot;Terms&quot;) govern your access to and use of the website chicagoaigroup.com (the &quot;Website&quot;) and the AI-powered services provided by The Chicago AI Group (&quot;we,&quot; &quot;us,&quot; or &quot;our&quot;), including AI agents for customer service, sales, administration, and marketing (collectively, the &quot;Services&quot;). By accessing or using our Website or Services, you agree to be bound by these Terms. If you do not agree, you must not access or use our Website or Services.</p>
+        <p>These Terms incorporate our Privacy Policy by reference, which explains how we handle your personal information.</p>
+
+        <h2 className="text-2xl font-bold text-white pt-4">1. Eligibility</h2>
+        <p>You must be at least 18 years old or the age of majority in your jurisdiction to use our Services. By using the Services, you represent that you meet these requirements and have the authority to enter into these Terms on behalf of yourself or your organization.</p>
+
+        <h2 className="text-2xl font-bold text-white pt-4">2. Description of Services</h2>
+        <p>We provide AI-driven tools tailored for small businesses, including:</p>
+        <ul className="list-disc pl-6 space-y-2">
+          <li>AI agents for automating customer service interactions.</li>
+          <li>Sales and lead generation support.</li>
+          <li>Administrative task automation.</li>
+          <li>Marketing campaign management and optimization.</li>
+        </ul>
+        <p>Services are available through subscription plans:</p>
+        <ul className="list-disc pl-6 space-y-2">
+          <li><strong className="text-white">Pro Plan:</strong> $299 per month, offering standard features and support.</li>
+          <li><strong className="text-white">Enterprise Plan:</strong> Custom pricing for advanced integrations and dedicated support.</li>
+        </ul>
+        <p>We may update or modify the Services at any time, and we do not guarantee continuous availability or specific features.</p>
+
+        <h2 className="text-2xl font-bold text-white pt-4">3. User Accounts</h2>
+        <p>To access certain Services, you may need to create an account. You agree to:</p>
+        <ul className="list-disc pl-6 space-y-2">
+          <li>Provide accurate and complete information during registration.</li>
+          <li>Maintain the security of your account credentials.</li>
+          <li>Notify us immediately of any unauthorized access.</li>
+          <li>Be responsible for all activities under your account.</li>
+        </ul>
+        <p>We reserve the right to suspend or terminate accounts for violations of these Terms.</p>
+
+        <h2 className="text-2xl font-bold text-white pt-4">4. Payments and Subscriptions</h2>
+        <ul className="list-disc pl-6 space-y-2">
+          <li><strong className="text-white">Billing:</strong> Subscriptions are billed monthly or as specified in your plan. All fees are non-refundable except as required by law.</li>
+          <li><strong className="text-white">Payment Methods:</strong> Payments are processed through secure third-party providers. You authorize us to charge your provided payment method.</li>
+          <li><strong className="text-white">Taxes:</strong> You are responsible for any applicable taxes.</li>
+          <li><strong className="text-white">Cancellations:</strong> You may cancel your subscription at any time, but no refunds will be issued for partial periods. Cancellations take effect at the end of the current billing cycle.</li>
+          <li><strong className="text-white">Price Changes:</strong> We may adjust pricing with notice; continued use after changes constitutes acceptance.</li>
+        </ul>
+
+        <h2 className="text-2xl font-bold text-white pt-4">5. User Content and Conduct</h2>
+        <p>You may provide data, content, or integrations (e.g., CRM data) to use our Services (&quot;User Content&quot;). You retain ownership of User Content but grant us a worldwide, non-exclusive, royalty-free license to use, store, and process it as necessary to provide the Services.</p>
+        <p>You agree not to:</p>
+        <ul className="list-disc pl-6 space-y-2">
+          <li>Use the Services for illegal purposes or to violate any laws.</li>
+          <li>Upload harmful content, including viruses or malware.</li>
+          <li>Infringe on third-party rights, including intellectual property.</li>
+          <li>Interfere with the Services or other users.</li>
+          <li>Attempt to reverse-engineer or decompile our technology.</li>
+        </ul>
+        <p>We may monitor User Content and remove it if it violates these Terms, but we are not obligated to do so.</p>
+
+        <h2 className="text-2xl font-bold text-white pt-4">6. Intellectual Property</h2>
+        <p>All content on our Website and Services, including AI models, software, logos, and materials (excluding User Content), is owned by us or our licensors and protected by intellectual property laws. You are granted a limited, non-transferable license to use the Services for your internal business purposes during your subscription term.</p>
+        <p>You may not copy, modify, distribute, or create derivative works from our intellectual property without written permission.</p>
+
+        <h2 className="text-2xl font-bold text-white pt-4">7. Integrations and Third-Party Services</h2>
+        <p>Our Services may integrate with third-party tools (e.g., CRMs via APIs). You are responsible for complying with those third parties&apos; terms. We are not liable for any issues arising from such integrations.</p>
+
+        <h2 className="text-2xl font-bold text-white pt-4">8. Disclaimers and Limitations of Liability</h2>
+        <p className="uppercase text-sm">THE SERVICES ARE PROVIDED &quot;AS IS&quot; WITHOUT WARRANTIES OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, OR NON-INFRINGEMENT. WE DO NOT GUARANTEE ERROR-FREE OPERATION, ACCURACY OF AI OUTPUTS, OR UNINTERRUPTED ACCESS.</p>
+        <p className="uppercase text-sm">TO THE MAXIMUM EXTENT PERMITTED BY LAW, WE SHALL NOT BE LIABLE FOR INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES, INCLUDING LOST PROFITS OR DATA LOSS, EVEN IF ADVISED OF THE POSSIBILITY. OUR TOTAL LIABILITY SHALL NOT EXCEED THE AMOUNT PAID BY YOU FOR THE SERVICES IN THE PRECEDING 12 MONTHS.</p>
+
+        <h2 className="text-2xl font-bold text-white pt-4">9. Indemnification</h2>
+        <p>You agree to indemnify and hold us harmless from any claims, losses, or damages arising from your use of the Services, violation of these Terms, or infringement of third-party rights.</p>
+
+        <h2 className="text-2xl font-bold text-white pt-4">10. Termination</h2>
+        <p>We may terminate or suspend your access to the Services at any time for violations of these Terms, non-payment, or other reasons, with or without notice. Upon termination, you must cease using the Services, and any outstanding payments remain due.</p>
+
+        <h2 className="text-2xl font-bold text-white pt-4">11. Governing Law and Dispute Resolution</h2>
+        <p>These Terms are governed by the laws of the State of Illinois, without regard to conflict of laws principles. Any disputes shall be resolved exclusively in the courts located in Chicago, Illinois. You waive any objections to venue or jurisdiction.</p>
+
+        <h2 className="text-2xl font-bold text-white pt-4">12. Changes to These Terms</h2>
+        <p>We may update these Terms from time to time. Changes will be posted on our Website with an updated effective date. Continued use after changes constitutes acceptance. It is your responsibility to review periodically.</p>
+
+        <h2 className="text-2xl font-bold text-white pt-4">13. Miscellaneous</h2>
+        <ul className="list-disc pl-6 space-y-2">
+          <li><strong className="text-white">Severability:</strong> If any provision is held invalid, the remainder remains in effect.</li>
+          <li><strong className="text-white">No Waiver:</strong> Failure to enforce any right does not waive it.</li>
+          <li><strong className="text-white">Assignment:</strong> We may assign these Terms without your consent; you may not assign without our written approval.</li>
+          <li><strong className="text-white">Entire Agreement:</strong> These Terms constitute the full agreement between you and us.</li>
+        </ul>
+
+        <h2 className="text-2xl font-bold text-white pt-4">14. Contact Us</h2>
+        <p>For questions about these Terms, contact us at:</p>
+        <div className="glass rounded-2xl p-6">
+          <p className="font-semibold text-white mb-2">The Chicago AI Group</p>
+          <p>Chicago, Illinois, US</p>
+          <p>Email: <a href="mailto:support@chicagoaigroup.com" className="text-blue-400 hover:text-blue-300 underline">support@chicagoaigroup.com</a></p>
+          <p>Website: chicagoaigroup.com</p>
+          <p className="mt-2">To book a call or request a demo, visit our <a href="https://calendly.com/matt-chicagoaigroup/30min" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 underline">contact page</a>.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+);
+
 export default function App() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeProduct, setActiveProduct] = useState(0);
@@ -203,20 +310,28 @@ export default function App() {
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
   const [selectedTiers, setSelectedTiers] = useState({0: 1, 1: 1, 2: 1, 3: 1});
   const [showPrivacy, setShowPrivacy] = useState(false);
+  const [showTerms, setShowTerms] = useState(false);
+
+  const showingSubpage = showPrivacy || showTerms;
 
   const selectTier = useCallback((productIdx, tierIdx) => {
     setSelectedTiers(prev => ({...prev, [productIdx]: tierIdx}));
   }, []);
 
+  const goHome = useCallback(() => {
+    setShowPrivacy(false);
+    setShowTerms(false);
+  }, []);
+
   const scrollTo = useCallback((id) => {
     setMobileMenuOpen(false);
     if (id === 'home') {
-      setShowPrivacy(false);
+      goHome();
       window.scrollTo({ top: 0, behavior: 'smooth' });
       return;
     }
-    if (showPrivacy) {
-      setShowPrivacy(false);
+    if (showingSubpage) {
+      goHome();
       setTimeout(() => {
         const sanitizedId = id.toLowerCase().replace(/[^a-z0-9-]/g, '');
         const el = document.getElementById(sanitizedId);
@@ -227,7 +342,7 @@ export default function App() {
     const sanitizedId = id.toLowerCase().replace(/[^a-z0-9-]/g, '');
     const el = document.getElementById(sanitizedId);
     if (el) el.scrollIntoView({ behavior: 'smooth' });
-  }, [showPrivacy]);
+  }, [showingSubpage, goHome]);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
@@ -321,7 +436,9 @@ export default function App() {
       </nav>
 
       {showPrivacy ? (
-        <PrivacyPolicy onBack={() => { setShowPrivacy(false); window.scrollTo({ top: 0 }); }} />
+        <PrivacyPolicy onBack={() => { goHome(); window.scrollTo({ top: 0 }); }} />
+      ) : showTerms ? (
+        <TermsOfService onBack={() => { goHome(); window.scrollTo({ top: 0 }); }} />
       ) : (
       <>
       <section className="min-h-screen flex items-center justify-center relative pt-20" aria-labelledby="hero-heading">
@@ -644,7 +761,8 @@ export default function App() {
             <div>
               <h4 className="font-semibold text-white mb-4">Legal</h4>
               <nav className="flex flex-col gap-3 text-gray-400 text-sm" aria-label="Legal links">
-                <button onClick={() => { setShowPrivacy(true); window.scrollTo({ top: 0 }); }} className="hover:text-white transition text-left" type="button">Privacy Policy</button>
+                <button onClick={() => { goHome(); setShowPrivacy(true); window.scrollTo({ top: 0 }); }} className="hover:text-white transition text-left" type="button">Privacy Policy</button>
+                <button onClick={() => { goHome(); setShowTerms(true); window.scrollTo({ top: 0 }); }} className="hover:text-white transition text-left" type="button">Terms of Service</button>
                 <a href={EXTERNAL_URLS.contact} {...SECURE_LINK_PROPS} className="hover:text-white transition">Contact Us</a>
               </nav>
             </div>
@@ -668,7 +786,8 @@ export default function App() {
           <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
             <div className="text-gray-500 text-sm">&copy; 2025 The Chicago AI Group. All rights reserved.</div>
             <div className="flex gap-6 text-gray-500 text-sm">
-              <button onClick={() => { setShowPrivacy(true); window.scrollTo({ top: 0 }); }} className="hover:text-white transition" type="button">Privacy Policy</button>
+              <button onClick={() => { goHome(); setShowPrivacy(true); window.scrollTo({ top: 0 }); }} className="hover:text-white transition" type="button">Privacy Policy</button>
+              <button onClick={() => { goHome(); setShowTerms(true); window.scrollTo({ top: 0 }); }} className="hover:text-white transition" type="button">Terms of Service</button>
               <a href={EXTERNAL_URLS.contact} {...SECURE_LINK_PROPS} className="hover:text-white transition">Contact</a>
             </div>
           </div>
