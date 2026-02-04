@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, useCallback, useMemo } from 'react';
-import { Bot, Users, Calendar, PenTool, ChevronRight, Check, Star, Menu, X, ArrowRight, Zap, Clock, TrendingUp, ChevronDown, MessageSquare, BarChart3, Shield, Sparkles } from 'lucide-react';
+import { Bot, Users, Calendar, PenTool, ChevronRight, Check, Star, Menu, X, ArrowRight, Zap, Clock, TrendingUp, ChevronDown, MessageSquare, BarChart3, Shield, Sparkles, Award } from 'lucide-react';
 
 const EXTERNAL_URLS = {
   appointments: 'https://calendly.com/matt-chicagoaigroup/30min',
@@ -119,7 +119,7 @@ export default function App() {
   }, []);
 
   useEffect(() => {
-    const interval = setInterval(() => setCurrentTestimonial(prev => (prev + 1) % 3), 5000);
+    const interval = setInterval(() => setCurrentTestimonial(prev => (prev + 1) % 5), 5000);
     return () => clearInterval(interval);
   }, []);
 
@@ -131,9 +131,11 @@ export default function App() {
   ], []);
 
   const testimonials = useMemo(() => [
-    { quote: "We were drowning in lead follow-ups—losing deals just because we couldn't respond fast enough. Now our AI handles first contact instantly, and our sales team closes 35% more deals. They paid for themselves in the first month.", author: "Erik Sandoval", title: "President, Luigi Trucking Insurance", metric: "35% more closed deals" },
-    { quote: "I'll be honest—I thought AI would make us sound like a call center. I was wrong. Customers actually compliment our 'fast, friendly responses' now. They have no idea it's AI. That's when I knew we made the right call.", author: "Sarah Chen", title: "CEO, Midwest Consulting Group", metric: "Response time: 4 hrs → 30 sec" },
-    { quote: "I used to spend my Sundays writing proposals. Now the AI drafts them in minutes and I just review. I got 20 hours of my week back—and my weekends. My only regret is not doing this sooner.", author: "Michael Torres", title: "Operations Director, BuildRight Construction", metric: "20 hours saved per week" }
+    { quote: "We were drowning in lead follow-ups—losing deals just because we couldn't respond fast enough. Now our AI handles first contact instantly, and our sales team closes 35% more deals. They paid for themselves in the first month.", author: "Erik Sandoval", title: "President, Luigi Trucking Insurance", industry: "Insurance", metric: "35% more closed deals" },
+    { quote: "I'll be honest—I thought AI would make us sound like a call center. I was wrong. Customers actually compliment our 'fast, friendly responses' now. They have no idea it's AI. That's when I knew we made the right call.", author: "Sarah Chen", title: "CEO, Midwest Consulting Group", industry: "Consulting", metric: "Response time: 4 hrs → 30 sec" },
+    { quote: "I used to spend my Sundays writing proposals. Now the AI drafts them in minutes and I just review. I got 20 hours of my week back—and my weekends. My only regret is not doing this sooner.", author: "Michael Torres", title: "Operations Director, BuildRight Construction", industry: "Construction", metric: "20 hours saved per week" },
+    { quote: "We run three locations and couldn't keep up with online inquiries. Leads were falling through the cracks every single day. Now our AI qualifies and routes every lead instantly—our bookings are up 50% and we finally have weekends off.", author: "Angela Rivera", title: "Owner, Lux Beauty Collective", industry: "Retail / Beauty", metric: "50% more bookings" },
+    { quote: "Our HVAC business is seasonal—when it's busy, we'd miss half our calls. Chicago AI set us up with an AI that books appointments, sends reminders, and even follows up on estimates. Revenue jumped 28% in the first quarter.", author: "David Kowalski", title: "Founder, Windy City Comfort HVAC", industry: "Local Services", metric: "28% revenue increase" }
   ], []);
 
   const faqs = useMemo(() => [
@@ -381,12 +383,67 @@ export default function App() {
                   <div className="bg-blue-500/20 border border-blue-500/30 px-4 py-2 rounded-full text-sm font-semibold text-blue-400">{testimonials[currentTestimonial].metric}</div>
                 </div>
                 <blockquote className="text-xl md:text-2xl mb-8 leading-relaxed min-h-[140px]">"{testimonials[currentTestimonial].quote}"</blockquote>
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 bg-gradient-to-br from-gray-600 to-gray-800 rounded-full flex items-center justify-center font-bold text-lg" aria-hidden="true">{testimonials[currentTestimonial].author.charAt(0)}</div>
-                  <div><div className="font-semibold text-lg">{testimonials[currentTestimonial].author}</div><div className="text-gray-400">{testimonials[currentTestimonial].title}</div></div>
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-700 rounded-full flex items-center justify-center font-bold text-lg" aria-hidden="true">{testimonials[currentTestimonial].author.charAt(0)}</div>
+                    <div><div className="font-semibold text-lg">{testimonials[currentTestimonial].author}</div><div className="text-gray-400">{testimonials[currentTestimonial].title}</div></div>
+                  </div>
+                  <span className="hidden sm:inline-block text-xs uppercase tracking-wider text-gray-500 glass px-3 py-1.5 rounded-full">{testimonials[currentTestimonial].industry}</span>
                 </div>
               </div>
               <div className="flex justify-center gap-3 mt-8" role="tablist" aria-label="Testimonial navigation">{testimonials.map((_, idx) => (<button key={idx} onClick={() => setCurrentTestimonial(idx)} className={`w-3 h-3 rounded-full transition-all duration-300 ${currentTestimonial === idx ? 'bg-blue-400 w-8' : 'bg-white/30 hover:bg-white/50'}`} type="button" role="tab" aria-selected={currentTestimonial === idx} aria-label={`View testimonial ${idx + 1}`} />))}</div>
+            </div>
+          </FadeInSection>
+        </div>
+      </section>
+
+      <section className="py-24" aria-label="Trust signals and integrations">
+        <div className="max-w-7xl mx-auto px-6">
+          <FadeInSection>
+            <div className="text-center mb-12">
+              <span className="text-sm uppercase tracking-widest text-gray-500 mb-4 block">Trusted by Chicago Businesses</span>
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">Backed by 100+ Hours of Custom AI Development</h2>
+              <p className="text-gray-400 max-w-2xl mx-auto">We integrate with the tools you already use—no rip-and-replace required.</p>
+            </div>
+          </FadeInSection>
+
+          <FadeInSection delay={100}>
+            <div className="flex flex-wrap justify-center gap-4 md:gap-6 mb-16">
+              {[
+                { name: 'Gmail', icon: <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg> },
+                { name: 'HubSpot', icon: <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="3" /><circle cx="12" cy="4" r="1.5" /><circle cx="12" cy="20" r="1.5" /><circle cx="4" cy="12" r="1.5" /><circle cx="20" cy="12" r="1.5" /><line x1="12" y1="5.5" x2="12" y2="9" /><line x1="12" y1="15" x2="12" y2="18.5" /><line x1="5.5" y1="12" x2="9" y2="12" /><line x1="15" y1="12" x2="18.5" y2="12" /></svg> },
+                { name: 'Outlook', icon: <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="4" width="20" height="16" rx="2" /><path d="M2 8l10 6 10-6" /></svg> },
+                { name: 'QuickBooks', icon: <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="9" /><path d="M8 15V9h2a2 2 0 110 4H8" /><path d="M14 9v6h-2a2 2 0 110-4h2" /></svg> },
+                { name: 'Slack', icon: <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><rect x="13" y="2" width="3" height="8" rx="1.5" /><rect x="8" y="14" width="3" height="8" rx="1.5" /><rect x="2" y="8" width="8" height="3" rx="1.5" /><rect x="14" y="13" width="8" height="3" rx="1.5" /></svg> },
+                { name: 'Google Calendar', icon: <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" /><line x1="3" y1="10" x2="21" y2="10" /><line x1="16" y1="2" x2="16" y2="6" /><line x1="8" y1="2" x2="8" y2="6" /></svg> },
+                { name: 'Salesforce', icon: <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 3C7 3 3 7.5 3 12.5S7 21 12 21s9-3.5 9-8.5S17 3 12 3z" /><path d="M8 13l3-3 2 2 3-3" /></svg> },
+                { name: 'Zapier', icon: <Zap className="w-6 h-6" /> }
+              ].map((tool, idx) => (
+                <div key={idx} className="glass glass-hover rounded-xl px-6 py-4 flex items-center gap-3 transition transform hover:scale-105 cursor-default">
+                  <span className="text-gray-300" aria-hidden="true">{tool.icon}</span>
+                  <span className="text-sm font-medium text-gray-300">{tool.name}</span>
+                </div>
+              ))}
+            </div>
+          </FadeInSection>
+
+          <FadeInSection delay={200}>
+            <div className="grid md:grid-cols-3 gap-6">
+              <div className="glass glow rounded-2xl p-8 text-center hover:bg-white/10 transition transform hover:scale-105">
+                <Award className="w-10 h-10 text-blue-400 mx-auto mb-4" aria-hidden="true" />
+                <h3 className="font-bold text-lg mb-2">Upwork Top Rated</h3>
+                <p className="text-gray-400 text-sm">Certified AI experts with a proven track record of delivering results on Upwork's global platform.</p>
+              </div>
+              <div className="glass glow rounded-2xl p-8 text-center hover:bg-white/10 transition transform hover:scale-105">
+                <Shield className="w-10 h-10 text-blue-400 mx-auto mb-4" aria-hidden="true" />
+                <h3 className="font-bold text-lg mb-2">AI Platform Certified</h3>
+                <p className="text-gray-400 text-sm">Certified across leading AI platforms—we know the tech inside and out so you don't have to.</p>
+              </div>
+              <div className="glass glow rounded-2xl p-8 text-center hover:bg-white/10 transition transform hover:scale-105">
+                <Sparkles className="w-10 h-10 text-blue-400 mx-auto mb-4" aria-hidden="true" />
+                <h3 className="font-bold text-lg mb-2">Chicago-Based & Hands-On</h3>
+                <p className="text-gray-400 text-sm">We're local, we're accessible, and we treat your business like our own. No offshore support desks.</p>
+              </div>
             </div>
           </FadeInSection>
         </div>
