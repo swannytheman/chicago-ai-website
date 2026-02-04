@@ -302,6 +302,42 @@ const TermsOfService = ({ onBack }) => (
   </div>
 );
 
+const CopyrightNotice = ({ onBack }) => (
+  <div className="min-h-screen bg-black text-white pt-32 pb-24">
+    <div className="max-w-3xl mx-auto px-6">
+      <button onClick={onBack} className="text-blue-400 hover:text-blue-300 transition mb-8 flex items-center gap-2" type="button">
+        <ArrowRight className="w-4 h-4 rotate-180" aria-hidden="true" /> Back to Home
+      </button>
+      <h1 className="text-4xl md:text-5xl font-bold mb-4">Copyright Notice</h1>
+      <p className="text-gray-400 mb-12">The Chicago AI Group</p>
+
+      <div className="prose prose-invert max-w-none space-y-8 text-gray-300 leading-relaxed">
+        <p className="text-xl font-semibold text-white">Copyright &copy; 2026 The Chicago AI Group. All rights reserved.</p>
+
+        <p>The contents of this website (chicagoaigroup.com), including but not limited to text, graphics, images, logos, AI models, software code, and any other materials (collectively, the &quot;Content&quot;), are owned by The Chicago AI Group or its licensors and are protected by United States and international copyright, trademark, and other intellectual property laws.</p>
+
+        <p>You may not reproduce, distribute, modify, create derivative works from, publicly display, publicly perform, republish, download, store, or transmit any of the Content without our prior written consent, except as follows:</p>
+        <ul className="list-disc pl-6 space-y-2">
+          <li>Your computer or browser may temporarily store or cache copies of materials being accessed and viewed.</li>
+          <li>You may print or download one copy of a reasonable number of pages for your own personal, non-commercial use (not for further reproduction, publication, or distribution).</li>
+          <li>If we provide social media features or other sharing tools, you may use them as provided.</li>
+        </ul>
+
+        <p>Unauthorized use of the Content may violate copyright, trademark, and other laws and could result in criminal or civil penalties.</p>
+
+        <h2 className="text-2xl font-bold text-white pt-4">Contact Us</h2>
+        <p>For permission requests or questions about this Copyright Notice, contact us at:</p>
+        <div className="glass rounded-2xl p-6">
+          <p className="font-semibold text-white mb-2">The Chicago AI Group</p>
+          <p>Chicago, Illinois, US</p>
+          <p>Email: <a href="mailto:legal@chicagoaigroup.com" className="text-blue-400 hover:text-blue-300 underline">legal@chicagoaigroup.com</a></p>
+          <p>Website: chicagoaigroup.com</p>
+        </div>
+      </div>
+    </div>
+  </div>
+);
+
 export default function App() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeProduct, setActiveProduct] = useState(0);
@@ -311,8 +347,9 @@ export default function App() {
   const [selectedTiers, setSelectedTiers] = useState({0: 1, 1: 1, 2: 1, 3: 1});
   const [showPrivacy, setShowPrivacy] = useState(false);
   const [showTerms, setShowTerms] = useState(false);
+  const [showCopyright, setShowCopyright] = useState(false);
 
-  const showingSubpage = showPrivacy || showTerms;
+  const showingSubpage = showPrivacy || showTerms || showCopyright;
 
   const selectTier = useCallback((productIdx, tierIdx) => {
     setSelectedTiers(prev => ({...prev, [productIdx]: tierIdx}));
@@ -321,6 +358,7 @@ export default function App() {
   const goHome = useCallback(() => {
     setShowPrivacy(false);
     setShowTerms(false);
+    setShowCopyright(false);
   }, []);
 
   const scrollTo = useCallback((id) => {
@@ -439,6 +477,8 @@ export default function App() {
         <PrivacyPolicy onBack={() => { goHome(); window.scrollTo({ top: 0 }); }} />
       ) : showTerms ? (
         <TermsOfService onBack={() => { goHome(); window.scrollTo({ top: 0 }); }} />
+      ) : showCopyright ? (
+        <CopyrightNotice onBack={() => { goHome(); window.scrollTo({ top: 0 }); }} />
       ) : (
       <>
       <section className="min-h-screen flex items-center justify-center relative pt-20" aria-labelledby="hero-heading">
@@ -763,6 +803,7 @@ export default function App() {
               <nav className="flex flex-col gap-3 text-gray-400 text-sm" aria-label="Legal links">
                 <button onClick={() => { goHome(); setShowPrivacy(true); window.scrollTo({ top: 0 }); }} className="hover:text-white transition text-left" type="button">Privacy Policy</button>
                 <button onClick={() => { goHome(); setShowTerms(true); window.scrollTo({ top: 0 }); }} className="hover:text-white transition text-left" type="button">Terms of Service</button>
+                <button onClick={() => { goHome(); setShowCopyright(true); window.scrollTo({ top: 0 }); }} className="hover:text-white transition text-left" type="button">Copyright Notice</button>
                 <a href={EXTERNAL_URLS.contact} {...SECURE_LINK_PROPS} className="hover:text-white transition">Contact Us</a>
               </nav>
             </div>
@@ -788,6 +829,7 @@ export default function App() {
             <div className="flex gap-6 text-gray-500 text-sm">
               <button onClick={() => { goHome(); setShowPrivacy(true); window.scrollTo({ top: 0 }); }} className="hover:text-white transition" type="button">Privacy Policy</button>
               <button onClick={() => { goHome(); setShowTerms(true); window.scrollTo({ top: 0 }); }} className="hover:text-white transition" type="button">Terms of Service</button>
+              <button onClick={() => { goHome(); setShowCopyright(true); window.scrollTo({ top: 0 }); }} className="hover:text-white transition" type="button">Copyright</button>
               <a href={EXTERNAL_URLS.contact} {...SECURE_LINK_PROPS} className="hover:text-white transition">Contact</a>
             </div>
           </div>
