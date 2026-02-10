@@ -1,0 +1,5 @@
+# robots.txt for Chicago AI Group
+User-agent: *
+Allow: /
+
+Sitemap: https://www.chicagoaigroup.com/sitemap.xml

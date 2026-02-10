@@ -2,9 +2,222 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>chicago-ai-website</title>
+
+    <!-- Primary SEO Meta Tags -->
+    <title>Chicago AI Group | AI Agents for Customer Service, Sales & Marketing</title>
+    <meta name="description" content="Chicago AI Group builds AI agents that handle customer service, sales, admin, and marketing for small businesses. Live in 2-4 weeks. No technical skills needed. Grow your business without growing your team." />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://www.chicagoaigroup.com/" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://www.chicagoaigroup.com/" />
+    <meta property="og:title" content="Chicago AI Group | AI Agents for Small Business" />
+    <meta property="og:description" content="AI agents that handle customer service, sales, admin, and marketing—so you can focus on what you do best. Live in 2-4 weeks. No tech skills needed." />
+    <meta property="og:site_name" content="Chicago AI Group" />
+    <meta property="og:locale" content="en_US" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Chicago AI Group | AI Agents for Small Business" />
+    <meta name="twitter:description" content="AI agents that handle customer service, sales, admin, and marketing—so you can focus on what you do best. Live in 2-4 weeks." />
+
+    <!-- Additional SEO Meta Tags -->
+    <meta name="author" content="Chicago AI Group" />
+    <meta name="geo.region" content="US-IL" />
+    <meta name="geo.placename" content="Chicago" />
+    <meta name="theme-color" content="#000000" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+
+    <!-- Preconnect for external resources -->
+    <link rel="preconnect" href="https://calendly.com" />
+    <link rel="dns-prefetch" href="https://calendly.com" />
+
+    <!-- Structured Data: Organization -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Chicago AI Group",
+      "url": "https://www.chicagoaigroup.com",
+      "description": "Chicago AI Group builds AI agents that handle customer service, sales, admin, and marketing for small businesses.",
+      "areaServed": {
+        "@type": "City",
+        "name": "Chicago",
+        "containedInPlace": {
+          "@type": "State",
+          "name": "Illinois"
+        }
+      },
+      "knowsAbout": ["Artificial Intelligence", "AI Agents", "Business Automation", "Customer Service AI", "Sales AI", "Marketing AI"]
+    }
+    </script>
+
+    <!-- Structured Data: LocalBusiness -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "Chicago AI Group",
+      "url": "https://www.chicagoaigroup.com",
+      "description": "AI automation services for small to mid-sized businesses. We build AI agents for customer service, sales, admin, and marketing.",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Chicago",
+        "addressRegion": "IL",
+        "addressCountry": "US"
+      },
+      "priceRange": "$129-$699/mo",
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "5",
+        "reviewCount": "3",
+        "bestRating": "5",
+        "worstRating": "5"
+      }
+    }
+    </script>
+
+    <!-- Structured Data: Services -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      "name": "AI Agent Services",
+      "itemListElement": [
+        {
+          "@type": "Service",
+          "position": 1,
+          "name": "Customer Service AI",
+          "description": "AI agent that answers customer questions instantly, captures and qualifies leads automatically, and works on website, email, and SMS 24/7.",
+          "provider": { "@type": "Organization", "name": "Chicago AI Group" },
+          "offers": {
+            "@type": "AggregateOffer",
+            "lowPrice": "129",
+            "highPrice": "499",
+            "priceCurrency": "USD",
+            "offerCount": "3"
+          }
+        },
+        {
+          "@type": "Service",
+          "position": 2,
+          "name": "Sales AI",
+          "description": "AI agent that qualifies leads in real-time, sends personalized follow-ups, recovers abandoned carts, and integrates with your CRM.",
+          "provider": { "@type": "Organization", "name": "Chicago AI Group" },
+          "offers": {
+            "@type": "AggregateOffer",
+            "lowPrice": "179",
+            "highPrice": "649",
+            "priceCurrency": "USD",
+            "offerCount": "3"
+          }
+        },
+        {
+          "@type": "Service",
+          "position": 3,
+          "name": "Admin AI",
+          "description": "AI agent that sorts email, drafts replies, handles scheduling, sends reminders, and chases unpaid invoices automatically.",
+          "provider": { "@type": "Organization", "name": "Chicago AI Group" },
+          "offers": {
+            "@type": "AggregateOffer",
+            "lowPrice": "199",
+            "highPrice": "699",
+            "priceCurrency": "USD",
+            "offerCount": "3"
+          }
+        },
+        {
+          "@type": "Service",
+          "position": 4,
+          "name": "Marketing AI",
+          "description": "AI agent that writes blogs, social posts, and emails in your brand voice, schedules across platforms, and provides analytics.",
+          "provider": { "@type": "Organization", "name": "Chicago AI Group" },
+          "offers": {
+            "@type": "AggregateOffer",
+            "lowPrice": "149",
+            "highPrice": "299",
+            "priceCurrency": "USD",
+            "offerCount": "2"
+          }
+        }
+      ]
+    }
+    </script>
+
+    <!-- Structured Data: FAQ -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "I'm not technical. Will this work for me?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Absolutely. We built this for busy business owners, not engineers. We handle all the technical stuff—you just tell us what you need and show up for a few calls. Most clients are surprised how painless it is."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How fast can I get started?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Most clients are live within 2-4 weeks. We move fast because we know your time is money. After a quick discovery call, we get to work immediately."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Will the AI sound like a robot?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. We train each AI on your business, your tone, and your way of talking to customers. People often can't tell they're chatting with AI—that's the whole point."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What if something goes wrong?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We've got your back. All plans include support, and Pro/Enterprise clients get priority access plus regular check-ins to make sure everything runs smoothly."
+          }
+        }
+      ]
+    }
+    </script>
+
+    <!-- Structured Data: Reviews -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Chicago AI Group",
+      "review": [
+        {
+          "@type": "Review",
+          "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
+          "author": { "@type": "Person", "name": "Erik Sandoval" },
+          "reviewBody": "We were drowning in lead follow-ups—losing deals just because we couldn't respond fast enough. Now our AI handles first contact instantly, and our sales team closes 35% more deals. They paid for themselves in the first month."
+        },
+        {
+          "@type": "Review",
+          "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
+          "author": { "@type": "Person", "name": "Sarah Chen" },
+          "reviewBody": "Customers actually compliment our 'fast, friendly responses' now. They have no idea it's AI. That's when I knew we made the right call."
+        },
+        {
+          "@type": "Review",
+          "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
+          "author": { "@type": "Person", "name": "Michael Torres" },
+          "reviewBody": "I used to spend my Sundays writing proposals. Now the AI drafts them in minutes and I just review. I got 20 hours of my week back—and my weekends. My only regret is not doing this sooner."
+        }
+      ]
+    }
+    </script>
   </head>
   <body>
     <div id="root"></div>

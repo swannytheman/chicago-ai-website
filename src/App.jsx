@@ -1,4 +1,3 @@
-cat > src/App.jsx << 'EOF'
 import { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import { Bot, Users, Calendar, PenTool, ChevronRight, Check, Star, Menu, X, ArrowRight, Zap, Clock, TrendingUp, ChevronDown, MessageSquare, BarChart3, Shield, Sparkles } from 'lucide-react';
 
@@ -155,6 +154,7 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-black text-white overflow-x-hidden">
+      <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:bg-white focus:text-black focus:px-4 focus:py-2 focus:rounded-lg">Skip to main content</a>
       <style>{`
         @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-20px); } }
         @keyframes pulse-glow { 0%, 100% { opacity: 0.5; } 50% { opacity: 0.8; } }
@@ -195,7 +195,8 @@ export default function App() {
         )}
       </nav>
 
-      <section className="min-h-screen flex items-center justify-center relative pt-20" aria-labelledby="hero-heading">
+      <main id="main-content">
+      <section id="hero" className="min-h-screen flex items-center justify-center relative pt-20" aria-labelledby="hero-heading">
         <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-black to-black" aria-hidden="true" />
         <div className="absolute top-20 left-10 w-72 h-72 bg-blue-500/10 rounded-full blur-3xl animate-pulse-glow" aria-hidden="true" />
         <div className="absolute bottom-20 right-10 w-96 h-96 bg-white/5 rounded-full blur-3xl animate-pulse-glow" style={{ animationDelay: '-2s' }} aria-hidden="true" />
@@ -434,6 +435,7 @@ export default function App() {
           </FadeInSection>
         </div>
       </section>
+      </main>
 
       <footer className="py-12 border-t border-white/10" role="contentinfo">
         <div className="max-w-7xl mx-auto px-6">
@@ -454,4 +456,3 @@ export default function App() {
     </div>
   );
 }
-EOF
