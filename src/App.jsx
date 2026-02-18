@@ -138,17 +138,19 @@ export default function App() {
   ], []);
 
   const faqs = useMemo(() => [
-    { q: "I'm not technical. Will this work for me?", a: "Absolutely. We built this for busy business owners, not engineers. We handle all the technical stuff—you just tell us what you need and show up for a few calls. Most clients are surprised how painless it is." },
-    { q: "How fast can I get started?", a: "Most clients are live within 2-4 weeks. We move fast because we know your time is money. After a quick discovery call, we get to work immediately." },
-    { q: "Will the AI sound like a robot?", a: "No. We train each AI on your business, your tone, and your way of talking to customers. People often can't tell they're chatting with AI—that's the whole point." },
-    { q: "What if something goes wrong?", a: "We've got your back. All plans include support, and Pro/Enterprise clients get priority access plus regular check-ins to make sure everything runs smoothly." }
+    { q: "I'm not technical. Will this work for me?", a: "Absolutely. We built this for busy business owners, not engineers. We handle all the technical setup—you just tell us what you need and show up for a few calls. Most clients are surprised how painless it is." },
+    { q: "How fast can I get started?", a: "Most clients are live within 2–4 weeks. We move fast because we know your time is money. After your discovery call, we get to work immediately." },
+    { q: "Will the AI sound like a robot?", a: "No. We train each AI on your business, your tone, and the way you talk to customers. People often can't tell they're interacting with AI—that's the whole point." },
+    { q: "What types of businesses do you work with?", a: "We work with small businesses across industries—retail, professional services, construction, insurance, consulting, and more. If you have under 100 employees and you're spending too much time on repetitive tasks, we can help." },
+    { q: "What's the return on investment?", a: "Most clients see their AI pay for itself within 60–90 days through time savings and increased revenue. On your discovery call, we'll walk you through what realistic results look like for your specific business." },
+    { q: "What if something goes wrong?", a: "We've got your back. Every plan includes ongoing support, and Pro and Enterprise clients get priority access plus scheduled check-ins to make sure everything keeps running smoothly." }
   ], []);
 
   const process = useMemo(() => [
-    { icon: MessageSquare, title: "Quick Call", desc: "Tell us what's slowing you down" },
-    { icon: BarChart3, title: "Custom Plan", desc: "We design your AI solution" },
-    { icon: Zap, title: "We Build It", desc: "Setup, integration, testing—handled" },
-    { icon: Shield, title: "You Win", desc: "Go live with ongoing support" }
+    { icon: MessageSquare, title: "Discovery Call", desc: "We learn your business and pinpoint exactly where AI saves you the most time and money" },
+    { icon: BarChart3, title: "Custom Blueprint", desc: "We design a tailored AI plan that fits your workflow and connects to the tools you already use" },
+    { icon: Zap, title: "We Build It", desc: "Our team handles all setup, integrations, and testing—you don't touch a single line of code" },
+    { icon: Shield, title: "Go Live", desc: "Your AI goes live in 2–4 weeks, with dedicated support and regular check-ins to make sure it's working" }
   ], []);
 
   const navItems = ['Services', 'Process', 'Testimonials', 'FAQ'];
@@ -212,11 +214,11 @@ export default function App() {
             </div>
           </FadeInSection>
           <FadeInSection delay={100}><h1 id="hero-heading" className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 leading-tight tracking-tight">Grow Your Business<br /><span className="text-gradient">Without Growing Your Team</span></h1></FadeInSection>
-          <FadeInSection delay={200}><p className="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-10 leading-relaxed">AI agents that handle customer service, sales, admin, and marketing—so you can focus on what you do best.</p></FadeInSection>
+          <FadeInSection delay={200}><p className="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-10 leading-relaxed">We build custom AI agents that handle your customer service, sales, admin, and marketing—so you can run your business instead of drowning in it.</p></FadeInSection>
           <FadeInSection delay={300}>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <button onClick={() => scrollTo('cta')} className="btn-shine group bg-white text-black px-8 py-4 rounded-full font-semibold text-lg hover:bg-gray-100 transition transform hover:scale-105 flex items-center justify-center gap-2" type="button">Book a Free Call <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" aria-hidden="true" /></button>
-              <button onClick={() => scrollTo('services')} className="glass glass-hover px-8 py-4 rounded-full font-semibold text-lg transition transform hover:scale-105" type="button">See How It Works</button>
+              <button onClick={() => scrollTo('process')} className="glass glass-hover px-8 py-4 rounded-full font-semibold text-lg transition transform hover:scale-105" type="button">See How It Works</button>
             </div>
           </FadeInSection>
           <FadeInSection delay={400}>
@@ -233,7 +235,7 @@ export default function App() {
       <section className="py-20 relative" aria-label="Statistics">
         <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent" aria-hidden="true" />
         <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8">
-          {[{ value: 40, suffix: '%', label: 'average revenue increase' }, { value: 15, suffix: '+', label: 'hours saved per week' }, { value: 24, suffix: '/7', label: 'always-on AI support' }].map((stat, idx) => (
+          {[{ value: 40, suffix: '%', label: 'average revenue increase' }, { value: 15, suffix: '+', label: 'hours saved per week' }, { value: 60, suffix: 's', label: 'average AI response time' }].map((stat, idx) => (
             <FadeInSection key={idx} delay={idx * 100}>
               <div className="glass glow rounded-2xl p-8 text-center hover:bg-white/10 transition transform hover:scale-105 cursor-default">
                 <div className="text-5xl font-bold mb-2"><AnimatedCounter end={stat.value} suffix={stat.suffix} /></div>
@@ -250,7 +252,7 @@ export default function App() {
             <div className="text-center mb-16">
               <span className="text-sm uppercase tracking-widest text-gray-500 mb-4 block">The Problem We Solve</span>
               <h2 id="about-heading" className="text-4xl md:text-5xl font-bold mb-4">You're Doing Too Much</h2>
-              <p className="text-gray-400 max-w-2xl mx-auto">Answering emails. Chasing leads. Scheduling. Posting content. There's a better way.</p>
+              <p className="text-gray-400 max-w-2xl mx-auto">Answering emails. Chasing leads. Scheduling. Posting content. You didn't start a business to spend your days on this. We fix that.</p>
             </div>
           </FadeInSection>
           <div className="grid md:grid-cols-3 gap-6">
@@ -297,8 +299,8 @@ export default function App() {
           <FadeInSection>
             <div className="text-center mb-16">
               <span className="text-sm uppercase tracking-widest text-gray-500 mb-4 block">AI Agents</span>
-              <h2 id="services-heading" className="text-4xl md:text-5xl font-bold mb-4">Pick Your Superpower</h2>
-              <p className="text-gray-400 max-w-2xl mx-auto">Four AI agents. Each one replaces hours of work you hate doing.</p>
+              <h2 id="services-heading" className="text-4xl md:text-5xl font-bold mb-4">Choose Your AI Agent</h2>
+              <p className="text-gray-400 max-w-2xl mx-auto">Four specialized AI agents, each custom-built for your business. Start with one, add more as you grow.</p>
             </div>
           </FadeInSection>
           <FadeInSection delay={100}>
@@ -397,8 +399,8 @@ export default function App() {
         <div className="max-w-3xl mx-auto px-6">
           <FadeInSection>
             <div className="text-center mb-16">
-              <span className="text-sm uppercase tracking-widest text-gray-500 mb-4 block">FAQ</span>
-              <h2 id="faq-heading" className="text-4xl md:text-5xl font-bold mb-4">Got Questions?</h2>
+              <span className="text-sm uppercase tracking-widest text-gray-500 mb-4 block">Common Questions</span>
+              <h2 id="faq-heading" className="text-4xl md:text-5xl font-bold mb-4">Questions We Hear From Small Business Owners</h2>
             </div>
           </FadeInSection>
           <div className="space-y-4">
@@ -447,7 +449,7 @@ export default function App() {
               <button onClick={() => scrollTo('process')} className="hover:text-white transition" type="button">About</button>
               <a href={EXTERNAL_URLS.contact} {...SECURE_LINK_PROPS} className="hover:text-white transition">Contact</a>
             </nav>
-            <div className="text-gray-500 text-sm">© 2025 The Chicago AI Group. All rights reserved.</div>
+            <div className="text-gray-500 text-sm">© 2026 The Chicago AI Group. All rights reserved.</div>
           </div>
         </div>
       </footer>
