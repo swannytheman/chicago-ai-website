@@ -65,7 +65,7 @@ function MainSite() {
   const [activeProduct, setActiveProduct] = useState(0);
   const [scrolled, setScrolled] = useState(false);
   const [activeFaq, setActiveFaq] = useState(null);
-  const [currentTestimonial, setCurrentTestimonial] = useState(0);
+
   const [selectedTiers, setSelectedTiers] = useState({0: 1, 1: 1, 2: 1, 3: 1});
 
   const selectTier = useCallback((productIdx, tierIdx) => {
@@ -84,10 +84,6 @@ function MainSite() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  useEffect(() => {
-    const interval = setInterval(() => setCurrentTestimonial(prev => (prev + 1) % 3), 5000);
-    return () => clearInterval(interval);
-  }, []);
 
   const products = useMemo(() => [
     { icon: Bot, name: "Customer Service AI", tagline: "Answer every question instantly—even at 3am", capabilities: ["Responds in natural conversation, not robotic scripts", "Captures leads and qualifies them automatically", "Works on your website, email, and SMS", "Syncs with your CRM so nothing slips through"], pricing: [{ tier: "Starter", monthly: "$129", setup: "$1,800", details: "1,000 conversations/mo" }, { tier: "Pro", monthly: "$299", setup: "$2,900", details: "Unlimited + integrations", popular: true }, { tier: "Enterprise", monthly: "$499", setup: "$4,500", details: "Custom features + priority support" }] },
@@ -392,29 +388,30 @@ function MainSite() {
       </section>
 
       <section id="testimonials" className="py-24 bg-gradient-to-b from-transparent via-white/5 to-transparent" aria-labelledby="testimonials-heading">
-        <div className="max-w-4xl mx-auto px-6">
+        <div className="max-w-6xl mx-auto px-6">
           <FadeInSection>
             <div className="text-center mb-16">
               <span className="text-sm uppercase tracking-widest text-gray-500 mb-4 block">Real Results</span>
               <h2 id="testimonials-heading" className="text-4xl md:text-5xl font-bold">They Were Skeptical Too</h2>
             </div>
           </FadeInSection>
-          <FadeInSection delay={100}>
-            <div className="relative">
-              <div className="glass glow rounded-3xl p-8 md:p-12 transition-all duration-500">
-                <div className="flex items-center justify-between mb-6">
-                  <div className="flex gap-1" role="img" aria-label="5 star rating">{[...Array(5)].map((_, i) => (<Star key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400" aria-hidden="true" />))}</div>
-                  <div className="bg-blue-500/20 border border-blue-500/30 px-4 py-2 rounded-full text-sm font-semibold text-blue-400">{testimonials[currentTestimonial].metric}</div>
+          <div className="grid md:grid-cols-3 gap-6">
+            {testimonials.map((t, idx) => (
+              <FadeInSection key={idx} delay={idx * 100}>
+                <div className="glass glow rounded-3xl p-8 flex flex-col h-full">
+                  <div className="flex items-center justify-between mb-6">
+                    <div className="flex gap-1" role="img" aria-label="5 star rating">{[...Array(5)].map((_, i) => (<Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" aria-hidden="true" />))}</div>
+                    <div className="bg-blue-500/20 border border-blue-500/30 px-3 py-1 rounded-full text-xs font-semibold text-blue-400">{t.metric}</div>
+                  </div>
+                  <blockquote className="text-base leading-relaxed flex-1 mb-6">"{t.quote}"</blockquote>
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 bg-gradient-to-br from-gray-600 to-gray-800 rounded-full flex items-center justify-center font-bold" aria-hidden="true">{t.author.charAt(0)}</div>
+                    <div><div className="font-semibold">{t.author}</div><div className="text-gray-400 text-sm">{t.title}</div></div>
+                  </div>
                 </div>
-                <blockquote className="text-xl md:text-2xl mb-8 leading-relaxed min-h-[140px]">"{testimonials[currentTestimonial].quote}"</blockquote>
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 bg-gradient-to-br from-gray-600 to-gray-800 rounded-full flex items-center justify-center font-bold text-lg" aria-hidden="true">{testimonials[currentTestimonial].author.charAt(0)}</div>
-                  <div><div className="font-semibold text-lg">{testimonials[currentTestimonial].author}</div><div className="text-gray-400">{testimonials[currentTestimonial].title}</div></div>
-                </div>
-              </div>
-              <div className="flex justify-center gap-3 mt-8" role="tablist" aria-label="Testimonial navigation">{testimonials.map((_, idx) => (<button key={idx} onClick={() => setCurrentTestimonial(idx)} className={`w-3 h-3 rounded-full transition-all duration-300 ${currentTestimonial === idx ? 'bg-blue-400 w-8' : 'bg-white/30 hover:bg-white/50'}`} type="button" role="tab" aria-selected={currentTestimonial === idx} aria-label={`View testimonial ${idx + 1}`} />))}</div>
-            </div>
-          </FadeInSection>
+              </FadeInSection>
+            ))}
+          </div>
         </div>
       </section>
 
