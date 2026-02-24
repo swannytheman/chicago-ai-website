@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
+import Logo from './Logo.jsx';
 
 function escapeHtml(str) {
   return str
@@ -219,11 +220,6 @@ export default function TryItFree() {
           backdrop-filter:blur(20px);
           position:sticky;top:0;z-index:100;
         }
-        .tif-nav-logo { display:flex;align-items:center;gap:12px;text-decoration:none; }
-        .tif-nav-logo svg { width:36px;height:36px;filter:drop-shadow(0 0 8px rgba(96,165,250,.4)); }
-        .tif-nav-brand { display:flex;flex-direction:column; }
-        .tif-nav-brand-top { font-family:'Syne',sans-serif;font-size:.62rem;font-weight:600;letter-spacing:.18em;color:var(--blue-hi);text-transform:uppercase;line-height:1; }
-        .tif-nav-brand-name { font-family:'Syne',sans-serif;font-size:.95rem;font-weight:700;color:var(--text);line-height:1.2; }
         .tif-nav-link { font-size:.8rem;color:var(--text-2);text-decoration:none;letter-spacing:.04em;transition:color .2s; }
         .tif-nav-link:hover { color:var(--blue-hi); }
 
@@ -433,63 +429,8 @@ export default function TryItFree() {
         <div className="tif-page">
           {/* NAV */}
           <nav className="tif-nav">
-            <a href="https://www.chicagoaigroup.com" className="tif-nav-logo">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
-                <defs>
-                  <linearGradient id="tif-pg" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%"   style={{stopColor:'#ffffff',stopOpacity:1}} />
-                    <stop offset="50%"  style={{stopColor:'#e0e7ff',stopOpacity:1}} />
-                    <stop offset="100%" style={{stopColor:'#94a3b8',stopOpacity:1}} />
-                  </linearGradient>
-                  <linearGradient id="tif-ag" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%"   style={{stopColor:'#60a5fa',stopOpacity:1}} />
-                    <stop offset="100%" style={{stopColor:'#3b82f6',stopOpacity:1}} />
-                  </linearGradient>
-                  <radialGradient id="tif-bg2" cx="50%" cy="40%" r="70%">
-                    <stop offset="0%"   style={{stopColor:'#111827',stopOpacity:1}} />
-                    <stop offset="100%" style={{stopColor:'#000000',stopOpacity:1}} />
-                  </radialGradient>
-                  <radialGradient id="tif-cng" cx="30%" cy="30%" r="70%">
-                    <stop offset="0%"   style={{stopColor:'#ffffff',stopOpacity:1}} />
-                    <stop offset="40%"  style={{stopColor:'#bfdbfe',stopOpacity:1}} />
-                    <stop offset="100%" style={{stopColor:'#3b82f6',stopOpacity:1}} />
-                  </radialGradient>
-                  <filter id="tif-sg"><feGaussianBlur stdDeviation="3" result="blur"/><feComposite in="SourceGraphic" in2="blur" operator="over"/></filter>
-                  <filter id="tif-acg" x="-100%" y="-100%" width="300%" height="300%">
-                    <feGaussianBlur stdDeviation="5" result="blur"/>
-                    <feFlood floodColor="#60a5fa" floodOpacity="0.4"/>
-                    <feComposite in2="blur" operator="in"/>
-                    <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
-                  </filter>
-                </defs>
-                <rect width="400" height="400" fill="url(#tif-bg2)"/>
-                <g transform="translate(200,165)">
-                  <circle cx="0" cy="0" r="95" fill="none" stroke="url(#tif-pg)" strokeWidth="1" opacity="0.15"/>
-                  <path d="M 48 -58 A 75 75 0 1 0 48 58" fill="none" stroke="url(#tif-pg)" strokeWidth="14" strokeLinecap="round" filter="url(#tif-sg)"/>
-                  <g opacity="0.4">
-                    <line x1="0" y1="0" x2="-45" y2="-32" stroke="url(#tif-pg)" strokeWidth="2"/>
-                    <line x1="0" y1="0" x2="-45" y2="32"  stroke="url(#tif-pg)" strokeWidth="2"/>
-                    <line x1="0" y1="0" x2="-65" y2="0"   stroke="url(#tif-pg)" strokeWidth="2"/>
-                    <line x1="-45" y1="-32" x2="-65" y2="0" stroke="url(#tif-pg)" strokeWidth="1.5"/>
-                    <line x1="-45" y1="32"  x2="-65" y2="0" stroke="url(#tif-pg)" strokeWidth="1.5"/>
-                    <line x1="0" y1="0" x2="35" y2="-45" stroke="url(#tif-pg)" strokeWidth="1.5" opacity="0.7"/>
-                    <line x1="0" y1="0" x2="35" y2="45"  stroke="url(#tif-pg)" strokeWidth="1.5" opacity="0.7"/>
-                  </g>
-                  <circle cx="-65" cy="0"  r="5" fill="url(#tif-pg)" filter="url(#tif-sg)"/>
-                  <circle cx="-45" cy="-32" r="7" fill="url(#tif-pg)" filter="url(#tif-sg)"/>
-                  <circle cx="-45" cy="32"  r="7" fill="url(#tif-pg)" filter="url(#tif-sg)"/>
-                  <circle cx="35"  cy="-45" r="4" fill="url(#tif-pg)" opacity="0.8"/>
-                  <circle cx="35"  cy="45"  r="4" fill="url(#tif-pg)" opacity="0.8"/>
-                  <circle cx="0"   cy="0"   r="12" fill="url(#tif-cng)" filter="url(#tif-acg)"/>
-                  <g transform="translate(58,0) scale(0.35)" opacity="0.7">
-                    <polygon points="0,-20 5.77,-10 17.32,-10 8.66,0 17.32,10 5.77,10 0,20 -5.77,10 -17.32,10 -8.66,0 -17.32,-10 -5.77,-10" fill="url(#tif-ag)"/>
-                  </g>
-                </g>
-              </svg>
-              <div className="tif-nav-brand">
-                <span className="tif-nav-brand-top">Chicago AI</span>
-                <span className="tif-nav-brand-name">GROUP</span>
-              </div>
+            <a href="https://www.chicagoaigroup.com" style={{textDecoration:'none'}}>
+              <Logo />
             </a>
             <a href="https://www.chicagoaigroup.com" className="tif-nav-link">← Back to site</a>
           </nav>
