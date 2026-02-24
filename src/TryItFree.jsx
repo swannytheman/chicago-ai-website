@@ -1,7 +1,21 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
 
-const PREVIEW_TEMPLATE = (biz, industry) =>
-  `Hi there,\n\nI noticed you recently reached out about ${biz || 'your business'} — I wanted to follow up and see if you had any questions I could help answer.\n\nWe've helped a number of ${industry ? industry.toLowerCase() : 'local'} businesses streamline their follow-up process, and I'd love to show you what that looks like in practice.\n\nWould you be open to a quick 15-minute call this week?\n\nBest,\n[Your Name]`;
+function escapeHtml(str) {
+  return str
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
+const PREVIEW_TEMPLATE = (biz, industry) => {
+  const safeBiz      = biz      ? escapeHtml(biz)                      : 'your business';
+  const safeIndustry = industry ? escapeHtml(industry.toLowerCase())    : 'local';
+  return `Hi there,\n\nI noticed you recently reached out about ${safeBiz} — I wanted to follow up and see if you had any questions I could help answer.\n\nWe've helped a number of ${safeIndustry} businesses streamline their follow-up process, and I'd love to show you what that looks like in practice.\n\nWould you be open to a quick 15-minute call this week?\n\nBest,\n[Your Name]`;
+};
+
+const PLACEHOLDER_BODY = '<span style="color:#4a6080;font-style:italic;">Start typing your business description to see a preview...</span>';
 
 function isValidEmail(email) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
@@ -25,9 +39,7 @@ export default function TryItFree() {
   const [previewVisible, setPreviewVisible] = useState(false);
   const [previewSubject, setPreviewSubject] = useState('Quick question about your inquiry');
   const [previewFrom,    setPreviewFrom]    = useState('Your Name, Chicago AI Group');
-  const [previewBodyHtml, setPreviewBodyHtml] = useState(
-    '<span style="color:#4a6080;font-style:italic;">Start typing your business description to see a preview...</span>'
-  );
+  const [previewBodyHtml, setPreviewBodyHtml] = useState(PLACEHOLDER_BODY);
 
   // Typing animation refs
   const typeTimeoutRef    = useRef(null);
@@ -45,10 +57,18 @@ export default function TryItFree() {
     tick();
   }, []);
 
+  // Page title
+  useEffect(() => {
+    const prev = document.title;
+    document.title = 'Try It Free — Chicago AI Group';
+    return () => { document.title = prev; };
+  }, []);
+
   // Update preview when description / biz name / industry change
   useEffect(() => {
     if (bizDesc.trim().length < 10) {
       setPreviewVisible(false);
+      setPreviewBodyHtml(PLACEHOLDER_BODY);
       return;
     }
     setPreviewVisible(true);
@@ -493,7 +513,7 @@ export default function TryItFree() {
                       placeholder="you@yourbusiness.com"
                       autoComplete="email"
                       value={email}
-                      onChange={e => setEmail(e.target.value)}
+                      onChange={e => { setEmail(e.target.value); setEmailError(false); }}
                       onKeyDown={e => e.key === 'Enter' && goStep1()}
                     />
                     <div className={`tif-field-error${emailError ? ' show' : ''}`}>Please enter a valid email address.</div>
@@ -537,7 +557,7 @@ export default function TryItFree() {
                       maxLength={300}
                       placeholder="e.g. We install and replace residential roofs in the Chicago suburbs. Most of our leads come from homeowners who requested a quote after a storm. Our average job is $12,000."
                       value={bizDesc}
-                      onChange={e => setBizDesc(e.target.value)}
+                      onChange={e => { setBizDesc(e.target.value); setDescError(false); }}
                     />
                     <div className={`tif-char-counter${charLen > 240 ? ' near' : ''}`}>{charLen} / 300</div>
                     <div className={`tif-field-error${descError ? ' show' : ''}`}>Please describe your business (at least 20 characters).</div>
@@ -577,9 +597,9 @@ export default function TryItFree() {
                         </div>
                       ))}
                     </div>
-                    <button className="tif-btn" onClick={() => window.location.href = 'https://www.chicagoaigroup.com'}>
+                    <a className="tif-btn" href="https://calendly.com/matt-chicagoaigroup/30min" target="_blank" rel="noopener noreferrer" style={{display:'block',textDecoration:'none',textAlign:'center'}}>
                       Book a Call to Learn More
-                    </button>
+                    </a>
                   </div>
                 </div>
               </div>
