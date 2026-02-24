@@ -122,13 +122,10 @@ function MainSite() {
   return (
     <div className="min-h-screen bg-black text-white overflow-x-hidden">
       <style>{`
-        @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-20px); } }
-        @keyframes pulse-glow { 0%, 100% { opacity: 0.5; } 50% { opacity: 0.8; } }
         @keyframes blue-pulse { 0%, 100% { box-shadow: 0 0 20px rgba(59, 130, 246, 0.3); } 50% { box-shadow: 0 0 40px rgba(59, 130, 246, 0.6); } }
-        .animate-float { animation: float 6s ease-in-out infinite; }
-        .animate-float-delayed { animation: float 6s ease-in-out infinite; animation-delay: -3s; }
-        .animate-pulse-glow { animation: pulse-glow 4s ease-in-out infinite; }
         .animate-blue-pulse { animation: blue-pulse 3s ease-in-out infinite; }
+        @keyframes net-ring       { 0%, 100% { opacity: 0.06; } 50% { opacity: 0.22; } }
+        @keyframes net-ring-outer { 0%, 100% { opacity: 0.03; } 50% { opacity: 0.11; } }
         .glass { background: rgba(255,255,255,0.05); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.1); }
         .glass-hover:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.2); }
         .glow { box-shadow: 0 0 40px rgba(255,255,255,0.1); }
@@ -170,15 +167,61 @@ function MainSite() {
       </nav>
 
       <section className="min-h-screen flex items-center justify-center relative pt-20" aria-labelledby="hero-heading">
-        <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-black to-black" aria-hidden="true" />
-        <div className="absolute top-20 left-10 w-72 h-72 bg-blue-500/10 rounded-full blur-3xl animate-pulse-glow" aria-hidden="true" />
-        <div className="absolute bottom-20 right-10 w-96 h-96 bg-white/5 rounded-full blur-3xl animate-pulse-glow" style={{ animationDelay: '-2s' }} aria-hidden="true" />
-        <div className="absolute top-1/3 right-1/4 w-48 h-48 bg-blue-400/5 rounded-full blur-3xl animate-pulse-glow" style={{ animationDelay: '-1s' }} aria-hidden="true" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] opacity-30" aria-hidden="true">
-          <div className="absolute inset-0 border border-blue-500/20 rounded-full animate-float" />
-          <div className="absolute inset-12 border border-white/10 rounded-full animate-float-delayed" />
-          <div className="absolute inset-24 border border-blue-500/10 rounded-full animate-float" style={{ animationDelay: '-1.5s' }} />
-        </div>
+        {/* Deep navy-black base — fades to pure black at the section fold */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#080b12] to-black" aria-hidden="true" />
+        {/* Single asymmetric bloom — upper-right only, not scattered */}
+        <div className="absolute -top-32 -right-32 w-[640px] h-[640px]" style={{ background: 'radial-gradient(circle, rgba(29,78,216,0.14) 0%, transparent 62%)' }} aria-hidden="true" />
+        {/* Network graph — echoes the logo's neural-network motif at hero scale */}
+        <svg className="absolute inset-0 w-full h-full" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <defs>
+            <filter id="hglow" x="-80%" y="-80%" width="260%" height="260%">
+              <feGaussianBlur stdDeviation="5" result="blur" />
+              <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
+            </filter>
+          </defs>
+          {/* Edges — perimeter top */}
+          <line x1="88"  y1="88"  x2="440"  y2="40"  stroke="#94a3b8" strokeWidth="0.7" strokeOpacity="0.07" />
+          <line x1="440" y1="40"  x2="780"  y2="110" stroke="#94a3b8" strokeWidth="0.7" strokeOpacity="0.07" />
+          <line x1="780" y1="110" x2="1120" y2="50"  stroke="#94a3b8" strokeWidth="0.7" strokeOpacity="0.07" />
+          {/* Edges — approaching hot node E (blue-tinted) */}
+          <line x1="1120" y1="50"  x2="1340" y2="195" stroke="#3b82f6" strokeWidth="0.8" strokeOpacity="0.14" />
+          {/* Edges — radiating from hot node E */}
+          <line x1="1340" y1="195" x2="1410" y2="490" stroke="#3b82f6" strokeWidth="0.8" strokeOpacity="0.13" />
+          <line x1="1340" y1="195" x2="1120" y2="420" stroke="#3b82f6" strokeWidth="0.7" strokeOpacity="0.10" />
+          {/* Edges — perimeter right and bottom */}
+          <line x1="1410" y1="490" x2="1270" y2="760" stroke="#94a3b8" strokeWidth="0.7" strokeOpacity="0.07" />
+          <line x1="1270" y1="760" x2="700"  y2="860" stroke="#94a3b8" strokeWidth="0.7" strokeOpacity="0.06" />
+          <line x1="700"  y1="860" x2="220"  y2="820" stroke="#94a3b8" strokeWidth="0.7" strokeOpacity="0.06" />
+          {/* Edges — perimeter left */}
+          <line x1="220"  y1="820" x2="40"   y2="530" stroke="#94a3b8" strokeWidth="0.7" strokeOpacity="0.07" />
+          <line x1="40"   y1="530" x2="120"  y2="310" stroke="#94a3b8" strokeWidth="0.7" strokeOpacity="0.07" />
+          <line x1="120"  y1="310" x2="88"   y2="88"  stroke="#94a3b8" strokeWidth="0.7" strokeOpacity="0.06" />
+          {/* Edges — interior diagonals for depth */}
+          <line x1="440"  y1="40"  x2="120"  y2="310" stroke="#94a3b8" strokeWidth="0.6" strokeOpacity="0.05" />
+          <line x1="780"  y1="110" x2="1120" y2="420" stroke="#94a3b8" strokeWidth="0.6" strokeOpacity="0.04" />
+          <line x1="1120" y1="420" x2="1410" y2="490" stroke="#60a5fa" strokeWidth="0.6" strokeOpacity="0.08" />
+          {/* Edge — long-range cross, barely visible, creates depth */}
+          <line x1="440"  y1="40"  x2="1270" y2="760" stroke="#94a3b8" strokeWidth="0.5" strokeOpacity="0.025" />
+          {/* Nodes — perimeter */}
+          <circle cx="88"   cy="88"  r="2"   fill="#e2e8f0" fillOpacity="0.30" />
+          <circle cx="440"  cy="40"  r="1.5" fill="#e2e8f0" fillOpacity="0.25" />
+          <circle cx="780"  cy="110" r="2.5" fill="#e2e8f0" fillOpacity="0.30" />
+          <circle cx="1120" cy="50"  r="1.5" fill="#e2e8f0" fillOpacity="0.25" />
+          <circle cx="1410" cy="490" r="2.5" fill="#e2e8f0" fillOpacity="0.28" />
+          <circle cx="1270" cy="760" r="2"   fill="#e2e8f0" fillOpacity="0.25" />
+          <circle cx="700"  cy="860" r="2"   fill="#e2e8f0" fillOpacity="0.22" />
+          <circle cx="220"  cy="820" r="1.5" fill="#e2e8f0" fillOpacity="0.20" />
+          <circle cx="40"   cy="530" r="2.5" fill="#e2e8f0" fillOpacity="0.28" />
+          <circle cx="120"  cy="310" r="2"   fill="#e2e8f0" fillOpacity="0.25" />
+          {/* Node M — warm secondary, mid-right */}
+          <circle cx="1120" cy="420" r="7"   fill="none"    stroke="#60a5fa" strokeWidth="0.8" style={{ animation: 'net-ring-outer 5s ease-in-out 0.8s infinite' }} />
+          <circle cx="1120" cy="420" r="3"   fill="#60a5fa" fillOpacity="0.35" />
+          {/* Node E — hot focal point, upper-right — two rings pulse out slowly */}
+          <circle cx="1340" cy="195" r="22"  fill="none"    stroke="#3b82f6" strokeWidth="1"   style={{ animation: 'net-ring-outer 4s ease-in-out 1s infinite' }} />
+          <circle cx="1340" cy="195" r="13"  fill="none"    stroke="#3b82f6" strokeWidth="1.2" style={{ animation: 'net-ring 4s ease-in-out infinite' }} />
+          <circle cx="1340" cy="195" r="5"   fill="#3b82f6" fillOpacity="0.75" filter="url(#hglow)" />
+          <circle cx="1340" cy="195" r="3"   fill="#93c5fd" fillOpacity="0.90" />
+        </svg>
         <div className="relative z-10 max-w-5xl mx-auto px-6 text-center">
           <FadeInSection>
             <div className="inline-flex items-center gap-2 glass px-5 py-2.5 rounded-full text-sm mb-8 hover:bg-white/10 transition cursor-default">
