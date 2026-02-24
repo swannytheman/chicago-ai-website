@@ -102,6 +102,8 @@ function MainSite() {
     { q: "I'm not technical. Will this work for me?", a: "Absolutely. We built this for busy business owners, not engineers. We handle all the technical stuff—you just tell us what you need and show up for a few calls. Most clients are surprised how painless it is." },
     { q: "How fast can I get started?", a: "Most clients are live within 2-4 weeks. We move fast because we know your time is money. After a quick discovery call, we get to work immediately." },
     { q: "Will the AI sound like a robot?", a: "No. We train each AI on your business, your tone, and your way of talking to customers. People often can't tell they're chatting with AI—that's the whole point." },
+    { q: "What's the commitment? Can I cancel?", a: "No long-term contracts. Monthly plans are month-to-month—cancel anytime, no questions asked. The one-time setup fee covers our team's time building your custom AI, but your monthly plan is never locked in." },
+    { q: "Will this work for my type of business?", a: "We've built AI for trucking companies, insurance agencies, construction firms, consultants, restaurants, and more. If you talk to customers and deal with repetitive tasks, AI can help. We'll tell you honestly on the call if it's not the right fit—we'd rather say that upfront than take your money." },
     { q: "What if something goes wrong?", a: "We've got your back. All plans include support, and Pro/Enterprise clients get priority access plus regular check-ins to make sure everything runs smoothly." }
   ], []);
 
@@ -245,15 +247,19 @@ function MainSite() {
 
       <section className="py-20 relative" aria-label="Statistics">
         <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent" aria-hidden="true" />
-        <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8">
-          {[{ value: 40, suffix: '%', label: 'average revenue increase' }, { value: 15, suffix: '+', label: 'hours saved per week' }, { value: 24, suffix: '/7', label: 'always-on AI support' }].map((stat, idx) => (
-            <FadeInSection key={idx} delay={idx * 100}>
-              <div className="glass glow rounded-2xl p-8 text-center hover:bg-white/10 transition transform hover:scale-105 cursor-default">
-                <div className="text-5xl font-bold mb-2"><AnimatedCounter end={stat.value} suffix={stat.suffix} /></div>
-                <div className="text-gray-400">{stat.label}</div>
-              </div>
-            </FadeInSection>
-          ))}
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {[{ value: 35, suffix: '%', label: 'more closed deals', source: 'Luigi Trucking Insurance' }, { value: 20, suffix: ' hrs', label: 'reclaimed per week', source: 'BuildRight Construction' }, { value: 30, suffix: 's', label: 'avg. first response time', source: 'Midwest Consulting Group' }].map((stat, idx) => (
+              <FadeInSection key={idx} delay={idx * 100}>
+                <div className="glass glow rounded-2xl p-8 text-center hover:bg-white/10 transition transform hover:scale-105 cursor-default">
+                  <div className="text-5xl font-bold mb-2"><AnimatedCounter end={stat.value} suffix={stat.suffix} /></div>
+                  <div className="text-gray-400 mb-1">{stat.label}</div>
+                  <div className="text-xs text-gray-600">{stat.source}</div>
+                </div>
+              </FadeInSection>
+            ))}
+          </div>
+          <p className="text-center text-xs text-gray-600 mt-6">Real results from Chicago AI Group clients</p>
         </div>
       </section>
 
@@ -419,8 +425,8 @@ function MainSite() {
         <div className="max-w-3xl mx-auto px-6">
           <FadeInSection>
             <div className="text-center mb-16">
-              <span className="text-sm uppercase tracking-widest text-gray-500 mb-4 block">FAQ</span>
-              <h2 id="faq-heading" className="text-4xl md:text-5xl font-bold mb-4">Got Questions?</h2>
+              <span className="text-sm uppercase tracking-widest text-gray-500 mb-4 block">Common Questions</span>
+              <h2 id="faq-heading" className="text-4xl md:text-5xl font-bold mb-4">Before You Book a Call</h2>
             </div>
           </FadeInSection>
           <div className="space-y-4">
@@ -447,15 +453,15 @@ function MainSite() {
               <div className="absolute -top-24 -right-24 w-48 h-48 bg-blue-500/20 rounded-full blur-3xl" aria-hidden="true" />
               <div className="absolute -bottom-24 -left-24 w-48 h-48 bg-blue-500/10 rounded-full blur-3xl" aria-hidden="true" />
               <div className="relative z-10">
-                <h2 id="cta-heading" className="text-4xl md:text-5xl font-bold mb-6">Let's See If We're a Fit</h2>
-                <p className="text-xl text-gray-400 mb-10 max-w-2xl mx-auto">Book a free 30-minute call. We'll show you exactly how AI can work for your business—no pressure, no jargon.</p>
+                <h2 id="cta-heading" className="text-4xl md:text-5xl font-bold mb-6">Ready to Reclaim Your Time?</h2>
+                <p className="text-xl text-gray-400 mb-10 max-w-2xl mx-auto">Book a free 30-minute call. We'll map out exactly how AI can work for your business—and tell you honestly if it's not the right fit.</p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
                   <a href={EXTERNAL_URLS.appointments} {...SECURE_LINK_PROPS} className="btn-shine bg-white text-black px-10 py-5 rounded-full font-semibold text-lg hover:bg-gray-100 transition transform hover:scale-105 inline-flex items-center gap-3 shadow-lg shadow-blue-500/30">Book Your Free Call <ArrowRight className="w-5 h-5" aria-hidden="true" /></a>
                   <Link to="/try-it-free" className="try-it-pill text-blue-300 px-8 py-5 rounded-full font-semibold text-lg transition transform hover:scale-105 inline-flex items-center gap-2">
                     Or Try It Free First <Zap className="w-4 h-4" aria-hidden="true" />
                   </Link>
                 </div>
-                <p className="text-gray-500 text-sm mt-6">Free • 30 minutes • Zero obligation</p>
+                <p className="text-gray-500 text-sm mt-6">No contracts • No long-term commitment • Honest advice even if we can't help you</p>
               </div>
             </div>
           </FadeInSection>
