@@ -63,6 +63,7 @@ const FadeInSection = ({ children, delay = 0, className = '' }) => {
 function MainSite() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeProduct, setActiveProduct] = useState(0);
+  const [panelVisible, setPanelVisible] = useState(true);
   const [scrolled, setScrolled] = useState(false);
   const [activeFaq, setActiveFaq] = useState(null);
 
@@ -71,6 +72,12 @@ function MainSite() {
   const selectTier = useCallback((productIdx, tierIdx) => {
     setSelectedTiers(prev => ({...prev, [productIdx]: tierIdx}));
   }, []);
+
+  const switchProduct = useCallback((idx) => {
+    if (idx === activeProduct) return;
+    setPanelVisible(false);
+    setTimeout(() => { setActiveProduct(idx); setPanelVisible(true); }, 150);
+  }, [activeProduct]);
 
   const scrollTo = useCallback((id) => {
     const sanitizedId = id.toLowerCase().replace(/[^a-z0-9-]/g, '');
@@ -223,7 +230,7 @@ function MainSite() {
         <div className="relative z-10 max-w-5xl mx-auto px-6 text-center">
           <FadeInSection>
             <div className="inline-flex items-center gap-2 glass px-5 py-2.5 rounded-full text-sm mb-8 hover:bg-white/10 transition cursor-default">
-              <Zap className="w-4 h-4 text-blue-400" aria-hidden="true" /><span>AI That Actually Works for Small Business</span><span className="w-2 h-2 bg-blue-400 rounded-full animate-pulse" aria-hidden="true" />
+              <Zap className="w-4 h-4 text-blue-400" aria-hidden="true" /><span>Chicago's AI Partner for Small Business</span><span className="w-2 h-2 bg-blue-400 rounded-full animate-pulse" aria-hidden="true" />
             </div>
           </FadeInSection>
           <FadeInSection delay={100}><h1 id="hero-heading" className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 leading-tight tracking-tight">Grow Your Business<br /><span className="text-gradient">Without Growing Your Team</span></h1></FadeInSection>
@@ -323,14 +330,14 @@ function MainSite() {
           <FadeInSection delay={100}>
             <div className="flex flex-wrap justify-center gap-3 mb-12" role="tablist" aria-label="Product categories">
               {products.map((product, idx) => (
-                <button key={idx} onClick={() => setActiveProduct(idx)} className={`flex items-center gap-2 px-6 py-3 rounded-full transition transform hover:scale-105 ${activeProduct === idx ? 'bg-white text-black shadow-lg shadow-blue-500/20' : 'glass glass-hover'}`} type="button" role="tab" aria-selected={activeProduct === idx}>
+                <button key={idx} onClick={() => switchProduct(idx)} className={`flex items-center gap-2 px-6 py-3 rounded-full transition transform hover:scale-105 ${activeProduct === idx ? 'bg-white text-black shadow-lg shadow-blue-500/20' : 'glass glass-hover'}`} type="button" role="tab" aria-selected={activeProduct === idx}>
                   <product.icon className="w-4 h-4" aria-hidden="true" /><span className="hidden sm:inline">{product.name.split(' ').slice(0, 2).join(' ')}</span>
                 </button>
               ))}
             </div>
           </FadeInSection>
           <FadeInSection delay={200}>
-            <div className="glass glow rounded-3xl overflow-hidden" role="tabpanel">
+            <div className={`glass glow rounded-3xl overflow-hidden transition-opacity duration-200 ${panelVisible ? 'opacity-100' : 'opacity-0'}`} role="tabpanel">
               <div className="p-8 md:p-12">
                 <div className="flex flex-col md:flex-row md:items-start gap-6 mb-8">
                   <div className="w-16 h-16 bg-gradient-to-br from-white to-gray-300 rounded-2xl flex items-center justify-center flex-shrink-0 shadow-lg shadow-blue-500/20 animate-blue-pulse">
@@ -454,7 +461,7 @@ function MainSite() {
               <div className="absolute -bottom-24 -left-24 w-48 h-48 bg-blue-500/10 rounded-full blur-3xl" aria-hidden="true" />
               <div className="relative z-10">
                 <h2 id="cta-heading" className="text-4xl md:text-5xl font-bold mb-6">Ready to Reclaim Your Time?</h2>
-                <p className="text-xl text-gray-400 mb-10 max-w-2xl mx-auto">Book a free 30-minute call. We'll map out exactly how AI can work for your business—and tell you honestly if it's not the right fit.</p>
+                <p className="text-xl text-gray-400 mb-10 max-w-2xl mx-auto">Book a free 30-minute call with our Chicago-based team. We'll map out exactly how AI can work for your business—and tell you honestly if it's not the right fit.</p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
                   <a href={EXTERNAL_URLS.appointments} {...SECURE_LINK_PROPS} className="btn-shine bg-white text-black px-10 py-5 rounded-full font-semibold text-lg hover:bg-gray-100 transition transform hover:scale-105 inline-flex items-center gap-3 shadow-lg shadow-blue-500/30">Book Your Free Call <ArrowRight className="w-5 h-5" aria-hidden="true" /></a>
                   <Link to="/try-it-free" className="try-it-pill text-blue-300 px-8 py-5 rounded-full font-semibold text-lg transition transform hover:scale-105 inline-flex items-center gap-2">
