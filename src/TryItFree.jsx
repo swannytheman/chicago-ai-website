@@ -73,6 +73,10 @@ export default function TryItFree() {
   const [descError, setDescError] = useState(false);
   const [firstName, setFirstName] = useState('');
 
+  // Security
+  const [honeypot, setHoneypot]       = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   // Preview
   const [previewVisible, setPreviewVisible] = useState(false);
   const [previewSubject, setPreviewSubject] = useState('Quick question about your inquiry');
@@ -100,6 +104,14 @@ export default function TryItFree() {
     const prev = document.title;
     document.title = 'Try It Free — Chicago AI Group';
     return () => { document.title = prev; };
+  }, []);
+
+  // Restore session if already submitted this browser session
+  useEffect(() => {
+    if (sessionStorage.getItem('tif_submitted')) {
+      setEmail(sessionStorage.getItem('tif_email') || '');
+      setStep(3);
+    }
   }, []);
 
   // Update preview when description / biz name / industry change
@@ -139,7 +151,9 @@ export default function TryItFree() {
   }, []);
 
   function goStep1() {
-    if (!isValidEmail(email)) { setEmailError(true); return; }
+    const trimmed = email.trim();
+    if (!isValidEmail(trimmed)) { setEmailError(true); return; }
+    setEmail(trimmed);
     setEmailError(false);
     setStep(2);
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -149,6 +163,12 @@ export default function TryItFree() {
     if (bizDesc.trim().length < 20) { setDescError(true); return; }
     setDescError(false);
     setPreviewVisible(false);
+    setIsSubmitting(true);
+    // Only persist + trigger send for real users — bots fill the honeypot
+    if (!honeypot) {
+      sessionStorage.setItem('tif_submitted', '1');
+      sessionStorage.setItem('tif_email', email);
+    }
     setStep(3);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
@@ -345,6 +365,7 @@ export default function TryItFree() {
         .tif-btn:hover { transform:translateY(-1px);box-shadow:0 8px 24px rgba(59,130,246,.35); }
         .tif-btn:hover::before { opacity:1; }
         .tif-btn:active { transform:translateY(0); }
+        .tif-btn:disabled { opacity:0.6;cursor:not-allowed;transform:none;box-shadow:none; }
         .tif-btn-back {
           background:none;border:none;color:var(--text-3);font-size:.82rem;cursor:pointer;
           padding:8px 0;display:flex;align-items:center;gap:6px;margin-bottom:20px;
@@ -518,7 +539,7 @@ export default function TryItFree() {
                   <div className="tif-field-row">
                     <div className="tif-field">
                       <label className="tif-label-text" htmlFor="tif-biz-name">Business Name</label>
-                      <input id="tif-biz-name" type="text" className="tif-input" placeholder="e.g. Apex Roofing" value={bizName} onChange={e => setBizName(e.target.value)} />
+                      <input id="tif-biz-name" type="text" className="tif-input" placeholder="e.g. Apex Roofing" maxLength={80} value={bizName} onChange={e => setBizName(e.target.value)} />
                     </div>
                     <div className="tif-field">
                       <label className="tif-label-text" htmlFor="tif-biz-type">Industry</label>
@@ -552,10 +573,17 @@ export default function TryItFree() {
                     <label className="tif-label-text" htmlFor="tif-first-name">
                       Your First Name <span className="tif-label-opt">(optional)</span>
                     </label>
-                    <input id="tif-first-name" type="text" className="tif-input" placeholder="e.g. Sarah" value={firstName} onChange={e => setFirstName(e.target.value)} />
+                    <input id="tif-first-name" type="text" className="tif-input" placeholder="e.g. Sarah" maxLength={50} value={firstName} onChange={e => setFirstName(e.target.value)} />
                   </div>
 
-                  <button type="button" className="tif-btn" onClick={goStep3}>Send My Demo Emails &nbsp;→</button>
+                  {/* Honeypot — invisible to real users, bots fill it automatically */}
+                  <div style={{position:'absolute',left:'-9999px',width:'1px',height:'1px',overflow:'hidden'}} aria-hidden="true">
+                    <input type="text" name="website" value={honeypot} onChange={e => setHoneypot(e.target.value)} tabIndex={-1} autoComplete="off" />
+                  </div>
+
+                  <button type="button" className="tif-btn" onClick={goStep3} disabled={isSubmitting}>
+                    {isSubmitting ? 'Sending…' : 'Send My Demo Emails \u00a0→'}
+                  </button>
                   <div className="tif-legal">Your information is never sold or shared. Used only to personalize your demo.</div>
                 </div>
 
