@@ -120,7 +120,7 @@ function MainSite() {
   const currentProduct = products[activeProduct];
 
   return (
-    <div className="min-h-screen bg-black text-white overflow-x-hidden">
+    <div className="min-h-screen bg-[#080b12] text-white overflow-x-hidden">
       <style>{`
         @keyframes blue-pulse { 0%, 100% { box-shadow: 0 0 20px rgba(59, 130, 246, 0.3); } 50% { box-shadow: 0 0 40px rgba(59, 130, 246, 0.6); } }
         .animate-blue-pulse { animation: blue-pulse 3s ease-in-out infinite; }
