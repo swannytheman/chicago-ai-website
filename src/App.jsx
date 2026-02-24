@@ -1,6 +1,7 @@
-cat > src/App.jsx << 'EOF'
 import { useState, useEffect, useRef, useCallback, useMemo } from 'react';
+import { Routes, Route, Link } from 'react-router-dom';
 import { Bot, Users, Calendar, PenTool, ChevronRight, Check, Star, Menu, X, ArrowRight, Zap, Clock, TrendingUp, ChevronDown, MessageSquare, BarChart3, Shield, Sparkles } from 'lucide-react';
+import TryItFree from './TryItFree.jsx';
 
 const EXTERNAL_URLS = {
   appointments: 'https://calendly.com/matt-chicagoaigroup/30min',
@@ -95,7 +96,7 @@ const FadeInSection = ({ children, delay = 0, className = '' }) => {
   );
 };
 
-export default function App() {
+function MainSite() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeProduct, setActiveProduct] = useState(0);
   const [scrolled, setScrolled] = useState(false);
@@ -126,7 +127,7 @@ export default function App() {
 
   const products = useMemo(() => [
     { icon: Bot, name: "Customer Service AI", tagline: "Answer every question instantly—even at 3am", capabilities: ["Responds in natural conversation, not robotic scripts", "Captures leads and qualifies them automatically", "Works on your website, email, and SMS", "Syncs with your CRM so nothing slips through"], pricing: [{ tier: "Starter", monthly: "$129", setup: "$1,800", details: "1,000 conversations/mo" }, { tier: "Pro", monthly: "$299", setup: "$2,900", details: "Unlimited + integrations", popular: true }, { tier: "Enterprise", monthly: "$499", setup: "$4,500", details: "Custom features + priority support" }] },
-    { icon: Users, name: "Sales AI", tagline: "Turn website visitors into booked meetings", capabilities: ["Qualifies leads in real-time so you talk to buyers only", "Sends personalized follow-ups that don't feel automated", "Recovers abandoned carts and dead leads", "Plugs into your CRM and email tools"], pricing: [{ tier: "Starter", monthly: "$179", setup: "$2,200", details: "Core lead qualification" }, { tier: "Pro", monthly: "$399", setup: "$3,500", details: "Full sequences + lead scoring", popular: true }, { tier: "Enterprise", monthly: "$649", setup: "$5,900", details: "Multi-channel + A/B testing" }] },
+    { icon: Users, name: "Sales AI", tagline: "Turn website visitors into booked meetings", hasTryItFree: true, capabilities: ["Qualifies leads in real-time so you talk to buyers only", "Sends personalized follow-ups that don't feel automated", "Recovers abandoned carts and dead leads", "Plugs into your CRM and email tools"], pricing: [{ tier: "Starter", monthly: "$179", setup: "$2,200", details: "Core lead qualification" }, { tier: "Pro", monthly: "$399", setup: "$3,500", details: "Full sequences + lead scoring", popular: true }, { tier: "Enterprise", monthly: "$649", setup: "$5,900", details: "Multi-channel + A/B testing" }] },
     { icon: Calendar, name: "Admin AI", tagline: "Automate the busywork you dread every day", capabilities: ["Sorts your email and drafts replies", "Handles scheduling and sends reminders", "Chases unpaid invoices (politely)", "Connects to Google, QuickBooks, and more"], pricing: [{ tier: "Starter", monthly: "$199", setup: "$2,400", details: "Email + calendar automation" }, { tier: "Pro", monthly: "$399", setup: "$3,900", details: "Full suite + weekly reports", popular: true }, { tier: "Enterprise", monthly: "$699", setup: "$6,200", details: "Custom workflows + integrations" }] },
     { icon: PenTool, name: "Marketing AI", tagline: "Create a month of content in minutes", capabilities: ["Writes blogs, social posts, and emails that sound like you", "Learns your brand voice and keeps it consistent", "Schedules posts across all platforms", "Shows you what's working and what's not"], pricing: [{ tier: "Starter", monthly: "$149", setup: "$1,500", details: "20 posts/month" }, { tier: "Pro", monthly: "$299", setup: "$2,800", details: "Unlimited + analytics", popular: true }] }
   ], []);
@@ -152,6 +153,7 @@ export default function App() {
   ], []);
 
   const navItems = ['Services', 'Process', 'Testimonials', 'FAQ'];
+  const currentProduct = products[activeProduct];
 
   return (
     <div className="min-h-screen bg-black text-white overflow-x-hidden">
@@ -172,6 +174,8 @@ export default function App() {
         .btn-shine::after { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: linear-gradient(to right, transparent, rgba(255,255,255,0.2), transparent); transform: rotate(45deg); transition: 0.5s; }
         .btn-shine:hover::after { left: 100%; }
         html { scroll-behavior: smooth; }
+        .try-it-pill { background: linear-gradient(135deg, rgba(59,130,246,0.15), rgba(129,140,248,0.15)); border: 1px solid rgba(59,130,246,0.35); }
+        .try-it-pill:hover { background: linear-gradient(135deg, rgba(59,130,246,0.25), rgba(129,140,248,0.25)); border-color: rgba(96,165,250,0.6); }
       `}</style>
 
       <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled ? 'glass py-3' : 'bg-transparent py-5'}`} role="navigation" aria-label="Main navigation">
@@ -183,6 +187,9 @@ export default function App() {
                 {item}<span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-400 transition-all group-hover:w-full" aria-hidden="true" />
               </button>
             ))}
+            <Link to="/try-it-free" className="try-it-pill text-blue-300 px-5 py-2 rounded-full text-sm font-medium transition">
+              Try It Free ✦
+            </Link>
             <button onClick={() => scrollTo('cta')} className="btn-shine bg-white text-black px-6 py-2.5 rounded-full font-medium hover:bg-gray-100 transition transform hover:scale-105" type="button">Book a Call</button>
           </div>
           <button className="md:hidden p-2 glass rounded-lg" onClick={() => setMobileMenuOpen(!mobileMenuOpen)} type="button" aria-expanded={mobileMenuOpen} aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}>{mobileMenuOpen ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}</button>
@@ -190,6 +197,9 @@ export default function App() {
         {mobileMenuOpen && (
           <div className="md:hidden glass mx-4 mt-2 rounded-2xl p-6 space-y-4" role="menu">
             {navItems.map(item => (<button key={item} onClick={() => scrollTo(item.toLowerCase())} className="block w-full text-left text-gray-300 hover:text-white py-2" type="button" role="menuitem">{item}</button>))}
+            <Link to="/try-it-free" className="block w-full text-center try-it-pill text-blue-300 px-5 py-3 rounded-full text-sm font-medium" role="menuitem" onClick={() => setMobileMenuOpen(false)}>
+              Try It Free ✦
+            </Link>
             <button onClick={() => scrollTo('cta')} className="w-full bg-white text-black px-5 py-3 rounded-full font-medium" type="button" role="menuitem">Book a Call</button>
           </div>
         )}
@@ -315,15 +325,18 @@ export default function App() {
               <div className="p-8 md:p-12">
                 <div className="flex flex-col md:flex-row md:items-start gap-6 mb-8">
                   <div className="w-16 h-16 bg-gradient-to-br from-white to-gray-300 rounded-2xl flex items-center justify-center flex-shrink-0 shadow-lg shadow-blue-500/20 animate-blue-pulse">
-                    {(() => { const Icon = products[activeProduct].icon; return <Icon className="w-8 h-8 text-black" aria-hidden="true" />; })()}
+                    {(() => { const Icon = currentProduct.icon; return <Icon className="w-8 h-8 text-black" aria-hidden="true" />; })()}
                   </div>
-                  <div><h3 className="text-3xl font-bold mb-2">{products[activeProduct].name}</h3><p className="text-gray-400 text-lg">{products[activeProduct].tagline}</p></div>
+                  <div>
+                    <h3 className="text-3xl font-bold mb-2">{currentProduct.name}</h3>
+                    <p className="text-gray-400 text-lg">{currentProduct.tagline}</p>
+                  </div>
                 </div>
                 <div className="grid lg:grid-cols-2 gap-8">
                   <div>
                     <h4 className="text-sm uppercase tracking-wider text-gray-500 mb-6 flex items-center gap-2"><Sparkles className="w-4 h-4" aria-hidden="true" /> What It Does For You</h4>
                     <ul className="space-y-4">
-                      {products[activeProduct].capabilities.map((cap, idx) => (
+                      {currentProduct.capabilities.map((cap, idx) => (
                         <li key={idx} className="flex items-center gap-4 glass rounded-xl p-4 hover:bg-white/10 transition">
                           <div className="w-8 h-8 bg-blue-500/20 rounded-lg flex items-center justify-center flex-shrink-0"><Check className="w-4 h-4 text-blue-400" aria-hidden="true" /></div>
                           <span>{cap}</span>
@@ -334,7 +347,7 @@ export default function App() {
                   <div>
                     <h4 className="text-sm uppercase tracking-wider text-gray-500 mb-6">Choose Your Plan</h4>
                     <div className="space-y-4" role="radiogroup" aria-label="Pricing plans">
-                      {products[activeProduct].pricing.map((plan, idx) => {
+                      {currentProduct.pricing.map((plan, idx) => {
                         const isSelected = selectedTiers[activeProduct] === idx;
                         return (
                           <button key={idx} onClick={() => selectTier(activeProduct, idx)} className={`w-full rounded-2xl p-5 flex items-center justify-between transition-all duration-300 transform hover:scale-102 cursor-pointer ${isSelected ? 'bg-white text-black shadow-lg shadow-white/20 scale-102' : 'glass hover:bg-white/15 hover:border-white/30'}`} type="button" role="radio" aria-checked={isSelected}>
@@ -347,7 +360,7 @@ export default function App() {
                             </div>
                             <div className="text-right">
                               <div className="text-2xl font-bold">{plan.monthly}<span className={`text-sm font-normal ${isSelected ? 'text-gray-600' : 'text-gray-400'}`}>/mo</span></div>
-                              <div className={`text-sm ${isSelected ? 'text-gray-500' : 'text-gray-500'}`}>Setup: {plan.setup}</div>
+                              <div className="text-sm text-gray-500">Setup: {plan.setup}</div>
                             </div>
                           </button>
                         );
@@ -355,10 +368,15 @@ export default function App() {
                     </div>
                   </div>
                 </div>
-                <div className="mt-10 pt-8 border-t border-white/10 flex flex-col sm:flex-row gap-4 items-center">
-                  <button onClick={() => scrollTo('cta')} className="btn-shine bg-white text-black px-8 py-4 rounded-full font-semibold hover:bg-gray-100 transition transform hover:scale-105 flex items-center justify-center gap-2" type="button">Get the {products[activeProduct].pricing[selectedTiers[activeProduct]].tier} Plan <ChevronRight className="w-4 h-4" aria-hidden="true" /></button>
+                <div className="mt-10 pt-8 border-t border-white/10 flex flex-col sm:flex-row gap-4 items-center flex-wrap">
+                  <button onClick={() => scrollTo('cta')} className="btn-shine bg-white text-black px-8 py-4 rounded-full font-semibold hover:bg-gray-100 transition transform hover:scale-105 flex items-center justify-center gap-2" type="button">Get the {currentProduct.pricing[selectedTiers[activeProduct]].tier} Plan <ChevronRight className="w-4 h-4" aria-hidden="true" /></button>
+                  {currentProduct.hasTryItFree && (
+                    <Link to="/try-it-free" className="btn-shine try-it-pill text-blue-300 px-8 py-4 rounded-full font-semibold transition transform hover:scale-105 flex items-center justify-center gap-2">
+                      Try It Free — See It Work <Zap className="w-4 h-4" aria-hidden="true" />
+                    </Link>
+                  )}
                   <button onClick={() => scrollTo('cta')} className="glass glass-hover px-8 py-4 rounded-full font-semibold transition" type="button">Talk to Us First</button>
-                  <span className="text-gray-500 text-sm">{products[activeProduct].pricing[selectedTiers[activeProduct]].monthly}/mo • Cancel anytime</span>
+                  <span className="text-gray-500 text-sm">{currentProduct.pricing[selectedTiers[activeProduct]].monthly}/mo • Cancel anytime</span>
                 </div>
               </div>
             </div>
@@ -427,7 +445,12 @@ export default function App() {
               <div className="relative z-10">
                 <h2 id="cta-heading" className="text-4xl md:text-5xl font-bold mb-6">Let's See If We're a Fit</h2>
                 <p className="text-xl text-gray-400 mb-10 max-w-2xl mx-auto">Book a free 30-minute call. We'll show you exactly how AI can work for your business—no pressure, no jargon.</p>
-                <a href={EXTERNAL_URLS.appointments} {...SECURE_LINK_PROPS} className="btn-shine bg-white text-black px-10 py-5 rounded-full font-semibold text-lg hover:bg-gray-100 transition transform hover:scale-105 inline-flex items-center gap-3 shadow-lg shadow-blue-500/30">Book Your Free Call <ArrowRight className="w-5 h-5" aria-hidden="true" /></a>
+                <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                  <a href={EXTERNAL_URLS.appointments} {...SECURE_LINK_PROPS} className="btn-shine bg-white text-black px-10 py-5 rounded-full font-semibold text-lg hover:bg-gray-100 transition transform hover:scale-105 inline-flex items-center gap-3 shadow-lg shadow-blue-500/30">Book Your Free Call <ArrowRight className="w-5 h-5" aria-hidden="true" /></a>
+                  <Link to="/try-it-free" className="try-it-pill text-blue-300 px-8 py-5 rounded-full font-semibold text-lg transition transform hover:scale-105 inline-flex items-center gap-2">
+                    Or Try It Free First <Zap className="w-4 h-4" aria-hidden="true" />
+                  </Link>
+                </div>
                 <p className="text-gray-500 text-sm mt-6">Free • 30 minutes • Zero obligation</p>
               </div>
             </div>
@@ -445,6 +468,7 @@ export default function App() {
             <nav className="flex gap-8 text-gray-400" aria-label="Footer navigation">
               <button onClick={() => scrollTo('services')} className="hover:text-white transition" type="button">Services</button>
               <button onClick={() => scrollTo('process')} className="hover:text-white transition" type="button">About</button>
+              <Link to="/try-it-free" className="hover:text-white transition">Try It Free</Link>
               <a href={EXTERNAL_URLS.contact} {...SECURE_LINK_PROPS} className="hover:text-white transition">Contact</a>
             </nav>
             <div className="text-gray-500 text-sm">© 2025 The Chicago AI Group. All rights reserved.</div>
@@ -454,4 +478,12 @@ export default function App() {
     </div>
   );
 }
-EOF
+
+export default function App() {
+  return (
+    <Routes>
+      <Route path="/" element={<MainSite />} />
+      <Route path="/try-it-free" element={<TryItFree />} />
+    </Routes>
+  );
+}
