@@ -218,7 +218,7 @@ export default function TryItFree() {
         @keyframes tifBlink { 0%,100%{opacity:1} 50%{opacity:.3} }
         .tif-h1 {
           font-family:'Syne',sans-serif;font-size:3.6rem;font-weight:800;
-          line-height:1.05;letter-spacing:-.03em;color:#fff;
+          line-height:1.12;letter-spacing:-.01em;color:#fff;
           margin-bottom:24px;animation:tifFadeUp .6s .1s ease both;
         }
         .tif-h1 em {
