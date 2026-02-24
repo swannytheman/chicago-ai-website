@@ -435,7 +435,7 @@ function MainSite() {
               <Link to="/try-it-free" className="hover:text-white transition">Try It Free</Link>
               <a href={EXTERNAL_URLS.contact} {...SECURE_LINK_PROPS} className="hover:text-white transition">Contact</a>
             </nav>
-            <div className="text-gray-500 text-sm">© 2025 The Chicago AI Group. All rights reserved.</div>
+            <div className="text-gray-500 text-sm">© 2026 The Chicago AI Group. All rights reserved.</div>
           </div>
         </div>
       </footer>

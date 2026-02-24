@@ -299,7 +299,7 @@ export default function TryItFree() {
         .tif-panel.active { display:block;animation:tifPanelIn .4s ease; }
         @keyframes tifPanelIn { from{opacity:0;transform:translateX(16px)} to{opacity:1;transform:translateX(0)} }
 
-        .tif-form-title { font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:700;color:#fff;margin-bottom:6px; }
+        .tif-form-title { font-size:1.4rem;font-weight:700;color:#fff;margin-bottom:6px; }
         .tif-form-sub   { font-size:.85rem;color:var(--text-2);margin-bottom:28px;line-height:1.5; }
 
         /* Fields */
@@ -335,8 +335,8 @@ export default function TryItFree() {
         .tif-btn {
           width:100%;padding:15px 24px;
           background:linear-gradient(135deg,#3b82f6,#2563eb);
-          border:none;border-radius:10px;color:white;
-          font-family:'Syne',sans-serif;font-size:.95rem;font-weight:700;letter-spacing:.02em;
+          border:none;border-radius:100px;color:white;
+          font-size:.95rem;font-weight:700;letter-spacing:.02em;
           cursor:pointer;transition:all .2s;
           position:relative;overflow:hidden;margin-top:8px;
         }
@@ -365,7 +365,7 @@ export default function TryItFree() {
           animation:tifPopIn .5s cubic-bezier(.175,.885,.32,1.275) both;
         }
         @keyframes tifPopIn { from{transform:scale(0);opacity:0} to{transform:scale(1);opacity:1} }
-        .tif-success-title { font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:800;color:#fff;margin-bottom:12px; }
+        .tif-success-title { font-size:1.5rem;font-weight:700;color:#fff;margin-bottom:12px; }
         .tif-success-sub   { font-size:.88rem;color:var(--text-2);line-height:1.7;max-width:320px;margin:0 auto 28px; }
 
         .tif-timeline { display:flex;flex-direction:column;gap:0;text-align:left;margin-bottom:24px; }
