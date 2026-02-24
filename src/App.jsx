@@ -274,7 +274,7 @@ function MainSite() {
         <div className="max-w-7xl mx-auto px-6">
           <FadeInSection>
             <div className="text-center mb-16">
-              <span className="text-sm uppercase tracking-widest text-gray-500 mb-4 block">The Problem We Solve</span>
+              <span className="text-sm uppercase tracking-widest text-gray-500 mb-4 block">Sound Familiar?</span>
               <h2 id="about-heading" className="text-4xl md:text-5xl font-bold mb-4">You're Doing Too Much</h2>
               <p className="text-gray-400 max-w-2xl mx-auto">Answering emails. Chasing leads. Scheduling. Posting content. There's a better way.</p>
             </div>
@@ -282,7 +282,7 @@ function MainSite() {
           <div className="grid md:grid-cols-3 gap-6">
             {[{ icon: TrendingUp, title: "Make More Money", desc: "AI finds opportunities you're missing—smarter pricing, faster follow-ups, upsells that actually convert. Most clients see 20-40% more revenue.", color: "from-blue-500/20" }, { icon: Users, title: "Never Miss a Lead", desc: "Instant responses at 3am. Personalized follow-ups on autopilot. Your AI works every hour you don't.", color: "from-blue-400/20" }, { icon: Clock, title: "Get Your Life Back", desc: "Stop drowning in busywork. Our clients reclaim 15+ hours every week for strategy, family, or actually taking a vacation.", color: "from-blue-600/20" }].map((item, idx) => (
               <FadeInSection key={idx} delay={idx * 100}>
-                <div className={`glass glow-hover rounded-3xl p-8 h-full transition transform hover:scale-105 hover:-translate-y-2 bg-gradient-to-b ${item.color} to-transparent`}>
+                <div className={`glass glow-hover rounded-3xl p-8 h-full transition transform hover:-translate-y-2 bg-gradient-to-b ${item.color} to-transparent`}>
                   <div className="w-14 h-14 glass rounded-2xl flex items-center justify-center mb-6"><item.icon className="w-7 h-7" aria-hidden="true" /></div>
                   <h3 className="text-2xl font-semibold mb-4">{item.title}</h3>
                   <p className="text-gray-400 leading-relaxed">{item.desc}</p>
@@ -297,7 +297,7 @@ function MainSite() {
         <div className="max-w-7xl mx-auto px-6">
           <FadeInSection>
             <div className="text-center mb-16">
-              <span className="text-sm uppercase tracking-widest text-gray-500 mb-4 block">How It Works</span>
+              <span className="text-sm uppercase tracking-widest text-gray-500 mb-4 block">The Setup</span>
               <h2 id="process-heading" className="text-4xl md:text-5xl font-bold mb-4">Live in Weeks, Not Months</h2>
               <p className="text-gray-400 max-w-2xl mx-auto">We handle everything. You just show up for a few calls.</p>
             </div>
@@ -322,8 +322,8 @@ function MainSite() {
         <div className="max-w-7xl mx-auto px-6">
           <FadeInSection>
             <div className="text-center mb-16">
-              <span className="text-sm uppercase tracking-widest text-gray-500 mb-4 block">AI Agents</span>
-              <h2 id="services-heading" className="text-4xl md:text-5xl font-bold mb-4">Pick Your Superpower</h2>
+              <span className="text-sm uppercase tracking-widest text-gray-500 mb-4 block">Meet Your Agents</span>
+              <h2 id="services-heading" className="text-4xl md:text-5xl font-bold mb-4">The Team You Can Actually Afford</h2>
               <p className="text-gray-400 max-w-2xl mx-auto">Four AI agents. Each one replaces hours of work you hate doing.</p>
             </div>
           </FadeInSection>
@@ -404,7 +404,7 @@ function MainSite() {
         <div className="max-w-6xl mx-auto px-6">
           <FadeInSection>
             <div className="text-center mb-16">
-              <span className="text-sm uppercase tracking-widest text-gray-500 mb-4 block">Real Results</span>
+              <span className="text-sm uppercase tracking-widest text-gray-500 mb-4 block">Don't Take Our Word For It</span>
               <h2 id="testimonials-heading" className="text-4xl md:text-5xl font-bold">They Were Skeptical Too</h2>
             </div>
           </FadeInSection>
@@ -432,7 +432,7 @@ function MainSite() {
         <div className="max-w-3xl mx-auto px-6">
           <FadeInSection>
             <div className="text-center mb-16">
-              <span className="text-sm uppercase tracking-widest text-gray-500 mb-4 block">Common Questions</span>
+              <span className="text-sm uppercase tracking-widest text-gray-500 mb-4 block">Good Questions</span>
               <h2 id="faq-heading" className="text-4xl md:text-5xl font-bold mb-4">Before You Book a Call</h2>
             </div>
           </FadeInSection>
