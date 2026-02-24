@@ -21,6 +21,42 @@ function isValidEmail(email) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
 
+function useCounter(end, duration = 1500) {
+  const [count, setCount] = useState(0);
+  const [active, setActive] = useState(false);
+  const ref = useRef(null);
+  useEffect(() => {
+    const el = ref.current;
+    const obs = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) setActive(true); },
+      { threshold: 0.3 }
+    );
+    if (el) obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+  useEffect(() => {
+    if (!active) return;
+    let v = 0;
+    const step = end / (duration / 16);
+    const t = setInterval(() => {
+      v += step;
+      if (v >= end) { setCount(end); clearInterval(t); }
+      else setCount(Math.floor(v));
+    }, 16);
+    return () => clearInterval(t);
+  }, [active, end, duration]);
+  return [count, ref];
+}
+
+function StatNum({ num, suffix, prefix = '' }) {
+  const [count, ref] = useCounter(num);
+  return (
+    <span className="tif-stat-num" ref={ref}>
+      {prefix}{count}<span>{suffix}</span>
+    </span>
+  );
+}
+
 export default function TryItFree() {
   const [step, setStep] = useState(1);
 
@@ -365,7 +401,7 @@ export default function TryItFree() {
         /* ── STATS BAR ── */
         .tif-stats { border-top:1px solid var(--border);padding:32px 48px;display:flex;justify-content:center;gap:80px;max-width:1200px;margin:0 auto; }
         .tif-stat  { text-align:center; }
-        .tif-stat-num { font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;color:#fff;display:block;line-height:1;margin-bottom:4px; }
+        .tif-stat-num { font-size:3rem;font-weight:700;color:#fff;display:block;line-height:1;margin-bottom:4px; }
         .tif-stat-num span { color:var(--blue-hi); }
         .tif-stat-label { font-size:.78rem;color:var(--text-3);letter-spacing:.04em; }
 
@@ -640,13 +676,13 @@ export default function TryItFree() {
           {/* STATS BAR */}
           <div className="tif-stats">
             {[
-              { num: '80', suffix: '%', label: 'of sales need 5+ follow-ups' },
-              { num: '44', suffix: '%', label: 'of reps give up after 1 attempt' },
-              { num: '<60', suffix: 's', label: 'average response time' },
-              { num: '3',  suffix: 'x', label: 'more replies vs manual follow-up' },
+              { num: 80, suffix: '%', prefix: '',  label: 'of sales need 5+ follow-ups' },
+              { num: 44, suffix: '%', prefix: '',  label: 'of reps give up after 1 attempt' },
+              { num: 60, suffix: 's', prefix: '<', label: 'average response time' },
+              { num: 3,  suffix: 'x', prefix: '',  label: 'more replies vs manual follow-up' },
             ].map((s, i) => (
               <div className="tif-stat" key={i}>
-                <span className="tif-stat-num">{s.num}<span>{s.suffix}</span></span>
+                <StatNum num={s.num} suffix={s.suffix} prefix={s.prefix} />
                 <span className="tif-stat-label">{s.label}</span>
               </div>
             ))}
