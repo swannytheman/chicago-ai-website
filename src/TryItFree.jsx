@@ -285,7 +285,13 @@ export default function TryItFree() {
         .tif-input:focus,.tif-select:focus,.tif-textarea:focus { border-color:var(--blue);box-shadow:0 0 0 3px var(--blue-soft); }
         .tif-input.invalid,.tif-textarea.invalid { border-color:#f87171; }
         .tif-textarea { resize:none;line-height:1.6; }
-        .tif-select { cursor:pointer; }
+        .tif-select {
+          cursor:pointer;
+          background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238fa3bf' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+          background-repeat: no-repeat;
+          background-position: right 14px center;
+          padding-right: 38px;
+        }
         .tif-select option { background:#0d1422; }
         .tif-field-row { display:grid;grid-template-columns:1fr 1fr;gap:14px; }
         .tif-char-counter { display:flex;justify-content:flex-end;font-size:.72rem;color:var(--text-3);margin-top:6px;font-family:'DM Mono',monospace;transition:color .2s; }
@@ -512,13 +518,14 @@ export default function TryItFree() {
                       className={`tif-input${emailError ? ' invalid' : ''}`}
                       placeholder="you@yourbusiness.com"
                       autoComplete="email"
+                      autoFocus
                       value={email}
                       onChange={e => { setEmail(e.target.value); setEmailError(false); }}
                       onKeyDown={e => e.key === 'Enter' && goStep1()}
                     />
                     <div className={`tif-field-error${emailError ? ' show' : ''}`}>Please enter a valid email address.</div>
                   </div>
-                  <button className="tif-btn" onClick={goStep1}>Continue &nbsp;→</button>
+                  <button type="button" className="tif-btn" onClick={goStep1}>Continue &nbsp;→</button>
                   <div className="tif-legal">
                     No spam. Unsubscribe in one click. By continuing you agree to receive<br/>a 3-email demo sequence from Chicago AI Group.
                   </div>
@@ -526,7 +533,7 @@ export default function TryItFree() {
 
                 {/* Panel 2 — Business Details */}
                 <div className={`tif-panel ${step === 2 ? 'active' : ''}`}>
-                  <button className="tif-btn-back" onClick={() => setStep(1)}>← Back</button>
+                  <button type="button" className="tif-btn-back" onClick={() => setStep(1)}>← Back</button>
                   <div className="tif-form-title">Tell us about your business</div>
                   <div className="tif-form-sub">The more detail you give, the more personalized your demo emails will be.</div>
 
@@ -570,7 +577,7 @@ export default function TryItFree() {
                     <input id="tif-first-name" type="text" className="tif-input" placeholder="e.g. Sarah" value={firstName} onChange={e => setFirstName(e.target.value)} />
                   </div>
 
-                  <button className="tif-btn" onClick={goStep3}>Send My Demo Emails &nbsp;→</button>
+                  <button type="button" className="tif-btn" onClick={goStep3}>Send My Demo Emails &nbsp;→</button>
                   <div className="tif-legal">Your information is never sold or shared. Used only to personalize your demo.</div>
                 </div>
 
