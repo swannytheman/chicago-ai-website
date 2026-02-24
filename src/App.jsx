@@ -256,7 +256,7 @@ function MainSite() {
         <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent" aria-hidden="true" />
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[{ value: 35, suffix: '%', label: 'more closed deals', source: 'Luigi Trucking Insurance' }, { value: 20, suffix: ' hrs', label: 'reclaimed per week', source: 'BuildRight Construction' }, { value: 30, suffix: 's', label: 'avg. first response time', source: 'Midwest Consulting Group' }].map((stat, idx) => (
+            {[{ value: 35, suffix: '%', label: 'more closed deals', source: 'Luigi Trucking Insurance' }, { value: 20, suffix: ' hrs', label: 'reclaimed per week', source: 'BuildRight Construction' }, { value: 3, suffix: 'x', label: 'more after-hours leads captured', source: 'Midwest Consulting Group' }].map((stat, idx) => (
               <FadeInSection key={idx} delay={idx * 100}>
                 <div className="glass glow rounded-2xl p-8 text-center hover:bg-white/10 transition transform hover:scale-105 cursor-default">
                   <div className="text-5xl font-bold mb-2"><AnimatedCounter end={stat.value} suffix={stat.suffix} /></div>
@@ -433,7 +433,7 @@ function MainSite() {
           <FadeInSection>
             <div className="text-center mb-16">
               <span className="text-sm uppercase tracking-widest text-gray-500 mb-4 block">Good Questions</span>
-              <h2 id="faq-heading" className="text-4xl md:text-5xl font-bold mb-4">Before You Book a Call</h2>
+              <h2 id="faq-heading" className="text-4xl md:text-5xl font-bold mb-4">Still on the Fence?</h2>
             </div>
           </FadeInSection>
           <div className="space-y-4">

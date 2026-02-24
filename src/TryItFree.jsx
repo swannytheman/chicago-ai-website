@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
+import { Link } from 'react-router-dom';
 import Logo from './Logo.jsx';
 
 function escapeHtml(str) {
@@ -429,10 +430,10 @@ export default function TryItFree() {
         <div className="tif-page">
           {/* NAV */}
           <nav className="tif-nav">
-            <a href="https://www.chicagoaigroup.com" style={{textDecoration:'none'}}>
+            <Link to="/" style={{textDecoration:'none'}}>
               <Logo />
-            </a>
-            <a href="https://www.chicagoaigroup.com" className="tif-nav-link">← Back to site</a>
+            </Link>
+            <Link to="/" className="tif-nav-link">← Back to site</Link>
           </nav>
 
           {/* HERO */}
