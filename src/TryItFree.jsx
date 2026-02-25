@@ -84,8 +84,14 @@ export default function TryItFree() {
   const [previewBodyHtml, setPreviewBodyHtml] = useState(PLACEHOLDER_BODY);
 
   // Typing animation refs
-  const typeTimeoutRef    = useRef(null);
-  const previewTimeoutRef = useRef(null);
+  const typeTimeoutRef       = useRef(null);
+  const previewTimeoutRef    = useRef(null);
+
+  // Mobile scroll refs
+  const cardRef              = useRef(null);
+  const previewRef           = useRef(null);
+  const hasScrolledToPreview = useRef(false);
+  const previewScrollTimer   = useRef(null);
 
   const typeText = useCallback((text, onUpdate) => {
     clearTimeout(typeTimeoutRef.current);
@@ -119,9 +125,25 @@ export default function TryItFree() {
     if (bizDesc.trim().length < 10) {
       setPreviewVisible(false);
       setPreviewBodyHtml(PLACEHOLDER_BODY);
+      // Reset so the scroll fires again next time the preview appears
+      hasScrolledToPreview.current = false;
+      clearTimeout(previewScrollTimer.current);
       return;
     }
+
+    const firstAppearance = !hasScrolledToPreview.current;
     setPreviewVisible(true);
+
+    // On mobile, scroll to the preview the first time it becomes visible.
+    // We wait ~1.4 s so the user finishes reading their typed text before
+    // we move their viewport.
+    if (firstAppearance && window.innerWidth < 900) {
+      hasScrolledToPreview.current = true;
+      clearTimeout(previewScrollTimer.current);
+      previewScrollTimer.current = setTimeout(() => {
+        previewRef.current?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }, 1400);
+    }
 
     // Subject line
     if (bizType) {
@@ -148,6 +170,7 @@ export default function TryItFree() {
   useEffect(() => () => {
     clearTimeout(typeTimeoutRef.current);
     clearTimeout(previewTimeoutRef.current);
+    clearTimeout(previewScrollTimer.current);
   }, []);
 
   function goStep1() {
@@ -156,7 +179,9 @@ export default function TryItFree() {
     setEmail(trimmed);
     setEmailError(false);
     setStep(2);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    // Scroll to the card itself — on mobile the hero copy sits above the card
+    // so scrollTo(top:0) would land on the wrong section.
+    setTimeout(() => cardRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 50);
   }
 
   function goStep3() {
@@ -170,7 +195,7 @@ export default function TryItFree() {
       sessionStorage.setItem('tif_email', email);
     }
     setStep(3);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    setTimeout(() => cardRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 50);
   }
 
   const charLen = bizDesc.length;
@@ -366,6 +391,28 @@ export default function TryItFree() {
         .tif-btn:hover::before { opacity:1; }
         .tif-btn:active { transform:translateY(0); }
         .tif-btn:disabled { opacity:0.6;cursor:not-allowed;transform:none;box-shadow:none; }
+
+        /* ── MOBILE PREVIEW NUDGE ── */
+        /* Hidden on desktop — the preview is already visible below the card */
+        .tif-preview-nudge { display:none; }
+        @media (max-width:900px) {
+          .tif-preview-nudge {
+            display:flex;align-items:center;gap:10px;
+            background:rgba(34,211,160,0.08);
+            border:1px solid rgba(34,211,160,0.3);
+            border-radius:10px;padding:13px 16px;
+            font-size:.84rem;color:var(--green);
+            cursor:pointer;margin-top:14px;
+            animation:tifFadeUp .4s ease both,tifNudgePulse 2.4s ease-in-out 0.6s 3;
+            transition:background .2s;
+          }
+          .tif-preview-nudge:active { background:rgba(34,211,160,0.16); }
+          .tif-preview-nudge-icon { font-size:1rem;flex-shrink:0; }
+        }
+        @keyframes tifNudgePulse {
+          0%,100% { box-shadow:0 0 0 0 rgba(34,211,160,0.4); }
+          50%      { box-shadow:0 0 0 6px rgba(34,211,160,0); }
+        }
         .tif-btn-back {
           background:none;border:none;color:var(--text-3);font-size:.82rem;cursor:pointer;
           padding:8px 0;display:flex;align-items:center;gap:6px;margin-bottom:20px;
@@ -486,7 +533,7 @@ export default function TryItFree() {
 
             {/* Right: form */}
             <div>
-              <div className="tif-card">
+              <div className="tif-card" ref={cardRef}>
                 {/* Steps indicator */}
                 <div className="tif-steps">
                   <div className={`tif-step ${stepClass(1)}`}>
@@ -585,6 +632,14 @@ export default function TryItFree() {
                     {isSubmitting ? 'Sending…' : 'Send My Demo Emails \u00a0→'}
                   </button>
                   <div className="tif-legal">Your information is never sold or shared. Used only to personalize your demo.</div>
+
+                  {/* Mobile nudge — only rendered when preview is active; hidden via CSS on desktop */}
+                  {previewVisible && (
+                    <div className="tif-preview-nudge" role="button" aria-label="Scroll to email preview" onClick={() => previewRef.current?.scrollIntoView({ behavior: 'smooth', block: 'nearest' })}>
+                      <span className="tif-preview-nudge-icon">✉️</span>
+                      <span>Your personalized email is ready — tap to see it ↓</span>
+                    </div>
+                  )}
                 </div>
 
                 {/* Panel 3 — Success */}
@@ -618,7 +673,7 @@ export default function TryItFree() {
               </div>
 
               {/* Live Preview */}
-              <div className={`tif-preview${previewVisible ? ' visible' : ''}`}>
+              <div className={`tif-preview${previewVisible ? ' visible' : ''}`} ref={previewRef}>
                 <div className="tif-preview-label">
                   <div className="tif-preview-dot" />
                   Live Preview — Email 1
