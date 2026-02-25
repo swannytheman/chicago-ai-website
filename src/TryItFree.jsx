@@ -193,6 +193,17 @@ export default function TryItFree() {
     if (!honeypot) {
       sessionStorage.setItem('tif_submitted', '1');
       sessionStorage.setItem('tif_email', email);
+      fetch('https://hook.us2.make.com/mq25xf54hvh879toi85w5ek9al6yufko', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email:                email.trim(),
+          first_name:           firstName.trim(),
+          business_name:        bizName.trim(),
+          industry:             bizType,
+          business_description: bizDesc.trim(),
+        }),
+      }).catch(() => {}); // fire-and-forget; don't block UX on webhook errors
     }
     setStep(3);
     setTimeout(() => cardRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 50);
