@@ -242,6 +242,9 @@ export default function TryItFree() {
           --green-glow: rgba(34,211,160,0.12);
           --r:          12px;
         }
+        /* Prevent horizontal scroll & white bleed on mobile overscroll */
+        html, body { overflow-x: hidden; }
+        body { background: #06090f; }
         .tif-root * { box-sizing: border-box; }
         .tif-root {
           font-family: 'Inter', sans-serif;
@@ -249,10 +252,11 @@ export default function TryItFree() {
           color: var(--text);
           min-height: 100vh;
           overflow-x: hidden;
+          width: 100%;
         }
 
         /* ── BG ATMOSPHERE ── */
-        .tif-bg { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+        .tif-bg { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; clip-path: inset(0); }
         .tif-orb { position: absolute; border-radius: 50%; filter: blur(120px); opacity: 0.35; }
         .tif-orb-1 { width:600px;height:600px;top:-200px;right:-100px;background:radial-gradient(circle,#1d4ed8 0%,transparent 70%);animation:tifDrift1 18s ease-in-out infinite alternate; }
         .tif-orb-2 { width:400px;height:400px;bottom:0;left:-100px;background:radial-gradient(circle,#1e3a5f 0%,transparent 70%);animation:tifDrift2 22s ease-in-out infinite alternate; }
@@ -475,25 +479,30 @@ export default function TryItFree() {
         @keyframes tifCursor { 0%,100%{opacity:1} 50%{opacity:0} }
 
         /* ── STATS BAR ── */
-        .tif-stats { border-top:1px solid var(--border);padding:32px 48px;display:flex;justify-content:center;gap:80px;max-width:1200px;margin:0 auto; }
-        .tif-stat  { text-align:center; }
+        .tif-stats { border-top:1px solid var(--border);padding:32px 48px;display:flex;justify-content:center;gap:80px;max-width:1200px;margin:0 auto;overflow:hidden; }
+        .tif-stat  { text-align:center;min-width:0; }
         .tif-stat-num { font-size:3rem;font-weight:700;color:#fff;display:block;line-height:1;margin-bottom:4px; }
         .tif-stat-num span { color:var(--blue-hi); }
         .tif-stat-label { font-size:.78rem;color:var(--text-3);letter-spacing:.04em; }
 
         /* ── RESPONSIVE ── */
         @media (max-width:900px) {
-          .tif-hero { grid-template-columns:1fr;gap:40px;padding:48px 24px 48px;min-height:auto; }
+          .tif-hero { grid-template-columns:1fr;gap:40px;padding:48px 20px 48px;min-height:auto; }
           .tif-h1 { font-size:2.6rem; }
           .tif-sub { max-width:100%; }
-          .tif-nav { padding:16px 24px; }
-          .tif-stats { padding:32px 24px;gap:40px;flex-wrap:wrap; }
+          .tif-nav { padding:16px 20px; }
+          .tif-stats { padding:32px 20px;gap:40px;flex-wrap:wrap; }
+          .tif-orb-1 { width:320px;height:320px;right:-60px;top:-100px; }
+          .tif-orb-2 { width:240px;height:240px;left:-60px; }
         }
         @media (max-width:520px) {
+          .tif-hero { padding:40px 16px; }
           .tif-h1 { font-size:2rem; }
-          .tif-card { padding:28px 20px; }
+          .tif-card { padding:24px 16px; }
           .tif-field-row { grid-template-columns:1fr; }
-          .tif-stats { gap:24px; }
+          .tif-nav { padding:14px 16px; }
+          .tif-stats { gap:20px;padding:28px 16px; }
+          .tif-stat-num { font-size:2.2rem; }
         }
       `}</style>
 
