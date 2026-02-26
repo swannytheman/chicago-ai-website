@@ -7,6 +7,7 @@ import Logo from './Logo.jsx';
 const EXTERNAL_URLS = {
   appointments: 'https://calendly.com/matt-chicagoaigroup/30min',
   contact: 'https://www.chicagoaigroup.com/contact',
+  discovery: 'https://chicagoaigroup.com/book',
 };
 
 const SECURE_LINK_PROPS = {
@@ -67,12 +68,6 @@ function MainSite() {
   const [scrolled, setScrolled] = useState(false);
   const [activeFaq, setActiveFaq] = useState(null);
 
-  const [selectedTiers, setSelectedTiers] = useState({0: 1, 1: 1, 2: 1, 3: 1});
-
-  const selectTier = useCallback((productIdx, tierIdx) => {
-    setSelectedTiers(prev => ({...prev, [productIdx]: tierIdx}));
-  }, []);
-
   const switchProduct = useCallback((idx) => {
     if (idx === activeProduct) return;
     setPanelVisible(false);
@@ -93,10 +88,10 @@ function MainSite() {
 
 
   const products = useMemo(() => [
-    { icon: Bot, name: "Customer Service AI", tagline: "Answer every question instantly—even at 3am", capabilities: ["Responds in natural conversation, not robotic scripts", "Captures leads and qualifies them automatically", "Works on your website, email, and SMS", "Syncs with your CRM so nothing slips through"], pricing: [{ tier: "Starter", monthly: "$129", setup: "$1,800", details: "1,000 conversations/mo" }, { tier: "Pro", monthly: "$299", setup: "$2,900", details: "Unlimited + integrations", popular: true }, { tier: "Enterprise", monthly: "$499", setup: "$4,500", details: "Custom features + priority support" }] },
-    { icon: Users, name: "Sales AI", tagline: "Turn website visitors into booked meetings", hasTryItFree: true, capabilities: ["Qualifies leads in real-time so you talk to buyers only", "Sends personalized follow-ups that don't feel automated", "Recovers abandoned carts and dead leads", "Plugs into your CRM and email tools"], pricing: [{ tier: "Starter", monthly: "$179", setup: "$2,200", details: "Core lead qualification" }, { tier: "Pro", monthly: "$399", setup: "$3,500", details: "Full sequences + lead scoring", popular: true }, { tier: "Enterprise", monthly: "$649", setup: "$5,900", details: "Multi-channel + A/B testing" }] },
-    { icon: Calendar, name: "Admin AI", tagline: "Automate the busywork you dread every day", capabilities: ["Sorts your email and drafts replies", "Handles scheduling and sends reminders", "Chases unpaid invoices (politely)", "Connects to Google, QuickBooks, and more"], pricing: [{ tier: "Starter", monthly: "$199", setup: "$2,400", details: "Email + calendar automation" }, { tier: "Pro", monthly: "$399", setup: "$3,900", details: "Full suite + weekly reports", popular: true }, { tier: "Enterprise", monthly: "$699", setup: "$6,200", details: "Custom workflows + integrations" }] },
-    { icon: PenTool, name: "Marketing AI", tagline: "Create a month of content in minutes", capabilities: ["Writes blogs, social posts, and emails that sound like you", "Learns your brand voice and keeps it consistent", "Schedules posts across all platforms", "Shows you what's working and what's not"], pricing: [{ tier: "Starter", monthly: "$149", setup: "$1,500", details: "20 posts/month" }, { tier: "Pro", monthly: "$299", setup: "$2,800", details: "Unlimited + analytics", popular: true }] }
+    { icon: Bot,      name: "Customer Service AI", tagline: "Answer every question instantly—even at 3am",      capabilities: ["Responds in natural conversation, not robotic scripts", "Captures leads and qualifies them automatically", "Works on your website, email, and SMS", "Syncs with your CRM so nothing slips through"] },
+    { icon: Users,    name: "Sales AI",             tagline: "Turn website visitors into booked meetings",        hasTryItFree: true, capabilities: ["Qualifies leads in real-time so you talk to buyers only", "Sends personalized follow-ups that don't feel automated", "Recovers abandoned carts and dead leads", "Plugs into your CRM and email tools"] },
+    { icon: Calendar, name: "Admin AI",             tagline: "Automate the busywork you dread every day",        capabilities: ["Sorts your email and drafts replies", "Handles scheduling and sends reminders", "Chases unpaid invoices (politely)", "Connects to Google, QuickBooks, and more"] },
+    { icon: PenTool,  name: "Marketing AI",         tagline: "Create a month of content in minutes",             capabilities: ["Writes blogs, social posts, and emails that sound like you", "Learns your brand voice and keeps it consistent", "Schedules posts across all platforms", "Shows you what's working and what's not"] }
   ], []);
 
   const testimonials = useMemo(() => [
@@ -121,7 +116,7 @@ function MainSite() {
     { icon: Shield, title: "You Win", desc: "Go live with ongoing support" }
   ], []);
 
-  const navItems = ['Services', 'Process', 'Testimonials', 'FAQ'];
+  const navItems = ['Services', 'Pricing', 'Process', 'Testimonials', 'FAQ'];
   const currentProduct = products[activeProduct];
 
   return (
@@ -353,53 +348,162 @@ function MainSite() {
                     <p className="text-gray-400 text-lg">{currentProduct.tagline}</p>
                   </div>
                 </div>
-                <div className="grid lg:grid-cols-2 gap-8">
-                  <div>
-                    <h4 className="text-sm uppercase tracking-wider text-gray-500 mb-6 flex items-center gap-2"><Sparkles className="w-4 h-4" aria-hidden="true" /> What It Does For You</h4>
-                    <ul className="space-y-4">
-                      {currentProduct.capabilities.map((cap, idx) => (
-                        <li key={idx} className="flex items-center gap-4 glass rounded-xl p-4 hover:bg-white/10 transition">
-                          <div className="w-8 h-8 bg-blue-500/20 rounded-lg flex items-center justify-center flex-shrink-0"><Check className="w-4 h-4 text-blue-400" aria-hidden="true" /></div>
-                          <span>{cap}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                  <div>
-                    <h4 className="text-sm uppercase tracking-wider text-gray-500 mb-6">Choose Your Plan</h4>
-                    <div className="space-y-4" role="radiogroup" aria-label="Pricing plans">
-                      {currentProduct.pricing.map((plan, idx) => {
-                        const isSelected = selectedTiers[activeProduct] === idx;
-                        return (
-                          <button key={idx} onClick={() => selectTier(activeProduct, idx)} className={`w-full rounded-2xl p-5 flex items-center justify-between transition-all duration-300 transform hover:scale-102 cursor-pointer ${isSelected ? 'bg-white text-black shadow-lg shadow-white/20 scale-102' : 'glass hover:bg-white/15 hover:border-white/30'}`} type="button" role="radio" aria-checked={isSelected}>
-                            <div className="text-left">
-                              <div className="flex items-center gap-2">
-                                <span className="font-bold text-lg">{plan.tier}</span>
-                                {plan.popular && <span className={`text-xs px-2 py-0.5 rounded-full ${isSelected ? 'bg-black text-white' : 'bg-white/20 text-white'}`}>Popular</span>}
-                              </div>
-                              <div className={`text-sm ${isSelected ? 'text-gray-600' : 'text-gray-400'}`}>{plan.details}</div>
-                            </div>
-                            <div className="text-right">
-                              <div className="text-2xl font-bold">{plan.monthly}<span className={`text-sm font-normal ${isSelected ? 'text-gray-600' : 'text-gray-400'}`}>/mo</span></div>
-                              <div className="text-sm text-gray-500">Setup: {plan.setup}</div>
-                            </div>
-                          </button>
-                        );
-                      })}
-                    </div>
+                <div>
+                  <h4 className="text-sm uppercase tracking-wider text-gray-500 mb-6 flex items-center gap-2"><Sparkles className="w-4 h-4" aria-hidden="true" /> What It Does For You</h4>
+                  <div className="grid md:grid-cols-2 gap-4">
+                    {currentProduct.capabilities.map((cap, idx) => (
+                      <div key={idx} className="flex items-center gap-4 glass rounded-xl p-4 hover:bg-white/10 transition">
+                        <div className="w-8 h-8 bg-blue-500/20 rounded-lg flex items-center justify-center flex-shrink-0"><Check className="w-4 h-4 text-blue-400" aria-hidden="true" /></div>
+                        <span>{cap}</span>
+                      </div>
+                    ))}
                   </div>
                 </div>
                 <div className="mt-10 pt-8 border-t border-white/10 flex flex-col sm:flex-row gap-4 items-center flex-wrap">
-                  <button onClick={() => scrollTo('cta')} className="btn-shine bg-white text-black px-8 py-4 rounded-full font-semibold hover:bg-gray-100 transition transform hover:scale-105 flex items-center justify-center gap-2" type="button">Get the {currentProduct.pricing[selectedTiers[activeProduct]].tier} Plan <ChevronRight className="w-4 h-4" aria-hidden="true" /></button>
+                  <button onClick={() => scrollTo('pricing')} className="btn-shine bg-white text-black px-8 py-4 rounded-full font-semibold hover:bg-gray-100 transition transform hover:scale-105 flex items-center justify-center gap-2" type="button">See Pricing &amp; Get Started <ChevronRight className="w-4 h-4" aria-hidden="true" /></button>
                   {currentProduct.hasTryItFree && (
                     <Link to="/try-it-free" className="btn-shine try-it-pill text-blue-300 px-8 py-4 rounded-full font-semibold transition transform hover:scale-105 flex items-center justify-center gap-2">
                       Try It Free — See It Work <Zap className="w-4 h-4" aria-hidden="true" />
                     </Link>
                   )}
                   <button onClick={() => scrollTo('cta')} className="glass glass-hover px-8 py-4 rounded-full font-semibold transition" type="button">Talk to Us First</button>
-                  <span className="text-gray-500 text-sm">{currentProduct.pricing[selectedTiers[activeProduct]].monthly}/mo • Cancel anytime</span>
                 </div>
               </div>
+            </div>
+          </FadeInSection>
+        </div>
+      </section>
+
+      <section id="pricing" className="py-24 bg-gradient-to-b from-transparent via-white/5 to-transparent" aria-labelledby="pricing-heading">
+        <div className="max-w-7xl mx-auto px-6">
+          <FadeInSection>
+            <div className="text-center mb-16">
+              <span className="text-sm uppercase tracking-widest text-gray-500 mb-4 block">How We Work</span>
+              <h2 id="pricing-heading" className="text-4xl md:text-5xl font-bold mb-4">A Proven Process—Not a Package</h2>
+              <p className="text-gray-400 max-w-2xl mx-auto">Three phases that build on each other. Start with Discovery — everything else follows from what we learn.</p>
+            </div>
+          </FadeInSection>
+
+          <div className="flex flex-col md:flex-row items-stretch">
+
+            {/* Phase 1 — Discovery (featured) */}
+            <FadeInSection delay={100} className="flex-1 min-w-0">
+              <div className="h-full rounded-3xl p-8 relative overflow-hidden border border-blue-500/40" style={{background:'rgba(255,255,255,0.05)',backdropFilter:'blur(20px)',boxShadow:'0 0 50px rgba(59,130,246,0.12), 0 0 0 1px rgba(59,130,246,0.08)'}}>
+                <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-blue-500 to-transparent" aria-hidden="true" />
+                <div className="flex items-start justify-between mb-6">
+                  <span className="text-xs text-gray-500 font-mono tracking-widest">PHASE 01</span>
+                  <span className="inline-flex items-center gap-1.5 bg-blue-500/20 border border-blue-500/30 text-blue-400 text-xs font-semibold px-3 py-1 rounded-full">
+                    <span className="w-1.5 h-1.5 bg-blue-400 rounded-full animate-pulse" aria-hidden="true" />
+                    Start Here
+                  </span>
+                </div>
+                <div className="mb-5">
+                  <div className="text-3xl font-bold text-white">$500–$750</div>
+                  <div className="text-gray-500 text-sm mt-1">one-time</div>
+                </div>
+                <h3 className="text-2xl font-bold text-white mb-1">Discovery Session</h3>
+                <p className="text-blue-300/80 text-sm font-medium mb-4">We learn your business before we build anything.</p>
+                <p className="text-gray-400 text-sm leading-relaxed mb-6">A focused deep dive into your lead flow, follow-up process, and where revenue is slipping through the cracks. You walk away with a clear picture of what's costing you money and exactly what we'd build to fix it.</p>
+                <ul className="space-y-3 mb-8" aria-label="What's included">
+                  {[
+                    '60–90 min strategy session with your team',
+                    'Full audit of your current lead flow',
+                    'Identification of drop-off points costing you revenue',
+                    'Custom AI architecture recommendation',
+                    'Written summary with findings and proposed design',
+                  ].map((item, i) => (
+                    <li key={i} className="flex items-start gap-3 text-sm">
+                      <div className="w-5 h-5 bg-blue-500/20 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5"><Check className="w-3 h-3 text-blue-400" aria-hidden="true" /></div>
+                      <span className="text-gray-300">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+                <a href={EXTERNAL_URLS.discovery} {...SECURE_LINK_PROPS} className="btn-shine block w-full bg-blue-600 hover:bg-blue-500 text-white text-center px-6 py-4 rounded-full font-semibold transition transform hover:scale-105 shadow-lg shadow-blue-500/25">
+                  Book a Discovery Call
+                </a>
+              </div>
+            </FadeInSection>
+
+            {/* Connector */}
+            <div className="flex items-center justify-center py-5 md:py-0 md:px-4 flex-shrink-0" aria-hidden="true">
+              <ArrowRight className="w-5 h-5 text-gray-600 rotate-90 md:rotate-0" />
+            </div>
+
+            {/* Phase 2 — Build & Launch */}
+            <FadeInSection delay={200} className="flex-1 min-w-0">
+              <div className="h-full glass rounded-3xl p-8 relative overflow-hidden">
+                <div className="flex items-start justify-between mb-6">
+                  <span className="text-xs text-gray-500 font-mono tracking-widest">PHASE 02</span>
+                </div>
+                <div className="mb-5">
+                  <div className="text-3xl font-bold text-white">$1,500–$3,000</div>
+                  <div className="text-gray-500 text-sm mt-1">one-time</div>
+                </div>
+                <h3 className="text-2xl font-bold text-white mb-1">Build &amp; Launch</h3>
+                <p className="text-gray-400 text-sm font-medium mb-4">Your custom AI system, built and deployed.</p>
+                <p className="text-gray-400 text-sm leading-relaxed mb-6">We build the entire system around what we found in Discovery — automated follow-ups, personalized AI-generated emails, lead tracking, and smart scheduling. Tested, deployed, and running within two weeks.</p>
+                <ul className="space-y-3 mb-6" aria-label="What's included">
+                  {[
+                    'Custom AI lead follow-up system for your business',
+                    'Personalized email sequences in your voice',
+                    'Full lead tracking and management database',
+                    'Smart scheduling — right message, right time',
+                    'Two weeks hands-on support during launch',
+                    'Complete documentation for your team',
+                  ].map((item, i) => (
+                    <li key={i} className="flex items-start gap-3 text-sm">
+                      <div className="w-5 h-5 bg-white/10 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5"><Check className="w-3 h-3 text-gray-400" aria-hidden="true" /></div>
+                      <span className="text-gray-400">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+                <p className="text-gray-600 text-xs">Exact pricing depends on complexity identified during Discovery.</p>
+              </div>
+            </FadeInSection>
+
+            {/* Connector */}
+            <div className="flex items-center justify-center py-5 md:py-0 md:px-4 flex-shrink-0" aria-hidden="true">
+              <ArrowRight className="w-5 h-5 text-gray-600 rotate-90 md:rotate-0" />
+            </div>
+
+            {/* Phase 3 — Ongoing Management */}
+            <FadeInSection delay={300} className="flex-1 min-w-0">
+              <div className="h-full glass rounded-3xl p-8 relative overflow-hidden">
+                <div className="flex items-start justify-between mb-6">
+                  <span className="text-xs text-gray-500 font-mono tracking-widest">PHASE 03</span>
+                </div>
+                <div className="mb-5">
+                  <div className="text-3xl font-bold text-white">$297–$497</div>
+                  <div className="text-gray-500 text-sm mt-1">/month</div>
+                </div>
+                <h3 className="text-2xl font-bold text-white mb-1">Ongoing Management</h3>
+                <p className="text-gray-400 text-sm font-medium mb-4">You never think about follow-up again.</p>
+                <p className="text-gray-400 text-sm leading-relaxed mb-6">We monitor, optimize, and evolve your system as your business grows. Prompts get refined based on real performance data. New sequences get added as you expand. Issues get handled before you notice them.</p>
+                <ul className="space-y-3 mb-6" aria-label="What's included">
+                  {[
+                    'Continuous monitoring and maintenance',
+                    'Prompt optimization based on response rates',
+                    'New sequence creation as your business evolves',
+                    'Priority support — same business day',
+                    'Monthly performance summary',
+                  ].map((item, i) => (
+                    <li key={i} className="flex items-start gap-3 text-sm">
+                      <div className="w-5 h-5 bg-white/10 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5"><Check className="w-3 h-3 text-gray-400" aria-hidden="true" /></div>
+                      <span className="text-gray-400">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </FadeInSection>
+          </div>
+
+          {/* Section CTA */}
+          <FadeInSection delay={400}>
+            <div className="text-center mt-14">
+              <a href={EXTERNAL_URLS.discovery} {...SECURE_LINK_PROPS} className="btn-shine inline-flex items-center gap-3 bg-white text-black px-10 py-5 rounded-full font-semibold text-lg hover:bg-gray-100 transition transform hover:scale-105 shadow-lg shadow-blue-500/20">
+                Start with Discovery <ArrowRight className="w-5 h-5" aria-hidden="true" />
+              </a>
+              <p className="text-gray-600 text-sm mt-4">Every engagement starts with Discovery — it's how we make sure we build the right thing.</p>
             </div>
           </FadeInSection>
         </div>
@@ -487,8 +591,9 @@ function MainSite() {
               <Logo size="small" />
               <div className="w-16 h-0.5 bg-gradient-to-r from-blue-500 to-blue-400 mt-2 rounded-full" aria-hidden="true" />
             </div>
-            <nav className="flex gap-8 text-gray-400" aria-label="Footer navigation">
+            <nav className="flex flex-wrap gap-6 text-gray-400 justify-center md:justify-start" aria-label="Footer navigation">
               <button onClick={() => scrollTo('services')} className="hover:text-white transition" type="button">Services</button>
+              <button onClick={() => scrollTo('pricing')} className="hover:text-white transition" type="button">Pricing</button>
               <button onClick={() => scrollTo('process')} className="hover:text-white transition" type="button">About</button>
               <Link to="/try-it-free" className="hover:text-white transition">Try It Free</Link>
               <a href={EXTERNAL_URLS.contact} {...SECURE_LINK_PROPS} className="hover:text-white transition">Contact</a>
