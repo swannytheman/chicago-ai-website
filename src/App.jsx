@@ -89,7 +89,7 @@ function MainSite() {
 
   const products = useMemo(() => [
     { icon: Bot,      name: "Customer Service AI", tagline: "Answer every question instantly—even at 3am",      capabilities: ["Responds in natural conversation, not robotic scripts", "Captures leads and qualifies them automatically", "Works on your website, email, and SMS", "Syncs with your CRM so nothing slips through"] },
-    { icon: Users,    name: "Sales AI",             tagline: "Turn website visitors into booked meetings",        hasTryItFree: true, capabilities: ["Qualifies leads in real-time so you talk to buyers only", "Sends personalized follow-ups that don't feel automated", "Recovers abandoned carts and dead leads", "Plugs into your CRM and email tools"] },
+    { icon: Users,    name: "Sales AI",             tagline: "Stop losing leads you already worked to get.",       hasTryItFree: true, capabilities: ["Follows up with every lead who went quiet — automatically", "Sends personalized follow-ups that don't feel automated", "Re-engages old contacts sitting in your CRM right now", "Books meetings directly into your calendar"] },
     { icon: Calendar, name: "Admin AI",             tagline: "Automate the busywork you dread every day",        capabilities: ["Sorts your email and drafts replies", "Handles scheduling and sends reminders", "Chases unpaid invoices (politely)", "Connects to Google, QuickBooks, and more"] },
     { icon: PenTool,  name: "Marketing AI",         tagline: "Create a month of content in minutes",             capabilities: ["Writes blogs, social posts, and emails that sound like you", "Learns your brand voice and keeps it consistent", "Schedules posts across all platforms", "Shows you what's working and what's not"] }
   ], []);
