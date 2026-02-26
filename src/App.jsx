@@ -158,7 +158,12 @@ function MainSite() {
             </Link>
             <button onClick={() => scrollTo('cta')} className="btn-shine bg-white text-black px-6 py-2.5 rounded-full font-medium hover:bg-gray-100 transition transform hover:scale-105" type="button">Book a Call</button>
           </div>
-          <button className="md:hidden p-2 glass rounded-lg" onClick={() => setMobileMenuOpen(!mobileMenuOpen)} type="button" aria-expanded={mobileMenuOpen} aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}>{mobileMenuOpen ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}</button>
+          <div className="md:hidden flex items-center gap-3">
+            <Link to="/try-it-free" className="try-it-pill text-blue-300 px-4 py-1.5 rounded-full text-sm font-medium transition">
+              Try It Free ✦
+            </Link>
+            <button className="p-2 glass rounded-lg" onClick={() => setMobileMenuOpen(!mobileMenuOpen)} type="button" aria-expanded={mobileMenuOpen} aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}>{mobileMenuOpen ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}</button>
+          </div>
         </div>
         {mobileMenuOpen && (
           <div className="md:hidden glass mx-4 mt-2 rounded-2xl p-6 space-y-4" role="menu">
