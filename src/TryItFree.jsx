@@ -242,8 +242,8 @@ export default function TryItFree() {
           --green-glow: rgba(34,211,160,0.12);
           --r:          12px;
         }
-        /* Prevent horizontal scroll & white bleed on mobile overscroll */
-        html, body { overflow-x: hidden; }
+        /* Prevent horizontal scroll, white bleed, and double-bounce on mobile */
+        html, body { overflow-x: hidden; overscroll-behavior-y: none; }
         body { background: #06090f; }
         .tif-root * { box-sizing: border-box; }
         .tif-root {
@@ -253,6 +253,7 @@ export default function TryItFree() {
           min-height: 100vh;
           overflow-x: hidden;
           width: 100%;
+          overscroll-behavior-y: none;
         }
 
         /* ── BG ATMOSPHERE ── */
