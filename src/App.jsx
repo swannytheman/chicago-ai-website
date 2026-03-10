@@ -139,13 +139,28 @@ export default function App() {
 
   const faqs = useMemo(() => [
     { q: "I'm not technical. Will this work for me?", a: "Absolutely. We built this for busy business owners, not engineers. We handle all the technical stuff—you just tell us what you need and show up for a few calls. Most clients are surprised how painless it is." },
-    { q: "How fast can I get started?", a: "Most clients are live within 2-4 weeks. We move fast because we know your time is money. After a quick discovery call, we get to work immediately." },
+    { q: "How fast can I get started?", a: "Most clients are live within 2-4 weeks after their Discovery Session. The session itself takes 60-90 minutes, and you'll walk away with a written summary and clear plan. Once you're ready to build, we move fast." },
     { q: "Will the AI sound like a robot?", a: "No. We train each AI on your business, your tone, and your way of talking to customers. People often can't tell they're chatting with AI—that's the whole point." },
     { q: "What if something goes wrong?", a: "We've got your back. All plans include support, and Pro/Enterprise clients get priority access plus regular check-ins to make sure everything runs smoothly." }
   ], []);
 
+  const discoverySession = useMemo(() => ({
+    price: "$500–$750",
+    type: "one-time",
+    title: "Discovery Session",
+    subtitle: "We learn your business before we build anything.",
+    description: "A focused deep dive into your lead flow, follow-up process, and where revenue is slipping through the cracks. You walk away with a clear picture of what's costing you money and exactly what we'd build to fix it.",
+    deliverables: [
+      "60–90 min strategy session with your team",
+      "Full audit of your current lead flow",
+      "Identification of drop-off points costing you revenue",
+      "Custom AI architecture recommendation",
+      "Written summary with findings and proposed design"
+    ]
+  }), []);
+
   const process = useMemo(() => [
-    { icon: MessageSquare, title: "Quick Call", desc: "Tell us what's slowing you down" },
+    { icon: MessageSquare, title: "Discovery Session", desc: "Deep dive into your business and revenue leaks" },
     { icon: BarChart3, title: "Custom Plan", desc: "We design your AI solution" },
     { icon: Zap, title: "We Build It", desc: "Setup, integration, testing—handled" },
     { icon: Shield, title: "You Win", desc: "Go live with ongoing support" }
@@ -183,14 +198,14 @@ export default function App() {
                 {item}<span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-400 transition-all group-hover:w-full" aria-hidden="true" />
               </button>
             ))}
-            <button onClick={() => scrollTo('cta')} className="btn-shine bg-white text-black px-6 py-2.5 rounded-full font-medium hover:bg-gray-100 transition transform hover:scale-105" type="button">Book a Call</button>
+            <button onClick={() => scrollTo('discovery')} className="btn-shine bg-white text-black px-6 py-2.5 rounded-full font-medium hover:bg-gray-100 transition transform hover:scale-105" type="button">Book a Discovery Call</button>
           </div>
           <button className="md:hidden p-2 glass rounded-lg" onClick={() => setMobileMenuOpen(!mobileMenuOpen)} type="button" aria-expanded={mobileMenuOpen} aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}>{mobileMenuOpen ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}</button>
         </div>
         {mobileMenuOpen && (
           <div className="md:hidden glass mx-4 mt-2 rounded-2xl p-6 space-y-4" role="menu">
             {navItems.map(item => (<button key={item} onClick={() => scrollTo(item.toLowerCase())} className="block w-full text-left text-gray-300 hover:text-white py-2" type="button" role="menuitem">{item}</button>))}
-            <button onClick={() => scrollTo('cta')} className="w-full bg-white text-black px-5 py-3 rounded-full font-medium" type="button" role="menuitem">Book a Call</button>
+            <button onClick={() => scrollTo('discovery')} className="w-full bg-white text-black px-5 py-3 rounded-full font-medium" type="button" role="menuitem">Book a Discovery Call</button>
           </div>
         )}
       </nav>
@@ -215,8 +230,8 @@ export default function App() {
           <FadeInSection delay={200}><p className="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-10 leading-relaxed">AI agents that handle customer service, sales, admin, and marketing—so you can focus on what you do best.</p></FadeInSection>
           <FadeInSection delay={300}>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button onClick={() => scrollTo('cta')} className="btn-shine group bg-white text-black px-8 py-4 rounded-full font-semibold text-lg hover:bg-gray-100 transition transform hover:scale-105 flex items-center justify-center gap-2" type="button">Book a Free Call <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" aria-hidden="true" /></button>
-              <button onClick={() => scrollTo('services')} className="glass glass-hover px-8 py-4 rounded-full font-semibold text-lg transition transform hover:scale-105" type="button">See How It Works</button>
+              <button onClick={() => scrollTo('discovery')} className="btn-shine group bg-white text-black px-8 py-4 rounded-full font-semibold text-lg hover:bg-gray-100 transition transform hover:scale-105 flex items-center justify-center gap-2" type="button">Book a Discovery Call <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" aria-hidden="true" /></button>
+              <button onClick={() => scrollTo('process')} className="glass glass-hover px-8 py-4 rounded-full font-semibold text-lg transition transform hover:scale-105" type="button">See How It Works</button>
             </div>
           </FadeInSection>
           <FadeInSection delay={400}>
@@ -292,6 +307,44 @@ export default function App() {
         </div>
       </section>
 
+      <section id="discovery" className="py-24" aria-labelledby="discovery-heading">
+        <div className="max-w-5xl mx-auto px-6">
+          <FadeInSection>
+            <div className="text-center mb-16">
+              <span className="text-sm uppercase tracking-widest text-gray-500 mb-4 block">Phase 01</span>
+              <h2 id="discovery-heading" className="text-4xl md:text-5xl font-bold mb-4">Start Here</h2>
+              <p className="text-gray-400 max-w-2xl mx-auto">{discoverySession.subtitle}</p>
+            </div>
+          </FadeInSection>
+          <FadeInSection delay={100}>
+            <div className="glass glow rounded-3xl p-8 md:p-12 border border-blue-500/20">
+              <div className="flex flex-col lg:flex-row gap-10">
+                <div className="flex-1">
+                  <div className="flex items-baseline gap-3 mb-2">
+                    <span className="text-4xl font-bold">{discoverySession.price}</span>
+                    <span className="text-gray-500">{discoverySession.type}</span>
+                  </div>
+                  <h3 className="text-2xl font-semibold mb-4">{discoverySession.title}</h3>
+                  <p className="text-gray-400 leading-relaxed mb-8">{discoverySession.description}</p>
+                  <a href={EXTERNAL_URLS.appointments} {...SECURE_LINK_PROPS} className="btn-shine bg-white text-black px-8 py-4 rounded-full font-semibold hover:bg-gray-100 transition transform hover:scale-105 inline-flex items-center gap-2">Book a Discovery Call <ArrowRight className="w-5 h-5" aria-hidden="true" /></a>
+                </div>
+                <div className="flex-1">
+                  <h4 className="text-sm uppercase tracking-wider text-gray-500 mb-6 flex items-center gap-2"><Sparkles className="w-4 h-4" aria-hidden="true" /> What You Walk Away With</h4>
+                  <ul className="space-y-4">
+                    {discoverySession.deliverables.map((item, idx) => (
+                      <li key={idx} className="flex items-center gap-4 glass rounded-xl p-4 hover:bg-white/10 transition">
+                        <div className="w-8 h-8 bg-blue-500/20 rounded-lg flex items-center justify-center flex-shrink-0"><Check className="w-4 h-4 text-blue-400" aria-hidden="true" /></div>
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </FadeInSection>
+        </div>
+      </section>
+
       <section id="services" className="py-24" aria-labelledby="services-heading">
         <div className="max-w-7xl mx-auto px-6">
           <FadeInSection>
@@ -356,8 +409,8 @@ export default function App() {
                   </div>
                 </div>
                 <div className="mt-10 pt-8 border-t border-white/10 flex flex-col sm:flex-row gap-4 items-center">
-                  <button onClick={() => scrollTo('cta')} className="btn-shine bg-white text-black px-8 py-4 rounded-full font-semibold hover:bg-gray-100 transition transform hover:scale-105 flex items-center justify-center gap-2" type="button">Get the {products[activeProduct].pricing[selectedTiers[activeProduct]].tier} Plan <ChevronRight className="w-4 h-4" aria-hidden="true" /></button>
-                  <button onClick={() => scrollTo('cta')} className="glass glass-hover px-8 py-4 rounded-full font-semibold transition" type="button">Talk to Us First</button>
+                  <button onClick={() => scrollTo('discovery')} className="btn-shine bg-white text-black px-8 py-4 rounded-full font-semibold hover:bg-gray-100 transition transform hover:scale-105 flex items-center justify-center gap-2" type="button">Start with Discovery <ChevronRight className="w-4 h-4" aria-hidden="true" /></button>
+                  <button onClick={() => scrollTo('discovery')} className="glass glass-hover px-8 py-4 rounded-full font-semibold transition" type="button">Learn About Discovery</button>
                   <span className="text-gray-500 text-sm">{products[activeProduct].pricing[selectedTiers[activeProduct]].monthly}/mo • Cancel anytime</span>
                 </div>
               </div>
@@ -426,9 +479,9 @@ export default function App() {
               <div className="absolute -bottom-24 -left-24 w-48 h-48 bg-blue-500/10 rounded-full blur-3xl" aria-hidden="true" />
               <div className="relative z-10">
                 <h2 id="cta-heading" className="text-4xl md:text-5xl font-bold mb-6">Let's See If We're a Fit</h2>
-                <p className="text-xl text-gray-400 mb-10 max-w-2xl mx-auto">Book a free 30-minute call. We'll show you exactly how AI can work for your business—no pressure, no jargon.</p>
-                <a href={EXTERNAL_URLS.appointments} {...SECURE_LINK_PROPS} className="btn-shine bg-white text-black px-10 py-5 rounded-full font-semibold text-lg hover:bg-gray-100 transition transform hover:scale-105 inline-flex items-center gap-3 shadow-lg shadow-blue-500/30">Book Your Free Call <ArrowRight className="w-5 h-5" aria-hidden="true" /></a>
-                <p className="text-gray-500 text-sm mt-6">Free • 30 minutes • Zero obligation</p>
+                <p className="text-xl text-gray-400 mb-10 max-w-2xl mx-auto">Start with a Discovery Session. We'll dig into your business, find where revenue is leaking, and give you a clear plan—whether you work with us or not.</p>
+                <a href={EXTERNAL_URLS.appointments} {...SECURE_LINK_PROPS} className="btn-shine bg-white text-black px-10 py-5 rounded-full font-semibold text-lg hover:bg-gray-100 transition transform hover:scale-105 inline-flex items-center gap-3 shadow-lg shadow-blue-500/30">Book a Discovery Call <ArrowRight className="w-5 h-5" aria-hidden="true" /></a>
+                <p className="text-gray-500 text-sm mt-6">$500–$750 • 60–90 minutes • Written summary included</p>
               </div>
             </div>
           </FadeInSection>
