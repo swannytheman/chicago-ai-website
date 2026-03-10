@@ -1,5 +1,7 @@
 import { useState, useEffect, useRef, useCallback, useMemo } from 'react';
+import { Routes, Route, Link } from 'react-router-dom';
 import { Bot, Users, Calendar, PenTool, ChevronRight, Check, Star, Menu, X, ArrowRight, Zap, Clock, TrendingUp, ChevronDown, MessageSquare, BarChart3, Shield, Sparkles } from 'lucide-react';
+import TryItFree from './TryItFree.jsx';
 
 const EXTERNAL_URLS = {
   appointments: 'https://calendly.com/matt-chicagoaigroup/30min',
@@ -94,7 +96,7 @@ const FadeInSection = ({ children, delay = 0, className = '' }) => {
   );
 };
 
-export default function App() {
+function MainSite() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeProduct, setActiveProduct] = useState(0);
   const [scrolled, setScrolled] = useState(false);
@@ -125,7 +127,7 @@ export default function App() {
 
   const products = useMemo(() => [
     { icon: Bot, name: "Customer Service AI", tagline: "Answer every question instantly—even at 3am", capabilities: ["Responds in natural conversation, not robotic scripts", "Captures leads and qualifies them automatically", "Works on your website, email, and SMS", "Syncs with your CRM so nothing slips through"], pricing: [{ tier: "Starter", monthly: "$129", setup: "$1,800", details: "1,000 conversations/mo" }, { tier: "Pro", monthly: "$299", setup: "$2,900", details: "Unlimited + integrations", popular: true }, { tier: "Enterprise", monthly: "$499", setup: "$4,500", details: "Custom features + priority support" }] },
-    { icon: Users, name: "Sales AI", tagline: "Turn website visitors into booked meetings", capabilities: ["Qualifies leads in real-time so you talk to buyers only", "Sends personalized follow-ups that don't feel automated", "Recovers abandoned carts and dead leads", "Plugs into your CRM and email tools"], pricing: [{ tier: "Starter", monthly: "$179", setup: "$2,200", details: "Core lead qualification" }, { tier: "Pro", monthly: "$399", setup: "$3,500", details: "Full sequences + lead scoring", popular: true }, { tier: "Enterprise", monthly: "$649", setup: "$5,900", details: "Multi-channel + A/B testing" }] },
+    { icon: Users, name: "Sales AI", tagline: "Turn website visitors into booked meetings", hasTryItFree: true, capabilities: ["Qualifies leads in real-time so you talk to buyers only", "Sends personalized follow-ups that don't feel automated", "Recovers abandoned carts and dead leads", "Plugs into your CRM and email tools"], pricing: [{ tier: "Starter", monthly: "$179", setup: "$2,200", details: "Core lead qualification" }, { tier: "Pro", monthly: "$399", setup: "$3,500", details: "Full sequences + lead scoring", popular: true }, { tier: "Enterprise", monthly: "$649", setup: "$5,900", details: "Multi-channel + A/B testing" }] },
     { icon: Calendar, name: "Admin AI", tagline: "Automate the busywork you dread every day", capabilities: ["Sorts your email and drafts replies", "Handles scheduling and sends reminders", "Chases unpaid invoices (politely)", "Connects to Google, QuickBooks, and more"], pricing: [{ tier: "Starter", monthly: "$199", setup: "$2,400", details: "Email + calendar automation" }, { tier: "Pro", monthly: "$399", setup: "$3,900", details: "Full suite + weekly reports", popular: true }, { tier: "Enterprise", monthly: "$699", setup: "$6,200", details: "Custom workflows + integrations" }] },
     { icon: PenTool, name: "Marketing AI", tagline: "Create a month of content in minutes", capabilities: ["Writes blogs, social posts, and emails that sound like you", "Learns your brand voice and keeps it consistent", "Schedules posts across all platforms", "Shows you what's working and what's not"], pricing: [{ tier: "Starter", monthly: "$149", setup: "$1,500", details: "20 posts/month" }, { tier: "Pro", monthly: "$299", setup: "$2,800", details: "Unlimited + analytics", popular: true }] }
   ], []);
@@ -197,6 +199,7 @@ export default function App() {
                 {item}<span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-400 transition-all group-hover:w-full" aria-hidden="true" />
               </button>
             ))}
+            <Link to="/try-it-free" className="text-blue-300 px-5 py-2 rounded-full text-sm font-medium transition hover:text-blue-200 border border-blue-500/30 hover:border-blue-400/50">Try It Free</Link>
             <button onClick={() => scrollTo('discovery')} className="btn-shine bg-white text-black px-6 py-2.5 rounded-full font-medium hover:bg-gray-100 transition transform hover:scale-105" type="button">Book a Discovery Call</button>
           </div>
           <button className="md:hidden p-2 glass rounded-lg" onClick={() => setMobileMenuOpen(!mobileMenuOpen)} type="button" aria-expanded={mobileMenuOpen} aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}>{mobileMenuOpen ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}</button>
@@ -204,6 +207,7 @@ export default function App() {
         {mobileMenuOpen && (
           <div className="md:hidden glass mx-4 mt-2 rounded-2xl p-6 space-y-4" role="menu">
             {navItems.map(item => (<button key={item} onClick={() => scrollTo(item.toLowerCase())} className="block w-full text-left text-gray-300 hover:text-white py-2" type="button" role="menuitem">{item}</button>))}
+            <Link to="/try-it-free" className="block w-full text-center text-blue-300 px-5 py-3 rounded-full text-sm font-medium border border-blue-500/30" role="menuitem" onClick={() => setMobileMenuOpen(false)}>Try It Free</Link>
             <button onClick={() => scrollTo('discovery')} className="w-full bg-white text-black px-5 py-3 rounded-full font-medium" type="button" role="menuitem">Book a Discovery Call</button>
           </div>
         )}
@@ -409,7 +413,11 @@ export default function App() {
                 </div>
                 <div className="mt-10 pt-8 border-t border-white/10 flex flex-col sm:flex-row gap-4 items-center">
                   <button onClick={() => scrollTo('discovery')} className="btn-shine bg-white text-black px-8 py-4 rounded-full font-semibold hover:bg-gray-100 transition transform hover:scale-105 flex items-center justify-center gap-2" type="button">Start with Discovery <ChevronRight className="w-4 h-4" aria-hidden="true" /></button>
-                  <button onClick={() => scrollTo('discovery')} className="glass glass-hover px-8 py-4 rounded-full font-semibold transition" type="button">Learn About Discovery</button>
+                  {products[activeProduct].hasTryItFree && (
+                    <Link to="/try-it-free" className="btn-shine text-blue-300 px-8 py-4 rounded-full font-semibold transition transform hover:scale-105 flex items-center justify-center gap-2 border border-blue-500/30 hover:border-blue-400/50">
+                      Try It Free <ArrowRight className="w-4 h-4" aria-hidden="true" />
+                    </Link>
+                  )}
                   <span className="text-gray-500 text-sm">{products[activeProduct].pricing[selectedTiers[activeProduct]].monthly}/mo • Cancel anytime</span>
                 </div>
               </div>
@@ -497,6 +505,7 @@ export default function App() {
             <nav className="flex gap-8 text-gray-400" aria-label="Footer navigation">
               <button onClick={() => scrollTo('services')} className="hover:text-white transition" type="button">Services</button>
               <button onClick={() => scrollTo('process')} className="hover:text-white transition" type="button">About</button>
+              <Link to="/try-it-free" className="hover:text-white transition">Try It Free</Link>
               <a href={EXTERNAL_URLS.contact} {...SECURE_LINK_PROPS} className="hover:text-white transition">Contact</a>
             </nav>
             <div className="text-gray-500 text-sm">© 2025 The Chicago AI Group. All rights reserved.</div>
@@ -504,5 +513,14 @@ export default function App() {
         </div>
       </footer>
     </div>
+  );
+}
+
+export default function App() {
+  return (
+    <Routes>
+      <Route path="/" element={<MainSite />} />
+      <Route path="/try-it-free" element={<TryItFree />} />
+    </Routes>
   );
 }
