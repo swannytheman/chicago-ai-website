@@ -1,4 +1,3 @@
-cat > src/App.jsx << 'EOF'
 import { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import { Bot, Users, Calendar, PenTool, ChevronRight, Check, Star, Menu, X, ArrowRight, Zap, Clock, TrendingUp, ChevronDown, MessageSquare, BarChart3, Shield, Sparkles } from 'lucide-react';
 
@@ -507,4 +506,3 @@ export default function App() {
     </div>
   );
 }
-EOF
