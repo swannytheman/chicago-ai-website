@@ -1,6 +1,5 @@
-cat > src/App.jsx << 'EOF'
 import { useState, useEffect, useRef, useCallback, useMemo } from 'react';
-import { Bot, Users, Calendar, PenTool, ChevronRight, Check, Star, Menu, X, ArrowRight, Zap, Clock, TrendingUp, ChevronDown, MessageSquare, BarChart3, Shield, Sparkles } from 'lucide-react';
+import { Users, ChevronRight, Check, Star, Menu, X, ArrowRight, Zap, Clock, TrendingUp, ChevronDown, MessageSquare, BarChart3, Shield, Sparkles } from 'lucide-react';
 
 const EXTERNAL_URLS = {
   appointments: 'https://calendly.com/matt-chicagoaigroup/30min',
@@ -97,15 +96,10 @@ const FadeInSection = ({ children, delay = 0, className = '' }) => {
 
 export default function App() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [activeProduct, setActiveProduct] = useState(0);
   const [scrolled, setScrolled] = useState(false);
   const [activeFaq, setActiveFaq] = useState(null);
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
-  const [selectedTiers, setSelectedTiers] = useState({0: 1, 1: 1, 2: 1, 3: 1});
-
-  const selectTier = useCallback((productIdx, tierIdx) => {
-    setSelectedTiers(prev => ({...prev, [productIdx]: tierIdx}));
-  }, []);
+  const [selectedTier, setSelectedTier] = useState(1);
 
   const scrollTo = useCallback((id) => {
     const sanitizedId = id.toLowerCase().replace(/[^a-z0-9-]/g, '');
@@ -124,12 +118,24 @@ export default function App() {
     return () => clearInterval(interval);
   }, []);
 
-  const products = useMemo(() => [
-    { icon: Bot, name: "Customer Service AI", tagline: "Answer every question instantly—even at 3am", capabilities: ["Responds in natural conversation, not robotic scripts", "Captures leads and qualifies them automatically", "Works on your website, email, and SMS", "Syncs with your CRM so nothing slips through"], pricing: [{ tier: "Starter", monthly: "$129", setup: "$1,800", details: "1,000 conversations/mo" }, { tier: "Pro", monthly: "$299", setup: "$2,900", details: "Unlimited + integrations", popular: true }, { tier: "Enterprise", monthly: "$499", setup: "$4,500", details: "Custom features + priority support" }] },
-    { icon: Users, name: "Sales AI", tagline: "Turn website visitors into booked meetings", capabilities: ["Qualifies leads in real-time so you talk to buyers only", "Sends personalized follow-ups that don't feel automated", "Recovers abandoned carts and dead leads", "Plugs into your CRM and email tools"], pricing: [{ tier: "Starter", monthly: "$179", setup: "$2,200", details: "Core lead qualification" }, { tier: "Pro", monthly: "$399", setup: "$3,500", details: "Full sequences + lead scoring", popular: true }, { tier: "Enterprise", monthly: "$649", setup: "$5,900", details: "Multi-channel + A/B testing" }] },
-    { icon: Calendar, name: "Admin AI", tagline: "Automate the busywork you dread every day", capabilities: ["Sorts your email and drafts replies", "Handles scheduling and sends reminders", "Chases unpaid invoices (politely)", "Connects to Google, QuickBooks, and more"], pricing: [{ tier: "Starter", monthly: "$199", setup: "$2,400", details: "Email + calendar automation" }, { tier: "Pro", monthly: "$399", setup: "$3,900", details: "Full suite + weekly reports", popular: true }, { tier: "Enterprise", monthly: "$699", setup: "$6,200", details: "Custom workflows + integrations" }] },
-    { icon: PenTool, name: "Marketing AI", tagline: "Create a month of content in minutes", capabilities: ["Writes blogs, social posts, and emails that sound like you", "Learns your brand voice and keeps it consistent", "Schedules posts across all platforms", "Shows you what's working and what's not"], pricing: [{ tier: "Starter", monthly: "$149", setup: "$1,500", details: "20 posts/month" }, { tier: "Pro", monthly: "$299", setup: "$2,800", details: "Unlimited + analytics", popular: true }] }
-  ], []);
+  const salesAgent = useMemo(() => ({
+    icon: Users,
+    name: "Sales AI Agent",
+    tagline: "Turn website visitors into booked meetings—on autopilot",
+    capabilities: [
+      "Qualifies leads in real-time so you only talk to serious buyers",
+      "Sends personalized follow-ups that don't feel automated",
+      "Recovers abandoned carts and re-engages dead leads",
+      "Plugs into your CRM, email, and calendar tools seamlessly",
+      "Works 24/7 so you never miss a hot lead again",
+      "Provides real-time lead scoring and pipeline insights"
+    ],
+    pricing: [
+      { tier: "Starter", monthly: "$179", setup: "$2,200", details: "Core lead qualification & follow-ups" },
+      { tier: "Pro", monthly: "$399", setup: "$3,500", details: "Full sequences + lead scoring + CRM sync", popular: true },
+      { tier: "Enterprise", monthly: "$649", setup: "$5,900", details: "Multi-channel outreach + A/B testing + priority support" }
+    ]
+  }), []);
 
   const testimonials = useMemo(() => [
     { quote: "We were drowning in lead follow-ups—losing deals just because we couldn't respond fast enough. Now our AI handles first contact instantly, and our sales team closes 35% more deals. They paid for themselves in the first month.", author: "Erik Sandoval", title: "President, Luigi Trucking Insurance", metric: "35% more closed deals" },
@@ -212,7 +218,7 @@ export default function App() {
             </div>
           </FadeInSection>
           <FadeInSection delay={100}><h1 id="hero-heading" className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 leading-tight tracking-tight">Grow Your Business<br /><span className="text-gradient">Without Growing Your Team</span></h1></FadeInSection>
-          <FadeInSection delay={200}><p className="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-10 leading-relaxed">AI agents that handle customer service, sales, admin, and marketing—so you can focus on what you do best.</p></FadeInSection>
+          <FadeInSection delay={200}><p className="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-10 leading-relaxed">An AI sales agent that qualifies leads, follows up instantly, and books meetings—so you can focus on closing deals.</p></FadeInSection>
           <FadeInSection delay={300}>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <button onClick={() => scrollTo('cta')} className="btn-shine group bg-white text-black px-8 py-4 rounded-full font-semibold text-lg hover:bg-gray-100 transition transform hover:scale-105 flex items-center justify-center gap-2" type="button">Book a Free Call <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" aria-hidden="true" /></button>
@@ -296,34 +302,25 @@ export default function App() {
         <div className="max-w-7xl mx-auto px-6">
           <FadeInSection>
             <div className="text-center mb-16">
-              <span className="text-sm uppercase tracking-widest text-gray-500 mb-4 block">AI Agents</span>
-              <h2 id="services-heading" className="text-4xl md:text-5xl font-bold mb-4">Pick Your Superpower</h2>
-              <p className="text-gray-400 max-w-2xl mx-auto">Four AI agents. Each one replaces hours of work you hate doing.</p>
-            </div>
-          </FadeInSection>
-          <FadeInSection delay={100}>
-            <div className="flex flex-wrap justify-center gap-3 mb-12" role="tablist" aria-label="Product categories">
-              {products.map((product, idx) => (
-                <button key={idx} onClick={() => setActiveProduct(idx)} className={`flex items-center gap-2 px-6 py-3 rounded-full transition transform hover:scale-105 ${activeProduct === idx ? 'bg-white text-black shadow-lg shadow-blue-500/20' : 'glass glass-hover'}`} type="button" role="tab" aria-selected={activeProduct === idx}>
-                  <product.icon className="w-4 h-4" aria-hidden="true" /><span className="hidden sm:inline">{product.name.split(' ').slice(0, 2).join(' ')}</span>
-                </button>
-              ))}
+              <span className="text-sm uppercase tracking-widest text-gray-500 mb-4 block">Our AI Sales Agent</span>
+              <h2 id="services-heading" className="text-4xl md:text-5xl font-bold mb-4">Your 24/7 Sales Machine</h2>
+              <p className="text-gray-400 max-w-2xl mx-auto">An AI agent that qualifies leads, follows up instantly, and books meetings—so your team only talks to serious buyers.</p>
             </div>
           </FadeInSection>
           <FadeInSection delay={200}>
-            <div className="glass glow rounded-3xl overflow-hidden" role="tabpanel">
+            <div className="glass glow rounded-3xl overflow-hidden">
               <div className="p-8 md:p-12">
                 <div className="flex flex-col md:flex-row md:items-start gap-6 mb-8">
                   <div className="w-16 h-16 bg-gradient-to-br from-white to-gray-300 rounded-2xl flex items-center justify-center flex-shrink-0 shadow-lg shadow-blue-500/20 animate-blue-pulse">
-                    {(() => { const Icon = products[activeProduct].icon; return <Icon className="w-8 h-8 text-black" aria-hidden="true" />; })()}
+                    <Users className="w-8 h-8 text-black" aria-hidden="true" />
                   </div>
-                  <div><h3 className="text-3xl font-bold mb-2">{products[activeProduct].name}</h3><p className="text-gray-400 text-lg">{products[activeProduct].tagline}</p></div>
+                  <div><h3 className="text-3xl font-bold mb-2">{salesAgent.name}</h3><p className="text-gray-400 text-lg">{salesAgent.tagline}</p></div>
                 </div>
                 <div className="grid lg:grid-cols-2 gap-8">
                   <div>
                     <h4 className="text-sm uppercase tracking-wider text-gray-500 mb-6 flex items-center gap-2"><Sparkles className="w-4 h-4" aria-hidden="true" /> What It Does For You</h4>
                     <ul className="space-y-4">
-                      {products[activeProduct].capabilities.map((cap, idx) => (
+                      {salesAgent.capabilities.map((cap, idx) => (
                         <li key={idx} className="flex items-center gap-4 glass rounded-xl p-4 hover:bg-white/10 transition">
                           <div className="w-8 h-8 bg-blue-500/20 rounded-lg flex items-center justify-center flex-shrink-0"><Check className="w-4 h-4 text-blue-400" aria-hidden="true" /></div>
                           <span>{cap}</span>
@@ -334,10 +331,10 @@ export default function App() {
                   <div>
                     <h4 className="text-sm uppercase tracking-wider text-gray-500 mb-6">Choose Your Plan</h4>
                     <div className="space-y-4" role="radiogroup" aria-label="Pricing plans">
-                      {products[activeProduct].pricing.map((plan, idx) => {
-                        const isSelected = selectedTiers[activeProduct] === idx;
+                      {salesAgent.pricing.map((plan, idx) => {
+                        const isSelected = selectedTier === idx;
                         return (
-                          <button key={idx} onClick={() => selectTier(activeProduct, idx)} className={`w-full rounded-2xl p-5 flex items-center justify-between transition-all duration-300 transform hover:scale-102 cursor-pointer ${isSelected ? 'bg-white text-black shadow-lg shadow-white/20 scale-102' : 'glass hover:bg-white/15 hover:border-white/30'}`} type="button" role="radio" aria-checked={isSelected}>
+                          <button key={idx} onClick={() => setSelectedTier(idx)} className={`w-full rounded-2xl p-5 flex items-center justify-between transition-all duration-300 transform hover:scale-102 cursor-pointer ${isSelected ? 'bg-white text-black shadow-lg shadow-white/20 scale-102' : 'glass hover:bg-white/15 hover:border-white/30'}`} type="button" role="radio" aria-checked={isSelected}>
                             <div className="text-left">
                               <div className="flex items-center gap-2">
                                 <span className="font-bold text-lg">{plan.tier}</span>
@@ -356,9 +353,9 @@ export default function App() {
                   </div>
                 </div>
                 <div className="mt-10 pt-8 border-t border-white/10 flex flex-col sm:flex-row gap-4 items-center">
-                  <button onClick={() => scrollTo('cta')} className="btn-shine bg-white text-black px-8 py-4 rounded-full font-semibold hover:bg-gray-100 transition transform hover:scale-105 flex items-center justify-center gap-2" type="button">Get the {products[activeProduct].pricing[selectedTiers[activeProduct]].tier} Plan <ChevronRight className="w-4 h-4" aria-hidden="true" /></button>
+                  <button onClick={() => scrollTo('cta')} className="btn-shine bg-white text-black px-8 py-4 rounded-full font-semibold hover:bg-gray-100 transition transform hover:scale-105 flex items-center justify-center gap-2" type="button">Get the {salesAgent.pricing[selectedTier].tier} Plan <ChevronRight className="w-4 h-4" aria-hidden="true" /></button>
                   <button onClick={() => scrollTo('cta')} className="glass glass-hover px-8 py-4 rounded-full font-semibold transition" type="button">Talk to Us First</button>
-                  <span className="text-gray-500 text-sm">{products[activeProduct].pricing[selectedTiers[activeProduct]].monthly}/mo • Cancel anytime</span>
+                  <span className="text-gray-500 text-sm">{salesAgent.pricing[selectedTier].monthly}/mo • Cancel anytime</span>
                 </div>
               </div>
             </div>
@@ -454,4 +451,3 @@ export default function App() {
     </div>
   );
 }
-EOF
