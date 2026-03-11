@@ -1,5 +1,7 @@
 import { useState, useEffect, useRef, useCallback, useMemo } from 'react';
+import { Routes, Route, Link } from 'react-router-dom';
 import { Users, ChevronRight, Check, Star, Menu, X, ArrowRight, Zap, Clock, TrendingUp, ChevronDown, MessageSquare, BarChart3, Shield, Sparkles } from 'lucide-react';
+import TryItFree from './TryItFree.jsx';
 
 const EXTERNAL_URLS = {
   appointments: 'https://calendly.com/matt-chicagoaigroup/30min',
@@ -94,7 +96,7 @@ const FadeInSection = ({ children, delay = 0, className = '' }) => {
   );
 };
 
-export default function App() {
+function MainSite() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeFaq, setActiveFaq] = useState(null);
@@ -189,6 +191,7 @@ export default function App() {
                 {item}<span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-400 transition-all group-hover:w-full" aria-hidden="true" />
               </button>
             ))}
+            <Link to="/try-it-free" className="text-blue-300 px-5 py-2 rounded-full text-sm font-medium transition hover:text-blue-200 border border-blue-500/30 hover:border-blue-400/50">Try It Free</Link>
             <button onClick={() => scrollTo('cta')} className="btn-shine bg-white text-black px-6 py-2.5 rounded-full font-medium hover:bg-gray-100 transition transform hover:scale-105" type="button">Book a Call</button>
           </div>
           <button className="md:hidden p-2 glass rounded-lg" onClick={() => setMobileMenuOpen(!mobileMenuOpen)} type="button" aria-expanded={mobileMenuOpen} aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}>{mobileMenuOpen ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}</button>
@@ -196,6 +199,7 @@ export default function App() {
         {mobileMenuOpen && (
           <div className="md:hidden glass mx-4 mt-2 rounded-2xl p-6 space-y-4" role="menu">
             {navItems.map(item => (<button key={item} onClick={() => scrollTo(item.toLowerCase())} className="block w-full text-left text-gray-300 hover:text-white py-2" type="button" role="menuitem">{item}</button>))}
+            <Link to="/try-it-free" className="block w-full text-center text-blue-300 px-5 py-3 rounded-full text-sm font-medium border border-blue-500/30" role="menuitem" onClick={() => setMobileMenuOpen(false)}>Try It Free</Link>
             <button onClick={() => scrollTo('cta')} className="w-full bg-white text-black px-5 py-3 rounded-full font-medium" type="button" role="menuitem">Book a Call</button>
           </div>
         )}
@@ -354,7 +358,7 @@ export default function App() {
                 </div>
                 <div className="mt-10 pt-8 border-t border-white/10 flex flex-col sm:flex-row gap-4 items-center">
                   <button onClick={() => scrollTo('cta')} className="btn-shine bg-white text-black px-8 py-4 rounded-full font-semibold hover:bg-gray-100 transition transform hover:scale-105 flex items-center justify-center gap-2" type="button">Get the {salesAgent.pricing[selectedTier].tier} Plan <ChevronRight className="w-4 h-4" aria-hidden="true" /></button>
-                  <button onClick={() => scrollTo('cta')} className="glass glass-hover px-8 py-4 rounded-full font-semibold transition" type="button">Talk to Us First</button>
+                  <Link to="/try-it-free" className="btn-shine text-blue-300 px-8 py-4 rounded-full font-semibold transition transform hover:scale-105 flex items-center justify-center gap-2 border border-blue-500/30 hover:border-blue-400/50">Try It Free <ArrowRight className="w-4 h-4" aria-hidden="true" /></Link>
                   <span className="text-gray-500 text-sm">{salesAgent.pricing[selectedTier].monthly}/mo • Cancel anytime</span>
                 </div>
               </div>
@@ -442,6 +446,7 @@ export default function App() {
             <nav className="flex gap-8 text-gray-400" aria-label="Footer navigation">
               <button onClick={() => scrollTo('services')} className="hover:text-white transition" type="button">Services</button>
               <button onClick={() => scrollTo('process')} className="hover:text-white transition" type="button">About</button>
+              <Link to="/try-it-free" className="hover:text-white transition">Try It Free</Link>
               <a href={EXTERNAL_URLS.contact} {...SECURE_LINK_PROPS} className="hover:text-white transition">Contact</a>
             </nav>
             <div className="text-gray-500 text-sm">© 2025 The Chicago AI Group. All rights reserved.</div>
@@ -449,5 +454,14 @@ export default function App() {
         </div>
       </footer>
     </div>
+  );
+}
+
+export default function App() {
+  return (
+    <Routes>
+      <Route path="/" element={<MainSite />} />
+      <Route path="/try-it-free" element={<TryItFree />} />
+    </Routes>
   );
 }
