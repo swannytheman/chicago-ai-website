@@ -12,9 +12,9 @@ export default function Logo({ size = 'default', showText = true }) {
         <circle cx="30" cy="35" r="5" fill="#e2e8f0" />
         <circle cx="30" cy="65" r="5" fill="#e2e8f0" />
         <circle cx="68" cy="50" r="4" fill="#e2e8f0" />
-        <circle cx="50" cy="50" r="10" fill="#3b82f6" filter="url(#blueGlow)" />
-        <circle cx="50" cy="50" r="6" fill="#60a5fa" />
-        <polygon points="82,38 84,42 88,42 85,45 86,49 82,46 78,49 79,45 76,42 80,42" fill="#60a5fa" />
+        <circle cx="50" cy="50" r="10" fill="#10b981" filter="url(#blueGlow)" />
+        <circle cx="50" cy="50" r="6" fill="#34d399" />
+        <polygon points="82,38 84,42 88,42 85,45 86,49 82,46 78,49 79,45 76,42 80,42" fill="#34d399" />
         <defs>
           <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
             <stop offset="0%" stopColor="#ffffff" />

@@ -222,10 +222,10 @@ export default function TryItFree() {
           --bg-input:   #0a111d;
           --border:     #1a2638;
           --border-hi:  #243550;
-          --blue:       #3b82f6;
-          --blue-hi:    #60a5fa;
-          --blue-glow:  rgba(59,130,246,0.18);
-          --blue-soft:  rgba(59,130,246,0.08);
+          --blue:       #10b981;
+          --blue-hi:    #34d399;
+          --blue-glow:  rgba(16,185,129,0.18);
+          --blue-soft:  rgba(16,185,129,0.08);
           --text:       #e8eef8;
           --text-2:     #8fa3bf;
           --text-3:     #4a6080;
@@ -249,16 +249,16 @@ export default function TryItFree() {
         /* -- BG ATMOSPHERE -- */
         .tif-bg { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; clip-path: inset(0); }
         .tif-orb { position: absolute; border-radius: 50%; filter: blur(120px); opacity: 0.35; }
-        .tif-orb-1 { width:600px;height:600px;top:-200px;right:-100px;background:radial-gradient(circle,#1d4ed8 0%,transparent 70%);animation:tifDrift1 18s ease-in-out infinite alternate; }
-        .tif-orb-2 { width:400px;height:400px;bottom:0;left:-100px;background:radial-gradient(circle,#1e3a5f 0%,transparent 70%);animation:tifDrift2 22s ease-in-out infinite alternate; }
-        .tif-orb-3 { width:300px;height:300px;top:50%;left:50%;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(59,130,246,.15) 0%,transparent 70%);animation:tifPulse 8s ease-in-out infinite; }
+        .tif-orb-1 { width:600px;height:600px;top:-200px;right:-100px;background:radial-gradient(circle,#059669 0%,transparent 70%);animation:tifDrift1 18s ease-in-out infinite alternate; }
+        .tif-orb-2 { width:400px;height:400px;bottom:0;left:-100px;background:radial-gradient(circle,#064e3b 0%,transparent 70%);animation:tifDrift2 22s ease-in-out infinite alternate; }
+        .tif-orb-3 { width:300px;height:300px;top:50%;left:50%;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(16,185,129,.15) 0%,transparent 70%);animation:tifPulse 8s ease-in-out infinite; }
         @keyframes tifDrift1 { from{transform:translate(0,0) scale(1)} to{transform:translate(-60px,80px) scale(1.1)} }
         @keyframes tifDrift2 { from{transform:translate(0,0) scale(1)} to{transform:translate(60px,-40px) scale(0.9)} }
         @keyframes tifPulse  { 0%,100%{opacity:.15} 50%{opacity:.3} }
 
         .tif-grid {
           position: fixed; inset: 0;
-          background-image: linear-gradient(rgba(59,130,246,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(59,130,246,.025) 1px,transparent 1px);
+          background-image: linear-gradient(rgba(16,185,129,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(16,185,129,.025) 1px,transparent 1px);
           background-size: 60px 60px;
           pointer-events: none; z-index: 0;
         }
@@ -288,7 +288,7 @@ export default function TryItFree() {
         /* -- HERO COPY -- */
         .tif-label {
           display:inline-flex;align-items:center;gap:8px;
-          background:var(--blue-soft);border:1px solid rgba(59,130,246,.2);
+          background:var(--blue-soft);border:1px solid rgba(16,185,129,.2);
           border-radius:100px;padding:6px 16px;
           font-size:.72rem;font-weight:500;letter-spacing:.1em;
           color:var(--blue-hi);text-transform:uppercase;
@@ -307,7 +307,7 @@ export default function TryItFree() {
         }
         .tif-h1 em {
           font-style:normal;
-          background:linear-gradient(135deg,#60a5fa 0%,#3b82f6 50%,#818cf8 100%);
+          background:linear-gradient(135deg,#34d399 0%,#10b981 50%,#059669 100%);
           -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
         }
         .tif-sub { font-size:1.05rem;line-height:1.7;color:var(--text-2);max-width:420px;margin-bottom:40px;font-weight:300;animation:tifFadeUp .6s .2s ease both; }
@@ -322,11 +322,11 @@ export default function TryItFree() {
           background:var(--bg-card);border:1px solid var(--border);border-radius:20px;
           padding:40px;position:relative;overflow:hidden;
           animation:tifFadeUp .6s .15s ease both;
-          box-shadow:0 40px 80px rgba(0,0,0,.4),0 0 0 1px rgba(59,130,246,.05);
+          box-shadow:0 40px 80px rgba(0,0,0,.4),0 0 0 1px rgba(16,185,129,.05);
         }
         .tif-card::before {
           content:'';position:absolute;top:0;left:0;right:0;height:1px;
-          background:linear-gradient(90deg,transparent,rgba(59,130,246,.5),transparent);
+          background:linear-gradient(90deg,transparent,rgba(16,185,129,.5),transparent);
         }
 
         /* Steps */
@@ -341,7 +341,7 @@ export default function TryItFree() {
           font-size:.7rem;font-weight:700;
           transition:all .3s;background:transparent;
         }
-        .tif-step.active .tif-step-num { background:var(--blue);border-color:var(--blue);color:white;box-shadow:0 0 12px rgba(59,130,246,.5); }
+        .tif-step.active .tif-step-num { background:var(--blue);border-color:var(--blue);color:white;box-shadow:0 0 12px rgba(16,185,129,.5); }
         .tif-step.done   .tif-step-num { background:var(--green);border-color:var(--green);color:white; }
         .tif-step-line { flex:1;height:1px;background:var(--border);margin:0 12px;transition:background .3s; }
         .tif-step-line.done { background:var(--green);opacity:.4; }
@@ -386,14 +386,14 @@ export default function TryItFree() {
         /* Buttons */
         .tif-btn {
           width:100%;padding:15px 24px;
-          background:linear-gradient(135deg,#3b82f6,#2563eb);
+          background:linear-gradient(135deg,#10b981,#059669);
           border:none;border-radius:100px;color:white;
           font-size:.95rem;font-weight:700;letter-spacing:.02em;
           cursor:pointer;transition:all .2s;
           position:relative;overflow:hidden;margin-top:8px;
         }
         .tif-btn::before { content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.1),transparent);opacity:0;transition:opacity .2s; }
-        .tif-btn:hover { transform:translateY(-1px);box-shadow:0 8px 24px rgba(59,130,246,.35); }
+        .tif-btn:hover { transform:translateY(-1px);box-shadow:0 8px 24px rgba(16,185,129,.35); }
         .tif-btn:hover::before { opacity:1; }
         .tif-btn:active { transform:translateY(0); }
         .tif-btn:disabled { opacity:0.6;cursor:not-allowed;transform:none;box-shadow:none; }
@@ -448,7 +448,7 @@ export default function TryItFree() {
         .tif-et:nth-child(1){animation-delay:.2s}
         .tif-et:nth-child(2){animation-delay:.35s}
         .tif-et:nth-child(3){animation-delay:.5s}
-        .tif-et-badge { background:var(--blue-soft);border:1px solid rgba(59,130,246,.2);color:var(--blue-hi);font-family:'DM Mono',monospace;font-size:.68rem;padding:3px 10px;border-radius:100px;white-space:nowrap;flex-shrink:0;margin-top:2px; }
+        .tif-et-badge { background:var(--blue-soft);border:1px solid rgba(16,185,129,.2);color:var(--blue-hi);font-family:'DM Mono',monospace;font-size:.68rem;padding:3px 10px;border-radius:100px;white-space:nowrap;flex-shrink:0;margin-top:2px; }
         .tif-et-strong { display:block;font-size:.84rem;color:var(--text);margin-bottom:2px; }
         .tif-et-span   { font-size:.78rem;color:var(--text-3); }
 
