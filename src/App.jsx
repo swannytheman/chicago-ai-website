@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import { Routes, Route, Link } from 'react-router-dom';
-import { Users, ChevronRight, Check, Star, Menu, X, ArrowRight, Zap, Clock, TrendingUp, ChevronDown, MessageSquare, BarChart3, Shield, Sparkles, Send, Calendar } from 'lucide-react';
+import { Users, ChevronRight, Check, Star, Menu, X, ArrowRight, Zap, Clock, TrendingUp, ChevronDown, MessageSquare, BarChart3, Shield, Sparkles, Send, Calendar, Building2, Hammer, Home, Briefcase } from 'lucide-react';
 import TryItFree from './TryItFree.jsx';
 
 const EXTERNAL_URLS = {
@@ -289,6 +289,68 @@ function MainSite() {
         </div>
       </section>
 
+      <section id="testimonials" className="py-24 bg-gradient-to-b from-transparent via-white/5 to-transparent" aria-labelledby="testimonials-heading">
+        <div className="max-w-7xl mx-auto px-6">
+          <FadeInSection>
+            <div className="text-center mb-10">
+              <span className="text-sm uppercase tracking-widest text-emerald-400 mb-4 block">Trusted by Local Businesses</span>
+              <h2 id="testimonials-heading" className="text-4xl md:text-5xl font-bold mb-4">Helping Chicago Businesses Like Yours</h2>
+              <p className="text-zinc-400 max-w-2xl mx-auto">From insurance firms to construction companies, we help small businesses across Chicago close more deals with less effort.</p>
+            </div>
+          </FadeInSection>
+          <FadeInSection delay={100}>
+            <div className="flex flex-wrap justify-center gap-3 mb-12">
+              {[
+                { icon: Shield, label: 'Insurance' },
+                { icon: Hammer, label: 'Construction' },
+                { icon: Home, label: 'Real Estate' },
+                { icon: Briefcase, label: 'Consulting' },
+                { icon: Building2, label: 'Home Services' },
+                { icon: TrendingUp, label: 'Finance' },
+              ].map((item, idx) => (
+                <div key={idx} className="flex items-center gap-2 glass rounded-full px-5 py-2.5 text-sm text-zinc-300 hover:bg-white/10 transition cursor-default">
+                  <item.icon className="w-4 h-4 text-emerald-400" aria-hidden="true" />
+                  {item.label}
+                </div>
+              ))}
+            </div>
+          </FadeInSection>
+          <FadeInSection delay={200}>
+            <div className="grid md:grid-cols-3 gap-5 mb-12">
+              {[
+                { stat: '35%', label: 'more closed deals', detail: 'Local insurance firm' },
+                { stat: '40%', label: 'response rate boost', detail: 'Average across clients' },
+                { stat: '3x', label: 'more appointments booked', detail: 'Chicago real estate agency' },
+              ].map((item, idx) => (
+                <div key={idx} className="glass glow rounded-2xl p-6 text-center hover:bg-white/10 transition transform hover:scale-105 cursor-default">
+                  <div className="text-3xl font-bold text-emerald-400 mb-1">{item.stat}</div>
+                  <div className="text-white font-medium text-sm mb-1">{item.label}</div>
+                  <div className="text-zinc-500 text-xs">{item.detail}</div>
+                </div>
+              ))}
+            </div>
+          </FadeInSection>
+          <FadeInSection delay={300}>
+            <div className="max-w-4xl mx-auto">
+              <div className="relative">
+                <div className="glass glow rounded-3xl p-8 md:p-12 transition-all duration-500">
+                  <div className="flex items-center justify-between mb-6">
+                    <div className="flex gap-1" role="img" aria-label="5 star rating">{[...Array(5)].map((_, i) => (<Star key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400" aria-hidden="true" />))}</div>
+                    <div className="bg-emerald-500/20 border border-emerald-500/30 px-4 py-2 rounded-full text-sm font-semibold text-emerald-400">{testimonials[currentTestimonial].metric}</div>
+                  </div>
+                  <blockquote className="text-xl md:text-2xl mb-8 leading-relaxed min-h-[140px]">"{testimonials[currentTestimonial].quote}"</blockquote>
+                  <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 bg-gradient-to-br from-zinc-600 to-zinc-800 rounded-full flex items-center justify-center font-bold text-lg" aria-hidden="true">{testimonials[currentTestimonial].author.charAt(0)}</div>
+                    <div><div className="font-semibold text-lg">{testimonials[currentTestimonial].author}</div><div className="text-zinc-400">{testimonials[currentTestimonial].title}</div></div>
+                  </div>
+                </div>
+                <div className="flex justify-center gap-3 mt-8" role="tablist" aria-label="Testimonial navigation">{testimonials.map((_, idx) => (<button key={idx} onClick={() => setCurrentTestimonial(idx)} className={`w-3 h-3 rounded-full transition-all duration-300 ${currentTestimonial === idx ? 'bg-emerald-400 w-8' : 'bg-white/30 hover:bg-white/50'}`} type="button" role="tab" aria-selected={currentTestimonial === idx} aria-label={`View testimonial ${idx + 1}`} />))}</div>
+              </div>
+            </div>
+          </FadeInSection>
+        </div>
+      </section>
+
       <section className="py-20 relative" aria-label="Statistics">
         <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent" aria-hidden="true" />
         <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -411,33 +473,6 @@ function MainSite() {
                   <span className="text-zinc-500 text-sm">{salesAgent.pricing[selectedTier].monthly}/mo • Cancel anytime</span>
                 </div>
               </div>
-            </div>
-          </FadeInSection>
-        </div>
-      </section>
-
-      <section id="testimonials" className="py-24 bg-gradient-to-b from-transparent via-white/5 to-transparent" aria-labelledby="testimonials-heading">
-        <div className="max-w-4xl mx-auto px-6">
-          <FadeInSection>
-            <div className="text-center mb-16">
-              <span className="text-sm uppercase tracking-widest text-zinc-500 mb-4 block">Real Results</span>
-              <h2 id="testimonials-heading" className="text-4xl md:text-5xl font-bold">They Were Skeptical Too</h2>
-            </div>
-          </FadeInSection>
-          <FadeInSection delay={100}>
-            <div className="relative">
-              <div className="glass glow rounded-3xl p-8 md:p-12 transition-all duration-500">
-                <div className="flex items-center justify-between mb-6">
-                  <div className="flex gap-1" role="img" aria-label="5 star rating">{[...Array(5)].map((_, i) => (<Star key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400" aria-hidden="true" />))}</div>
-                  <div className="bg-emerald-500/20 border border-emerald-500/30 px-4 py-2 rounded-full text-sm font-semibold text-emerald-400">{testimonials[currentTestimonial].metric}</div>
-                </div>
-                <blockquote className="text-xl md:text-2xl mb-8 leading-relaxed min-h-[140px]">"{testimonials[currentTestimonial].quote}"</blockquote>
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 bg-gradient-to-br from-zinc-600 to-zinc-800 rounded-full flex items-center justify-center font-bold text-lg" aria-hidden="true">{testimonials[currentTestimonial].author.charAt(0)}</div>
-                  <div><div className="font-semibold text-lg">{testimonials[currentTestimonial].author}</div><div className="text-zinc-400">{testimonials[currentTestimonial].title}</div></div>
-                </div>
-              </div>
-              <div className="flex justify-center gap-3 mt-8" role="tablist" aria-label="Testimonial navigation">{testimonials.map((_, idx) => (<button key={idx} onClick={() => setCurrentTestimonial(idx)} className={`w-3 h-3 rounded-full transition-all duration-300 ${currentTestimonial === idx ? 'bg-emerald-400 w-8' : 'bg-white/30 hover:bg-white/50'}`} type="button" role="tab" aria-selected={currentTestimonial === idx} aria-label={`View testimonial ${idx + 1}`} />))}</div>
             </div>
           </FadeInSection>
         </div>
