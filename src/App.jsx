@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import { Routes, Route, Link } from 'react-router-dom';
-import { Users, ChevronRight, Check, Star, Menu, X, ArrowRight, Zap, Clock, TrendingUp, ChevronDown, MessageSquare, BarChart3, Shield, Sparkles } from 'lucide-react';
+import { Users, ChevronRight, Check, Star, Menu, X, ArrowRight, Zap, Clock, TrendingUp, ChevronDown, MessageSquare, BarChart3, Shield, Sparkles, Send, Calendar } from 'lucide-react';
 import TryItFree from './TryItFree.jsx';
 
 const EXTERNAL_URLS = {
@@ -226,7 +226,7 @@ function MainSite() {
           <FadeInSection delay={300}>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <button onClick={() => scrollTo('cta')} className="btn-shine group bg-white text-black px-8 py-4 rounded-full font-semibold text-lg hover:bg-zinc-100 transition transform hover:scale-105 flex items-center justify-center gap-2" type="button">Book a Free Call <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" aria-hidden="true" /></button>
-              <button onClick={() => scrollTo('services')} className="glass glass-hover px-8 py-4 rounded-full font-semibold text-lg transition transform hover:scale-105" type="button">See How It Works</button>
+              <button onClick={() => scrollTo('how-it-works')} className="glass glass-hover px-8 py-4 rounded-full font-semibold text-lg transition transform hover:scale-105" type="button">See How It Works</button>
             </div>
           </FadeInSection>
           <FadeInSection delay={400}>
@@ -237,7 +237,56 @@ function MainSite() {
             </div>
           </FadeInSection>
         </div>
-        <button onClick={() => scrollTo('about')} className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce cursor-pointer hover:text-emerald-400 transition" type="button" aria-label="Scroll to learn more"><ChevronDown className="w-6 h-6 text-zinc-500 hover:text-emerald-400" aria-hidden="true" /></button>
+        <button onClick={() => scrollTo('how-it-works')} className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce cursor-pointer hover:text-emerald-400 transition" type="button" aria-label="Scroll to learn more"><ChevronDown className="w-6 h-6 text-zinc-500 hover:text-emerald-400" aria-hidden="true" /></button>
+      </section>
+
+      <section id="how-it-works" className="py-24 relative" aria-labelledby="how-it-works-heading">
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-emerald-500/5 to-transparent" aria-hidden="true" />
+        <div className="max-w-7xl mx-auto px-6 relative z-10">
+          <FadeInSection>
+            <div className="text-center mb-16">
+              <span className="text-sm uppercase tracking-widest text-emerald-400 mb-4 block">How It Works</span>
+              <h2 id="how-it-works-heading" className="text-4xl md:text-5xl font-bold mb-4">From Lead to Meeting in 3 Steps</h2>
+              <p className="text-zinc-400 max-w-2xl mx-auto">Your AI sales agent works around the clock — so no lead slips through the cracks.</p>
+            </div>
+          </FadeInSection>
+          <div className="grid md:grid-cols-3 gap-8 mb-16 relative">
+            <div className="hidden md:block absolute top-16 left-[16.666%] right-[16.666%] h-px bg-gradient-to-r from-emerald-500/30 via-emerald-400/50 to-emerald-500/30" aria-hidden="true" />
+            {[
+              { icon: MessageSquare, step: '01', title: 'Lead Comes In', desc: 'A prospect fills out a form, sends a message, or clicks an ad. Your AI agent picks it up instantly — day or night.' },
+              { icon: Send, step: '02', title: 'AI Qualifies & Follows Up', desc: 'Personalized, human-sounding emails and texts go out within seconds. Multi-touch sequences nurture every lead automatically.' },
+              { icon: Calendar, step: '03', title: 'Meeting Booked', desc: 'Qualified leads get a calendar link and book directly. You show up to a warm, ready-to-buy conversation.' },
+            ].map((item, idx) => (
+              <FadeInSection key={idx} delay={idx * 150}>
+                <div className="glass glow-hover rounded-3xl p-8 text-center relative transition transform hover:scale-105 hover:-translate-y-2 h-full">
+                  <div className="w-14 h-14 mx-auto rounded-2xl flex items-center justify-center mb-5 bg-emerald-500/10 border border-emerald-500/20 relative z-10">
+                    <item.icon className="w-6 h-6 text-emerald-400" aria-hidden="true" />
+                  </div>
+                  <div className="text-xs font-mono text-emerald-400/60 tracking-widest mb-3">STEP {item.step}</div>
+                  <h3 className="text-xl font-bold mb-3">{item.title}</h3>
+                  <p className="text-zinc-400 text-sm leading-relaxed">{item.desc}</p>
+                </div>
+              </FadeInSection>
+            ))}
+          </div>
+          <FadeInSection delay={500}>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              {[
+                { icon: Clock, text: 'Save 10+ hours/week' },
+                { icon: Shield, text: 'Never miss a lead' },
+                { icon: Zap, text: 'Integrates with your CRM (Zapier, GHL, etc.)' },
+                { icon: Users, text: 'Chicago support for setup & tweaks' },
+              ].map((benefit, idx) => (
+                <div key={idx} className="flex items-center gap-3 glass rounded-xl p-4 hover:bg-white/10 transition">
+                  <div className="w-8 h-8 bg-emerald-500/15 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <benefit.icon className="w-4 h-4 text-emerald-400" aria-hidden="true" />
+                  </div>
+                  <span className="text-sm font-medium">{benefit.text}</span>
+                </div>
+              ))}
+            </div>
+          </FadeInSection>
+        </div>
       </section>
 
       <section className="py-20 relative" aria-label="Statistics">
