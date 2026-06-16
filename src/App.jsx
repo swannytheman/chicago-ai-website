@@ -221,7 +221,7 @@ function MainSite() {
               <Zap className="w-4 h-4 text-emerald-400" aria-hidden="true" /><span>AI That Actually Works for Small Business</span><span className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse" aria-hidden="true" />
             </div>
           </FadeInSection>
-          <FadeInSection delay={100}><h1 id="hero-heading" className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 leading-tight tracking-tight">Never Miss<br /><span className="text-gradient">a Lead Again</span></h1></FadeInSection>
+          <FadeInSection delay={100}><h1 id="hero-heading" className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 leading-tight tracking-tight">AI That Handles Your Leads 24/7 —<br /><span className="text-gradient">So You Close More Deals in Chicago</span></h1></FadeInSection>
           <FadeInSection delay={200}><p className="text-lg md:text-xl text-zinc-400 max-w-2xl mx-auto mb-10 leading-relaxed">An AI sales agent that qualifies leads, follows up instantly, and books meetings—so you can focus on closing deals.</p></FadeInSection>
           <FadeInSection delay={300}>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
