@@ -202,7 +202,7 @@ function MainSite() {
             </div>
           </FadeInSection>
           <FadeInSection delay={100}><h1 id="hero-heading" className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 leading-tight tracking-tight">AI That Handles Your<br /><span className="text-gradient">Leads 24/7</span></h1></FadeInSection>
-          <FadeInSection delay={200}><p className="text-lg md:text-xl text-zinc-400 max-w-2xl mx-auto mb-10 leading-relaxed">An AI sales agent that qualifies leads, follows up instantly, and books meetings—so you can focus on closing deals.</p></FadeInSection>
+          <FadeInSection delay={200}><p className="text-lg md:text-xl text-zinc-300 max-w-2xl mx-auto mb-10 leading-relaxed">An AI sales agent that qualifies leads, follows up instantly, and books meetings—so you can focus on closing deals.</p></FadeInSection>
           <FadeInSection delay={300}>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <button onClick={() => scrollTo('cta')} className="group bg-white text-black px-8 py-4 rounded-full font-semibold text-lg hover:bg-zinc-100 transition flex items-center justify-center gap-2" type="button">Book a Free Call <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" aria-hidden="true" /></button>
@@ -225,8 +225,8 @@ function MainSite() {
           <FadeInSection>
             <div className="text-center mb-16">
               <span className="text-sm uppercase tracking-widest text-emerald-400 mb-4 block">How It Works</span>
-              <h2 id="how-it-works-heading" className="text-4xl md:text-5xl font-bold mb-4">From Lead to Meeting in 3 Steps</h2>
-              <p className="text-zinc-400 max-w-2xl mx-auto">Your AI sales agent works around the clock — so no lead slips through the cracks.</p>
+              <h2 id="how-it-works-heading" className="text-4xl md:text-5xl font-bold tracking-tight mb-4">From Lead to Meeting in 3 Steps</h2>
+              <p className="text-lg text-zinc-400 max-w-2xl mx-auto leading-relaxed">Your AI sales agent works around the clock — so no lead slips through the cracks.</p>
             </div>
           </FadeInSection>
           <div className="grid md:grid-cols-3 gap-8 mb-16 relative">
@@ -273,8 +273,8 @@ function MainSite() {
           <FadeInSection>
             <div className="text-center mb-10">
               <span className="text-sm uppercase tracking-widest text-emerald-400 mb-4 block">Trusted by Local Businesses</span>
-              <h2 id="testimonials-heading" className="text-4xl md:text-5xl font-bold mb-4">Helping Chicago Businesses Like Yours</h2>
-              <p className="text-zinc-400 max-w-2xl mx-auto">From insurance firms to construction companies, we help small businesses across Chicago close more deals with less effort.</p>
+              <h2 id="testimonials-heading" className="text-4xl md:text-5xl font-bold tracking-tight mb-4">Helping Chicago Businesses Like Yours</h2>
+              <p className="text-lg text-zinc-400 max-w-2xl mx-auto leading-relaxed">From insurance firms to construction companies, we help small businesses across Chicago close more deals with less effort.</p>
             </div>
           </FadeInSection>
           <FadeInSection delay={100}>
@@ -347,9 +347,9 @@ function MainSite() {
         <div className="max-w-7xl mx-auto px-6">
           <FadeInSection>
             <div className="text-center mb-16">
-              <span className="text-sm uppercase tracking-widest text-zinc-500 mb-4 block">The Problem We Solve</span>
-              <h2 id="about-heading" className="text-4xl md:text-5xl font-bold mb-4">You're Doing Too Much</h2>
-              <p className="text-zinc-400 max-w-2xl mx-auto">Answering emails. Chasing leads. Scheduling. Posting content. There's a better way.</p>
+              <span className="text-sm uppercase tracking-widest text-emerald-400 mb-4 block">The Problem We Solve</span>
+              <h2 id="about-heading" className="text-4xl md:text-5xl font-bold tracking-tight mb-4">You're Doing Too Much</h2>
+              <p className="text-lg text-zinc-400 max-w-2xl mx-auto leading-relaxed">Answering emails. Chasing leads. Scheduling. Posting content. There's a better way.</p>
             </div>
           </FadeInSection>
           <div className="grid md:grid-cols-3 gap-6">
@@ -370,9 +370,9 @@ function MainSite() {
         <div className="max-w-7xl mx-auto px-6">
           <FadeInSection>
             <div className="text-center mb-16">
-              <span className="text-sm uppercase tracking-widest text-zinc-500 mb-4 block">Our Process</span>
-              <h2 id="process-heading" className="text-4xl md:text-5xl font-bold mb-4">Live in Weeks, Not Months</h2>
-              <p className="text-zinc-400 max-w-2xl mx-auto">We handle everything. You just show up for a few calls.</p>
+              <span className="text-sm uppercase tracking-widest text-emerald-400 mb-4 block">Our Process</span>
+              <h2 id="process-heading" className="text-4xl md:text-5xl font-bold tracking-tight mb-4">Live in Weeks, Not Months</h2>
+              <p className="text-lg text-zinc-400 max-w-2xl mx-auto leading-relaxed">We handle everything. You just show up for a few calls.</p>
             </div>
           </FadeInSection>
           <div className="grid md:grid-cols-4 gap-6 relative">
@@ -395,9 +395,9 @@ function MainSite() {
         <div className="max-w-7xl mx-auto px-6">
           <FadeInSection>
             <div className="text-center mb-16">
-              <span className="text-sm uppercase tracking-widest text-zinc-500 mb-4 block">Our AI Sales Agent</span>
-              <h2 id="services-heading" className="text-4xl md:text-5xl font-bold mb-4">Your 24/7 Sales Machine</h2>
-              <p className="text-zinc-400 max-w-2xl mx-auto">An AI agent that qualifies leads, follows up instantly, and books meetings—so your team only talks to serious buyers.</p>
+              <span className="text-sm uppercase tracking-widest text-emerald-400 mb-4 block">Our AI Sales Agent</span>
+              <h2 id="services-heading" className="text-4xl md:text-5xl font-bold tracking-tight mb-4">Your 24/7 Sales Machine</h2>
+              <p className="text-lg text-zinc-400 max-w-2xl mx-auto leading-relaxed">An AI agent that qualifies leads, follows up instantly, and books meetings—so your team only talks to serious buyers.</p>
             </div>
           </FadeInSection>
           <FadeInSection delay={200}>
@@ -411,7 +411,7 @@ function MainSite() {
                 </div>
                 <div className="grid lg:grid-cols-2 gap-8">
                   <div>
-                    <h4 className="text-sm uppercase tracking-wider text-zinc-500 mb-6 flex items-center gap-2"><Sparkles className="w-4 h-4" aria-hidden="true" /> What It Does For You</h4>
+                    <h4 className="text-xs uppercase tracking-widest text-zinc-500 mb-6 flex items-center gap-2"><Sparkles className="w-4 h-4" aria-hidden="true" /> What It Does For You</h4>
                     <ul className="space-y-3">
                       {salesAgent.capabilities.map((cap, idx) => (
                         <li key={idx} className="flex items-center gap-4 border border-white/5 bg-white/[0.02] rounded-xl p-4 transition hover:bg-white/5">
@@ -422,7 +422,7 @@ function MainSite() {
                     </ul>
                   </div>
                   <div>
-                    <h4 className="text-sm uppercase tracking-wider text-zinc-500 mb-6">Choose Your Plan</h4>
+                    <h4 className="text-xs uppercase tracking-widest text-zinc-500 mb-6">Choose Your Plan</h4>
                     <div className="space-y-4" role="radiogroup" aria-label="Pricing plans">
                       {salesAgent.pricing.map((plan, idx) => {
                         const isSelected = selectedTier === idx;
@@ -460,8 +460,8 @@ function MainSite() {
         <div className="max-w-3xl mx-auto px-6">
           <FadeInSection>
             <div className="text-center mb-16">
-              <span className="text-sm uppercase tracking-widest text-zinc-500 mb-4 block">FAQ</span>
-              <h2 id="faq-heading" className="text-4xl md:text-5xl font-bold mb-4">Got Questions?</h2>
+              <span className="text-sm uppercase tracking-widest text-emerald-400 mb-4 block">FAQ</span>
+              <h2 id="faq-heading" className="text-4xl md:text-5xl font-bold tracking-tight mb-4">Got Questions?</h2>
             </div>
           </FadeInSection>
           <div className="space-y-3">
@@ -484,8 +484,8 @@ function MainSite() {
         <div className="max-w-5xl mx-auto px-6">
           <FadeInSection>
             <div className="card rounded-2xl p-12 md:p-16 text-center border-emerald-500/15">
-              <h2 id="cta-heading" className="text-4xl md:text-5xl font-bold mb-6">Let's See If We're a Fit</h2>
-              <p className="text-xl text-zinc-400 mb-10 max-w-2xl mx-auto">Book a free 30-minute call. We'll show you exactly how AI can work for your business—no pressure, no jargon.</p>
+              <h2 id="cta-heading" className="text-4xl md:text-5xl font-bold tracking-tight mb-6">Let's See If We're a Fit</h2>
+              <p className="text-xl text-zinc-300 mb-10 max-w-2xl mx-auto leading-relaxed">Book a free 30-minute call. We'll show you exactly how AI can work for your business—no pressure, no jargon.</p>
               <a href={EXTERNAL_URLS.appointments} {...SECURE_LINK_PROPS} className="bg-white text-black px-10 py-5 rounded-full font-semibold text-lg hover:bg-zinc-100 transition inline-flex items-center gap-3">Book Your Free Call <ArrowRight className="w-5 h-5" aria-hidden="true" /></a>
               <p className="text-zinc-500 text-sm mt-6">Free • 30 minutes • Zero obligation</p>
             </div>
