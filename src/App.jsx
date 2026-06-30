@@ -90,7 +90,7 @@ const FadeInSection = ({ children, delay = 0, className = '' }) => {
   }, []);
 
   return (
-    <div ref={ref} className={`transition-all duration-700 ${className}`} style={{ transitionDelay: `${delay}ms`, opacity: isVisible ? 1 : 0, transform: isVisible ? 'translateY(0)' : 'translateY(30px)' }}>
+    <div ref={ref} className={`transition-all duration-700 ${className}`} style={{ transitionDelay: `${delay}ms`, opacity: isVisible ? 1 : 0, transform: isVisible ? 'translateY(0)' : 'translateY(20px)' }}>
       {children}
     </div>
   );
@@ -162,27 +162,15 @@ function MainSite() {
   const navItems = ['Services', 'Process', 'Testimonials', 'FAQ'];
 
   return (
-    <div className="min-h-screen bg-black text-white overflow-x-hidden">
+    <div className="min-h-screen bg-zinc-950 text-white overflow-x-hidden">
       <style>{`
-        @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-20px); } }
-        @keyframes pulse-glow { 0%, 100% { opacity: 0.5; } 50% { opacity: 0.8; } }
-        @keyframes emerald-pulse { 0%, 100% { box-shadow: 0 0 20px rgba(16, 185, 129, 0.3); } 50% { box-shadow: 0 0 40px rgba(16, 185, 129, 0.6); } }
-        .animate-float { animation: float 6s ease-in-out infinite; }
-        .animate-float-delayed { animation: float 6s ease-in-out infinite; animation-delay: -3s; }
-        .animate-pulse-glow { animation: pulse-glow 4s ease-in-out infinite; }
-        .animate-emerald-pulse { animation: emerald-pulse 3s ease-in-out infinite; }
-        .glass { background: rgba(255,255,255,0.03); backdrop-filter: blur(24px); border: 1px solid rgba(255,255,255,0.06); }
-        .glass-hover:hover { background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.12); }
-        .glow { box-shadow: 0 0 40px rgba(255,255,255,0.05); }
-        .glow-hover:hover { box-shadow: 0 0 50px rgba(16,185,129,0.08); }
+        .card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); }
+        .card-hover:hover { background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.12); }
         .text-gradient { background: linear-gradient(135deg, #fff 0%, #94a3b8 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-        .btn-shine { position: relative; overflow: hidden; }
-        .btn-shine::after { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: linear-gradient(to right, transparent, rgba(255,255,255,0.2), transparent); transform: rotate(45deg); transition: 0.5s; }
-        .btn-shine:hover::after { left: 100%; }
         html { scroll-behavior: smooth; }
       `}</style>
 
-      <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled ? 'glass py-3' : 'bg-transparent py-5'}`} role="navigation" aria-label="Main navigation">
+      <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled ? 'bg-zinc-950/80 backdrop-blur-md border-b border-white/5 py-3' : 'bg-transparent py-5'}`} role="navigation" aria-label="Main navigation">
         <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
           <Logo size="default" />
           <div className="hidden md:flex items-center gap-8">
@@ -192,12 +180,12 @@ function MainSite() {
               </button>
             ))}
             <Link to="/try-it-free" className="text-emerald-300 px-5 py-2 rounded-full text-sm font-medium transition hover:text-emerald-200 border border-emerald-500/30 hover:border-emerald-400/50">Try It Free</Link>
-            <button onClick={() => scrollTo('cta')} className="btn-shine bg-white text-black px-6 py-2.5 rounded-full font-medium hover:bg-zinc-100 transition transform hover:scale-105" type="button">Book a Call</button>
+            <button onClick={() => scrollTo('cta')} className="bg-white text-black px-6 py-2.5 rounded-full font-medium hover:bg-zinc-100 transition" type="button">Book a Call</button>
           </div>
-          <button className="md:hidden p-2 glass rounded-lg" onClick={() => setMobileMenuOpen(!mobileMenuOpen)} type="button" aria-expanded={mobileMenuOpen} aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}>{mobileMenuOpen ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}</button>
+          <button className="md:hidden p-2 rounded-lg border border-white/10" onClick={() => setMobileMenuOpen(!mobileMenuOpen)} type="button" aria-expanded={mobileMenuOpen} aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}>{mobileMenuOpen ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}</button>
         </div>
         {mobileMenuOpen && (
-          <div className="md:hidden glass mx-4 mt-2 rounded-2xl p-6 space-y-4" role="menu">
+          <div className="md:hidden bg-zinc-900 border border-white/10 mx-4 mt-2 rounded-2xl p-6 space-y-4" role="menu">
             {navItems.map(item => (<button key={item} onClick={() => scrollTo(item.toLowerCase())} className="block w-full text-left text-zinc-300 hover:text-white py-2" type="button" role="menuitem">{item}</button>))}
             <Link to="/try-it-free" className="block w-full text-center text-emerald-300 px-5 py-3 rounded-full text-sm font-medium border border-emerald-500/30" role="menuitem" onClick={() => setMobileMenuOpen(false)}>Try It Free</Link>
             <button onClick={() => scrollTo('cta')} className="w-full bg-white text-black px-5 py-3 rounded-full font-medium" type="button" role="menuitem">Book a Call</button>
@@ -206,18 +194,10 @@ function MainSite() {
       </nav>
 
       <section className="min-h-screen flex items-center justify-center relative pt-20" aria-labelledby="hero-heading">
-        <div className="absolute inset-0 bg-gradient-to-br from-zinc-900 via-black to-black" aria-hidden="true" />
-        <div className="absolute top-20 left-10 w-72 h-72 bg-emerald-500/10 rounded-full blur-3xl animate-pulse-glow" aria-hidden="true" />
-        <div className="absolute bottom-20 right-10 w-96 h-96 bg-white/5 rounded-full blur-3xl animate-pulse-glow" style={{ animationDelay: '-2s' }} aria-hidden="true" />
-        <div className="absolute top-1/3 right-1/4 w-48 h-48 bg-emerald-400/5 rounded-full blur-3xl animate-pulse-glow" style={{ animationDelay: '-1s' }} aria-hidden="true" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] opacity-30" aria-hidden="true">
-          <div className="absolute inset-0 border border-emerald-500/20 rounded-full animate-float" />
-          <div className="absolute inset-12 border border-white/10 rounded-full animate-float-delayed" />
-          <div className="absolute inset-24 border border-emerald-500/10 rounded-full animate-float" style={{ animationDelay: '-1.5s' }} />
-        </div>
+        <div className="absolute inset-0 bg-gradient-to-b from-zinc-900 via-zinc-950 to-zinc-950" aria-hidden="true" />
         <div className="relative z-10 max-w-5xl mx-auto px-6 text-center">
           <FadeInSection>
-            <div className="inline-flex items-center gap-2 glass px-5 py-2.5 rounded-full text-sm mb-8 hover:bg-white/10 transition cursor-default">
+            <div className="inline-flex items-center gap-2 border border-white/10 bg-white/5 px-5 py-2.5 rounded-full text-sm mb-8 cursor-default">
               <Zap className="w-4 h-4 text-emerald-400" aria-hidden="true" /><span>AI That Actually Works for Small Business</span><span className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse" aria-hidden="true" />
             </div>
           </FadeInSection>
@@ -225,8 +205,8 @@ function MainSite() {
           <FadeInSection delay={200}><p className="text-lg md:text-xl text-zinc-400 max-w-2xl mx-auto mb-10 leading-relaxed">An AI sales agent that qualifies leads, follows up instantly, and books meetings—so you can focus on closing deals.</p></FadeInSection>
           <FadeInSection delay={300}>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button onClick={() => scrollTo('cta')} className="btn-shine group bg-white text-black px-8 py-4 rounded-full font-semibold text-lg hover:bg-zinc-100 transition transform hover:scale-105 flex items-center justify-center gap-2" type="button">Book a Free Call <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" aria-hidden="true" /></button>
-              <button onClick={() => scrollTo('how-it-works')} className="glass glass-hover px-8 py-4 rounded-full font-semibold text-lg transition transform hover:scale-105" type="button">See How It Works</button>
+              <button onClick={() => scrollTo('cta')} className="group bg-white text-black px-8 py-4 rounded-full font-semibold text-lg hover:bg-zinc-100 transition flex items-center justify-center gap-2" type="button">Book a Free Call <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" aria-hidden="true" /></button>
+              <button onClick={() => scrollTo('how-it-works')} className="border border-white/15 bg-white/5 px-8 py-4 rounded-full font-semibold text-lg transition hover:bg-white/10" type="button">See How It Works</button>
             </div>
           </FadeInSection>
           <FadeInSection delay={400}>
@@ -240,9 +220,8 @@ function MainSite() {
         <button onClick={() => scrollTo('how-it-works')} className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce cursor-pointer hover:text-emerald-400 transition" type="button" aria-label="Scroll to learn more"><ChevronDown className="w-6 h-6 text-zinc-500 hover:text-emerald-400" aria-hidden="true" /></button>
       </section>
 
-      <section id="how-it-works" className="py-24 relative" aria-labelledby="how-it-works-heading">
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-emerald-500/5 to-transparent" aria-hidden="true" />
-        <div className="max-w-7xl mx-auto px-6 relative z-10">
+      <section id="how-it-works" className="py-28 relative" aria-labelledby="how-it-works-heading">
+        <div className="max-w-7xl mx-auto px-6">
           <FadeInSection>
             <div className="text-center mb-16">
               <span className="text-sm uppercase tracking-widest text-emerald-400 mb-4 block">How It Works</span>
@@ -251,14 +230,14 @@ function MainSite() {
             </div>
           </FadeInSection>
           <div className="grid md:grid-cols-3 gap-8 mb-16 relative">
-            <div className="hidden md:block absolute top-16 left-[16.666%] right-[16.666%] h-px bg-gradient-to-r from-emerald-500/30 via-emerald-400/50 to-emerald-500/30" aria-hidden="true" />
+            <div className="hidden md:block absolute top-16 left-[16.666%] right-[16.666%] h-px bg-gradient-to-r from-emerald-500/20 via-emerald-400/40 to-emerald-500/20" aria-hidden="true" />
             {[
               { icon: MessageSquare, step: '01', title: 'Lead Comes In', desc: 'A prospect fills out a form, sends a message, or clicks an ad. Your AI agent picks it up instantly — day or night.' },
               { icon: Send, step: '02', title: 'AI Qualifies & Follows Up', desc: 'Personalized, human-sounding emails and texts go out within seconds. Multi-touch sequences nurture every lead automatically.' },
               { icon: Calendar, step: '03', title: 'Meeting Booked', desc: 'Qualified leads get a calendar link and book directly. You show up to a warm, ready-to-buy conversation.' },
             ].map((item, idx) => (
               <FadeInSection key={idx} delay={idx * 150}>
-                <div className="glass glow-hover rounded-3xl p-8 text-center relative transition transform hover:scale-105 hover:-translate-y-2 h-full">
+                <div className="card card-hover rounded-2xl p-8 text-center relative transition h-full">
                   <div className="w-14 h-14 mx-auto rounded-2xl flex items-center justify-center mb-5 bg-emerald-500/10 border border-emerald-500/20 relative z-10">
                     <item.icon className="w-6 h-6 text-emerald-400" aria-hidden="true" />
                   </div>
@@ -277,7 +256,7 @@ function MainSite() {
                 { icon: Zap, text: 'Integrates with your CRM (Zapier, GHL, etc.)' },
                 { icon: Users, text: 'Chicago support for setup & tweaks' },
               ].map((benefit, idx) => (
-                <div key={idx} className="flex items-center gap-3 glass rounded-xl p-4 hover:bg-white/10 transition">
+                <div key={idx} className="flex items-center gap-3 card rounded-xl p-4 transition hover:bg-white/5">
                   <div className="w-8 h-8 bg-emerald-500/15 rounded-lg flex items-center justify-center flex-shrink-0">
                     <benefit.icon className="w-4 h-4 text-emerald-400" aria-hidden="true" />
                   </div>
@@ -289,7 +268,7 @@ function MainSite() {
         </div>
       </section>
 
-      <section id="testimonials" className="py-24 bg-gradient-to-b from-transparent via-white/5 to-transparent" aria-labelledby="testimonials-heading">
+      <section id="testimonials" className="py-28 border-t border-white/5" aria-labelledby="testimonials-heading">
         <div className="max-w-7xl mx-auto px-6">
           <FadeInSection>
             <div className="text-center mb-10">
@@ -308,7 +287,7 @@ function MainSite() {
                 { icon: Building2, label: 'Home Services' },
                 { icon: TrendingUp, label: 'Finance' },
               ].map((item, idx) => (
-                <div key={idx} className="flex items-center gap-2 glass rounded-full px-5 py-2.5 text-sm text-zinc-300 hover:bg-white/10 transition cursor-default">
+                <div key={idx} className="flex items-center gap-2 border border-white/10 bg-white/[0.03] rounded-full px-5 py-2.5 text-sm text-zinc-300 cursor-default">
                   <item.icon className="w-4 h-4 text-emerald-400" aria-hidden="true" />
                   {item.label}
                 </div>
@@ -316,13 +295,13 @@ function MainSite() {
             </div>
           </FadeInSection>
           <FadeInSection delay={200}>
-            <div className="grid md:grid-cols-3 gap-5 mb-12">
+            <div className="grid md:grid-cols-3 gap-5 mb-14">
               {[
                 { stat: '35%', label: 'more closed deals', detail: 'Local insurance firm' },
                 { stat: '40%', label: 'response rate boost', detail: 'Average across clients' },
                 { stat: '3x', label: 'more appointments booked', detail: 'Chicago real estate agency' },
               ].map((item, idx) => (
-                <div key={idx} className="glass glow rounded-2xl p-6 text-center hover:bg-white/10 transition transform hover:scale-105 cursor-default">
+                <div key={idx} className="card rounded-2xl p-6 text-center cursor-default">
                   <div className="text-3xl font-bold text-emerald-400 mb-1">{item.stat}</div>
                   <div className="text-white font-medium text-sm mb-1">{item.label}</div>
                   <div className="text-zinc-500 text-xs">{item.detail}</div>
@@ -333,10 +312,10 @@ function MainSite() {
           <FadeInSection delay={300}>
             <div className="max-w-4xl mx-auto">
               <div className="relative">
-                <div className="glass glow rounded-3xl p-8 md:p-12 transition-all duration-500">
+                <div className="card rounded-2xl p-8 md:p-12 transition-all duration-500">
                   <div className="flex items-center justify-between mb-6">
                     <div className="flex gap-1" role="img" aria-label="5 star rating">{[...Array(5)].map((_, i) => (<Star key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400" aria-hidden="true" />))}</div>
-                    <div className="bg-emerald-500/20 border border-emerald-500/30 px-4 py-2 rounded-full text-sm font-semibold text-emerald-400">{testimonials[currentTestimonial].metric}</div>
+                    <div className="bg-emerald-500/10 border border-emerald-500/20 px-4 py-2 rounded-full text-sm font-semibold text-emerald-400">{testimonials[currentTestimonial].metric}</div>
                   </div>
                   <blockquote className="text-xl md:text-2xl mb-8 leading-relaxed min-h-[140px]">"{testimonials[currentTestimonial].quote}"</blockquote>
                   <div className="flex items-center gap-4">
@@ -344,19 +323,18 @@ function MainSite() {
                     <div><div className="font-semibold text-lg">{testimonials[currentTestimonial].author}</div><div className="text-zinc-400">{testimonials[currentTestimonial].title}</div></div>
                   </div>
                 </div>
-                <div className="flex justify-center gap-3 mt-8" role="tablist" aria-label="Testimonial navigation">{testimonials.map((_, idx) => (<button key={idx} onClick={() => setCurrentTestimonial(idx)} className={`w-3 h-3 rounded-full transition-all duration-300 ${currentTestimonial === idx ? 'bg-emerald-400 w-8' : 'bg-white/30 hover:bg-white/50'}`} type="button" role="tab" aria-selected={currentTestimonial === idx} aria-label={`View testimonial ${idx + 1}`} />))}</div>
+                <div className="flex justify-center gap-3 mt-8" role="tablist" aria-label="Testimonial navigation">{testimonials.map((_, idx) => (<button key={idx} onClick={() => setCurrentTestimonial(idx)} className={`w-3 h-3 rounded-full transition-all duration-300 ${currentTestimonial === idx ? 'bg-emerald-400 w-8' : 'bg-white/20 hover:bg-white/40'}`} type="button" role="tab" aria-selected={currentTestimonial === idx} aria-label={`View testimonial ${idx + 1}`} />))}</div>
               </div>
             </div>
           </FadeInSection>
         </div>
       </section>
 
-      <section className="py-20 relative" aria-label="Statistics">
-        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent" aria-hidden="true" />
+      <section className="py-20 border-t border-white/5" aria-label="Statistics">
         <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8">
           {[{ value: 40, suffix: '%', label: 'average revenue increase' }, { value: 15, suffix: '+', label: 'hours saved per week' }, { value: 24, suffix: '/7', label: 'always-on AI support' }].map((stat, idx) => (
             <FadeInSection key={idx} delay={idx * 100}>
-              <div className="glass glow rounded-2xl p-8 text-center hover:bg-white/10 transition transform hover:scale-105 cursor-default">
+              <div className="card rounded-2xl p-8 text-center cursor-default">
                 <div className="text-5xl font-bold mb-2"><AnimatedCounter end={stat.value} suffix={stat.suffix} /></div>
                 <div className="text-zinc-400">{stat.label}</div>
               </div>
@@ -365,7 +343,7 @@ function MainSite() {
         </div>
       </section>
 
-      <section id="about" className="py-24" aria-labelledby="about-heading">
+      <section id="about" className="py-28" aria-labelledby="about-heading">
         <div className="max-w-7xl mx-auto px-6">
           <FadeInSection>
             <div className="text-center mb-16">
@@ -375,10 +353,10 @@ function MainSite() {
             </div>
           </FadeInSection>
           <div className="grid md:grid-cols-3 gap-6">
-            {[{ icon: TrendingUp, title: "Make More Money", desc: "AI finds opportunities you're missing—smarter pricing, faster follow-ups, upsells that actually convert. Most clients see 20-40% more revenue.", color: "from-emerald-500/20" }, { icon: Users, title: "Never Miss a Lead", desc: "Instant responses at 3am. Personalized follow-ups on autopilot. Your AI works every hour you don't.", color: "from-emerald-400/20" }, { icon: Clock, title: "Get Your Life Back", desc: "Stop drowning in busywork. Our clients reclaim 15+ hours every week for strategy, family, or actually taking a vacation.", color: "from-emerald-600/20" }].map((item, idx) => (
+            {[{ icon: TrendingUp, title: "Make More Money", desc: "AI finds opportunities you're missing—smarter pricing, faster follow-ups, upsells that actually convert. Most clients see 20-40% more revenue." }, { icon: Users, title: "Never Miss a Lead", desc: "Instant responses at 3am. Personalized follow-ups on autopilot. Your AI works every hour you don't." }, { icon: Clock, title: "Get Your Life Back", desc: "Stop drowning in busywork. Our clients reclaim 15+ hours every week for strategy, family, or actually taking a vacation." }].map((item, idx) => (
               <FadeInSection key={idx} delay={idx * 100}>
-                <div className={`glass glow-hover rounded-3xl p-8 h-full transition transform hover:scale-105 hover:-translate-y-2 bg-gradient-to-b ${item.color} to-transparent`}>
-                  <div className="w-14 h-14 glass rounded-2xl flex items-center justify-center mb-6"><item.icon className="w-7 h-7" aria-hidden="true" /></div>
+                <div className="card card-hover rounded-2xl p-8 h-full transition">
+                  <div className="w-14 h-14 bg-white/5 border border-white/10 rounded-2xl flex items-center justify-center mb-6"><item.icon className="w-7 h-7 text-emerald-400" aria-hidden="true" /></div>
                   <h3 className="text-2xl font-semibold mb-4">{item.title}</h3>
                   <p className="text-zinc-400 leading-relaxed">{item.desc}</p>
                 </div>
@@ -388,22 +366,22 @@ function MainSite() {
         </div>
       </section>
 
-      <section id="process" className="py-24 bg-gradient-to-b from-transparent via-white/5 to-transparent" aria-labelledby="process-heading">
+      <section id="process" className="py-28 border-t border-white/5" aria-labelledby="process-heading">
         <div className="max-w-7xl mx-auto px-6">
           <FadeInSection>
             <div className="text-center mb-16">
-              <span className="text-sm uppercase tracking-widest text-zinc-500 mb-4 block">How It Works</span>
+              <span className="text-sm uppercase tracking-widest text-zinc-500 mb-4 block">Our Process</span>
               <h2 id="process-heading" className="text-4xl md:text-5xl font-bold mb-4">Live in Weeks, Not Months</h2>
               <p className="text-zinc-400 max-w-2xl mx-auto">We handle everything. You just show up for a few calls.</p>
             </div>
           </FadeInSection>
           <div className="grid md:grid-cols-4 gap-6 relative">
-            <div className="hidden md:block absolute top-1/2 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-emerald-500/30 to-transparent -translate-y-1/2" aria-hidden="true" />
+            <div className="hidden md:block absolute top-1/2 left-0 right-0 h-px bg-gradient-to-r from-transparent via-emerald-500/20 to-transparent -translate-y-1/2" aria-hidden="true" />
             {process.map((step, idx) => (
               <FadeInSection key={idx} delay={idx * 150}>
-                <div className="relative text-center group">
-                  <div className="w-20 h-20 glass glow mx-auto rounded-2xl flex items-center justify-center mb-6 transition transform group-hover:scale-110 group-hover:bg-white/20"><step.icon className="w-8 h-8" aria-hidden="true" /></div>
-                  <div className="absolute -top-2 -right-2 w-8 h-8 bg-emerald-500 text-white rounded-full flex items-center justify-center font-bold text-sm shadow-lg shadow-emerald-500/30" aria-label={`Step ${idx + 1}`}>{idx + 1}</div>
+                <div className="relative text-center">
+                  <div className="w-20 h-20 card mx-auto rounded-2xl flex items-center justify-center mb-6"><step.icon className="w-8 h-8 text-zinc-300" aria-hidden="true" /></div>
+                  <div className="absolute -top-2 -right-2 w-8 h-8 bg-emerald-500 text-white rounded-full flex items-center justify-center font-bold text-sm" aria-label={`Step ${idx + 1}`}>{idx + 1}</div>
                   <h3 className="text-xl font-semibold mb-2">{step.title}</h3>
                   <p className="text-zinc-400 text-sm">{step.desc}</p>
                 </div>
@@ -413,7 +391,7 @@ function MainSite() {
         </div>
       </section>
 
-      <section id="services" className="py-24" aria-labelledby="services-heading">
+      <section id="services" className="py-28" aria-labelledby="services-heading">
         <div className="max-w-7xl mx-auto px-6">
           <FadeInSection>
             <div className="text-center mb-16">
@@ -423,10 +401,10 @@ function MainSite() {
             </div>
           </FadeInSection>
           <FadeInSection delay={200}>
-            <div className="glass glow rounded-3xl overflow-hidden">
+            <div className="card rounded-2xl overflow-hidden">
               <div className="p-8 md:p-12">
                 <div className="flex flex-col md:flex-row md:items-start gap-6 mb-8">
-                  <div className="w-16 h-16 bg-gradient-to-br from-white to-zinc-300 rounded-2xl flex items-center justify-center flex-shrink-0 shadow-lg shadow-emerald-500/20 animate-emerald-pulse">
+                  <div className="w-16 h-16 bg-gradient-to-br from-white to-zinc-300 rounded-2xl flex items-center justify-center flex-shrink-0">
                     <Users className="w-8 h-8 text-black" aria-hidden="true" />
                   </div>
                   <div><h3 className="text-3xl font-bold mb-2">{salesAgent.name}</h3><p className="text-zinc-400 text-lg">{salesAgent.tagline}</p></div>
@@ -434,10 +412,10 @@ function MainSite() {
                 <div className="grid lg:grid-cols-2 gap-8">
                   <div>
                     <h4 className="text-sm uppercase tracking-wider text-zinc-500 mb-6 flex items-center gap-2"><Sparkles className="w-4 h-4" aria-hidden="true" /> What It Does For You</h4>
-                    <ul className="space-y-4">
+                    <ul className="space-y-3">
                       {salesAgent.capabilities.map((cap, idx) => (
-                        <li key={idx} className="flex items-center gap-4 glass rounded-xl p-4 hover:bg-white/10 transition">
-                          <div className="w-8 h-8 bg-emerald-500/20 rounded-lg flex items-center justify-center flex-shrink-0"><Check className="w-4 h-4 text-emerald-400" aria-hidden="true" /></div>
+                        <li key={idx} className="flex items-center gap-4 border border-white/5 bg-white/[0.02] rounded-xl p-4 transition hover:bg-white/5">
+                          <div className="w-8 h-8 bg-emerald-500/15 rounded-lg flex items-center justify-center flex-shrink-0"><Check className="w-4 h-4 text-emerald-400" aria-hidden="true" /></div>
                           <span>{cap}</span>
                         </li>
                       ))}
@@ -449,11 +427,11 @@ function MainSite() {
                       {salesAgent.pricing.map((plan, idx) => {
                         const isSelected = selectedTier === idx;
                         return (
-                          <button key={idx} onClick={() => setSelectedTier(idx)} className={`w-full rounded-2xl p-5 flex items-center justify-between transition-all duration-300 transform hover:scale-102 cursor-pointer ${isSelected ? 'bg-white text-black shadow-lg shadow-white/20 scale-102' : 'glass hover:bg-white/15 hover:border-white/30'}`} type="button" role="radio" aria-checked={isSelected}>
+                          <button key={idx} onClick={() => setSelectedTier(idx)} className={`w-full rounded-2xl p-5 flex items-center justify-between transition-all duration-300 cursor-pointer ${isSelected ? 'bg-white text-black shadow-lg shadow-white/10' : 'card hover:bg-white/5'}`} type="button" role="radio" aria-checked={isSelected}>
                             <div className="text-left">
                               <div className="flex items-center gap-2">
                                 <span className="font-bold text-lg">{plan.tier}</span>
-                                {plan.popular && <span className={`text-xs px-2 py-0.5 rounded-full ${isSelected ? 'bg-black text-white' : 'bg-white/20 text-white'}`}>Popular</span>}
+                                {plan.popular && <span className={`text-xs px-2 py-0.5 rounded-full ${isSelected ? 'bg-black text-white' : 'bg-white/15 text-white'}`}>Popular</span>}
                               </div>
                               <div className={`text-sm ${isSelected ? 'text-zinc-600' : 'text-zinc-400'}`}>{plan.details}</div>
                             </div>
@@ -468,8 +446,8 @@ function MainSite() {
                   </div>
                 </div>
                 <div className="mt-10 pt-8 border-t border-white/10 flex flex-col sm:flex-row gap-4 items-center">
-                  <button onClick={() => scrollTo('cta')} className="btn-shine bg-white text-black px-8 py-4 rounded-full font-semibold hover:bg-zinc-100 transition transform hover:scale-105 flex items-center justify-center gap-2" type="button">Get the {salesAgent.pricing[selectedTier].tier} Plan <ChevronRight className="w-4 h-4" aria-hidden="true" /></button>
-                  <Link to="/try-it-free" className="btn-shine text-emerald-300 px-8 py-4 rounded-full font-semibold transition transform hover:scale-105 flex items-center justify-center gap-2 border border-emerald-500/30 hover:border-emerald-400/50">Try It Free <ArrowRight className="w-4 h-4" aria-hidden="true" /></Link>
+                  <button onClick={() => scrollTo('cta')} className="bg-white text-black px-8 py-4 rounded-full font-semibold hover:bg-zinc-100 transition flex items-center justify-center gap-2" type="button">Get the {salesAgent.pricing[selectedTier].tier} Plan <ChevronRight className="w-4 h-4" aria-hidden="true" /></button>
+                  <Link to="/try-it-free" className="text-emerald-300 px-8 py-4 rounded-full font-semibold transition flex items-center justify-center gap-2 border border-emerald-500/30 hover:border-emerald-400/50 hover:bg-emerald-500/5">Try It Free <ArrowRight className="w-4 h-4" aria-hidden="true" /></Link>
                   <span className="text-zinc-500 text-sm">{salesAgent.pricing[selectedTier].monthly}/mo • Cancel anytime</span>
                 </div>
               </div>
@@ -478,7 +456,7 @@ function MainSite() {
         </div>
       </section>
 
-      <section id="faq" className="py-24" aria-labelledby="faq-heading">
+      <section id="faq" className="py-28 border-t border-white/5" aria-labelledby="faq-heading">
         <div className="max-w-3xl mx-auto px-6">
           <FadeInSection>
             <div className="text-center mb-16">
@@ -486,10 +464,10 @@ function MainSite() {
               <h2 id="faq-heading" className="text-4xl md:text-5xl font-bold mb-4">Got Questions?</h2>
             </div>
           </FadeInSection>
-          <div className="space-y-4">
+          <div className="space-y-3">
             {faqs.map((faq, idx) => (
               <FadeInSection key={idx} delay={idx * 100}>
-                <div className="glass rounded-2xl overflow-hidden transition hover:bg-white/10">
+                <div className="card rounded-2xl overflow-hidden transition hover:bg-white/5">
                   <button onClick={() => setActiveFaq(activeFaq === idx ? null : idx)} className="w-full p-6 flex items-center justify-between text-left" type="button" aria-expanded={activeFaq === idx}>
                     <span className="font-semibold text-lg pr-4">{faq.q}</span>
                     <ChevronDown className={`w-5 h-5 flex-shrink-0 transition-transform duration-300 ${activeFaq === idx ? 'rotate-180' : ''}`} aria-hidden="true" />
@@ -502,31 +480,23 @@ function MainSite() {
         </div>
       </section>
 
-      <section id="cta" className="py-24" aria-labelledby="cta-heading">
+      <section id="cta" className="py-28" aria-labelledby="cta-heading">
         <div className="max-w-5xl mx-auto px-6">
           <FadeInSection>
-            <div className="glass glow rounded-3xl p-12 md:p-16 text-center relative overflow-hidden border border-emerald-500/20">
-              <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-emerald-500/10 via-transparent to-transparent" aria-hidden="true" />
-              <div className="absolute -top-24 -right-24 w-48 h-48 bg-emerald-500/20 rounded-full blur-3xl" aria-hidden="true" />
-              <div className="absolute -bottom-24 -left-24 w-48 h-48 bg-emerald-500/10 rounded-full blur-3xl" aria-hidden="true" />
-              <div className="relative z-10">
-                <h2 id="cta-heading" className="text-4xl md:text-5xl font-bold mb-6">Let's See If We're a Fit</h2>
-                <p className="text-xl text-zinc-400 mb-10 max-w-2xl mx-auto">Book a free 30-minute call. We'll show you exactly how AI can work for your business—no pressure, no jargon.</p>
-                <a href={EXTERNAL_URLS.appointments} {...SECURE_LINK_PROPS} className="btn-shine bg-white text-black px-10 py-5 rounded-full font-semibold text-lg hover:bg-zinc-100 transition transform hover:scale-105 inline-flex items-center gap-3 shadow-lg shadow-emerald-500/30">Book Your Free Call <ArrowRight className="w-5 h-5" aria-hidden="true" /></a>
-                <p className="text-zinc-500 text-sm mt-6">Free • 30 minutes • Zero obligation</p>
-              </div>
+            <div className="card rounded-2xl p-12 md:p-16 text-center border-emerald-500/15">
+              <h2 id="cta-heading" className="text-4xl md:text-5xl font-bold mb-6">Let's See If We're a Fit</h2>
+              <p className="text-xl text-zinc-400 mb-10 max-w-2xl mx-auto">Book a free 30-minute call. We'll show you exactly how AI can work for your business—no pressure, no jargon.</p>
+              <a href={EXTERNAL_URLS.appointments} {...SECURE_LINK_PROPS} className="bg-white text-black px-10 py-5 rounded-full font-semibold text-lg hover:bg-zinc-100 transition inline-flex items-center gap-3">Book Your Free Call <ArrowRight className="w-5 h-5" aria-hidden="true" /></a>
+              <p className="text-zinc-500 text-sm mt-6">Free • 30 minutes • Zero obligation</p>
             </div>
           </FadeInSection>
         </div>
       </section>
 
-      <footer className="py-12 border-t border-white/10" role="contentinfo">
+      <footer className="py-12 border-t border-white/5" role="contentinfo">
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-8">
-            <div className="flex flex-col items-center md:items-start">
-              <Logo size="small" />
-              <div className="w-16 h-0.5 bg-gradient-to-r from-emerald-500 to-emerald-400 mt-2 rounded-full" aria-hidden="true" />
-            </div>
+            <Logo size="small" />
             <nav className="flex gap-8 text-zinc-400" aria-label="Footer navigation">
               <button onClick={() => scrollTo('services')} className="hover:text-white transition" type="button">Services</button>
               <button onClick={() => scrollTo('process')} className="hover:text-white transition" type="button">About</button>
