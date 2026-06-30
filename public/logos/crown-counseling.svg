@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 70" fill="#fff">
+  <g transform="translate(35,36)">
+    <ellipse cx="-10" cy="0" rx="7" ry="15" transform="rotate(-20)" opacity="0.7"/>
+    <ellipse cx="10" cy="0" rx="7" ry="15" transform="rotate(20)" opacity="0.7"/>
+    <ellipse cx="0" cy="-1" rx="6" ry="16"/>
+    <circle cx="0" cy="-20" r="3.5" opacity="0.8"/>
+    <circle cx="-12" cy="-14" r="3" opacity="0.6"/>
+    <circle cx="12" cy="-14" r="3" opacity="0.6"/>
+  </g>
+  <text x="78" y="30" font-family="Georgia, 'Times New Roman', serif" font-size="28" letter-spacing="3">CROWN</text>
+  <text x="78" y="56" font-family="Georgia, 'Times New Roman', serif" font-size="18" letter-spacing="5">COUNSELING</text>
+</svg>

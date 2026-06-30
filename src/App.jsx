@@ -254,11 +254,11 @@ function MainSite() {
           <FadeInSection delay={100}>
             <div className="flex flex-wrap items-center justify-center gap-10 md:gap-16 mb-16 py-8 border-y border-white/5">
               {[
-                { src: '/logos/luigi-trucking.png', alt: 'Luigi Trucking Insurance Agency' },
-                { src: '/logos/crown-counseling.png', alt: 'Crown Counseling' },
-                { src: '/logos/prg-management.png', alt: 'PRG Management' },
+                { src: '/logos/luigi-trucking.svg', alt: 'Luigi Trucking Insurance Agency' },
+                { src: '/logos/crown-counseling.svg', alt: 'Crown Counseling' },
+                { src: '/logos/prg-management.svg', alt: 'PRG Management' },
               ].map((logo, idx) => (
-                <img key={idx} src={logo.src} alt={logo.alt} className="h-10 md:h-12 w-auto object-contain brightness-0 invert opacity-50 hover:opacity-80 transition-opacity duration-300" />
+                <img key={idx} src={logo.src} alt={logo.alt} className="h-10 md:h-12 w-auto object-contain opacity-40 hover:opacity-70 transition-opacity duration-300" />
               ))}
             </div>
           </FadeInSection>
