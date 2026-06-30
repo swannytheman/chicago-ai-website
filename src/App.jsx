@@ -224,24 +224,24 @@ function MainSite() {
         <div className="max-w-7xl mx-auto px-6">
           <FadeInSection>
             <div className="text-center mb-16">
-              <span className="text-sm uppercase tracking-widest text-emerald-400 mb-4 block">How It Works</span>
-              <h2 id="how-it-works-heading" className="text-4xl md:text-5xl font-bold tracking-tight mb-4">From Lead to Meeting in 3 Steps</h2>
-              <p className="text-lg text-zinc-400 max-w-2xl mx-auto leading-relaxed">Your AI sales agent works around the clock — so no lead slips through the cracks.</p>
+              <span className="text-sm uppercase tracking-widest text-emerald-400 mb-4 block">Our Methodology</span>
+              <h2 id="how-it-works-heading" className="text-4xl md:text-5xl font-bold tracking-tight mb-4">Capture. Nurture. Close.</h2>
+              <p className="text-lg text-zinc-400 max-w-2xl mx-auto leading-relaxed">A proven, three-phase system refined across dozens of Chicago businesses — engineered to turn every inbound lead into a booked meeting.</p>
             </div>
           </FadeInSection>
           <div className="grid md:grid-cols-3 gap-8 mb-16 relative">
             <div className="hidden md:block absolute top-16 left-[16.666%] right-[16.666%] h-px bg-gradient-to-r from-emerald-500/20 via-emerald-400/40 to-emerald-500/20" aria-hidden="true" />
             {[
-              { icon: MessageSquare, step: '01', title: 'Lead Comes In', desc: 'A prospect fills out a form, sends a message, or clicks an ad. Your AI agent picks it up instantly — day or night.' },
-              { icon: Send, step: '02', title: 'AI Qualifies & Follows Up', desc: 'Personalized, human-sounding emails and texts go out within seconds. Multi-touch sequences nurture every lead automatically.' },
-              { icon: Calendar, step: '03', title: 'Meeting Booked', desc: 'Qualified leads get a calendar link and book directly. You show up to a warm, ready-to-buy conversation.' },
+              { icon: Zap, phase: 'CAPTURE', title: 'Detect Every Lead, Instantly', desc: 'Your AI agent monitors every channel — forms, ads, messages, missed calls — and engages within seconds. No lead goes unnoticed, day or night.' },
+              { icon: MessageSquare, phase: 'NURTURE', title: 'Build Trust on Autopilot', desc: 'Personalized, human-sounding follow-ups deploy across email and SMS. Intelligent multi-touch sequences adapt to each prospect until they are ready to talk.' },
+              { icon: Calendar, phase: 'CLOSE', title: 'Book Ready-to-Buy Meetings', desc: 'Only qualified, high-intent leads reach your calendar. You walk into every meeting with context, confidence, and a prospect who is ready to move forward.' },
             ].map((item, idx) => (
               <FadeInSection key={idx} delay={idx * 150}>
                 <div className="card card-hover rounded-2xl p-8 text-center relative transition h-full">
                   <div className="w-14 h-14 mx-auto rounded-2xl flex items-center justify-center mb-5 bg-emerald-500/10 border border-emerald-500/20 relative z-10">
                     <item.icon className="w-6 h-6 text-emerald-400" aria-hidden="true" />
                   </div>
-                  <div className="text-xs font-mono text-emerald-400/60 tracking-widest mb-3">STEP {item.step}</div>
+                  <div className="text-xs font-semibold text-emerald-400/80 tracking-[0.2em] mb-3">{item.phase}</div>
                   <h3 className="text-xl font-bold mb-3">{item.title}</h3>
                   <p className="text-zinc-400 text-sm leading-relaxed">{item.desc}</p>
                 </div>
@@ -251,10 +251,10 @@ function MainSite() {
           <FadeInSection delay={500}>
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
               {[
-                { icon: Clock, text: 'Save 10+ hours/week' },
-                { icon: Shield, text: 'Never miss a lead' },
-                { icon: Zap, text: 'Integrates with your CRM (Zapier, GHL, etc.)' },
-                { icon: Users, text: 'Chicago support for setup & tweaks' },
+                { icon: Clock, text: 'Responds in under 60 seconds' },
+                { icon: Shield, text: 'Zero leads lost — guaranteed' },
+                { icon: Zap, text: 'Integrates with your CRM & tools' },
+                { icon: Users, text: 'Managed by our Chicago team' },
               ].map((benefit, idx) => (
                 <div key={idx} className="flex items-center gap-3 card rounded-xl p-4 transition hover:bg-white/5">
                   <div className="w-8 h-8 bg-emerald-500/15 rounded-lg flex items-center justify-center flex-shrink-0">
