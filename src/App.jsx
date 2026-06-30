@@ -180,7 +180,7 @@ function MainSite() {
               </button>
             ))}
             <Link to="/try-it-free" className="text-emerald-300 px-5 py-2 rounded-full text-sm font-medium transition hover:text-emerald-200 border border-emerald-500/30 hover:border-emerald-400/50">Try It Free</Link>
-            <button onClick={() => scrollTo('cta')} className="bg-white text-black px-6 py-2.5 rounded-full font-medium hover:bg-zinc-100 transition" type="button">Book a Call</button>
+            <button onClick={() => scrollTo('cta')} className="bg-white text-black px-6 py-2.5 rounded-full font-medium hover:bg-zinc-100 transition" type="button">Book a Strategy Call</button>
           </div>
           <button className="md:hidden p-2 rounded-lg border border-white/10" onClick={() => setMobileMenuOpen(!mobileMenuOpen)} type="button" aria-expanded={mobileMenuOpen} aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}>{mobileMenuOpen ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}</button>
         </div>
@@ -188,7 +188,7 @@ function MainSite() {
           <div className="md:hidden bg-zinc-900 border border-white/10 mx-4 mt-2 rounded-2xl p-6 space-y-4" role="menu">
             {navItems.map(item => (<button key={item} onClick={() => scrollTo(item.toLowerCase())} className="block w-full text-left text-zinc-300 hover:text-white py-2" type="button" role="menuitem">{item}</button>))}
             <Link to="/try-it-free" className="block w-full text-center text-emerald-300 px-5 py-3 rounded-full text-sm font-medium border border-emerald-500/30" role="menuitem" onClick={() => setMobileMenuOpen(false)}>Try It Free</Link>
-            <button onClick={() => scrollTo('cta')} className="w-full bg-white text-black px-5 py-3 rounded-full font-medium" type="button" role="menuitem">Book a Call</button>
+            <button onClick={() => scrollTo('cta')} className="w-full bg-white text-black px-5 py-3 rounded-full font-medium" type="button" role="menuitem">Book a Strategy Call</button>
           </div>
         )}
       </nav>
@@ -197,23 +197,23 @@ function MainSite() {
         <div className="absolute inset-0 bg-gradient-to-b from-zinc-900 via-zinc-950 to-zinc-950" aria-hidden="true" />
         <div className="relative z-10 max-w-5xl mx-auto px-6 text-center">
           <FadeInSection>
-            <div className="inline-flex items-center gap-2 border border-white/10 bg-white/5 px-5 py-2.5 rounded-full text-sm mb-8 cursor-default">
-              <Zap className="w-4 h-4 text-emerald-400" aria-hidden="true" /><span>AI That Actually Works for Small Business</span><span className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse" aria-hidden="true" />
+            <div className="inline-flex items-center gap-2 border border-emerald-500/20 bg-emerald-500/5 px-5 py-2.5 rounded-full text-sm mb-8 cursor-default">
+              <span className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse" aria-hidden="true" /><span className="text-emerald-300">Expert AI &amp; Automation Team</span><span className="text-zinc-500 mx-1">•</span><span className="text-zinc-400">Chicago, IL</span>
             </div>
           </FadeInSection>
-          <FadeInSection delay={100}><h1 id="hero-heading" className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 leading-tight tracking-tight">AI That Handles Your<br /><span className="text-gradient">Leads 24/7</span></h1></FadeInSection>
-          <FadeInSection delay={200}><p className="text-lg md:text-xl text-zinc-300 max-w-2xl mx-auto mb-10 leading-relaxed">An AI sales agent that qualifies leads, follows up instantly, and books meetings—so you can focus on closing deals.</p></FadeInSection>
+          <FadeInSection delay={100}><h1 id="hero-heading" className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 leading-tight tracking-tight">Your AI Sales Team<br /><span className="text-gradient">Built &amp; Managed For You</span></h1></FadeInSection>
+          <FadeInSection delay={200}><p className="text-lg md:text-xl text-zinc-300 max-w-2xl mx-auto mb-10 leading-relaxed">We design, build, and manage custom AI sales agents that qualify your leads, follow up instantly, and book meetings — so you never miss another opportunity.</p></FadeInSection>
           <FadeInSection delay={300}>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button onClick={() => scrollTo('cta')} className="group bg-white text-black px-8 py-4 rounded-full font-semibold text-lg hover:bg-zinc-100 transition flex items-center justify-center gap-2" type="button">Book a Free Call <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" aria-hidden="true" /></button>
+              <button onClick={() => scrollTo('cta')} className="group bg-white text-black px-8 py-4 rounded-full font-semibold text-lg hover:bg-zinc-100 transition flex items-center justify-center gap-2" type="button">Book a Strategy Call <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" aria-hidden="true" /></button>
               <button onClick={() => scrollTo('how-it-works')} className="border border-white/15 bg-white/5 px-8 py-4 rounded-full font-semibold text-lg transition hover:bg-white/10" type="button">See How It Works</button>
             </div>
           </FadeInSection>
           <FadeInSection delay={400}>
-            <div className="mt-16 flex flex-wrap justify-center gap-6 md:gap-8 text-sm text-zinc-500">
-              <div className="flex items-center gap-2"><Check className="w-4 h-4 text-emerald-400" aria-hidden="true" /> Zero tech skills needed</div>
-              <div className="flex items-center gap-2"><Check className="w-4 h-4 text-emerald-400" aria-hidden="true" /> Live in 2-4 weeks</div>
-              <div className="flex items-center gap-2"><Check className="w-4 h-4 text-emerald-400" aria-hidden="true" /> White-glove setup</div>
+            <div className="mt-16 flex flex-wrap justify-center gap-6 md:gap-8 text-sm text-zinc-400">
+              <div className="flex items-center gap-2"><Check className="w-4 h-4 text-emerald-400" aria-hidden="true" /> Chicago-based team</div>
+              <div className="flex items-center gap-2"><Check className="w-4 h-4 text-emerald-400" aria-hidden="true" /> 35% avg increase in closed deals</div>
+              <div className="flex items-center gap-2"><Check className="w-4 h-4 text-emerald-400" aria-hidden="true" /> Go live in 2–4 weeks</div>
             </div>
           </FadeInSection>
         </div>
@@ -485,8 +485,8 @@ function MainSite() {
           <FadeInSection>
             <div className="card rounded-2xl p-12 md:p-16 text-center border-emerald-500/15">
               <h2 id="cta-heading" className="text-4xl md:text-5xl font-bold tracking-tight mb-6">Let's See If We're a Fit</h2>
-              <p className="text-xl text-zinc-300 mb-10 max-w-2xl mx-auto leading-relaxed">Book a free 30-minute call. We'll show you exactly how AI can work for your business—no pressure, no jargon.</p>
-              <a href={EXTERNAL_URLS.appointments} {...SECURE_LINK_PROPS} className="bg-white text-black px-10 py-5 rounded-full font-semibold text-lg hover:bg-zinc-100 transition inline-flex items-center gap-3">Book Your Free Call <ArrowRight className="w-5 h-5" aria-hidden="true" /></a>
+              <p className="text-xl text-zinc-300 mb-10 max-w-2xl mx-auto leading-relaxed">Book a free 30-minute strategy call. We'll audit your current lead flow and show you exactly where AI can make an impact — no pressure, no jargon.</p>
+              <a href={EXTERNAL_URLS.appointments} {...SECURE_LINK_PROPS} className="bg-white text-black px-10 py-5 rounded-full font-semibold text-lg hover:bg-zinc-100 transition inline-flex items-center gap-3">Book Your Free Strategy Call <ArrowRight className="w-5 h-5" aria-hidden="true" /></a>
               <p className="text-zinc-500 text-sm mt-6">Free • 30 minutes • Zero obligation</p>
             </div>
           </FadeInSection>
