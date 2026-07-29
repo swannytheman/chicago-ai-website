@@ -73,7 +73,6 @@ function MainSite() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeFaq, setActiveFaq] = useState(null);
-  const [currentTestimonial, setCurrentTestimonial] = useState(0);
   const [selectedTier, setSelectedTier] = useState(1);
 
   const scrollTo = useCallback((id) => {
@@ -86,11 +85,6 @@ function MainSite() {
     const handleScroll = () => setScrolled(window.scrollY > 50);
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  useEffect(() => {
-    const interval = setInterval(() => setCurrentTestimonial(prev => (prev + 1) % 3), 5000);
-    return () => clearInterval(interval);
   }, []);
 
   const salesAgent = useMemo(() => ({
@@ -112,11 +106,12 @@ function MainSite() {
     ]
   }), []);
 
-  const testimonials = useMemo(() => [
-    { quote: "We were drowning in lead follow-ups—losing deals just because we couldn't respond fast enough. Now our AI handles first contact instantly, and our sales team closes 35% more deals. They paid for themselves in the first month.", author: "Erik Sandoval", title: "President, Luigi Trucking Insurance", metric: "35% more closed deals" },
-    { quote: "I'll be honest—I thought AI would make us sound like a call center. I was wrong. Customers actually compliment our 'fast, friendly responses' now. They have no idea it's AI. That's when I knew we made the right call.", author: "Sarah Chen", title: "CEO, Midwest Consulting Group", metric: "Response time: 4 hrs → 30 sec" },
-    { quote: "I used to spend my Sundays writing proposals. Now the AI drafts them in minutes and I just review. I got 20 hours of my week back—and my weekends. My only regret is not doing this sooner.", author: "Michael Torres", title: "Operations Director, BuildRight Construction", metric: "20 hours saved per week" }
-  ], []);
+  const testimonial = useMemo(() => ({
+    quote: "We were drowning in lead follow-ups—losing deals just because we couldn't respond fast enough. Now our AI handles first contact instantly, and our sales team closes 35% more deals. They paid for themselves in the first month.",
+    author: "Erik Sandoval",
+    title: "President, Luigi Trucking Insurance",
+    metric: "35% more closed deals"
+  }), []);
 
   const faqs = useMemo(() => [
     { q: "I'm not technical. Will this work for me?", a: "Absolutely. We built this for busy business owners, not engineers. We handle all the technical stuff—you just tell us what you need and show up for a few calls. Most clients are surprised how painless it is." },
@@ -185,7 +180,7 @@ function MainSite() {
           <FadeInSection delay={400}>
             <div className="mt-16 flex flex-wrap justify-center gap-6 md:gap-8 text-sm text-zinc-400">
               <div className="flex items-center gap-2"><Check className="w-4 h-4 text-emerald-400" aria-hidden="true" /> Chicago-based team</div>
-              <div className="flex items-center gap-2"><Check className="w-4 h-4 text-emerald-400" aria-hidden="true" /> 35% avg increase in closed deals</div>
+              <div className="flex items-center gap-2"><Check className="w-4 h-4 text-emerald-400" aria-hidden="true" /> 35% more closed deals for Luigi Trucking</div>
               <div className="flex items-center gap-2"><Check className="w-4 h-4 text-emerald-400" aria-hidden="true" /> Go live in 2–4 weeks</div>
             </div>
           </FadeInSection>
@@ -199,7 +194,7 @@ function MainSite() {
             <div className="text-center mb-16">
               <span className="text-sm uppercase tracking-widest text-emerald-400 mb-4 block">Our Methodology</span>
               <h2 id="how-it-works-heading" className="text-4xl md:text-5xl font-bold tracking-tight mb-4">Capture. Nurture. Close.</h2>
-              <p className="text-lg text-zinc-400 max-w-2xl mx-auto leading-relaxed">A proven, three-phase system refined across dozens of Chicago businesses — engineered to turn every inbound lead into a booked meeting.</p>
+              <p className="text-lg text-zinc-400 max-w-2xl mx-auto leading-relaxed">A three-phase system we build, run, and refine for every client — engineered to turn inbound leads into booked meetings.</p>
             </div>
           </FadeInSection>
           <div className="grid md:grid-cols-3 gap-8 mb-16 relative">
@@ -225,7 +220,7 @@ function MainSite() {
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
               {[
                 { icon: Clock, text: 'Responds in under 60 seconds' },
-                { icon: Shield, text: 'Zero leads lost — guaranteed' },
+                { icon: Shield, text: 'Every lead gets a response' },
                 { icon: Zap, text: 'Integrates with your CRM & tools' },
                 { icon: Users, text: 'Managed by our Chicago team' },
               ].map((benefit, idx) => (
@@ -247,7 +242,7 @@ function MainSite() {
             <div className="text-center mb-14">
               <span className="text-sm uppercase tracking-widest text-emerald-400 mb-4 block">Proven Results</span>
               <h2 id="testimonials-heading" className="text-4xl md:text-5xl font-bold tracking-tight mb-4">Trusted by Chicago Businesses</h2>
-              <p className="text-lg text-zinc-400 max-w-2xl mx-auto leading-relaxed">We've helped companies across industries transform their sales pipeline with measurable, lasting results.</p>
+              <p className="text-lg text-zinc-400 max-w-2xl mx-auto leading-relaxed">From commercial insurance to counseling to property management — we build AI sales agents that produce measurable results.</p>
             </div>
           </FadeInSection>
 
@@ -267,8 +262,8 @@ function MainSite() {
             <div className="grid md:grid-cols-3 gap-5 mb-16">
               {[
                 { stat: '35%', label: 'increase in closed deals', detail: 'Luigi Trucking Insurance' },
-                { stat: '3x', label: 'more appointments booked', detail: 'Average across clients' },
-                { stat: '24/7', label: 'lead response coverage', detail: 'Every client, from day one' },
+                { stat: '<60 sec', label: 'first response to every lead', detail: 'Automated, around the clock' },
+                { stat: '2–4 wks', label: 'from kickoff to fully live', detail: 'Typical implementation' },
               ].map((item, idx) => (
                 <div key={idx} className="card rounded-2xl p-8 text-center cursor-default">
                   <div className="text-4xl font-bold text-emerald-400 mb-2">{item.stat}</div>
@@ -280,25 +275,20 @@ function MainSite() {
           </FadeInSection>
 
           <FadeInSection delay={300}>
-            <div className="max-w-4xl mx-auto">
-              <div className="relative">
-                <div className="card rounded-2xl p-8 md:p-12">
-                  <div className="flex items-center justify-between mb-8">
-                    <div className="flex gap-1" role="img" aria-label="5 star rating">{[...Array(5)].map((_, i) => (<Star key={i} className="w-5 h-5 fill-emerald-400 text-emerald-400" aria-hidden="true" />))}</div>
-                    <div className="bg-emerald-500/10 border border-emerald-500/20 px-4 py-2 rounded-full text-sm font-semibold text-emerald-400">{testimonials[currentTestimonial].metric}</div>
-                  </div>
-                  <blockquote className="text-xl md:text-2xl mb-8 leading-relaxed min-h-[140px] text-zinc-200">"{testimonials[currentTestimonial].quote}"</blockquote>
-                  <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 bg-emerald-500/10 border border-emerald-500/20 rounded-full flex items-center justify-center font-bold text-lg text-emerald-400" aria-hidden="true">{testimonials[currentTestimonial].author.charAt(0)}</div>
-                    <div>
-                      <div className="font-semibold text-lg">{testimonials[currentTestimonial].author}</div>
-                      <div className="text-zinc-400 text-sm">{testimonials[currentTestimonial].title}</div>
-                    </div>
-                  </div>
-                </div>
-                <div className="flex justify-center gap-3 mt-8" role="tablist" aria-label="Testimonial navigation">{testimonials.map((_, idx) => (<button key={idx} onClick={() => setCurrentTestimonial(idx)} className={`w-3 h-3 rounded-full transition-all duration-300 ${currentTestimonial === idx ? 'bg-emerald-400 w-8' : 'bg-white/20 hover:bg-white/40'}`} type="button" role="tab" aria-selected={currentTestimonial === idx} aria-label={`View testimonial ${idx + 1}`} />))}</div>
+            <figure className="max-w-4xl mx-auto card rounded-2xl p-8 md:p-12">
+              <div className="flex items-center justify-between mb-8">
+                <div className="flex gap-1" role="img" aria-label="5 star rating">{[...Array(5)].map((_, i) => (<Star key={i} className="w-5 h-5 fill-emerald-400 text-emerald-400" aria-hidden="true" />))}</div>
+                <div className="bg-emerald-500/10 border border-emerald-500/20 px-4 py-2 rounded-full text-sm font-semibold text-emerald-400">{testimonial.metric}</div>
               </div>
-            </div>
+              <blockquote className="text-xl md:text-2xl mb-8 leading-relaxed text-zinc-200">"{testimonial.quote}"</blockquote>
+              <figcaption className="flex items-center gap-4">
+                <div className="w-12 h-12 bg-emerald-500/10 border border-emerald-500/20 rounded-full flex items-center justify-center font-bold text-lg text-emerald-400" aria-hidden="true">{testimonial.author.charAt(0)}</div>
+                <div>
+                  <div className="font-semibold text-lg">{testimonial.author}</div>
+                  <div className="text-zinc-400 text-sm">{testimonial.title}</div>
+                </div>
+              </figcaption>
+            </figure>
           </FadeInSection>
         </div>
       </section>
@@ -313,7 +303,7 @@ function MainSite() {
             </div>
           </FadeInSection>
           <div className="grid md:grid-cols-3 gap-6">
-            {[{ icon: TrendingUp, title: "Make More Money", desc: "AI finds opportunities you're missing—smarter pricing, faster follow-ups, upsells that actually convert. Most clients see 20-40% more revenue." }, { icon: Users, title: "Never Miss a Lead", desc: "Instant responses at 3am. Personalized follow-ups on autopilot. Your AI works every hour you don't." }, { icon: Clock, title: "Get Your Life Back", desc: "Stop drowning in busywork. Our clients reclaim 15+ hours every week for strategy, family, or actually taking a vacation." }].map((item, idx) => (
+            {[{ icon: TrendingUp, title: "Close More Deals", desc: "Speed wins deals. When every lead gets a thoughtful reply in under a minute, you win the ones you used to lose to whoever answered first." }, { icon: Users, title: "Never Miss a Lead", desc: "Instant responses at 3am. Personalized follow-ups on autopilot. Your AI works every hour you don't." }, { icon: Clock, title: "Get Your Life Back", desc: "Stop drowning in busywork. Hand off the chasing, the scheduling, and the follow-up—and get your evenings and weekends back." }].map((item, idx) => (
               <FadeInSection key={idx} delay={idx * 100}>
                 <div className="card card-hover rounded-2xl p-8 h-full transition">
                   <div className="w-14 h-14 bg-white/5 border border-white/10 rounded-2xl flex items-center justify-center mb-6"><item.icon className="w-7 h-7 text-emerald-400" aria-hidden="true" /></div>
