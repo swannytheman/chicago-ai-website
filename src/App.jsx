@@ -169,8 +169,8 @@ function MainSite() {
               <span className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse" aria-hidden="true" /><span className="text-emerald-300">Expert AI &amp; Automation Team</span><span className="text-zinc-500 mx-1">•</span><span className="text-zinc-400">Chicago, IL</span>
             </div>
           </FadeInSection>
-          <FadeInSection delay={100}><h1 id="hero-heading" className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 leading-tight tracking-tight">Your AI Sales Team<br /><span className="text-gradient">Built &amp; Managed For You</span></h1></FadeInSection>
-          <FadeInSection delay={200}><p className="text-lg md:text-xl text-zinc-300 max-w-2xl mx-auto mb-10 leading-relaxed">We design, build, and manage custom AI sales agents that qualify your leads, follow up instantly, and book meetings — so you never miss another opportunity.</p></FadeInSection>
+          <FadeInSection delay={100}><h1 id="hero-heading" className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 leading-tight tracking-tight">AI That Books Meetings<br /><span className="text-gradient">While You Sleep</span></h1></FadeInSection>
+          <FadeInSection delay={200}><p className="text-lg md:text-xl text-zinc-300 max-w-2xl mx-auto mb-10 leading-relaxed">An AI sales agent that qualifies leads, follows up instantly, and books meetings — so your team only talks to serious buyers.</p></FadeInSection>
           <FadeInSection delay={300}>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <button onClick={() => scrollTo('cta')} className="group bg-white text-black px-8 py-4 rounded-full font-semibold text-lg hover:bg-zinc-100 transition flex items-center justify-center gap-2" type="button">Book a Strategy Call <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" aria-hidden="true" /></button>
@@ -347,7 +347,7 @@ function MainSite() {
             <div className="text-center mb-16">
               <span className="text-sm uppercase tracking-widest text-emerald-400 mb-4 block">Our AI Sales Agent</span>
               <h2 id="services-heading" className="text-4xl md:text-5xl font-bold tracking-tight mb-4">Your 24/7 Sales Machine</h2>
-              <p className="text-lg text-zinc-400 max-w-2xl mx-auto leading-relaxed">An AI agent that qualifies leads, follows up instantly, and books meetings—so your team only talks to serious buyers.</p>
+              <p className="text-lg text-zinc-400 max-w-2xl mx-auto leading-relaxed">We build it, train it on your voice, and manage it for you. Here's exactly what's included — and what it costs.</p>
             </div>
           </FadeInSection>
           <FadeInSection delay={200}>
