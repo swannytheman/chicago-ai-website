@@ -393,12 +393,15 @@ function MainSite() {
                         );
                       })}
                     </div>
+                    <button onClick={() => scrollTo('guarantee')} className="mt-4 w-full flex items-center justify-center gap-2 text-sm text-emerald-300 hover:text-emerald-200 transition py-2" type="button">
+                      <Shield className="w-4 h-4 flex-shrink-0" aria-hidden="true" /> Includes our 60-day Results Guarantee
+                    </button>
                   </div>
                 </div>
                 <div className="mt-10 pt-8 border-t border-white/10 flex flex-col sm:flex-row gap-4 items-center">
                   <button onClick={() => scrollTo('cta')} className="bg-white text-black px-8 py-4 rounded-full font-semibold hover:bg-zinc-100 transition flex items-center justify-center gap-2" type="button">Get the {salesAgent.pricing[selectedTier].tier} Plan <ChevronRight className="w-4 h-4" aria-hidden="true" /></button>
                   <Link to="/try-it-free" className="text-emerald-300 px-8 py-4 rounded-full font-semibold transition flex items-center justify-center gap-2 border border-emerald-500/30 hover:border-emerald-400/50 hover:bg-emerald-500/5">Try It Free <ArrowRight className="w-4 h-4" aria-hidden="true" /></Link>
-                  <span className="text-zinc-500 text-sm">{salesAgent.pricing[selectedTier].monthly}/mo • Cancel anytime</span>
+                  <span className="text-zinc-500 text-sm">{salesAgent.pricing[selectedTier].monthly}/mo • Cancel anytime • 60-day Results Guarantee</span>
                 </div>
               </div>
             </div>
@@ -427,6 +430,22 @@ function MainSite() {
               </FadeInSection>
             ))}
           </div>
+        </div>
+      </section>
+
+      <section id="guarantee" className="py-28 border-t border-white/5" aria-labelledby="guarantee-heading">
+        <div className="max-w-4xl mx-auto px-6">
+          <FadeInSection>
+            <div className="rounded-2xl border border-emerald-500/25 bg-emerald-500/[0.04] p-10 md:p-14 text-center">
+              <div className="w-14 h-14 mx-auto rounded-2xl flex items-center justify-center mb-6 bg-emerald-500/10 border border-emerald-500/25">
+                <Shield className="w-7 h-7 text-emerald-400" aria-hidden="true" />
+              </div>
+              <h2 id="guarantee-heading" className="text-4xl md:text-5xl font-bold tracking-tight mb-8">Results Guarantee</h2>
+              <p className="text-xl md:text-2xl text-white leading-relaxed mb-6 max-w-2xl mx-auto">We guarantee your AI sales agent will respond to new leads in under 60 seconds and book qualified meetings.</p>
+              <p className="text-lg text-zinc-300 leading-relaxed mb-8 max-w-2xl mx-auto">If the system is live and properly used for 60 days and does not deliver meaningful results, we will refund you in full.</p>
+              <p className="text-lg font-semibold text-emerald-300">No fine print. No runaround.</p>
+            </div>
+          </FadeInSection>
         </div>
       </section>
 
