@@ -127,7 +127,12 @@ function MainSite() {
     { icon: Shield, title: "You Win", desc: "Go live with ongoing support" }
   ], []);
 
-  const navItems = ['Services', 'Process', 'Testimonials', 'FAQ'];
+  const navItems = useMemo(() => [
+    { label: 'How It Works', id: 'how-it-works' },
+    { label: 'Results', id: 'testimonials' },
+    { label: 'Pricing', id: 'services' },
+    { label: 'FAQ', id: 'faq' }
+  ], []);
 
   return (
     <div className="min-h-screen bg-zinc-950 text-white overflow-x-hidden">
@@ -143,8 +148,8 @@ function MainSite() {
           <Logo size="default" />
           <div className="hidden md:flex items-center gap-8">
             {navItems.map(item => (
-              <button key={item} onClick={() => scrollTo(item.toLowerCase())} className="text-zinc-400 hover:text-white transition relative group" type="button" aria-label={`Navigate to ${item} section`}>
-                {item}<span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-emerald-400 transition-all group-hover:w-full" aria-hidden="true" />
+              <button key={item.id} onClick={() => scrollTo(item.id)} className="text-zinc-400 hover:text-white transition relative group whitespace-nowrap" type="button" aria-label={`Navigate to ${item.label} section`}>
+                {item.label}<span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-emerald-400 transition-all group-hover:w-full" aria-hidden="true" />
               </button>
             ))}
             <Link to="/try-it-free" className="text-emerald-300 px-5 py-2 rounded-full text-sm font-medium transition hover:text-emerald-200 border border-emerald-500/30 hover:border-emerald-400/50">Try It Free</Link>
@@ -154,7 +159,7 @@ function MainSite() {
         </div>
         {mobileMenuOpen && (
           <div className="md:hidden bg-zinc-900 border border-white/10 mx-4 mt-2 rounded-2xl p-6 space-y-4" role="menu">
-            {navItems.map(item => (<button key={item} onClick={() => scrollTo(item.toLowerCase())} className="block w-full text-left text-zinc-300 hover:text-white py-2" type="button" role="menuitem">{item}</button>))}
+            {navItems.map(item => (<button key={item.id} onClick={() => scrollTo(item.id)} className="block w-full text-left text-zinc-300 hover:text-white py-2" type="button" role="menuitem">{item.label}</button>))}
             <Link to="/try-it-free" className="block w-full text-center text-emerald-300 px-5 py-3 rounded-full text-sm font-medium border border-emerald-500/30" role="menuitem" onClick={() => setMobileMenuOpen(false)}>Try It Free</Link>
             <button onClick={() => scrollTo('cta')} className="w-full bg-white text-black px-5 py-3 rounded-full font-medium" type="button" role="menuitem">Book a Strategy Call</button>
           </div>
@@ -293,55 +298,7 @@ function MainSite() {
         </div>
       </section>
 
-      <section id="about" className="py-28" aria-labelledby="about-heading">
-        <div className="max-w-7xl mx-auto px-6">
-          <FadeInSection>
-            <div className="text-center mb-16">
-              <span className="text-sm uppercase tracking-widest text-emerald-400 mb-4 block">The Problem We Solve</span>
-              <h2 id="about-heading" className="text-4xl md:text-5xl font-bold tracking-tight mb-4">You're Doing Too Much</h2>
-              <p className="text-lg text-zinc-400 max-w-2xl mx-auto leading-relaxed">Answering emails. Chasing leads. Scheduling. Posting content. There's a better way.</p>
-            </div>
-          </FadeInSection>
-          <div className="grid md:grid-cols-3 gap-6">
-            {[{ icon: TrendingUp, title: "Close More Deals", desc: "Speed wins deals. When every lead gets a thoughtful reply in under a minute, you win the ones you used to lose to whoever answered first." }, { icon: Users, title: "Never Miss a Lead", desc: "Instant responses at 3am. Personalized follow-ups on autopilot. Your AI works every hour you don't." }, { icon: Clock, title: "Get Your Life Back", desc: "Stop drowning in busywork. Hand off the chasing, the scheduling, and the follow-up—and get your evenings and weekends back." }].map((item, idx) => (
-              <FadeInSection key={idx} delay={idx * 100}>
-                <div className="card card-hover rounded-2xl p-8 h-full transition">
-                  <div className="w-14 h-14 bg-white/5 border border-white/10 rounded-2xl flex items-center justify-center mb-6"><item.icon className="w-7 h-7 text-emerald-400" aria-hidden="true" /></div>
-                  <h3 className="text-2xl font-semibold mb-4">{item.title}</h3>
-                  <p className="text-zinc-400 leading-relaxed">{item.desc}</p>
-                </div>
-              </FadeInSection>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section id="process" className="py-28 border-t border-white/5" aria-labelledby="process-heading">
-        <div className="max-w-7xl mx-auto px-6">
-          <FadeInSection>
-            <div className="text-center mb-16">
-              <span className="text-sm uppercase tracking-widest text-emerald-400 mb-4 block">Our Process</span>
-              <h2 id="process-heading" className="text-4xl md:text-5xl font-bold tracking-tight mb-4">Live in Weeks, Not Months</h2>
-              <p className="text-lg text-zinc-400 max-w-2xl mx-auto leading-relaxed">We handle everything. You just show up for a few calls.</p>
-            </div>
-          </FadeInSection>
-          <div className="grid md:grid-cols-4 gap-6 relative">
-            <div className="hidden md:block absolute top-1/2 left-0 right-0 h-px bg-gradient-to-r from-transparent via-emerald-500/20 to-transparent -translate-y-1/2" aria-hidden="true" />
-            {process.map((step, idx) => (
-              <FadeInSection key={idx} delay={idx * 150}>
-                <div className="relative text-center">
-                  <div className="w-20 h-20 card mx-auto rounded-2xl flex items-center justify-center mb-6"><step.icon className="w-8 h-8 text-zinc-300" aria-hidden="true" /></div>
-                  <div className="absolute -top-2 -right-2 w-8 h-8 bg-emerald-500 text-white rounded-full flex items-center justify-center font-bold text-sm" aria-label={`Step ${idx + 1}`}>{idx + 1}</div>
-                  <h3 className="text-xl font-semibold mb-2">{step.title}</h3>
-                  <p className="text-zinc-400 text-sm">{step.desc}</p>
-                </div>
-              </FadeInSection>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section id="services" className="py-28" aria-labelledby="services-heading">
+      <section id="services" className="pt-28 pb-14" aria-labelledby="services-heading">
         <div className="max-w-7xl mx-auto px-6">
           <FadeInSection>
             <div className="text-center mb-16">
@@ -409,6 +366,70 @@ function MainSite() {
         </div>
       </section>
 
+      <section id="guarantee" className="pb-28" aria-labelledby="guarantee-heading">
+        <div className="max-w-4xl mx-auto px-6">
+          <FadeInSection>
+            <div className="rounded-2xl border border-emerald-500/25 bg-emerald-500/[0.04] p-10 md:p-14 text-center">
+              <div className="w-14 h-14 mx-auto rounded-2xl flex items-center justify-center mb-6 bg-emerald-500/10 border border-emerald-500/25">
+                <Shield className="w-7 h-7 text-emerald-400" aria-hidden="true" />
+              </div>
+              <h2 id="guarantee-heading" className="text-4xl md:text-5xl font-bold tracking-tight mb-8">Results Guarantee</h2>
+              <p className="text-xl md:text-2xl text-white leading-relaxed mb-6 max-w-2xl mx-auto">We guarantee your AI sales agent will respond to new leads in under 60 seconds and book qualified meetings.</p>
+              <p className="text-lg text-zinc-300 leading-relaxed mb-8 max-w-2xl mx-auto">If the system is live and properly used for 60 days and does not deliver meaningful results, we will refund you in full.</p>
+              <p className="text-lg font-semibold text-emerald-300">No fine print. No runaround.</p>
+            </div>
+          </FadeInSection>
+        </div>
+      </section>
+
+      <section id="about" className="py-28" aria-labelledby="about-heading">
+        <div className="max-w-7xl mx-auto px-6">
+          <FadeInSection>
+            <div className="text-center mb-16">
+              <span className="text-sm uppercase tracking-widest text-emerald-400 mb-4 block">The Problem We Solve</span>
+              <h2 id="about-heading" className="text-4xl md:text-5xl font-bold tracking-tight mb-4">You're Doing Too Much</h2>
+              <p className="text-lg text-zinc-400 max-w-2xl mx-auto leading-relaxed">Answering emails. Chasing leads. Scheduling. Posting content. There's a better way.</p>
+            </div>
+          </FadeInSection>
+          <div className="grid md:grid-cols-3 gap-6">
+            {[{ icon: TrendingUp, title: "Close More Deals", desc: "Speed wins deals. When every lead gets a thoughtful reply in under a minute, you win the ones you used to lose to whoever answered first." }, { icon: Users, title: "Never Miss a Lead", desc: "Instant responses at 3am. Personalized follow-ups on autopilot. Your AI works every hour you don't." }, { icon: Clock, title: "Get Your Life Back", desc: "Stop drowning in busywork. Hand off the chasing, the scheduling, and the follow-up—and get your evenings and weekends back." }].map((item, idx) => (
+              <FadeInSection key={idx} delay={idx * 100}>
+                <div className="card card-hover rounded-2xl p-8 h-full transition">
+                  <div className="w-14 h-14 bg-white/5 border border-white/10 rounded-2xl flex items-center justify-center mb-6"><item.icon className="w-7 h-7 text-emerald-400" aria-hidden="true" /></div>
+                  <h3 className="text-2xl font-semibold mb-4">{item.title}</h3>
+                  <p className="text-zinc-400 leading-relaxed">{item.desc}</p>
+                </div>
+              </FadeInSection>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="process" className="py-28 border-t border-white/5" aria-labelledby="process-heading">
+        <div className="max-w-7xl mx-auto px-6">
+          <FadeInSection>
+            <div className="text-center mb-16">
+              <span className="text-sm uppercase tracking-widest text-emerald-400 mb-4 block">Our Process</span>
+              <h2 id="process-heading" className="text-4xl md:text-5xl font-bold tracking-tight mb-4">Live in Weeks, Not Months</h2>
+              <p className="text-lg text-zinc-400 max-w-2xl mx-auto leading-relaxed">We handle everything. You just show up for a few calls.</p>
+            </div>
+          </FadeInSection>
+          <div className="grid md:grid-cols-4 gap-6 relative">
+            <div className="hidden md:block absolute top-1/2 left-0 right-0 h-px bg-gradient-to-r from-transparent via-emerald-500/20 to-transparent -translate-y-1/2" aria-hidden="true" />
+            {process.map((step, idx) => (
+              <FadeInSection key={idx} delay={idx * 150}>
+                <div className="relative text-center">
+                  <div className="w-20 h-20 card mx-auto rounded-2xl flex items-center justify-center mb-6"><step.icon className="w-8 h-8 text-zinc-300" aria-hidden="true" /></div>
+                  <div className="absolute -top-2 -right-2 w-8 h-8 bg-emerald-500 text-white rounded-full flex items-center justify-center font-bold text-sm" aria-label={`Step ${idx + 1}`}>{idx + 1}</div>
+                  <h3 className="text-xl font-semibold mb-2">{step.title}</h3>
+                  <p className="text-zinc-400 text-sm">{step.desc}</p>
+                </div>
+              </FadeInSection>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section id="faq" className="py-28 border-t border-white/5" aria-labelledby="faq-heading">
         <div className="max-w-3xl mx-auto px-6">
           <FadeInSection>
@@ -430,22 +451,6 @@ function MainSite() {
               </FadeInSection>
             ))}
           </div>
-        </div>
-      </section>
-
-      <section id="guarantee" className="py-28 border-t border-white/5" aria-labelledby="guarantee-heading">
-        <div className="max-w-4xl mx-auto px-6">
-          <FadeInSection>
-            <div className="rounded-2xl border border-emerald-500/25 bg-emerald-500/[0.04] p-10 md:p-14 text-center">
-              <div className="w-14 h-14 mx-auto rounded-2xl flex items-center justify-center mb-6 bg-emerald-500/10 border border-emerald-500/25">
-                <Shield className="w-7 h-7 text-emerald-400" aria-hidden="true" />
-              </div>
-              <h2 id="guarantee-heading" className="text-4xl md:text-5xl font-bold tracking-tight mb-8">Results Guarantee</h2>
-              <p className="text-xl md:text-2xl text-white leading-relaxed mb-6 max-w-2xl mx-auto">We guarantee your AI sales agent will respond to new leads in under 60 seconds and book qualified meetings.</p>
-              <p className="text-lg text-zinc-300 leading-relaxed mb-8 max-w-2xl mx-auto">If the system is live and properly used for 60 days and does not deliver meaningful results, we will refund you in full.</p>
-              <p className="text-lg font-semibold text-emerald-300">No fine print. No runaround.</p>
-            </div>
-          </FadeInSection>
         </div>
       </section>
 
