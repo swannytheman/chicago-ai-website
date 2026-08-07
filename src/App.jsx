@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import { Routes, Route, Link } from 'react-router-dom';
-import { Users, ChevronRight, Check, Star, Menu, X, ArrowRight, Zap, Clock, ChevronDown, MessageSquare, BarChart3, Shield, Sparkles, Send, Calendar } from 'lucide-react';
+import { Users, ChevronRight, Check, Star, Menu, X, ArrowRight, Zap, Clock, ChevronDown, MessageSquare, BarChart3, Shield, Sparkles, Send, Calendar, Rocket } from 'lucide-react';
 import TryItFree from './TryItFree.jsx';
 
 const EXTERNAL_URLS = {
@@ -121,10 +121,10 @@ function MainSite() {
   ], []);
 
   const process = useMemo(() => [
-    { icon: MessageSquare, title: "Quick Call", desc: "Tell us what's slowing you down" },
-    { icon: BarChart3, title: "Custom Plan", desc: "We design your AI solution" },
-    { icon: Zap, title: "We Build It", desc: "Setup, integration, testing—handled" },
-    { icon: Shield, title: "You Win", desc: "Go live with ongoing support" }
+    { icon: MessageSquare, when: "Day 1", title: "Quick Call", desc: "Tell us what's slowing you down" },
+    { icon: BarChart3, when: "Week 1", title: "Custom Plan", desc: "We map your leads, tools, and follow-up gaps" },
+    { icon: Zap, when: "Weeks 2–3", title: "We Build It", desc: "Setup, integrations, and testing — handled" },
+    { icon: Rocket, when: "Week 4", title: "Go Live", desc: "We launch, monitor, and keep improving it" }
   ], []);
 
   const navItems = useMemo(() => [
@@ -197,7 +197,7 @@ function MainSite() {
         <div className="max-w-7xl mx-auto px-6">
           <FadeInSection>
             <div className="text-center mb-16">
-              <span className="text-sm uppercase tracking-widest text-emerald-400 mb-4 block">Our Methodology</span>
+              <span className="text-sm uppercase tracking-widest text-emerald-400 mb-4 block">How Your AI Works</span>
               <h2 id="how-it-works-heading" className="text-4xl md:text-5xl font-bold tracking-tight mb-4">Capture. Nurture. Close.</h2>
               <p className="text-lg text-zinc-400 max-w-2xl mx-auto leading-relaxed">A three-phase system we build, run, and manage for you — so every lead gets handled the moment it arrives, and you get your evenings and weekends back.</p>
             </div>
@@ -386,20 +386,23 @@ function MainSite() {
         <div className="max-w-7xl mx-auto px-6">
           <FadeInSection>
             <div className="text-center mb-16">
-              <span className="text-sm uppercase tracking-widest text-emerald-400 mb-4 block">Our Process</span>
+              <span className="text-sm uppercase tracking-widest text-emerald-400 mb-4 block">Getting Started</span>
               <h2 id="process-heading" className="text-4xl md:text-5xl font-bold tracking-tight mb-4">Live in Weeks, Not Months</h2>
-              <p className="text-lg text-zinc-400 max-w-2xl mx-auto leading-relaxed">We handle everything. You just show up for a few calls.</p>
+              <p className="text-lg text-zinc-400 max-w-2xl mx-auto leading-relaxed">We handle the build, the integrations, and the testing — you just show up for a few calls. Here's what a typical rollout looks like.</p>
             </div>
           </FadeInSection>
           <div className="grid md:grid-cols-4 gap-6 relative">
-            <div className="hidden md:block absolute top-1/2 left-0 right-0 h-px bg-gradient-to-r from-transparent via-emerald-500/20 to-transparent -translate-y-1/2" aria-hidden="true" />
+            <div className="hidden md:block absolute top-10 left-[12.5%] right-[12.5%] h-px bg-gradient-to-r from-emerald-500/20 via-emerald-400/40 to-emerald-500/20" aria-hidden="true" />
             {process.map((step, idx) => (
               <FadeInSection key={idx} delay={idx * 150}>
-                <div className="relative text-center">
-                  <div className="w-20 h-20 card mx-auto rounded-2xl flex items-center justify-center mb-6"><step.icon className="w-8 h-8 text-zinc-300" aria-hidden="true" /></div>
-                  <div className="absolute -top-2 -right-2 w-8 h-8 bg-emerald-500 text-white rounded-full flex items-center justify-center font-bold text-sm" aria-label={`Step ${idx + 1}`}>{idx + 1}</div>
+                <div className="text-center">
+                  <div className="relative w-20 h-20 mx-auto mb-6 z-10 bg-zinc-950 rounded-2xl">
+                    <div className="w-20 h-20 card rounded-2xl flex items-center justify-center"><step.icon className="w-8 h-8 text-zinc-300" aria-hidden="true" /></div>
+                    <div className="absolute -top-2 -right-2 w-8 h-8 bg-emerald-500 text-white rounded-full flex items-center justify-center font-bold text-sm" aria-label={`Step ${idx + 1}`}>{idx + 1}</div>
+                  </div>
+                  <div className="text-xs font-semibold text-emerald-400/80 tracking-[0.2em] uppercase mb-2">{step.when}</div>
                   <h3 className="text-xl font-semibold mb-2">{step.title}</h3>
-                  <p className="text-zinc-400 text-sm">{step.desc}</p>
+                  <p className="text-zinc-400 text-sm leading-relaxed">{step.desc}</p>
                 </div>
               </FadeInSection>
             ))}
