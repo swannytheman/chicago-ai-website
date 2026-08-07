@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import { Routes, Route, Link } from 'react-router-dom';
-import { Users, ChevronRight, Check, Star, Menu, X, ArrowRight, Zap, Clock, TrendingUp, ChevronDown, MessageSquare, BarChart3, Shield, Sparkles, Send, Calendar } from 'lucide-react';
+import { Users, ChevronRight, Check, Star, Menu, X, ArrowRight, Zap, Clock, ChevronDown, MessageSquare, BarChart3, Shield, Sparkles, Send, Calendar } from 'lucide-react';
 import TryItFree from './TryItFree.jsx';
 
 const EXTERNAL_URLS = {
@@ -199,7 +199,7 @@ function MainSite() {
             <div className="text-center mb-16">
               <span className="text-sm uppercase tracking-widest text-emerald-400 mb-4 block">Our Methodology</span>
               <h2 id="how-it-works-heading" className="text-4xl md:text-5xl font-bold tracking-tight mb-4">Capture. Nurture. Close.</h2>
-              <p className="text-lg text-zinc-400 max-w-2xl mx-auto leading-relaxed">A three-phase system we build, run, and refine for every client — engineered to turn inbound leads into booked meetings.</p>
+              <p className="text-lg text-zinc-400 max-w-2xl mx-auto leading-relaxed">A three-phase system we build, run, and manage for you — so every lead gets handled the moment it arrives, and you get your evenings and weekends back.</p>
             </div>
           </FadeInSection>
           <div className="grid md:grid-cols-3 gap-8 mb-16 relative">
@@ -382,29 +382,6 @@ function MainSite() {
         </div>
       </section>
 
-      <section id="about" className="py-28" aria-labelledby="about-heading">
-        <div className="max-w-7xl mx-auto px-6">
-          <FadeInSection>
-            <div className="text-center mb-16">
-              <span className="text-sm uppercase tracking-widest text-emerald-400 mb-4 block">The Problem We Solve</span>
-              <h2 id="about-heading" className="text-4xl md:text-5xl font-bold tracking-tight mb-4">You're Doing Too Much</h2>
-              <p className="text-lg text-zinc-400 max-w-2xl mx-auto leading-relaxed">Answering emails. Chasing leads. Scheduling. Posting content. There's a better way.</p>
-            </div>
-          </FadeInSection>
-          <div className="grid md:grid-cols-3 gap-6">
-            {[{ icon: TrendingUp, title: "Close More Deals", desc: "Speed wins deals. When every lead gets a thoughtful reply in under a minute, you win the ones you used to lose to whoever answered first." }, { icon: Users, title: "Never Miss a Lead", desc: "Instant responses at 3am. Personalized follow-ups on autopilot. Your AI works every hour you don't." }, { icon: Clock, title: "Get Your Life Back", desc: "Stop drowning in busywork. Hand off the chasing, the scheduling, and the follow-up—and get your evenings and weekends back." }].map((item, idx) => (
-              <FadeInSection key={idx} delay={idx * 100}>
-                <div className="card card-hover rounded-2xl p-8 h-full transition">
-                  <div className="w-14 h-14 bg-white/5 border border-white/10 rounded-2xl flex items-center justify-center mb-6"><item.icon className="w-7 h-7 text-emerald-400" aria-hidden="true" /></div>
-                  <h3 className="text-2xl font-semibold mb-4">{item.title}</h3>
-                  <p className="text-zinc-400 leading-relaxed">{item.desc}</p>
-                </div>
-              </FadeInSection>
-            ))}
-          </div>
-        </div>
-      </section>
-
       <section id="process" className="py-28 border-t border-white/5" aria-labelledby="process-heading">
         <div className="max-w-7xl mx-auto px-6">
           <FadeInSection>
@@ -472,8 +449,8 @@ function MainSite() {
           <div className="flex flex-col md:flex-row justify-between items-center gap-8">
             <Logo size="small" />
             <nav className="flex gap-8 text-zinc-400" aria-label="Footer navigation">
-              <button onClick={() => scrollTo('services')} className="hover:text-white transition" type="button">Services</button>
-              <button onClick={() => scrollTo('process')} className="hover:text-white transition" type="button">About</button>
+              <button onClick={() => scrollTo('services')} className="hover:text-white transition" type="button">Pricing</button>
+              <button onClick={() => scrollTo('how-it-works')} className="hover:text-white transition" type="button">How It Works</button>
               <Link to="/try-it-free" className="hover:text-white transition">Try It Free</Link>
               <a href={EXTERNAL_URLS.contact} {...SECURE_LINK_PROPS} className="hover:text-white transition">Contact</a>
             </nav>
