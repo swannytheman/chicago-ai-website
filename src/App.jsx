@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import { Routes, Route, Link } from 'react-router-dom';
-import { Users, ChevronRight, Check, Star, Menu, X, ArrowRight, Zap, Clock, ChevronDown, MessageSquare, BarChart3, Shield, Sparkles, Send, Calendar, Rocket } from 'lucide-react';
+import { Users, ChevronRight, Check, Star, Menu, X, ArrowRight, Zap, ChevronDown, MessageSquare, BarChart3, Shield, Sparkles, Calendar, Rocket } from 'lucide-react';
 import TryItFree from './TryItFree.jsx';
 
 const EXTERNAL_URLS = {
@@ -109,8 +109,7 @@ function MainSite() {
   const testimonial = useMemo(() => ({
     quote: "We were drowning in lead follow-ups—losing deals just because we couldn't respond fast enough. Now our AI handles first contact instantly, and our sales team closes 35% more deals. They paid for themselves in the first month.",
     author: "Erik Sandoval",
-    title: "President, Luigi Trucking Insurance",
-    metric: "35% more closed deals"
+    title: "President, Luigi Trucking Insurance"
   }), []);
 
   const faqs = useMemo(() => [
@@ -202,7 +201,7 @@ function MainSite() {
               <p className="text-lg text-zinc-400 max-w-2xl mx-auto leading-relaxed">A three-phase system we build, run, and manage for you — so every lead gets handled the moment it arrives, and you get your evenings and weekends back.</p>
             </div>
           </FadeInSection>
-          <div className="grid md:grid-cols-3 gap-8 mb-16 relative">
+          <div className="grid md:grid-cols-3 gap-8 relative">
             <div className="hidden md:block absolute top-16 left-[16.666%] right-[16.666%] h-px bg-gradient-to-r from-emerald-500/20 via-emerald-400/40 to-emerald-500/20" aria-hidden="true" />
             {[
               { icon: Zap, phase: 'CAPTURE', title: 'Detect Every Lead, Instantly', desc: 'Your AI agent monitors every channel — forms, ads, messages, missed calls — and engages within seconds. No lead goes unnoticed, day or night.' },
@@ -221,23 +220,6 @@ function MainSite() {
               </FadeInSection>
             ))}
           </div>
-          <FadeInSection delay={500}>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-              {[
-                { icon: Clock, text: 'Responds in under 60 seconds' },
-                { icon: Shield, text: 'Every lead gets a response' },
-                { icon: Zap, text: 'Integrates with your CRM & tools' },
-                { icon: Users, text: 'Managed by our Chicago team' },
-              ].map((benefit, idx) => (
-                <div key={idx} className="flex items-center gap-3 card rounded-xl p-4 transition hover:bg-white/5">
-                  <div className="w-8 h-8 bg-emerald-500/15 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <benefit.icon className="w-4 h-4 text-emerald-400" aria-hidden="true" />
-                  </div>
-                  <span className="text-sm font-medium">{benefit.text}</span>
-                </div>
-              ))}
-            </div>
-          </FadeInSection>
         </div>
       </section>
 
@@ -281,10 +263,7 @@ function MainSite() {
 
           <FadeInSection delay={300}>
             <figure className="max-w-4xl mx-auto card rounded-2xl p-8 md:p-12">
-              <div className="flex items-center justify-between mb-8">
-                <div className="flex gap-1" role="img" aria-label="5 star rating">{[...Array(5)].map((_, i) => (<Star key={i} className="w-5 h-5 fill-emerald-400 text-emerald-400" aria-hidden="true" />))}</div>
-                <div className="bg-emerald-500/10 border border-emerald-500/20 px-4 py-2 rounded-full text-sm font-semibold text-emerald-400">{testimonial.metric}</div>
-              </div>
+              <div className="flex gap-1 mb-8" role="img" aria-label="5 star rating">{[...Array(5)].map((_, i) => (<Star key={i} className="w-5 h-5 fill-emerald-400 text-emerald-400" aria-hidden="true" />))}</div>
               <blockquote className="text-xl md:text-2xl mb-8 leading-relaxed text-zinc-200">"{testimonial.quote}"</blockquote>
               <figcaption className="flex items-center gap-4">
                 <div className="w-12 h-12 bg-emerald-500/10 border border-emerald-500/20 rounded-full flex items-center justify-center font-bold text-lg text-emerald-400" aria-hidden="true">{testimonial.author.charAt(0)}</div>
