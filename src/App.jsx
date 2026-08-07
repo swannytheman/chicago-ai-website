@@ -133,6 +133,8 @@ function MainSite() {
     { label: 'FAQ', id: 'faq' }
   ], []);
 
+  const selectedPlan = salesAgent.pricing[selectedTier];
+
   return (
     <div className="min-h-screen bg-zinc-950 text-white overflow-x-hidden">
       <style>{`
@@ -178,8 +180,9 @@ function MainSite() {
           <FadeInSection delay={300}>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <button onClick={() => scrollTo('cta')} className="group bg-white text-black px-8 py-4 rounded-full font-semibold text-lg hover:bg-zinc-100 transition flex items-center justify-center gap-2" type="button">Book a Strategy Call <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" aria-hidden="true" /></button>
-              <button onClick={() => scrollTo('how-it-works')} className="border border-white/15 bg-white/5 px-8 py-4 rounded-full font-semibold text-lg transition hover:bg-white/10" type="button">See How It Works</button>
+              <Link to="/try-it-free" className="group text-emerald-300 border border-emerald-500/30 bg-emerald-500/5 px-8 py-4 rounded-full font-semibold text-lg transition hover:border-emerald-400/50 hover:bg-emerald-500/10 flex items-center justify-center gap-2">Try It Free <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" aria-hidden="true" /></Link>
             </div>
+            <p className="mt-5 text-sm text-zinc-500">See a 3-email follow-up sequence written for your business. No credit card.</p>
           </FadeInSection>
           <FadeInSection delay={400}>
             <div className="mt-16 flex flex-wrap justify-center gap-6 md:gap-8 text-sm text-zinc-400">
@@ -321,23 +324,24 @@ function MainSite() {
                               </div>
                               <div className={`text-sm ${isSelected ? 'text-zinc-600' : 'text-zinc-400'}`}>{plan.details}</div>
                             </div>
-                            <div className="text-right">
+                            <div className="text-right flex-shrink-0 pl-4">
                               <div className="text-2xl font-bold">{plan.monthly}<span className={`text-sm font-normal ${isSelected ? 'text-zinc-600' : 'text-zinc-400'}`}>/mo</span></div>
-                              <div className={`text-sm ${isSelected ? 'text-zinc-500' : 'text-zinc-500'}`}>Setup: {plan.setup}</div>
+                              <div className={`text-sm font-medium ${isSelected ? 'text-zinc-700' : 'text-zinc-300'}`}>+ {plan.setup} setup</div>
                             </div>
                           </button>
                         );
                       })}
                     </div>
-                    <button onClick={() => scrollTo('guarantee')} className="mt-4 w-full flex items-center justify-center gap-2 text-sm text-emerald-300 hover:text-emerald-200 transition py-2" type="button">
-                      <Shield className="w-4 h-4 flex-shrink-0" aria-hidden="true" /> Includes our 60-day Results Guarantee
+                    <p className="mt-5 text-sm text-zinc-500 text-center leading-relaxed">Setup is a one-time fee that covers the build, your integrations, and training the AI on your voice. Monthly billing starts the day you go live.</p>
+                    <button onClick={() => scrollTo('guarantee')} className="mt-3 w-full flex items-center justify-center gap-2 text-sm text-emerald-300 hover:text-emerald-200 transition py-2" type="button">
+                      <Shield className="w-4 h-4 flex-shrink-0" aria-hidden="true" /> Both are refundable under our 60-day Results Guarantee
                     </button>
                   </div>
                 </div>
                 <div className="mt-10 pt-8 border-t border-white/10 flex flex-col sm:flex-row gap-4 items-center">
-                  <button onClick={() => scrollTo('cta')} className="bg-white text-black px-8 py-4 rounded-full font-semibold hover:bg-zinc-100 transition flex items-center justify-center gap-2" type="button">Get the {salesAgent.pricing[selectedTier].tier} Plan <ChevronRight className="w-4 h-4" aria-hidden="true" /></button>
+                  <button onClick={() => scrollTo('cta')} className="bg-white text-black px-8 py-4 rounded-full font-semibold hover:bg-zinc-100 transition flex items-center justify-center gap-2" type="button">Get the {selectedPlan.tier} Plan <ChevronRight className="w-4 h-4" aria-hidden="true" /></button>
                   <Link to="/try-it-free" className="text-emerald-300 px-8 py-4 rounded-full font-semibold transition flex items-center justify-center gap-2 border border-emerald-500/30 hover:border-emerald-400/50 hover:bg-emerald-500/5">Try It Free <ArrowRight className="w-4 h-4" aria-hidden="true" /></Link>
-                  <span className="text-zinc-500 text-sm">{salesAgent.pricing[selectedTier].monthly}/mo • Cancel anytime • 60-day Results Guarantee</span>
+                  <span className="text-zinc-500 text-sm">{selectedPlan.monthly}/mo + {selectedPlan.setup} one-time setup • Cancel anytime</span>
                 </div>
               </div>
             </div>
@@ -354,7 +358,7 @@ function MainSite() {
               </div>
               <h2 id="guarantee-heading" className="text-4xl md:text-5xl font-bold tracking-tight mb-8">Results Guarantee</h2>
               <p className="text-xl md:text-2xl text-white leading-relaxed mb-6 max-w-2xl mx-auto">We guarantee your AI sales agent will respond to new leads in under 60 seconds and book qualified meetings.</p>
-              <p className="text-lg text-zinc-300 leading-relaxed mb-8 max-w-2xl mx-auto">If the system is live and properly used for 60 days and does not deliver meaningful results, we will refund you in full.</p>
+              <p className="text-lg text-zinc-300 leading-relaxed mb-8 max-w-2xl mx-auto">If the system is live and properly used for 60 days and does not deliver meaningful results, we will refund you in full — monthly fees and your one-time setup fee included.</p>
               <p className="text-lg font-semibold text-emerald-300">No fine print. No runaround.</p>
             </div>
           </FadeInSection>
@@ -421,6 +425,11 @@ function MainSite() {
               <p className="text-xl text-zinc-300 mb-10 max-w-2xl mx-auto leading-relaxed">Book a free 30-minute strategy call. We'll audit your current lead flow and show you exactly where AI can make an impact — no pressure, no jargon.</p>
               <a href={EXTERNAL_URLS.appointments} {...SECURE_LINK_PROPS} className="bg-white text-black px-10 py-5 rounded-full font-semibold text-lg hover:bg-zinc-100 transition inline-flex items-center gap-3">Book Your Free Strategy Call <ArrowRight className="w-5 h-5" aria-hidden="true" /></a>
               <p className="text-zinc-500 text-sm mt-6">Free • 30 minutes • Zero obligation</p>
+              <div className="mt-10 pt-8 border-t border-white/10 max-w-xl mx-auto">
+                <p className="text-zinc-300 mb-5">Not ready to talk? See it work on your own business first.</p>
+                <Link to="/try-it-free" className="group text-emerald-300 border border-emerald-500/30 bg-emerald-500/5 px-8 py-4 rounded-full font-semibold transition hover:border-emerald-400/50 hover:bg-emerald-500/10 inline-flex items-center gap-2">Try It Free <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" aria-hidden="true" /></Link>
+                <p className="text-zinc-500 text-sm mt-4">We'll write a 3-email follow-up sequence for your business. No credit card.</p>
+              </div>
             </div>
           </FadeInSection>
         </div>
@@ -430,13 +439,13 @@ function MainSite() {
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-8">
             <Logo size="small" />
-            <nav className="flex gap-8 text-zinc-400" aria-label="Footer navigation">
+            <nav className="flex flex-wrap justify-center gap-x-8 gap-y-3 text-zinc-400" aria-label="Footer navigation">
               <button onClick={() => scrollTo('services')} className="hover:text-white transition" type="button">Pricing</button>
               <button onClick={() => scrollTo('how-it-works')} className="hover:text-white transition" type="button">How It Works</button>
               <Link to="/try-it-free" className="hover:text-white transition">Try It Free</Link>
               <a href={EXTERNAL_URLS.contact} {...SECURE_LINK_PROPS} className="hover:text-white transition">Contact</a>
             </nav>
-            <div className="text-zinc-500 text-sm">© 2025 The Chicago AI Group. All rights reserved.</div>
+            <div className="text-zinc-500 text-sm">© {new Date().getFullYear()} The Chicago AI Group. All rights reserved.</div>
           </div>
         </div>
       </footer>
