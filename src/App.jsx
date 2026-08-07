@@ -1,4 +1,3 @@
-cat > src/App.jsx << 'EOF'
 import { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import { Bot, Users, Calendar, PenTool, ChevronRight, Check, Star, Menu, X, ArrowRight, Zap, Clock, TrendingUp, ChevronDown, MessageSquare, BarChart3, Shield, Sparkles } from 'lucide-react';
 
@@ -48,33 +47,6 @@ const Logo = ({ size = 'default', showText = true }) => {
       )}
     </div>
   );
-};
-
-const AnimatedCounter = ({ end, duration = 2000, suffix = '' }) => {
-  const [count, setCount] = useState(0);
-  const [isVisible, setIsVisible] = useState(false);
-  const ref = useRef(null);
-
-  useEffect(() => {
-    const currentRef = ref.current;
-    const observer = new IntersectionObserver(([entry]) => { if (entry.isIntersecting) setIsVisible(true); }, { threshold: 0.1 });
-    if (currentRef) observer.observe(currentRef);
-    return () => { if (currentRef) observer.unobserve(currentRef); observer.disconnect(); };
-  }, []);
-
-  useEffect(() => {
-    if (!isVisible) return;
-    let start = 0;
-    const increment = end / (duration / 16);
-    const timer = setInterval(() => {
-      start += increment;
-      if (start >= end) { setCount(end); clearInterval(timer); }
-      else setCount(Math.floor(start));
-    }, 16);
-    return () => clearInterval(timer);
-  }, [isVisible, end, duration]);
-
-  return <span ref={ref}>{count}{suffix}</span>;
 };
 
 const FadeInSection = ({ children, delay = 0, className = '' }) => {
@@ -228,20 +200,6 @@ export default function App() {
           </FadeInSection>
         </div>
         <button onClick={() => scrollTo('about')} className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce cursor-pointer hover:text-blue-400 transition" type="button" aria-label="Scroll to learn more"><ChevronDown className="w-6 h-6 text-gray-500 hover:text-blue-400" aria-hidden="true" /></button>
-      </section>
-
-      <section className="py-20 relative" aria-label="Statistics">
-        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent" aria-hidden="true" />
-        <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8">
-          {[{ value: 40, suffix: '%', label: 'average revenue increase' }, { value: 15, suffix: '+', label: 'hours saved per week' }, { value: 24, suffix: '/7', label: 'always-on AI support' }].map((stat, idx) => (
-            <FadeInSection key={idx} delay={idx * 100}>
-              <div className="glass glow rounded-2xl p-8 text-center hover:bg-white/10 transition transform hover:scale-105 cursor-default">
-                <div className="text-5xl font-bold mb-2"><AnimatedCounter end={stat.value} suffix={stat.suffix} /></div>
-                <div className="text-gray-400">{stat.label}</div>
-              </div>
-            </FadeInSection>
-          ))}
-        </div>
       </section>
 
       <section id="about" className="py-24" aria-labelledby="about-heading">
@@ -454,4 +412,3 @@ export default function App() {
     </div>
   );
 }
-EOF
