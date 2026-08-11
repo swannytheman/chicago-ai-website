@@ -734,9 +734,11 @@ export default function TryItFree() {
                     <div className={`tif-char-counter${charLen > 240 ? ' near' : ''}`}>{charLen} / 300</div>
                   </div>
 
-                  {/* Honeypot -- invisible to real users, bots fill it automatically */}
+                  {/* Honeypot -- invisible to real users, bots fill it automatically.
+                      Deliberately NOT named "website": a real Website field now exists, and an
+                      autofill collision here would silently discard a genuine submission. */}
                   <div style={{position:'absolute',left:'-9999px',width:'1px',height:'1px',overflow:'hidden'}} aria-hidden="true">
-                    <input type="text" name="website" value={honeypot} onChange={e => setHoneypot(e.target.value)} tabIndex={-1} autoComplete="off" />
+                    <input type="text" name="url_confirm" value={honeypot} onChange={e => setHoneypot(e.target.value)} tabIndex={-1} autoComplete="off" />
                   </div>
 
                   <button type="button" className="tif-btn" onClick={goStep3} disabled={isSubmitting}>
