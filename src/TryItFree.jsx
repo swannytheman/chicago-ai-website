@@ -142,10 +142,12 @@ export default function TryItFree() {
     return () => { document.title = prev; };
   }, []);
 
-  // Restore session if already submitted this browser session
+  // Restore the confirmation if this tab already submitted, so a refresh does not
+  // silently re-send. "Send another demo" on the success panel clears this.
   useEffect(() => {
     if (sessionStorage.getItem('tif_submitted')) {
       setEmail(sessionStorage.getItem('tif_email') || '');
+      setFirstName(sessionStorage.getItem('tif_first_name') || '');
       setStep(3);
     }
   }, []);
@@ -218,6 +220,7 @@ export default function TryItFree() {
     if (!honeypot) {
       sessionStorage.setItem('tif_submitted', '1');
       sessionStorage.setItem('tif_email', email);
+      sessionStorage.setItem('tif_first_name', firstName.trim());
       fetch('https://hook.us2.make.com/mq25xf54hvh879toi85w5ek9al6yufko', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -234,6 +237,24 @@ export default function TryItFree() {
       }).catch(() => {});
     }
     setStep(3);
+    setTimeout(() => cardRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 50);
+  }
+
+  // Clear the submitted-this-tab guard and hand back an empty form.
+  function startOver() {
+    sessionStorage.removeItem('tif_submitted');
+    sessionStorage.removeItem('tif_email');
+    sessionStorage.removeItem('tif_first_name');
+    setFirstName(''); setFirstNameError(false);
+    setEmail('');     setEmailError(false);
+    setBizName(''); setBizType(''); setBizTypeOther('');
+    setBottleneck(''); setCurrentTools(''); setWebsite(''); setNotes('');
+    setPreviewVisible(false);
+    setPreviewBodyHtml(PLACEHOLDER_BODY);
+    setPreviewSubject('Quick question about your inquiry');
+    hasScrolledToPreview.current = false;
+    setIsSubmitting(false);
+    setStep(1);
     setTimeout(() => cardRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 50);
   }
 
@@ -463,6 +484,12 @@ export default function TryItFree() {
           transition:color .2s;font-family:'Inter',sans-serif;
         }
         .tif-btn-back:hover { color:var(--text-2); }
+        .tif-btn-restart {
+          background:none;border:none;color:var(--text-2);font-size:.82rem;cursor:pointer;
+          padding:10px 0;margin-top:14px;width:100%;text-align:center;
+          transition:color .2s;font-family:'Inter',sans-serif;
+        }
+        .tif-btn-restart:hover { color:var(--blue-hi); }
 
         /* Legal */
         .tif-legal { font-size:.72rem;color:var(--text-3);text-align:center;margin-top:16px;line-height:1.5; }
@@ -752,6 +779,9 @@ export default function TryItFree() {
                     <a className="tif-btn" href="https://calendly.com/matt-chicagoaigroup/30min" target="_blank" rel="noopener noreferrer" style={{display:'block',textDecoration:'none',textAlign:'center'}}>
                       Book a Call to Learn More
                     </a>
+                    <button type="button" className="tif-btn-restart" onClick={startOver}>
+                      Send another demo &rarr;
+                    </button>
                   </div>
                 </div>
               </div>
