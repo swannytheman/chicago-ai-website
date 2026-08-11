@@ -11,11 +11,34 @@ function escapeHtml(str) {
     .replace(/'/g, '&#39;');
 }
 
-const PREVIEW_TEMPLATE = (biz, industry) => {
-  const safeBiz      = biz      ? escapeHtml(biz)                      : 'your business';
-  const safeIndustry = industry ? escapeHtml(industry.toLowerCase())    : 'local';
-  return `Hi there,\n\nI noticed you recently reached out about ${safeBiz} — I wanted to follow up and see if you had any questions I could help answer.\n\nWe've helped a number of ${safeIndustry} businesses streamline their follow-up process, and I'd love to show you what that looks like in practice.\n\nWould you be open to a quick 15-minute call this week?\n\nBest,\n[Your Name]`;
+const PREVIEW_TEMPLATE = (biz, industry, bottleneck) => {
+  const safeBiz      = biz      ? escapeHtml(biz)                    : 'your business';
+  const safeIndustry = industry ? escapeHtml(industry.toLowerCase()) : 'local';
+  const painLine = bottleneck && bottleneck !== OTHER_BOTTLENECK
+    ? `Most ${safeIndustry} teams we talk to say the same thing — ${escapeHtml(bottleneck.toLowerCase())}. `
+    : `Most ${safeIndustry} teams we talk to are juggling more leads than they can follow up on. `;
+  return `Hi there,\n\nI noticed you recently reached out to ${safeBiz} — I wanted to follow up and see if you had any questions I could help answer.\n\n${painLine}We've helped a number of them tighten that up, and I'd love to show you what it looks like in practice.\n\nWould you be open to a quick 15-minute call this week?\n\nBest,\n[Your Name]`;
 };
+
+const INDUSTRIES = ['Home Services', 'Real Estate', 'Insurance', 'Mortgage / Finance', 'Marketing Agency', 'Retail / E-commerce', 'Restaurants / Food', 'Health & Wellness', 'Consulting', 'Technology', 'Legal / Accounting', 'Other'];
+
+const OTHER_INDUSTRY = 'Other';
+const OTHER_BOTTLENECK = 'Something else';
+
+const BOTTLENECKS = [
+  'Leads go cold before we follow up',
+  'No consistent follow-up process',
+  'Too much time spent on manual outreach',
+  'Leads arrive unqualified',
+  'Not enough leads coming in',
+  OTHER_BOTTLENECK,
+];
+
+function normalizeUrl(value) {
+  const trimmed = value.trim();
+  if (!trimmed) return '';
+  return /^https?:\/\//i.test(trimmed) ? trimmed : `https://${trimmed}`;
+}
 
 const PLACEHOLDER_BODY = '<span style="color:#4a6080;font-style:italic;">Start typing your business description to see a preview...</span>';
 
@@ -62,16 +85,20 @@ function StatNum({ num, suffix, prefix = '' }) {
 export default function TryItFree() {
   const [step, setStep] = useState(1);
 
-  // Step 1
-  const [email, setEmail]           = useState('');
-  const [emailError, setEmailError] = useState(false);
+  // Step 1 -- required
+  const [firstName, setFirstName]           = useState('');
+  const [firstNameError, setFirstNameError] = useState(false);
+  const [email, setEmail]                   = useState('');
+  const [emailError, setEmailError]         = useState(false);
 
-  // Step 2
-  const [bizName, setBizName]     = useState('');
-  const [bizType, setBizType]     = useState('');
-  const [bizDesc, setBizDesc]     = useState('');
-  const [descError, setDescError] = useState(false);
-  const [firstName, setFirstName] = useState('');
+  // Step 2 -- all optional, used to personalize the sequence
+  const [bizName, setBizName]               = useState('');
+  const [bizType, setBizType]               = useState('');
+  const [bizTypeOther, setBizTypeOther]     = useState('');
+  const [bottleneck, setBottleneck]         = useState('');
+  const [currentTools, setCurrentTools]     = useState('');
+  const [website, setWebsite]               = useState('');
+  const [notes, setNotes]                   = useState('');
 
   // Security
   const [honeypot, setHoneypot]       = useState('');
@@ -92,6 +119,9 @@ export default function TryItFree() {
   const previewRef           = useRef(null);
   const hasScrolledToPreview = useRef(false);
   const previewScrollTimer   = useRef(null);
+
+  // "Other" resolves to whatever the visitor typed, so downstream always gets a usable industry
+  const industry = (bizType === OTHER_INDUSTRY ? bizTypeOther : bizType).trim();
 
   const typeText = useCallback((text, onUpdate) => {
     clearTimeout(typeTimeoutRef.current);
@@ -120,9 +150,9 @@ export default function TryItFree() {
     }
   }, []);
 
-  // Update preview when description / biz name / industry change
+  // Update preview as business details come in
   useEffect(() => {
-    if (bizDesc.trim().length < 10) {
+    if (bizName.trim().length < 2 && industry.length < 2) {
       setPreviewVisible(false);
       setPreviewBodyHtml(PLACEHOLDER_BODY);
       hasScrolledToPreview.current = false;
@@ -141,20 +171,20 @@ export default function TryItFree() {
       }, 1400);
     }
 
-    if (bizType) {
-      setPreviewSubject(`Quick question about your ${bizType.toLowerCase()} business`);
+    if (industry) {
+      setPreviewSubject(`Quick question about your ${industry.toLowerCase()} business`);
     } else if (bizName) {
       setPreviewSubject(`Quick question — ${bizName}`);
     }
 
     clearTimeout(previewTimeoutRef.current);
     previewTimeoutRef.current = setTimeout(() => {
-      const text = PREVIEW_TEMPLATE(bizName, bizType);
+      const text = PREVIEW_TEMPLATE(bizName, industry, bottleneck);
       typeText(text, setPreviewBodyHtml);
     }, 600);
 
     return () => clearTimeout(previewTimeoutRef.current);
-  }, [bizDesc, bizName, bizType, typeText]);
+  }, [bizName, industry, bottleneck, typeText]);
 
   // From field updates with first name
   useEffect(() => {
@@ -169,17 +199,20 @@ export default function TryItFree() {
   }, []);
 
   function goStep1() {
-    const trimmed = email.trim();
-    if (!isValidEmail(trimmed)) { setEmailError(true); return; }
-    setEmail(trimmed);
-    setEmailError(false);
+    const trimmedEmail = email.trim();
+    const trimmedName  = firstName.trim();
+    const badName  = trimmedName.length < 1;
+    const badEmail = !isValidEmail(trimmedEmail);
+    setFirstNameError(badName);
+    setEmailError(badEmail);
+    if (badName || badEmail) return;
+    setFirstName(trimmedName);
+    setEmail(trimmedEmail);
     setStep(2);
     setTimeout(() => cardRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 50);
   }
 
   function goStep3() {
-    if (bizDesc.trim().length < 20) { setDescError(true); return; }
-    setDescError(false);
     setPreviewVisible(false);
     setIsSubmitting(true);
     if (!honeypot) {
@@ -189,11 +222,14 @@ export default function TryItFree() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          email:                email.trim(),
-          first_name:           firstName.trim(),
-          business_name:        bizName.trim(),
-          industry:             bizType,
-          business_description: bizDesc.trim(),
+          email:         email.trim(),
+          first_name:    firstName.trim(),
+          business_name: bizName.trim(),
+          industry,
+          bottleneck,
+          current_tools: currentTools.trim(),
+          website:       normalizeUrl(website),
+          notes:         notes.trim(),
         }),
       }).catch(() => {});
     }
@@ -201,7 +237,7 @@ export default function TryItFree() {
     setTimeout(() => cardRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 50);
   }
 
-  const charLen = bizDesc.length;
+  const charLen = notes.length;
   const name    = firstName.trim() || 'there';
 
   function stepClass(n) {
@@ -378,6 +414,9 @@ export default function TryItFree() {
         }
         .tif-select option { background:#0d1422; }
         .tif-field-row { display:grid;grid-template-columns:1fr 1fr;gap:14px; }
+        /* Keep paired inputs on a shared baseline even when one label wraps */
+        .tif-field-row .tif-field { display:flex;flex-direction:column; }
+        .tif-field-row .tif-input, .tif-field-row .tif-select { margin-top:auto; }
         .tif-char-counter { display:flex;justify-content:flex-end;font-size:.72rem;color:var(--text-3);margin-top:6px;font-family:'DM Mono',monospace;transition:color .2s; }
         .tif-char-counter.near { color:var(--blue-hi); }
         .tif-field-error { font-size:.75rem;color:#f87171;margin-top:6px;display:none; }
@@ -548,7 +587,7 @@ export default function TryItFree() {
                 <div className="tif-steps">
                   <div className={`tif-step ${stepClass(1)}`}>
                     <div className="tif-step-num">{step > 1 ? '\u2713' : '1'}</div>
-                    <span>Your Email</span>
+                    <span>Your Details</span>
                   </div>
                   <div className={`tif-step-line ${lineClass(1)}`} />
                   <div className={`tif-step ${stepClass(2)}`}>
@@ -565,7 +604,23 @@ export default function TryItFree() {
                 {/* Panel 1 -- Email */}
                 <div className={`tif-panel ${step === 1 ? 'active' : ''}`}>
                   <div className="tif-form-title">Where should we send it?</div>
-                  <div className="tif-form-sub">Enter the email address where you'd like to receive the demo sequence.</div>
+                  <div className="tif-form-sub">Just two things to get started — we'll personalize the sequence on the next step.</div>
+                  <div className="tif-field">
+                    <label className="tif-label-text" htmlFor="tif-first-name">First Name</label>
+                    <input
+                      id="tif-first-name"
+                      type="text"
+                      className={`tif-input${firstNameError ? ' invalid' : ''}`}
+                      placeholder="e.g. Sarah"
+                      autoComplete="given-name"
+                      maxLength={50}
+                      autoFocus
+                      value={firstName}
+                      onChange={e => { setFirstName(e.target.value); setFirstNameError(false); }}
+                      onKeyDown={e => e.key === 'Enter' && goStep1()}
+                    />
+                    <div className={`tif-field-error${firstNameError ? ' show' : ''}`}>Please enter your first name.</div>
+                  </div>
                   <div className="tif-field">
                     <label className="tif-label-text" htmlFor="tif-email">Business Email Address</label>
                     <input
@@ -574,7 +629,6 @@ export default function TryItFree() {
                       className={`tif-input${emailError ? ' invalid' : ''}`}
                       placeholder="you@yourbusiness.com"
                       autoComplete="email"
-                      autoFocus
                       value={email}
                       onChange={e => { setEmail(e.target.value); setEmailError(false); }}
                       onKeyDown={e => e.key === 'Enter' && goStep1()}
@@ -591,46 +645,66 @@ export default function TryItFree() {
                 <div className={`tif-panel ${step === 2 ? 'active' : ''}`}>
                   <button type="button" className="tif-btn-back" onClick={() => setStep(1)}>&larr; Back</button>
                   <div className="tif-form-title">Tell us about your business</div>
-                  <div className="tif-form-sub">The more detail you give, the more personalized your demo emails will be.</div>
+                  <div className="tif-form-sub">All optional — but the more you share, the more your demo emails will sound like you.</div>
 
                   <div className="tif-field-row">
                     <div className="tif-field">
-                      <label className="tif-label-text" htmlFor="tif-biz-name">Business Name</label>
-                      <input id="tif-biz-name" type="text" className="tif-input" placeholder="e.g. Apex Roofing" maxLength={80} value={bizName} onChange={e => setBizName(e.target.value)} />
+                      <label className="tif-label-text" htmlFor="tif-biz-name">Company Name</label>
+                      <input id="tif-biz-name" type="text" className="tif-input" placeholder="e.g. Apex Roofing" autoComplete="organization" maxLength={80} value={bizName} onChange={e => setBizName(e.target.value)} />
                     </div>
                     <div className="tif-field">
                       <label className="tif-label-text" htmlFor="tif-biz-type">Industry</label>
                       <select id="tif-biz-type" className="tif-select" value={bizType} onChange={e => setBizType(e.target.value)}>
                         <option value="" disabled>Select one</option>
-                        {['Home Services','Real Estate','Insurance','Mortgage / Finance','Marketing Agency','Retail / E-commerce','Restaurants / Food','Health & Wellness','Consulting','Technology','Legal / Accounting','Other'].map(opt => (
-                          <option key={opt}>{opt}</option>
-                        ))}
+                        {INDUSTRIES.map(opt => (<option key={opt}>{opt}</option>))}
                       </select>
                     </div>
                   </div>
 
+                  {bizType === OTHER_INDUSTRY && (
+                    <div className="tif-field">
+                      <label className="tif-label-text" htmlFor="tif-biz-type-other">What industry are you in?</label>
+                      <input id="tif-biz-type-other" type="text" className="tif-input" placeholder="e.g. Commercial landscaping" maxLength={60} autoFocus value={bizTypeOther} onChange={e => setBizTypeOther(e.target.value)} />
+                    </div>
+                  )}
+
                   <div className="tif-field">
-                    <label className="tif-label-text" htmlFor="tif-biz-desc">
-                      What do you sell or offer? <span className="tif-label-opt">(be specific)</span>
-                    </label>
-                    <textarea
-                      id="tif-biz-desc"
-                      className={`tif-textarea${descError ? ' invalid' : ''}`}
-                      rows={4}
-                      maxLength={300}
-                      placeholder="e.g. We install and replace residential roofs in the Chicago suburbs. Most of our leads come from homeowners who requested a quote after a storm. Our average job is $12,000."
-                      value={bizDesc}
-                      onChange={e => { setBizDesc(e.target.value); setDescError(false); }}
-                    />
-                    <div className={`tif-char-counter${charLen > 240 ? ' near' : ''}`}>{charLen} / 300</div>
-                    <div className={`tif-field-error${descError ? ' show' : ''}`}>Please describe your business (at least 20 characters).</div>
+                    <label className="tif-label-text" htmlFor="tif-bottleneck">Biggest bottleneck right now</label>
+                    <select id="tif-bottleneck" className="tif-select" value={bottleneck} onChange={e => setBottleneck(e.target.value)}>
+                      <option value="" disabled>Select one</option>
+                      {BOTTLENECKS.map(opt => (<option key={opt}>{opt}</option>))}
+                    </select>
+                  </div>
+
+                  <div className="tif-field-row">
+                    <div className="tif-field">
+                      <label className="tif-label-text" htmlFor="tif-tools">
+                        CRM or Tools <span className="tif-label-opt">(if any)</span>
+                      </label>
+                      <input id="tif-tools" type="text" className="tif-input" placeholder="e.g. HubSpot, or none yet" maxLength={80} value={currentTools} onChange={e => setCurrentTools(e.target.value)} />
+                    </div>
+                    <div className="tif-field">
+                      <label className="tif-label-text" htmlFor="tif-website">
+                        Website <span className="tif-label-opt">(optional)</span>
+                      </label>
+                      <input id="tif-website" type="text" inputMode="url" className="tif-input" placeholder="yourbusiness.com" autoComplete="url" maxLength={120} value={website} onChange={e => setWebsite(e.target.value)} />
+                    </div>
                   </div>
 
                   <div className="tif-field">
-                    <label className="tif-label-text" htmlFor="tif-first-name">
-                      Your First Name <span className="tif-label-opt">(optional)</span>
+                    <label className="tif-label-text" htmlFor="tif-notes">
+                      Anything else you'd like us to know? <span className="tif-label-opt">(optional)</span>
                     </label>
-                    <input id="tif-first-name" type="text" className="tif-input" placeholder="e.g. Sarah" maxLength={50} value={firstName} onChange={e => setFirstName(e.target.value)} />
+                    <textarea
+                      id="tif-notes"
+                      className="tif-textarea"
+                      rows={3}
+                      maxLength={300}
+                      placeholder="e.g. Most of our leads come from homeowners who requested a quote after a storm. Our average job is $12,000."
+                      value={notes}
+                      onChange={e => setNotes(e.target.value)}
+                    />
+                    <div className={`tif-char-counter${charLen > 240 ? ' near' : ''}`}>{charLen} / 300</div>
                   </div>
 
                   {/* Honeypot -- invisible to real users, bots fill it automatically */}
