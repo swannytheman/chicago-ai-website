@@ -3,6 +3,10 @@ import { Link } from 'react-router-dom';
 import Logo from './Logo.jsx';
 import { getAttribution } from './attribution.js';
 
+// Make.com custom webhook that receives the demo signup. The host here must stay in
+// sync with connect-src in vercel.json, or the browser will refuse the request.
+const WEBHOOK_URL = 'https://hook.us2.make.com/l7i2trs8c1k9ooly4h072po7foh5cxt3';
+
 function escapeHtml(str) {
   return str
     .replace(/&/g, '&amp;')
@@ -233,7 +237,7 @@ export default function TryItFree() {
     setIsSubmitting(true);
 
     try {
-      const res = await fetch('https://hook.us2.make.com/mq25xf54hvh879toi85w5ek9al6yufko', {
+      const res = await fetch(WEBHOOK_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         // Survives the visitor closing the tab the instant they hit submit.
