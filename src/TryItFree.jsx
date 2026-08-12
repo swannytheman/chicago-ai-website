@@ -7,6 +7,14 @@ import { getAttribution } from './attribution.js';
 // sync with connect-src in vercel.json, or the browser will refuse the request.
 const WEBHOOK_URL = 'https://hook.us2.make.com/l7i2trs8c1k9ooly4h072po7foh5cxt3';
 
+// Normally one submission per browser tab: a refresh re-shows the confirmation
+// rather than firing the sequence at the same person twice.
+//
+// TEMPORARILY OFF so the Make.com scenario can be exercised repeatedly. While this
+// is false, every refresh returns an empty form and a visitor can submit as many
+// times as they like. Set it back to true before real traffic.
+const BLOCK_REPEAT_SUBMISSIONS = false;
+
 function escapeHtml(str) {
   return str
     .replace(/&/g, '&amp;')
@@ -151,6 +159,14 @@ export default function TryItFree() {
   // Restore the confirmation if this tab already submitted, so a refresh does not
   // silently re-send. "Send another demo" on the success panel clears this.
   useEffect(() => {
+    if (!BLOCK_REPEAT_SUBMISSIONS) {
+      // Clear anything a previous build left behind, so a tab that is already
+      // flagged as submitted still gets a usable form.
+      sessionStorage.removeItem('tif_submitted');
+      sessionStorage.removeItem('tif_email');
+      sessionStorage.removeItem('tif_first_name');
+      return;
+    }
     if (sessionStorage.getItem('tif_submitted')) {
       setEmail(sessionStorage.getItem('tif_email') || '');
       setFirstName(sessionStorage.getItem('tif_first_name') || '');
@@ -221,9 +237,11 @@ export default function TryItFree() {
   }
 
   function markSubmitted() {
-    sessionStorage.setItem('tif_submitted', '1');
-    sessionStorage.setItem('tif_email', email);
-    sessionStorage.setItem('tif_first_name', firstName.trim());
+    if (BLOCK_REPEAT_SUBMISSIONS) {
+      sessionStorage.setItem('tif_submitted', '1');
+      sessionStorage.setItem('tif_email', email);
+      sessionStorage.setItem('tif_first_name', firstName.trim());
+    }
     setStep(3);
     setTimeout(() => cardRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 50);
   }
