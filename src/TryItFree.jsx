@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import Logo from './Logo.jsx';
+import { getAttribution } from './attribution.js';
 
 function escapeHtml(str) {
   return str
@@ -101,8 +102,9 @@ export default function TryItFree() {
   const [notes, setNotes]                   = useState('');
 
   // Security
-  const [honeypot, setHoneypot]       = useState('');
+  const [honeypot, setHoneypot]         = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError]   = useState(false);
 
   // Preview
   const [previewVisible, setPreviewVisible] = useState(false);
@@ -214,16 +216,28 @@ export default function TryItFree() {
     setTimeout(() => cardRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 50);
   }
 
-  function goStep3() {
+  function markSubmitted() {
+    sessionStorage.setItem('tif_submitted', '1');
+    sessionStorage.setItem('tif_email', email);
+    sessionStorage.setItem('tif_first_name', firstName.trim());
+    setStep(3);
+    setTimeout(() => cardRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 50);
+  }
+
+  async function goStep3() {
+    // Bot filled the hidden field: show the normal confirmation, send nothing.
+    if (honeypot) { markSubmitted(); return; }
+
+    setSubmitError(false);
     setPreviewVisible(false);
     setIsSubmitting(true);
-    if (!honeypot) {
-      sessionStorage.setItem('tif_submitted', '1');
-      sessionStorage.setItem('tif_email', email);
-      sessionStorage.setItem('tif_first_name', firstName.trim());
-      fetch('https://hook.us2.make.com/mq25xf54hvh879toi85w5ek9al6yufko', {
+
+    try {
+      const res = await fetch('https://hook.us2.make.com/mq25xf54hvh879toi85w5ek9al6yufko', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
+        // Survives the visitor closing the tab the instant they hit submit.
+        keepalive: true,
         body: JSON.stringify({
           email:         email.trim(),
           first_name:    firstName.trim(),
@@ -233,11 +247,20 @@ export default function TryItFree() {
           current_tools: currentTools.trim(),
           website:       normalizeUrl(website),
           notes:         notes.trim(),
+          submitted_at:  new Date().toISOString(),
+          page_url:      window.location.href,
+          ...getAttribution(),
         }),
-      }).catch(() => {});
+      });
+      if (!res.ok) throw new Error(`Webhook responded ${res.status}`);
+      markSubmitted();
+    } catch {
+      // Never claim success we cannot verify -- the visitor keeps their answers and
+      // can retry, instead of walking away believing the demo is on its way.
+      setSubmitError(true);
+    } finally {
+      setIsSubmitting(false);
     }
-    setStep(3);
-    setTimeout(() => cardRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 50);
   }
 
   // Clear the submitted-this-tab guard and hand back an empty form.
@@ -254,6 +277,7 @@ export default function TryItFree() {
     setPreviewSubject('Quick question about your inquiry');
     hasScrolledToPreview.current = false;
     setIsSubmitting(false);
+    setSubmitError(false);
     setStep(1);
     setTimeout(() => cardRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 50);
   }
@@ -490,6 +514,13 @@ export default function TryItFree() {
           transition:color .2s;font-family:'Inter',sans-serif;
         }
         .tif-btn-restart:hover { color:var(--blue-hi); }
+        .tif-submit-error {
+          background:rgba(248,113,113,0.08);border:1px solid rgba(248,113,113,0.35);
+          border-radius:var(--r);padding:14px 16px;margin-bottom:16px;
+          font-size:.82rem;line-height:1.6;color:#fca5a5;
+        }
+        .tif-submit-error strong { color:#fecaca;display:block;margin-bottom:2px; }
+        .tif-submit-error a { color:#fca5a5;text-decoration:underline; }
 
         /* Legal */
         .tif-legal { font-size:.72rem;color:var(--text-3);text-align:center;margin-top:16px;line-height:1.5; }
@@ -741,8 +772,14 @@ export default function TryItFree() {
                     <input type="text" name="url_confirm" value={honeypot} onChange={e => setHoneypot(e.target.value)} tabIndex={-1} autoComplete="off" />
                   </div>
 
+                  {submitError && (
+                    <div className="tif-submit-error" role="alert">
+                      <strong>That didn't go through.</strong> Your answers are still here &mdash; try again in a moment.
+                      If it keeps failing, email us at <a href="mailto:matt@chicagoaigroup.com">matt@chicagoaigroup.com</a> and we'll set your demo up by hand.
+                    </div>
+                  )}
                   <button type="button" className="tif-btn" onClick={goStep3} disabled={isSubmitting}>
-                    {isSubmitting ? 'Sending\u2026' : 'Send My Demo Emails \u00a0\u2192'}
+                    {isSubmitting ? 'Sending\u2026' : submitError ? 'Try Again \u00a0\u2192' : 'Send My Demo Emails \u00a0\u2192'}
                   </button>
                   <div className="tif-legal">Your information is never sold or shared. Used only to personalize your demo.</div>
 
