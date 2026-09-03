@@ -59,37 +59,73 @@ function isValidEmail(email) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
 
-function useCounter(end, duration = 1500) {
-  const [count, setCount] = useState(0);
-  const [active, setActive] = useState(false);
+const COUNT_DURATION = 700;
+
+// The count-up is decoration layered on top of a correct number, never the thing that
+// produces it. State starts at the final value, so the real figure is in the DOM from
+// first paint and survives every way the animation can fail to finish: the observer
+// never reporting, the stats sitting below the fold, reduced motion, a crawler or a
+// screenshot sampling the page early, or an unmount mid-tween.
+function useCountUp(end, duration = COUNT_DURATION) {
+  const [value, setValue] = useState(end);
   const ref = useRef(null);
+  const frameRef = useRef(null);
+
   useEffect(() => {
     const el = ref.current;
-    const obs = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) setActive(true); },
-      { threshold: 0.3 }
-    );
-    if (el) obs.observe(el);
-    return () => obs.disconnect();
-  }, []);
-  useEffect(() => {
-    if (!active) return;
-    let v = 0;
-    const step = end / (duration / 16);
-    const t = setInterval(() => {
-      v += step;
-      if (v >= end) { setCount(end); clearInterval(t); }
-      else setCount(Math.floor(v));
-    }, 16);
-    return () => clearInterval(t);
-  }, [active, end, duration]);
-  return [count, ref];
+    if (!el || typeof IntersectionObserver === 'undefined') return;
+    if (window.matchMedia?.('(prefers-reduced-motion: reduce)').matches) return;
+
+    let started = false;
+    let observerReported = false;
+
+    const runTween = () => {
+      if (started) return;
+      started = true;
+      const startedAt = performance.now();
+      const step = (now) => {
+        const progress = Math.min((now - startedAt) / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        // Never render a zero. "0x more replies" was the worst thing this component
+        // could put on screen, and a tween that counts from 0 puts it there on every
+        // run for the 3x stat. Counting from 1 costs nothing visually.
+        setValue(progress === 1 ? end : Math.max(1, Math.floor(eased * end)));
+        if (progress < 1) frameRef.current = requestAnimationFrame(step);
+      };
+      setValue(1);
+      frameRef.current = requestAnimationFrame(step);
+    };
+
+    const observer = new IntersectionObserver(([entry]) => {
+      observerReported = true;
+      if (entry.isIntersecting) { observer.disconnect(); runTween(); }
+    }, { threshold: 0.3 });
+    observer.observe(el);
+
+    // An IntersectionObserver reports its initial state shortly after observe(). If
+    // nothing has come back within 200ms it is not working here, so stop waiting on it
+    // and leave the final number showing rather than gambling on a callback.
+    const watchdog = setTimeout(() => {
+      if (!observerReported) observer.disconnect();
+    }, 200);
+
+    return () => {
+      clearTimeout(watchdog);
+      observer.disconnect();
+      if (frameRef.current) cancelAnimationFrame(frameRef.current);
+      frameRef.current = null;
+    };
+  }, [end, duration]);
+
+  return [value, ref];
 }
 
 function StatNum({ num, suffix, prefix = '' }) {
-  const [count, ref] = useCounter(num);
+  const [count, ref] = useCountUp(num);
   return (
-    <span className="tif-stat-num" ref={ref}>
+    // The surrounding .tif-stat carries an aria-label with the whole phrase, so the
+    // digits are hidden from assistive tech instead of being read as they tick.
+    <span className="tif-stat-num" ref={ref} aria-hidden="true">
       {prefix}{count}<span>{suffix}</span>
     </span>
   );
@@ -885,15 +921,17 @@ export default function TryItFree() {
 
           {/* STATS BAR */}
           <div className="tif-stats">
+            {/* `sr` spells the same figure out for screen readers, where "5+" and
+                "<60s" read poorly. The visible label is unchanged. */}
             {[
-              { num: 80, suffix: '%', prefix: '',  label: 'of sales need 5+ follow-ups' },
-              { num: 44, suffix: '%', prefix: '',  label: 'of reps give up after 1 attempt' },
-              { num: 60, suffix: 's', prefix: '<', label: 'average response time' },
-              { num: 3,  suffix: 'x', prefix: '',  label: 'more replies vs manual follow-up' },
+              { num: 80, suffix: '%', prefix: '',  label: 'of sales need 5+ follow-ups',      sr: '80% of sales need 5 or more follow-ups' },
+              { num: 44, suffix: '%', prefix: '',  label: 'of reps give up after 1 attempt',  sr: '44% of reps give up after 1 attempt' },
+              { num: 60, suffix: 's', prefix: '<', label: 'average response time',            sr: 'Under 60 seconds average response time' },
+              { num: 3,  suffix: 'x', prefix: '',  label: 'more replies vs manual follow-up', sr: '3x more replies versus manual follow-up' },
             ].map((s, i) => (
-              <div className="tif-stat" key={i}>
+              <div className="tif-stat" key={i} role="group" aria-label={s.sr}>
                 <StatNum num={s.num} suffix={s.suffix} prefix={s.prefix} />
-                <span className="tif-stat-label">{s.label}</span>
+                <span className="tif-stat-label" aria-hidden="true">{s.label}</span>
               </div>
             ))}
           </div>
