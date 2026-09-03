@@ -75,6 +75,7 @@ function MainSite() {
     { q: "Is this software we log into, or do you run it for us?", a: "We run it. We build the agent, train it on how you talk to customers, connect it to your calendar and inbox, and keep managing it after go-live. You approve how it sounds and you take the meetings. There is no tool for your team to learn and nothing technical for you to do — most of our clients are owners, not engineers." },
     { q: "Who is this for, and who is it not for?", a: "It is for service businesses that already get inbound leads and lose some of them to slow follow-up — commercial insurance, home services and trades, counseling and group practices, property management, and similar appointment businesses. It is not a fit if you have no inbound demand yet, or if what you actually need is a custom CRM rebuild." },
     { q: "What can the agent actually do on day one?", a: "Reply to your inbound leads, qualify them on things like job type, timing and fit, follow up by email and SMS, and book the ones worth your time into your calendar. Which channels it covers is set on the strategy call. It only ever contacts people who already reached out to you." },
+    { q: "What does the 60-day guarantee actually cover?", a: "Two things we operate: a first response under 60 seconds on inbound leads wired into the agent, and follow-up plus a meeting offer for leads that meet the qualify rules we set with you. The 60 days starts when the agent goes live on your real lead flow, not at the kickoff call. Miss either and you get the setup fee and every monthly fee back. It does not guarantee a number of closed deals or a volume of new leads — if the leads are not coming in, that is not something the agent can fix." },
     { q: "How fast can I get started?", a: "Most clients are live within 2-4 weeks. We move fast because we know your time is money. After a quick discovery call, we get to work immediately." },
     { q: "Will the AI sound like a robot?", a: "No. We train each AI on your business, your tone, and your way of talking to customers. People often can't tell they're chatting with AI—that's the whole point." },
     { q: "What if something goes wrong?", a: "We've got your back. All plans include support, and Pro/Enterprise clients get priority access plus regular check-ins to make sure everything runs smoothly." }
@@ -268,7 +269,7 @@ function MainSite() {
                     </div>
                     <p className="mt-5 text-sm text-zinc-500 text-center leading-relaxed">Setup is a one-time fee that covers the build, your integrations, and training the AI on your voice. Monthly billing starts the day you go live.</p>
                     <button onClick={() => scrollTo('guarantee')} className="mt-3 w-full flex items-center justify-center gap-2 text-sm text-emerald-300 hover:text-emerald-200 transition py-2" type="button">
-                      <Shield className="w-4 h-4 flex-shrink-0" aria-hidden="true" /> Both are refundable under our 60-day Results Guarantee
+                      <Shield className="w-4 h-4 flex-shrink-0" aria-hidden="true" /> Both refundable under our 60-day Results Guarantee — response time and follow-up on scoped inbound leads
                     </button>
                   </div>
                 </div>
@@ -290,10 +291,43 @@ function MainSite() {
               <div className="w-14 h-14 mx-auto rounded-2xl flex items-center justify-center mb-6 bg-emerald-500/10 border border-emerald-500/25">
                 <Shield className="w-7 h-7 text-emerald-400" aria-hidden="true" />
               </div>
-              <h2 id="guarantee-heading" className="text-4xl md:text-5xl font-bold tracking-tight mb-8">Results Guarantee</h2>
-              <p className="text-xl md:text-2xl text-white leading-relaxed mb-6 max-w-2xl mx-auto">We guarantee your AI sales agent will respond to new leads in under 60 seconds and book qualified meetings.</p>
-              <p className="text-lg text-zinc-300 leading-relaxed mb-8 max-w-2xl mx-auto">If the system is live and properly used for 60 days and does not deliver meaningful results, we will refund you in full — monthly fees and your one-time setup fee included.</p>
-              <p className="text-lg font-semibold text-emerald-300">No fine print. No runaround.</p>
+              <h2 id="guarantee-heading" className="text-4xl md:text-5xl font-bold tracking-tight mb-6">Results Guarantee</h2>
+              <p className="text-xl md:text-2xl text-white leading-relaxed mb-12 max-w-2xl mx-auto">We guarantee the part we operate: inbound leads wired into your agent get a first response in under 60 seconds, and leads that meet your qualify rules get followed up and offered a meeting.</p>
+
+              <div className="grid md:grid-cols-3 gap-8 md:gap-6 text-left">
+                {[
+                  { title: 'What you get', items: [
+                    'New inbound leads wired into the agent get a first response in under 60 seconds.',
+                    'Leads that meet the qualify rules we set together get followed up and offered a time on your calendar.',
+                    'We build it, train it on your voice, and monitor it. You take the meetings.',
+                  ] },
+                  { title: 'The 60 days', items: [
+                    'The clock starts when the agent goes live on your real lead flow — not at the kickoff call.',
+                    'If after 60 days live we are not hitting that response time, or scoped inbound leads are not being followed up and offered a meeting, you get back the one-time setup fee and every monthly fee you have paid.',
+                    'Ask through the Contact page. We do not make you chase it.',
+                  ] },
+                  { title: 'What we need from you', items: [
+                    'The agent stays on and connected to the lead sources we agreed — forms, ads, inbox.',
+                    'You still have inbound leads coming in. This is not a lead-generation guarantee.',
+                    'You keep the qualify rules and calendar we set up together, and you show up to booked meetings.',
+                    'Outreach goes only to people who already contacted you, or where you have permission.',
+                  ] },
+                ].map((block, i) => (
+                  <div key={i}>
+                    <h3 className="text-xs uppercase tracking-widest text-emerald-400 mb-4">{block.title}</h3>
+                    <ul className="space-y-3">
+                      {block.items.map((item, j) => (
+                        <li key={j} className="flex gap-3 text-sm text-zinc-300 leading-relaxed">
+                          <span className="mt-2 w-1.5 h-1.5 rounded-full bg-emerald-400/70 flex-shrink-0" aria-hidden="true" />
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
+
+              <p className="text-base md:text-lg text-emerald-300 leading-relaxed mt-12 max-w-2xl mx-auto">If we miss our side of that, we refund you. If there were no leads to work, that is not a system failure.</p>
             </div>
           </FadeInSection>
         </div>

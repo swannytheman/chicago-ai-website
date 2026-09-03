@@ -65,7 +65,8 @@ export default function Terms() {
         </p>
         <p>
           Any commitment about outcomes applies only to paid work and only as written into the agreement we sign with
-          you. Nothing on this website is a promise of results on its own.
+          you. The 60-day Results Guarantee described on our homepage works that way too: the terms are as published
+          there, and they are confirmed in your client agreement.
         </p>
       </Section>
 
