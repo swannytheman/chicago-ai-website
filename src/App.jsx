@@ -49,14 +49,14 @@ function MainSite() {
   const salesAgent = useMemo(() => ({
     icon: Users,
     name: "Sales AI Agent",
-    tagline: "Turn website visitors into booked meetings—on autopilot",
+    tagline: "A managed AI sales agent for businesses that live on inbound leads",
     capabilities: [
-      "Qualifies leads in real-time so you only talk to serious buyers",
-      "Sends personalized follow-ups that don't feel automated",
-      "Recovers abandoned carts and re-engages dead leads",
-      "Plugs into your CRM, email, and calendar tools seamlessly",
-      "Works 24/7 so you never miss a hot lead again",
-      "Provides real-time lead scoring and pipeline insights"
+      "Replies to new website, form, and ad leads in under 60 seconds",
+      "Qualifies on job type, timing, and fit, so junk never reaches your calendar",
+      "Follows up by email and SMS in your voice until they answer or opt out",
+      "Books the ones worth your time into the calendar you already use",
+      "Connects to the CRM and inbox you already use (Pro and Enterprise)",
+      "We monitor and tune it after go-live — there is no new dashboard to babysit"
     ],
     pricing: [
       { tier: "Starter", monthly: "$179", setup: "$2,200", details: "Core lead qualification & follow-ups" },
@@ -72,7 +72,9 @@ function MainSite() {
   }), []);
 
   const faqs = useMemo(() => [
-    { q: "I'm not technical. Will this work for me?", a: "Absolutely. We built this for busy business owners, not engineers. We handle all the technical stuff—you just tell us what you need and show up for a few calls. Most clients are surprised how painless it is." },
+    { q: "Is this software we log into, or do you run it for us?", a: "We run it. We build the agent, train it on how you talk to customers, connect it to your calendar and inbox, and keep managing it after go-live. You approve how it sounds and you take the meetings. There is no tool for your team to learn and nothing technical for you to do — most of our clients are owners, not engineers." },
+    { q: "Who is this for, and who is it not for?", a: "It is for service businesses that already get inbound leads and lose some of them to slow follow-up — commercial insurance, home services and trades, counseling and group practices, property management, and similar appointment businesses. It is not a fit if you have no inbound demand yet, or if what you actually need is a custom CRM rebuild." },
+    { q: "What can the agent actually do on day one?", a: "Reply to your inbound leads, qualify them on things like job type, timing and fit, follow up by email and SMS, and book the ones worth your time into your calendar. Which channels it covers is set on the strategy call. It only ever contacts people who already reached out to you." },
     { q: "How fast can I get started?", a: "Most clients are live within 2-4 weeks. We move fast because we know your time is money. After a quick discovery call, we get to work immediately." },
     { q: "Will the AI sound like a robot?", a: "No. We train each AI on your business, your tone, and your way of talking to customers. People often can't tell they're chatting with AI—that's the whole point." },
     { q: "What if something goes wrong?", a: "We've got your back. All plans include support, and Pro/Enterprise clients get priority access plus regular check-ins to make sure everything runs smoothly." }
@@ -108,7 +110,7 @@ function MainSite() {
             </div>
           </FadeInSection>
           <FadeInSection delay={100}><h1 id="hero-heading" className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 leading-tight tracking-tight">AI That Books Meetings<br /><span className="text-gradient">While You Sleep</span></h1></FadeInSection>
-          <FadeInSection delay={200}><p className="text-lg md:text-xl text-zinc-300 max-w-2xl mx-auto mb-10 leading-relaxed">An AI sales agent that qualifies leads, follows up instantly, and books meetings — so your team only talks to serious buyers.</p></FadeInSection>
+          <FadeInSection delay={200}><p className="text-lg md:text-xl text-zinc-300 max-w-2xl mx-auto mb-10 leading-relaxed">For service businesses that already get inbound leads — insurance, home services, counseling, property management — we build, train, and run an AI sales agent that qualifies every inquiry and books the real ones into your calendar. Our Chicago team runs it, you take the meetings, and you&apos;re live in about 2–4 weeks.</p></FadeInSection>
           <FadeInSection delay={300}>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <button onClick={() => scrollTo('cta')} className="group bg-white text-black px-8 py-4 rounded-full font-semibold text-lg hover:bg-zinc-100 transition flex items-center justify-center gap-2" type="button">Book a strategy call <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" aria-hidden="true" /></button>
@@ -139,9 +141,9 @@ function MainSite() {
           <div className="grid md:grid-cols-3 gap-8 relative">
             <div className="hidden md:block absolute top-16 left-[16.666%] right-[16.666%] h-px bg-gradient-to-r from-emerald-500/20 via-emerald-400/40 to-emerald-500/20" aria-hidden="true" />
             {[
-              { icon: Zap, phase: 'CAPTURE', title: 'Detect Every Lead, Instantly', desc: 'Your AI agent monitors every channel — forms, ads, messages, missed calls — and engages within seconds. No lead goes unnoticed, day or night.' },
-              { icon: MessageSquare, phase: 'NURTURE', title: 'Build Trust on Autopilot', desc: 'Personalized, human-sounding follow-ups deploy across email and SMS. Intelligent multi-touch sequences adapt to each prospect until they are ready to talk.' },
-              { icon: Calendar, phase: 'CLOSE', title: 'Book Ready-to-Buy Meetings', desc: 'Only qualified, high-intent leads reach your calendar. You walk into every meeting with context, confidence, and a prospect who is ready to move forward.' },
+              { icon: Zap, phase: 'CAPTURE', title: 'Detect Every Lead, Instantly', desc: 'Your agent watches the places your leads actually come from — website forms, ad leads, inbound email, missed calls — and replies within seconds, day or night.' },
+              { icon: MessageSquare, phase: 'NURTURE', title: 'Build Trust on Autopilot', desc: 'Follow-ups go out by email and SMS, written in your voice, and keep going until they reply or opt out. Only people who already contacted you ever get one.' },
+              { icon: Calendar, phase: 'CLOSE', title: 'Book Ready-to-Buy Meetings', desc: 'Only leads that pass qualifying reach your calendar, and the whole conversation comes with them. Your team walks in already knowing the context.' },
             ].map((item, idx) => (
               <FadeInSection key={idx} delay={idx * 150}>
                 <div className="card card-hover rounded-2xl p-8 text-center relative transition h-full">
@@ -163,8 +165,8 @@ function MainSite() {
           <FadeInSection>
             <div className="text-center mb-14">
               <span className="text-sm uppercase tracking-widest text-emerald-400 mb-4 block">Proven Results</span>
-              <h2 id="testimonials-heading" className="text-4xl md:text-5xl font-bold tracking-tight mb-4">Trusted by Chicago Businesses</h2>
-              <p className="text-lg text-zinc-400 max-w-2xl mx-auto leading-relaxed">From commercial insurance to counseling to property management — we build AI sales agents that produce measurable results.</p>
+              <h2 id="testimonials-heading" className="text-4xl md:text-5xl font-bold tracking-tight mb-4">Built for Chicago service businesses</h2>
+              <p className="text-lg text-zinc-400 max-w-2xl mx-auto leading-relaxed">We start with firms that live on inbound quotes and appointments — commercial insurance, counseling and group practices, property management, and trades.</p>
             </div>
           </FadeInSection>
 
@@ -184,7 +186,7 @@ function MainSite() {
             <div className="grid md:grid-cols-3 gap-5 mb-16">
               {[
                 { stat: '35%', label: 'increase in closed deals', detail: 'Luigi Trucking Insurance' },
-                { stat: '<60 sec', label: 'first response to every lead', detail: 'Automated, around the clock' },
+                { stat: '<60 sec', label: 'first response to every lead', detail: 'How every agent we build is configured' },
                 { stat: '2–4 wks', label: 'from kickoff to fully live', detail: 'Typical implementation' },
               ].map((item, idx) => (
                 <div key={idx} className="card rounded-2xl p-8 text-center cursor-default">
@@ -303,7 +305,7 @@ function MainSite() {
             <div className="text-center mb-16">
               <span className="text-sm uppercase tracking-widest text-emerald-400 mb-4 block">Getting Started</span>
               <h2 id="process-heading" className="text-4xl md:text-5xl font-bold tracking-tight mb-4">Live in Weeks, Not Months</h2>
-              <p className="text-lg text-zinc-400 max-w-2xl mx-auto leading-relaxed">We handle the build, the integrations, and the testing — you just show up for a few calls. Here's what a typical rollout looks like.</p>
+              <p className="text-lg text-zinc-400 max-w-2xl mx-auto leading-relaxed">We handle the build, the integrations, and the testing. From you we need a kickoff call, an example of a good and a bad lead, calendar access, and any follow-up copy you already use. Here's what a typical rollout looks like.</p>
             </div>
           </FadeInSection>
           <div className="grid md:grid-cols-4 gap-6 relative">
@@ -341,7 +343,7 @@ function MainSite() {
                     <span className="font-semibold text-lg pr-4">{faq.q}</span>
                     <ChevronDown className={`w-5 h-5 flex-shrink-0 transition-transform duration-300 ${activeFaq === idx ? 'rotate-180' : ''}`} aria-hidden="true" />
                   </button>
-                  <div className={`overflow-hidden transition-all duration-300 ${activeFaq === idx ? 'max-h-48 pb-6' : 'max-h-0'}`} aria-hidden={activeFaq !== idx}><p className="px-6 text-zinc-400 leading-relaxed">{faq.a}</p></div>
+                  <div className={`overflow-hidden transition-all duration-300 ${activeFaq === idx ? 'max-h-[32rem] pb-6' : 'max-h-0'}`} aria-hidden={activeFaq !== idx}><p className="px-6 text-zinc-400 leading-relaxed">{faq.a}</p></div>
                 </div>
               </FadeInSection>
             ))}
@@ -354,7 +356,7 @@ function MainSite() {
           <FadeInSection>
             <div className="card rounded-2xl p-12 md:p-16 text-center border-emerald-500/15">
               <h2 id="cta-heading" className="text-4xl md:text-5xl font-bold tracking-tight mb-6">Let's See If We're a Fit</h2>
-              <p className="text-xl text-zinc-300 mb-10 max-w-2xl mx-auto leading-relaxed">Book a free 30-minute strategy call. We'll audit your current lead flow and show you exactly where AI can make an impact — no pressure, no jargon.</p>
+              <p className="text-xl text-zinc-300 mb-10 max-w-2xl mx-auto leading-relaxed">One 30-minute call: we look at how leads reach you now, where they go cold, and whether a managed AI agent is worth building for your business. If it is, you're live in about 2–4 weeks.</p>
               <a href={EXTERNAL_URLS.appointments} {...SECURE_LINK_PROPS} className="bg-white text-black px-10 py-5 rounded-full font-semibold text-lg hover:bg-zinc-100 transition inline-flex items-center gap-3">Book a strategy call <ArrowRight className="w-5 h-5" aria-hidden="true" /></a>
               <p className="text-zinc-500 text-sm mt-6">Free • 30 minutes • Zero obligation</p>
               <div className="mt-10 pt-8 border-t border-white/10 max-w-xl mx-auto">
