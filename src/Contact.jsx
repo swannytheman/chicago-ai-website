@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { ArrowRight, Calendar, Check, Clock, Shield } from 'lucide-react';
 import { SiteNav, SiteFooter } from './SiteChrome.jsx';
 import { EXTERNAL_URLS, SECURE_LINK_PROPS, CONTACT_EMAIL } from './siteConfig.js';
@@ -207,6 +208,12 @@ export default function Contact() {
                     className="w-full bg-white text-black px-8 py-4 rounded-full font-semibold hover:bg-zinc-100 transition disabled:opacity-60 inline-flex items-center justify-center gap-2">
                     {isSubmitting ? 'Sending…' : <>Send Message <ArrowRight className="w-4 h-4" aria-hidden="true" /></>}
                   </button>
+                  <p className="mt-4 text-xs text-zinc-500 text-center leading-relaxed">
+                    We use your details only to reply to you.{' '}
+                    <Link to="/privacy" className="underline hover:text-zinc-400">Privacy Policy</Link>
+                    {' · '}
+                    <Link to="/terms" className="underline hover:text-zinc-400">Terms of Use</Link>
+                  </p>
                 </form>
               )}
             </div>

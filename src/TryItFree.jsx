@@ -635,6 +635,13 @@ export default function TryItFree() {
 
         /* -- STATS BAR -- */
         .tif-stats { border-top:1px solid var(--border);padding:32px 48px;display:flex;justify-content:center;gap:80px;max-width:1200px;margin:0 auto;overflow:hidden; }
+        /* Deliberately just the legal links: this is a conversion page and does not
+           want the full site nav's worth of exits, but the policies have to be
+           reachable from the page that collects the most data. */
+        .tif-footer { border-top:1px solid var(--border);max-width:1200px;margin:0 auto;padding:22px 48px;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:6px 18px;font-size:.78rem;color:var(--text-3); }
+        .tif-footer a { color:var(--text-2);text-decoration:none;transition:color .2s; }
+        .tif-footer a:hover { color:var(--blue-hi); }
+        .tif-footer i { color:var(--border-hi);font-style:normal; }
         .tif-stat  { text-align:center;min-width:0; }
         .tif-stat-num { font-size:3rem;font-weight:700;color:#fff;display:block;line-height:1;margin-bottom:4px; }
         .tif-stat-num span { color:var(--blue-hi); }
@@ -657,6 +664,7 @@ export default function TryItFree() {
           .tif-field-row { grid-template-columns:1fr; }
           .tif-nav { padding:14px 16px; }
           .tif-stats { gap:20px;padding:28px 16px; }
+          .tif-footer { padding:20px 16px; }
           .tif-stat-num { font-size:2.2rem; }
         }
       `}</style>
@@ -763,7 +771,8 @@ export default function TryItFree() {
                   </div>
                   <button type="button" className="tif-btn" onClick={goStep1}>Continue &nbsp;&rarr;</button>
                   <div className="tif-legal">
-                    No spam. Unsubscribe in one click. By continuing you agree to receive<br/>a 3-email demo sequence from Chicago AI Group.
+                    No spam. Unsubscribe in one click. By continuing you agree to receive<br/>a 3-email demo sequence from Chicago AI Group.<br/>
+                    <Link to="/privacy">Privacy Policy</Link> &middot; <Link to="/terms">Terms of Use</Link>
                   </div>
                 </div>
 
@@ -849,7 +858,10 @@ export default function TryItFree() {
                   <button type="button" className="tif-btn" onClick={goStep3} disabled={isSubmitting}>
                     {isSubmitting ? 'Sending\u2026' : submitError ? 'Try Again \u00a0\u2192' : 'Send My Demo Emails \u00a0\u2192'}
                   </button>
-                  <div className="tif-legal">Your information is never sold or shared. Used only to personalize your demo.</div>
+                  <div className="tif-legal">
+                    Your information is never sold or shared. Used only to personalize your demo.<br/>
+                    <Link to="/privacy">Privacy Policy</Link> &middot; <Link to="/terms">Terms of Use</Link>
+                  </div>
 
                   {/* Mobile nudge */}
                   {previewVisible && (
@@ -935,6 +947,16 @@ export default function TryItFree() {
               </div>
             ))}
           </div>
+
+          <footer className="tif-footer">
+            <span>© {new Date().getFullYear()} The Chicago AI Group</span>
+            <i aria-hidden="true">·</i>
+            <Link to="/privacy">Privacy</Link>
+            <i aria-hidden="true">·</i>
+            <Link to="/terms">Terms</Link>
+            <i aria-hidden="true">·</i>
+            <Link to="/contact">Contact</Link>
+          </footer>
         </div>
       </div>
     </>

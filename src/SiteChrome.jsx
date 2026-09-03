@@ -64,6 +64,8 @@ export function SiteFooter() {
             <button onClick={() => goToSection('how-it-works')} className="hover:text-white transition" type="button">How It Works</button>
             <Link to="/try-it-free" className="hover:text-white transition">Try It Free</Link>
             <Link to="/contact" className="hover:text-white transition">Contact</Link>
+            <Link to="/privacy" className="hover:text-white transition">Privacy</Link>
+            <Link to="/terms" className="hover:text-white transition">Terms</Link>
           </nav>
           <div className="text-zinc-500 text-sm">© {new Date().getFullYear()} The Chicago AI Group. All rights reserved.</div>
         </div>

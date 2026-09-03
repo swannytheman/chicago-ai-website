@@ -3,6 +3,8 @@ import { Routes, Route, Link, useLocation } from 'react-router-dom';
 import { Users, ChevronRight, Check, Star, ArrowRight, Zap, ChevronDown, MessageSquare, BarChart3, Shield, Sparkles, Calendar, Rocket } from 'lucide-react';
 import TryItFree from './TryItFree.jsx';
 import Contact from './Contact.jsx';
+import Privacy from './Privacy.jsx';
+import Terms from './Terms.jsx';
 import { SiteNav, SiteFooter } from './SiteChrome.jsx';
 import { EXTERNAL_URLS, SECURE_LINK_PROPS, sectionId } from './siteConfig.js';
 
@@ -405,6 +407,8 @@ export default function App() {
       <Route path="/" element={<MainSite />} />
       <Route path="/try-it-free" element={<TryItFree />} />
       <Route path="/contact" element={<Contact />} />
+      <Route path="/privacy" element={<Privacy />} />
+      <Route path="/terms" element={<Terms />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );
