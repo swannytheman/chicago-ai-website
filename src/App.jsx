@@ -53,15 +53,15 @@ function MainSite() {
     capabilities: [
       "Replies to new website, form, and ad leads in under 60 seconds",
       "Qualifies on job type, timing, and fit, so junk never reaches your calendar",
-      "Follows up by email and SMS in your voice until they answer or opt out",
+      "Follows up by email in your voice — and by SMS on Pro and above — until they answer or opt out",
       "Books the ones worth your time into the calendar you already use",
       "Connects to the CRM and inbox you already use (Pro and Enterprise)",
       "We monitor and tune it after go-live — there is no new dashboard to babysit"
     ],
     pricing: [
-      { tier: "Starter", monthly: "$179", setup: "$2,200", details: "Core lead qualification & follow-ups" },
-      { tier: "Pro", monthly: "$399", setup: "$3,500", details: "Full sequences + lead scoring + CRM sync", popular: true },
-      { tier: "Enterprise", monthly: "$649", setup: "$5,900", details: "Multi-channel outreach + A/B testing + priority support" }
+      { tier: "Starter", monthly: "$179", setup: "$2,200", details: "One inbound source. Qualify, follow up, book." },
+      { tier: "Pro", monthly: "$399", setup: "$3,500", details: "Sequences, scoring, and CRM sync on top of Starter.", popular: true },
+      { tier: "Enterprise", monthly: "$649", setup: "$5,900", details: "More sources and locations, copy tests, priority support." }
     ]
   }), []);
 
@@ -74,8 +74,9 @@ function MainSite() {
   const faqs = useMemo(() => [
     { q: "Is this software we log into, or do you run it for us?", a: "We run it. We build the agent, train it on how you talk to customers, connect it to your calendar and inbox, and keep managing it after go-live. You approve how it sounds and you take the meetings. There is no tool for your team to learn and nothing technical for you to do — most of our clients are owners, not engineers." },
     { q: "Who is this for, and who is it not for?", a: "It is for service businesses that already get inbound leads and lose some of them to slow follow-up — commercial insurance, home services and trades, counseling and group practices, property management, and similar appointment businesses. It is not a fit if you have no inbound demand yet, or if what you actually need is a custom CRM rebuild." },
-    { q: "What can the agent actually do on day one?", a: "Reply to your inbound leads, qualify them on things like job type, timing and fit, follow up by email and SMS, and book the ones worth your time into your calendar. Which channels it covers is set on the strategy call. It only ever contacts people who already reached out to you." },
+    { q: "What can the agent actually do on day one?", a: "Reply to your inbound leads, qualify them on things like job type, timing and fit, follow up by email (SMS on Pro and above), and book the ones worth your time into your calendar. Which channels it covers is set on the strategy call. It only ever contacts people who already reached out to you." },
     { q: "What does the 60-day guarantee actually cover?", a: "Two things we operate: a first response under 60 seconds on inbound leads wired into the agent, and follow-up plus a meeting offer for leads that meet the qualify rules we set with you. The 60 days starts when the agent goes live on your real lead flow, not at the kickoff call. Miss either and you get the setup fee and every monthly fee back. It does not guarantee a number of closed deals or a volume of new leads — if the leads are not coming in, that is not something the agent can fix." },
+    { q: "What do you actually turn on in the first month?", a: "One inbound source you already have, a first reply in under 60 seconds, the qualify rules we write with you, and booking into the calendar you already use. Pro and Enterprise add the extra channels and systems we name on the call. We do not turn on the whole internet in week four." },
     { q: "How fast can I get started?", a: "Most clients are live within 2-4 weeks. We move fast because we know your time is money. After a quick discovery call, we get to work immediately." },
     { q: "Will the AI sound like a robot?", a: "No. We train each AI on your business, your tone, and your way of talking to customers. People often can't tell they're chatting with AI—that's the whole point." },
     { q: "What if something goes wrong?", a: "We've got your back. All plans include support, and Pro/Enterprise clients get priority access plus regular check-ins to make sure everything runs smoothly." }
@@ -84,8 +85,8 @@ function MainSite() {
   const process = useMemo(() => [
     { icon: MessageSquare, when: "Day 1", title: "Quick Call", desc: "Tell us what's slowing you down" },
     { icon: BarChart3, when: "Week 1", title: "Custom Plan", desc: "We map your leads, tools, and follow-up gaps" },
-    { icon: Zap, when: "Weeks 2–3", title: "We Build It", desc: "Setup, integrations, and testing — handled" },
-    { icon: Rocket, when: "Week 4", title: "Go Live", desc: "We launch, monitor, and keep improving it" }
+    { icon: Zap, when: "Weeks 2–3", title: "We Build It", desc: "Connect the agreed source, write qualify rules, train your voice, and test before anything reaches customers" },
+    { icon: Rocket, when: "Week 4", title: "Go Live", desc: "Live on that source. We watch replies at the start; you take the calendar" }
   ], []);
 
 
@@ -143,7 +144,7 @@ function MainSite() {
             <div className="hidden md:block absolute top-16 left-[16.666%] right-[16.666%] h-px bg-gradient-to-r from-emerald-500/20 via-emerald-400/40 to-emerald-500/20" aria-hidden="true" />
             {[
               { icon: Zap, phase: 'CAPTURE', title: 'Detect Every Lead, Instantly', desc: 'Your agent watches the places your leads actually come from — website forms, ad leads, inbound email, missed calls — and replies within seconds, day or night.' },
-              { icon: MessageSquare, phase: 'NURTURE', title: 'Build Trust on Autopilot', desc: 'Follow-ups go out by email and SMS, written in your voice, and keep going until they reply or opt out. Only people who already contacted you ever get one.' },
+              { icon: MessageSquare, phase: 'NURTURE', title: 'Build Trust on Autopilot', desc: 'Follow-ups go out by email, and by SMS on Pro and above, written in your voice, and keep going until they reply or opt out. Only people who already contacted you ever get one.' },
               { icon: Calendar, phase: 'CLOSE', title: 'Book Ready-to-Buy Meetings', desc: 'Only leads that pass qualifying reach your calendar, and the whole conversation comes with them. Your team walks in already knowing the context.' },
             ].map((item, idx) => (
               <FadeInSection key={idx} delay={idx * 150}>
@@ -244,6 +245,103 @@ function MainSite() {
                     <Link to="/contact" className="text-zinc-400 hover:text-white transition text-sm underline underline-offset-4">Or send a note</Link>
                   </div>
                 </div>
+              </div>
+            </div>
+          </FadeInSection>
+        </div>
+      </section>
+
+      <section id="scope" className="py-28 border-t border-white/5" aria-labelledby="scope-heading">
+        <div className="max-w-6xl mx-auto px-6">
+          <FadeInSection>
+            <div className="text-center mb-16">
+              <span className="text-sm uppercase tracking-widest text-emerald-400 mb-4 block">Scope</span>
+              <h2 id="scope-heading" className="text-4xl md:text-5xl font-bold tracking-tight mb-4">What &ldquo;live&rdquo; means &mdash; and what we need from you</h2>
+              <p className="text-lg text-zinc-400 max-w-2xl mx-auto leading-relaxed">The setup fee is the build. The monthly fee is us running it.</p>
+            </div>
+          </FadeInSection>
+
+          <div className="grid md:grid-cols-2 gap-6 mb-6">
+            <FadeInSection>
+              <div className="card rounded-2xl p-8 h-full">
+                <h3 className="text-xl font-bold mb-1">Live on day one</h3>
+                <p className="text-sm text-zinc-500 mb-6">The default build, on Starter.</p>
+                <ol className="space-y-5">
+                  {[
+                    { t: 'Lead intake', d: 'One inbound source you already have: a website form, an ad lead inbox, or a shared email address. We wire it so a new inquiry is seen the moment it lands.' },
+                    { t: 'First response', d: 'The agent replies in under 60 seconds, in your voice, to that source.' },
+                    { t: 'Qualify', d: 'A short rule set we write with you — service type, area, timing, fit. Bad-fit leads get a polite close, not your calendar.' },
+                    { t: 'Book', d: 'Qualified leads get a link to the calendar you already use, or a hold you confirm.' },
+                  ].map((item, i) => (
+                    <li key={i} className="flex gap-4">
+                      <span className="w-6 h-6 rounded-full bg-emerald-500/15 text-emerald-400 text-xs font-bold flex items-center justify-center flex-shrink-0 mt-0.5" aria-hidden="true">{i + 1}</span>
+                      <div>
+                        <div className="font-semibold mb-1">{item.t}</div>
+                        <p className="text-sm text-zinc-400 leading-relaxed">{item.d}</p>
+                      </div>
+                    </li>
+                  ))}
+                </ol>
+              </div>
+            </FadeInSection>
+
+            <FadeInSection delay={100}>
+              <div className="card rounded-2xl p-8 h-full">
+                <h3 className="text-xl font-bold mb-1">What we need from you</h3>
+                <p className="text-sm text-zinc-500 mb-6">Miss these and the build slips.</p>
+                <ul className="space-y-4">
+                  {[
+                    'A kickoff call, and one example of a good lead next to one you do not want.',
+                    'Access to the lead source and the calendar we agree to use.',
+                    'How you actually sound — a few sent emails, call notes, or twenty minutes on the phone. We do not guess your voice.',
+                    'Someone who will take the meetings the agent books.',
+                  ].map((item, i) => (
+                    <li key={i} className="flex gap-3">
+                      <Check className="w-5 h-5 text-emerald-400 flex-shrink-0 mt-0.5" aria-hidden="true" />
+                      <span className="text-zinc-300 leading-relaxed">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+                <p className="text-sm text-zinc-500 leading-relaxed mt-6 pt-6 border-t border-white/10">If a source is not connected, it is not covered by the 60-second guarantee.</p>
+              </div>
+            </FadeInSection>
+          </div>
+
+          <FadeInSection delay={150}>
+            <div className="card rounded-2xl p-8 mb-6">
+              <h3 className="text-xl font-bold mb-6">Not included unless we scope it</h3>
+              <ul className="grid md:grid-cols-2 gap-x-8 gap-y-3">
+                {[
+                  'Extra lead sources beyond the first — more forms, missed-call and voicemail follow-up, SMS as a second channel',
+                  'CRM write-back and lead scoring (Pro)',
+                  'A second brand, location, or agent voice, and copy tests (Enterprise)',
+                  'Generating new leads, running ads, or rebuilding your website',
+                  'The agent taking payment or closing the job',
+                ].map((item, i) => (
+                  <li key={i} className="flex gap-3 text-zinc-400 leading-relaxed">
+                    <span className="text-zinc-600 mt-0.5 flex-shrink-0" aria-hidden="true">&minus;</span>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </FadeInSection>
+
+          <FadeInSection delay={200}>
+            <div className="card rounded-2xl p-8">
+              <h3 className="text-xl font-bold mb-1">How the plans differ</h3>
+              <p className="text-sm text-zinc-500 mb-6">Same build. More surface area.</p>
+              <div className="space-y-4">
+                {[
+                  { tier: 'Starter', d: 'One inbound source. First response, qualify, book, email follow-up. We monitor it.' },
+                  { tier: 'Pro', d: 'Starter plus longer sequences, SMS if you want it and have permission, lead scoring, and CRM sync to the system you already use.' },
+                  { tier: 'Enterprise', d: 'Pro plus additional sources or locations, copy tests, and priority check-ins.' },
+                ].map((row, i) => (
+                  <div key={i} className="flex flex-col sm:flex-row sm:gap-6">
+                    <div className="font-bold text-emerald-400 sm:w-32 flex-shrink-0 mb-1 sm:mb-0">{row.tier}</div>
+                    <p className="text-zinc-300 leading-relaxed">{row.d}</p>
+                  </div>
+                ))}
               </div>
             </div>
           </FadeInSection>
@@ -374,7 +472,7 @@ function MainSite() {
             <div className="text-center mb-16">
               <span className="text-sm uppercase tracking-widest text-emerald-400 mb-4 block">Getting Started</span>
               <h2 id="process-heading" className="text-4xl md:text-5xl font-bold tracking-tight mb-4">Live in Weeks, Not Months</h2>
-              <p className="text-lg text-zinc-400 max-w-2xl mx-auto leading-relaxed">We handle the build, the integrations, and the testing. From you we need a kickoff call, an example of a good and a bad lead, calendar access, and any follow-up copy you already use. Here's what a typical rollout looks like.</p>
+              <p className="text-lg text-zinc-400 max-w-2xl mx-auto leading-relaxed">We handle the build, the integrations we agree on, and the testing. From you we need a kickoff call, an example of a good and a bad lead, calendar access, and any follow-up copy you already use. Here's what a typical rollout looks like.</p>
             </div>
           </FadeInSection>
           <div className="grid md:grid-cols-4 gap-6 relative">
