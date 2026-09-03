@@ -63,6 +63,7 @@ export function SiteFooter() {
           <nav className="flex flex-wrap justify-center gap-x-8 gap-y-3 text-zinc-400" aria-label="Footer navigation">
             <button onClick={() => goToSection('services')} className="hover:text-white transition" type="button">Pricing</button>
             <button onClick={() => goToSection('how-it-works')} className="hover:text-white transition" type="button">How It Works</button>
+            <button onClick={() => goToSection('about')} className="hover:text-white transition" type="button">About</button>
             <Link to="/try-it-free" className="hover:text-white transition">Sample sequence</Link>
             <Link to="/contact" className="hover:text-white transition">Contact</Link>
             <Link to="/privacy" className="hover:text-white transition">Privacy</Link>

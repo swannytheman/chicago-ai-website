@@ -215,6 +215,41 @@ function MainSite() {
         </div>
       </section>
 
+      <section id="about" className="py-28 border-t border-white/5" aria-labelledby="about-heading">
+        <div className="max-w-5xl mx-auto px-6">
+          <FadeInSection>
+            <div className="card rounded-2xl p-8 md:p-12">
+              <div className="flex flex-col md:flex-row gap-8 md:gap-12 md:items-start">
+                {/* No photo of Matt exists in the repo, so a monogram rather than a stock face. */}
+                <div className="flex md:flex-col items-center md:items-start gap-4 flex-shrink-0">
+                  <div className="w-20 h-20 rounded-2xl bg-emerald-500/10 border border-emerald-500/25 flex items-center justify-center" aria-hidden="true">
+                    <span className="text-2xl font-bold tracking-wide text-emerald-400">MS</span>
+                  </div>
+                  <div>
+                    <div className="font-semibold">Matt Swanson</div>
+                    <div className="text-zinc-500 text-sm">Chicago, IL</div>
+                  </div>
+                </div>
+
+                <div>
+                  <span className="text-sm uppercase tracking-widest text-emerald-400 mb-4 block">About</span>
+                  <h2 id="about-heading" className="text-3xl md:text-4xl font-bold tracking-tight mb-6">You&apos;re talking to a person in Chicago, not a platform.</h2>
+                  <div className="space-y-4 text-zinc-300 leading-relaxed">
+                    <p>Chicago AI Group is run by Matt Swanson. I work with owner-led service businesses — insurance, practices, property, trades — that already get inbound leads and lose them overnight. I build the agent, train it on how you actually talk to customers, and keep it running. You take the meetings.</p>
+                    <p>This started because generic AI tools dump another dashboard on a busy owner. The useful version is the one someone sets up and watches.</p>
+                  </div>
+                  <p className="text-emerald-300 font-semibold mt-6">The strategy call is with me.</p>
+                  <div className="mt-8 flex flex-col sm:flex-row gap-4 sm:items-center">
+                    <a href={EXTERNAL_URLS.appointments} {...SECURE_LINK_PROPS} className="bg-white text-black px-8 py-4 rounded-full font-semibold hover:bg-zinc-100 transition inline-flex items-center justify-center gap-2">Book a strategy call <ArrowRight className="w-4 h-4" aria-hidden="true" /></a>
+                    <Link to="/contact" className="text-zinc-400 hover:text-white transition text-sm underline underline-offset-4">Or send a note</Link>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </FadeInSection>
+        </div>
+      </section>
+
       <section id="services" className="pt-28 pb-14" aria-labelledby="services-heading">
         <div className="max-w-7xl mx-auto px-6">
           <FadeInSection>
