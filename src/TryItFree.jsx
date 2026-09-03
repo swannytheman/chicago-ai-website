@@ -375,8 +375,18 @@ export default function TryItFree() {
           backdrop-filter:blur(20px);
           position:sticky;top:0;z-index:100;
         }
-        .tif-nav-link { font-size:.8rem;color:var(--text-2);text-decoration:none;letter-spacing:.04em;transition:color .2s; }
-        .tif-nav-link:hover { color:var(--blue-hi); }
+        /* Reads as a control rather than faint label text -- this is the only way
+           back to the main site from here, so it has to look clickable. Shaped like
+           the pill buttons the main site uses for secondary actions. */
+        .tif-nav-link {
+          font-size:.875rem;color:var(--text);text-decoration:none;letter-spacing:.01em;
+          display:inline-flex;align-items:center;gap:8px;white-space:nowrap;
+          border:1px solid var(--border-hi);border-radius:999px;padding:9px 18px;
+          transition:color .2s,border-color .2s,background .2s;
+        }
+        .tif-nav-link:hover { color:var(--blue-hi);border-color:var(--blue);background:var(--blue-soft); }
+        .tif-nav-logo { display:inline-flex;text-decoration:none;transition:opacity .2s; }
+        .tif-nav-logo:hover { opacity:.72; }
 
         /* -- LAYOUT -- */
         .tif-page { position:relative;z-index:1; }
@@ -627,10 +637,10 @@ export default function TryItFree() {
         <div className="tif-page">
           {/* NAV */}
           <nav className="tif-nav">
-            <Link to="/" style={{textDecoration:'none'}}>
+            <Link to="/" className="tif-nav-logo" aria-label="Chicago AI Group home">
               <Logo />
             </Link>
-            <Link to="/" className="tif-nav-link">&larr; Back to site</Link>
+            <Link to="/" className="tif-nav-link">&larr; Back to Home</Link>
           </nav>
 
           {/* HERO */}
