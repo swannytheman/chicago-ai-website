@@ -453,11 +453,38 @@ function MainSite() {
   );
 }
 
+// Every unmatched path is rewritten to index.html so client-side routes survive a
+// refresh, which means an unknown URL reaches the router rather than the host's 404.
+// Without this it would render nothing at all.
+function NotFound() {
+  useEffect(() => {
+    const prev = document.title;
+    document.title = 'Page Not Found — Chicago AI Group';
+    return () => { document.title = prev; };
+  }, []);
+
+  return (
+    <div className="min-h-screen bg-zinc-950 text-white flex items-center justify-center px-6">
+      <div className="text-center max-w-md">
+        <div className="flex justify-center mb-8"><Logo size="default" /></div>
+        <div className="text-sm uppercase tracking-widest text-emerald-400 mb-4">404</div>
+        <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">We couldn't find that page</h1>
+        <p className="text-zinc-400 leading-relaxed mb-10">The link may be out of date, or the address may have a typo.</p>
+        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <Link to="/" className="bg-white text-black px-8 py-4 rounded-full font-semibold hover:bg-zinc-100 transition inline-flex items-center justify-center gap-2">Back to Home</Link>
+          <Link to="/try-it-free" className="text-emerald-300 border border-emerald-500/30 bg-emerald-500/5 px-8 py-4 rounded-full font-semibold transition hover:border-emerald-400/50 hover:bg-emerald-500/10 inline-flex items-center justify-center gap-2">Try It Free <ArrowRight className="w-4 h-4" aria-hidden="true" /></Link>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function App() {
   return (
     <Routes>
       <Route path="/" element={<MainSite />} />
       <Route path="/try-it-free" element={<TryItFree />} />
+      <Route path="*" element={<NotFound />} />
     </Routes>
   );
 }
