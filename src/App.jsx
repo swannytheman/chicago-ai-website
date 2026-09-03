@@ -1,55 +1,10 @@
 import { useState, useEffect, useRef, useCallback, useMemo } from 'react';
-import { Routes, Route, Link } from 'react-router-dom';
-import { Users, ChevronRight, Check, Star, Menu, X, ArrowRight, Zap, ChevronDown, MessageSquare, BarChart3, Shield, Sparkles, Calendar, Rocket } from 'lucide-react';
+import { Routes, Route, Link, useLocation } from 'react-router-dom';
+import { Users, ChevronRight, Check, Star, ArrowRight, Zap, ChevronDown, MessageSquare, BarChart3, Shield, Sparkles, Calendar, Rocket } from 'lucide-react';
 import TryItFree from './TryItFree.jsx';
-
-const EXTERNAL_URLS = {
-  appointments: 'https://calendly.com/matt-chicagoaigroup/30min',
-  contact: 'https://www.chicagoaigroup.com/contact',
-};
-
-const SECURE_LINK_PROPS = {
-  target: '_blank',
-  rel: 'noopener noreferrer',
-};
-
-const Logo = ({ size = 'default', showText = true }) => {
-  const dimensions = size === 'small' ? 32 : size === 'large' ? 64 : 40;
-  return (
-    <div className="flex items-center gap-3">
-      <svg width={dimensions} height={dimensions} viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Chicago AI Group Logo">
-        <title>Chicago AI Group Logo</title>
-        <path d="M70 15 A42 42 0 1 0 70 85" stroke="url(#logoGradient)" strokeWidth="6" strokeLinecap="round" fill="none" />
-        <line x1="30" y1="35" x2="50" y2="50" stroke="#64748b" strokeWidth="2" />
-        <line x1="30" y1="65" x2="50" y2="50" stroke="#64748b" strokeWidth="2" />
-        <line x1="30" y1="35" x2="30" y2="65" stroke="#64748b" strokeWidth="2" />
-        <line x1="50" y1="50" x2="68" y2="50" stroke="#64748b" strokeWidth="2" />
-        <circle cx="30" cy="35" r="5" fill="#e2e8f0" />
-        <circle cx="30" cy="65" r="5" fill="#e2e8f0" />
-        <circle cx="68" cy="50" r="4" fill="#e2e8f0" />
-        <circle cx="50" cy="50" r="10" fill="#10b981" filter="url(#blueGlow)" />
-        <circle cx="50" cy="50" r="6" fill="#34d399" />
-        <polygon points="82,38 84,42 88,42 85,45 86,49 82,46 78,49 79,45 76,42 80,42" fill="#34d399" />
-        <defs>
-          <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#ffffff" />
-            <stop offset="100%" stopColor="#94a3b8" />
-          </linearGradient>
-          <filter id="blueGlow" x="-50%" y="-50%" width="200%" height="200%">
-            <feGaussianBlur stdDeviation="3" result="blur" />
-            <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
-          </filter>
-        </defs>
-      </svg>
-      {showText && (
-        <div className="flex flex-col leading-none">
-          <span style={{ fontWeight: 600, letterSpacing: '3px', fontSize: size === 'small' ? '12px' : '14px' }}>CHICAGO AI</span>
-          <span style={{ fontWeight: 500, letterSpacing: '5px', fontSize: size === 'small' ? '10px' : '11px', color: '#64748b' }}>GROUP</span>
-        </div>
-      )}
-    </div>
-  );
-};
+import Contact from './Contact.jsx';
+import { SiteNav, SiteFooter } from './SiteChrome.jsx';
+import { EXTERNAL_URLS, SECURE_LINK_PROPS, sectionId } from './siteConfig.js';
 
 const FadeInSection = ({ children, delay = 0, className = '' }) => {
   const [isVisible, setIsVisible] = useState(false);
@@ -70,22 +25,24 @@ const FadeInSection = ({ children, delay = 0, className = '' }) => {
 };
 
 function MainSite() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
   const [activeFaq, setActiveFaq] = useState(null);
   const [selectedTier, setSelectedTier] = useState(1);
+  const { hash } = useLocation();
 
   const scrollTo = useCallback((id) => {
-    const sanitizedId = id.toLowerCase().replace(/[^a-z0-9-]/g, '');
-    const el = document.getElementById(sanitizedId);
-    if (el) { el.scrollIntoView({ behavior: 'smooth' }); setMobileMenuOpen(false); }
+    document.getElementById(sectionId(id))?.scrollIntoView({ behavior: 'smooth' });
   }, []);
 
+  // Arriving from a subpage's nav as /#pricing: sections are in the DOM immediately
+  // (FadeInSection only animates opacity), so one frame is enough before scrolling.
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 50);
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+    if (!hash) return;
+    const target = sectionId(hash.slice(1));
+    const timer = setTimeout(() => {
+      document.getElementById(target)?.scrollIntoView({ behavior: 'smooth' });
+    }, 80);
+    return () => clearTimeout(timer);
+  }, [hash]);
 
   const salesAgent = useMemo(() => ({
     icon: Users,
@@ -126,12 +83,6 @@ function MainSite() {
     { icon: Rocket, when: "Week 4", title: "Go Live", desc: "We launch, monitor, and keep improving it" }
   ], []);
 
-  const navItems = useMemo(() => [
-    { label: 'How It Works', id: 'how-it-works' },
-    { label: 'Results', id: 'testimonials' },
-    { label: 'Pricing', id: 'services' },
-    { label: 'FAQ', id: 'faq' }
-  ], []);
 
   const selectedPlan = salesAgent.pricing[selectedTier];
 
@@ -144,28 +95,7 @@ function MainSite() {
         html { scroll-behavior: smooth; }
       `}</style>
 
-      <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled ? 'bg-zinc-950/80 backdrop-blur-md border-b border-white/5 py-3' : 'bg-transparent py-5'}`} role="navigation" aria-label="Main navigation">
-        <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
-          <Logo size="default" />
-          <div className="hidden md:flex items-center gap-8">
-            {navItems.map(item => (
-              <button key={item.id} onClick={() => scrollTo(item.id)} className="text-zinc-400 hover:text-white transition relative group whitespace-nowrap" type="button" aria-label={`Navigate to ${item.label} section`}>
-                {item.label}<span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-emerald-400 transition-all group-hover:w-full" aria-hidden="true" />
-              </button>
-            ))}
-            <Link to="/try-it-free" className="text-emerald-300 px-5 py-2 rounded-full text-sm font-medium transition hover:text-emerald-200 border border-emerald-500/30 hover:border-emerald-400/50">Try It Free</Link>
-            <button onClick={() => scrollTo('cta')} className="bg-white text-black px-6 py-2.5 rounded-full font-medium hover:bg-zinc-100 transition" type="button">Book a Strategy Call</button>
-          </div>
-          <button className="md:hidden p-2 rounded-lg border border-white/10" onClick={() => setMobileMenuOpen(!mobileMenuOpen)} type="button" aria-expanded={mobileMenuOpen} aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}>{mobileMenuOpen ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}</button>
-        </div>
-        {mobileMenuOpen && (
-          <div className="md:hidden bg-zinc-900 border border-white/10 mx-4 mt-2 rounded-2xl p-6 space-y-4" role="menu">
-            {navItems.map(item => (<button key={item.id} onClick={() => scrollTo(item.id)} className="block w-full text-left text-zinc-300 hover:text-white py-2" type="button" role="menuitem">{item.label}</button>))}
-            <Link to="/try-it-free" className="block w-full text-center text-emerald-300 px-5 py-3 rounded-full text-sm font-medium border border-emerald-500/30" role="menuitem" onClick={() => setMobileMenuOpen(false)}>Try It Free</Link>
-            <button onClick={() => scrollTo('cta')} className="w-full bg-white text-black px-5 py-3 rounded-full font-medium" type="button" role="menuitem">Book a Strategy Call</button>
-          </div>
-        )}
-      </nav>
+      <SiteNav />
 
       <section className="min-h-screen flex items-center justify-center relative pt-20" aria-labelledby="hero-heading">
         <div className="absolute inset-0 bg-gradient-to-b from-zinc-900 via-zinc-950 to-zinc-950" aria-hidden="true" />
@@ -435,20 +365,7 @@ function MainSite() {
         </div>
       </section>
 
-      <footer className="py-12 border-t border-white/5" role="contentinfo">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-8">
-            <Logo size="small" />
-            <nav className="flex flex-wrap justify-center gap-x-8 gap-y-3 text-zinc-400" aria-label="Footer navigation">
-              <button onClick={() => scrollTo('services')} className="hover:text-white transition" type="button">Pricing</button>
-              <button onClick={() => scrollTo('how-it-works')} className="hover:text-white transition" type="button">How It Works</button>
-              <Link to="/try-it-free" className="hover:text-white transition">Try It Free</Link>
-              <a href={EXTERNAL_URLS.contact} {...SECURE_LINK_PROPS} className="hover:text-white transition">Contact</a>
-            </nav>
-            <div className="text-zinc-500 text-sm">© {new Date().getFullYear()} The Chicago AI Group. All rights reserved.</div>
-          </div>
-        </div>
-      </footer>
+      <SiteFooter />
     </div>
   );
 }
@@ -464,17 +381,20 @@ function NotFound() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-zinc-950 text-white flex items-center justify-center px-6">
-      <div className="text-center max-w-md">
-        <div className="flex justify-center mb-8"><Logo size="default" /></div>
-        <div className="text-sm uppercase tracking-widest text-emerald-400 mb-4">404</div>
-        <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">We couldn't find that page</h1>
-        <p className="text-zinc-400 leading-relaxed mb-10">The link may be out of date, or the address may have a typo.</p>
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Link to="/" className="bg-white text-black px-8 py-4 rounded-full font-semibold hover:bg-zinc-100 transition inline-flex items-center justify-center gap-2">Back to Home</Link>
-          <Link to="/try-it-free" className="text-emerald-300 border border-emerald-500/30 bg-emerald-500/5 px-8 py-4 rounded-full font-semibold transition hover:border-emerald-400/50 hover:bg-emerald-500/10 inline-flex items-center justify-center gap-2">Try It Free <ArrowRight className="w-4 h-4" aria-hidden="true" /></Link>
+    <div className="min-h-screen bg-zinc-950 text-white flex flex-col overflow-x-hidden">
+      <SiteNav solid />
+      <div className="flex-1 flex items-center justify-center px-6 pt-36 pb-24">
+        <div className="text-center max-w-md">
+          <div className="text-sm uppercase tracking-widest text-emerald-400 mb-4">404</div>
+          <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">We couldn't find that page</h1>
+          <p className="text-zinc-400 leading-relaxed mb-10">The link may be out of date, or the address may have a typo.</p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link to="/" className="bg-white text-black px-8 py-4 rounded-full font-semibold hover:bg-zinc-100 transition inline-flex items-center justify-center gap-2">Back to Home</Link>
+            <Link to="/contact" className="text-emerald-300 border border-emerald-500/30 bg-emerald-500/5 px-8 py-4 rounded-full font-semibold transition hover:border-emerald-400/50 hover:bg-emerald-500/10 inline-flex items-center justify-center gap-2">Contact Us <ArrowRight className="w-4 h-4" aria-hidden="true" /></Link>
+          </div>
         </div>
       </div>
+      <SiteFooter />
     </div>
   );
 }
@@ -484,6 +404,7 @@ export default function App() {
     <Routes>
       <Route path="/" element={<MainSite />} />
       <Route path="/try-it-free" element={<TryItFree />} />
+      <Route path="/contact" element={<Contact />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );
