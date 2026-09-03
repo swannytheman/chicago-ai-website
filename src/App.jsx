@@ -111,10 +111,10 @@ function MainSite() {
           <FadeInSection delay={200}><p className="text-lg md:text-xl text-zinc-300 max-w-2xl mx-auto mb-10 leading-relaxed">An AI sales agent that qualifies leads, follows up instantly, and books meetings — so your team only talks to serious buyers.</p></FadeInSection>
           <FadeInSection delay={300}>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button onClick={() => scrollTo('cta')} className="group bg-white text-black px-8 py-4 rounded-full font-semibold text-lg hover:bg-zinc-100 transition flex items-center justify-center gap-2" type="button">Book a Strategy Call <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" aria-hidden="true" /></button>
-              <Link to="/try-it-free" className="group text-emerald-300 border border-emerald-500/30 bg-emerald-500/5 px-8 py-4 rounded-full font-semibold text-lg transition hover:border-emerald-400/50 hover:bg-emerald-500/10 flex items-center justify-center gap-2">Try It Free <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" aria-hidden="true" /></Link>
+              <button onClick={() => scrollTo('cta')} className="group bg-white text-black px-8 py-4 rounded-full font-semibold text-lg hover:bg-zinc-100 transition flex items-center justify-center gap-2" type="button">Book a strategy call <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" aria-hidden="true" /></button>
+              <Link to="/try-it-free" className="group text-emerald-300 border border-emerald-500/30 bg-emerald-500/5 px-8 py-4 rounded-full font-semibold text-lg transition hover:border-emerald-400/50 hover:bg-emerald-500/10 flex items-center justify-center gap-2">See a sample sequence <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" aria-hidden="true" /></Link>
             </div>
-            <p className="mt-5 text-sm text-zinc-500">See a 3-email follow-up sequence written for your business. No credit card.</p>
+            <p className="mt-5 text-sm text-zinc-500">We'll write a 3-email follow-up for your business. No credit card.</p>
           </FadeInSection>
           <FadeInSection delay={400}>
             <div className="mt-16 flex flex-wrap justify-center gap-6 md:gap-8 text-sm text-zinc-400">
@@ -271,9 +271,9 @@ function MainSite() {
                   </div>
                 </div>
                 <div className="mt-10 pt-8 border-t border-white/10 flex flex-col sm:flex-row gap-4 items-center">
-                  <button onClick={() => scrollTo('cta')} className="bg-white text-black px-8 py-4 rounded-full font-semibold hover:bg-zinc-100 transition flex items-center justify-center gap-2" type="button">Get the {selectedPlan.tier} Plan <ChevronRight className="w-4 h-4" aria-hidden="true" /></button>
-                  <Link to="/try-it-free" className="text-emerald-300 px-8 py-4 rounded-full font-semibold transition flex items-center justify-center gap-2 border border-emerald-500/30 hover:border-emerald-400/50 hover:bg-emerald-500/5">Try It Free <ArrowRight className="w-4 h-4" aria-hidden="true" /></Link>
-                  <span className="text-zinc-500 text-sm">{selectedPlan.monthly}/mo + {selectedPlan.setup} one-time setup • Cancel anytime</span>
+                  <button onClick={() => scrollTo('cta')} className="bg-white text-black px-8 py-4 rounded-full font-semibold hover:bg-zinc-100 transition flex items-center justify-center gap-2" type="button">Book a call about {selectedPlan.tier} <ChevronRight className="w-4 h-4" aria-hidden="true" /></button>
+                  <Link to="/try-it-free" className="text-emerald-300 px-8 py-4 rounded-full font-semibold transition flex items-center justify-center gap-2 border border-emerald-500/30 hover:border-emerald-400/50 hover:bg-emerald-500/5">See a sample sequence <ArrowRight className="w-4 h-4" aria-hidden="true" /></Link>
+                  <span className="text-zinc-500 text-sm">{selectedPlan.monthly}/mo + {selectedPlan.setup} one-time setup • Cancel anytime<br />Plans start after a strategy call — the sample sequence is free either way.</span>
                 </div>
               </div>
             </div>
@@ -355,12 +355,12 @@ function MainSite() {
             <div className="card rounded-2xl p-12 md:p-16 text-center border-emerald-500/15">
               <h2 id="cta-heading" className="text-4xl md:text-5xl font-bold tracking-tight mb-6">Let's See If We're a Fit</h2>
               <p className="text-xl text-zinc-300 mb-10 max-w-2xl mx-auto leading-relaxed">Book a free 30-minute strategy call. We'll audit your current lead flow and show you exactly where AI can make an impact — no pressure, no jargon.</p>
-              <a href={EXTERNAL_URLS.appointments} {...SECURE_LINK_PROPS} className="bg-white text-black px-10 py-5 rounded-full font-semibold text-lg hover:bg-zinc-100 transition inline-flex items-center gap-3">Book Your Free Strategy Call <ArrowRight className="w-5 h-5" aria-hidden="true" /></a>
+              <a href={EXTERNAL_URLS.appointments} {...SECURE_LINK_PROPS} className="bg-white text-black px-10 py-5 rounded-full font-semibold text-lg hover:bg-zinc-100 transition inline-flex items-center gap-3">Book a strategy call <ArrowRight className="w-5 h-5" aria-hidden="true" /></a>
               <p className="text-zinc-500 text-sm mt-6">Free • 30 minutes • Zero obligation</p>
               <div className="mt-10 pt-8 border-t border-white/10 max-w-xl mx-auto">
-                <p className="text-zinc-300 mb-5">Not ready to talk? See it work on your own business first.</p>
-                <Link to="/try-it-free" className="group text-emerald-300 border border-emerald-500/30 bg-emerald-500/5 px-8 py-4 rounded-full font-semibold transition hover:border-emerald-400/50 hover:bg-emerald-500/10 inline-flex items-center gap-2">Try It Free <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" aria-hidden="true" /></Link>
-                <p className="text-zinc-500 text-sm mt-4">We'll write a 3-email follow-up sequence for your business. No credit card.</p>
+                <p className="text-zinc-300 mb-5">Not ready to talk? Read a sample first &mdash; we'll write three follow-up emails for your business so you can judge the copy. It's a preview, not the live system; setup still starts with a call.</p>
+                <Link to="/try-it-free" className="group text-emerald-300 border border-emerald-500/30 bg-emerald-500/5 px-8 py-4 rounded-full font-semibold transition hover:border-emerald-400/50 hover:bg-emerald-500/10 inline-flex items-center gap-2">See a sample sequence <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" aria-hidden="true" /></Link>
+                <p className="text-zinc-500 text-sm mt-4">We'll write a 3-email follow-up for your business. No credit card.</p>
               </div>
             </div>
           </FadeInSection>

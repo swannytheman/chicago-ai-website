@@ -2,6 +2,7 @@ import { useState, useRef, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import Logo from './Logo.jsx';
 import { getAttribution } from './attribution.js';
+import { EXTERNAL_URLS } from './siteConfig.js';
 
 // Make.com custom webhook that receives the demo signup. The host here must stay in
 // sync with connect-src in vercel.json, or the browser will refuse the request.
@@ -188,7 +189,7 @@ export default function TryItFree() {
   // Page title
   useEffect(() => {
     const prev = document.title;
-    document.title = 'Try It Free — Chicago AI Group';
+    document.title = 'Sample Follow-Up Sequence — Chicago AI Group';
     return () => { document.title = prev; };
   }, []);
 
@@ -591,6 +592,7 @@ export default function TryItFree() {
         .tif-submit-error a { color:#fca5a5;text-decoration:underline; }
 
         /* Legal */
+        .tif-upsell { font-size:.84rem;color:var(--text-2);line-height:1.6;text-align:center;margin:0 0 14px; }
         .tif-legal { font-size:.72rem;color:var(--text-3);text-align:center;margin-top:16px;line-height:1.5; }
         .tif-legal a { color:var(--text-3);text-decoration:underline; }
 
@@ -697,14 +699,14 @@ export default function TryItFree() {
               </div>
               <h1 className="tif-h1">See AI<br/>follow-up<br/><em>in action.</em></h1>
               <p className="tif-sub">
-                Enter your business details and we'll send you a real AI-written email sequence — personalized to your product, hitting your inbox within seconds.
+                Tell us about your business and we'll write a 3-email follow-up sequence for it and send it to your inbox. It's a preview of how your follow-ups would read — not the live meeting-booking system.
               </p>
               <div className="tif-proof">
                 {[
                   'First email arrives in under 60 seconds',
                   'Personalized to your specific business — not a template',
                   '3-touch sequence over 5 days — unsubscribe anytime',
-                  'This is exactly what your customers would receive',
+                  'Written the way your customers would actually receive it',
                 ].map((item, i) => (
                   <div className="tif-proof-item" key={i}>
                     <div className="tif-proof-icon">&#10003;</div>
@@ -856,7 +858,7 @@ export default function TryItFree() {
                     </div>
                   )}
                   <button type="button" className="tif-btn" onClick={goStep3} disabled={isSubmitting}>
-                    {isSubmitting ? 'Sending\u2026' : submitError ? 'Try Again \u00a0\u2192' : 'Send My Demo Emails \u00a0\u2192'}
+                    {isSubmitting ? 'Sending\u2026' : submitError ? 'Try Again \u00a0\u2192' : 'Send my sample sequence \u00a0\u2192'}
                   </button>
                   <div className="tif-legal">
                     Your information is never sold or shared. Used only to personalize your demo.<br/>
@@ -876,9 +878,9 @@ export default function TryItFree() {
                 <div className={`tif-panel ${step === 3 ? 'active' : ''}`}>
                   <div className="tif-success">
                     <div className="tif-success-icon">{'\uD83D\uDE80'}</div>
-                    <div className="tif-success-title">You're all set!</div>
+                    <div className="tif-success-title">Your sample is on the way</div>
                     <div className="tif-success-sub">
-                      We're generating your personalized sequence now, {name}. Check {email} — Email 1 is on its way.
+                      We're writing your sample sequence now, {name}. Check {email} — email 1 is on its way. This is preview copy, not a live agent on your leads.
                     </div>
                     <div className="tif-timeline">
                       {[
@@ -895,11 +897,12 @@ export default function TryItFree() {
                         </div>
                       ))}
                     </div>
-                    <a className="tif-btn" href="https://calendly.com/matt-chicagoaigroup/30min" target="_blank" rel="noopener noreferrer" style={{display:'block',textDecoration:'none',textAlign:'center'}}>
-                      Book a Call to Learn More
+                    <p className="tif-upsell">Want this on live leads, not just a sample? Book a strategy call.</p>
+                    <a className="tif-btn" href={EXTERNAL_URLS.appointments} target="_blank" rel="noopener noreferrer" style={{display:'block',textDecoration:'none',textAlign:'center'}}>
+                      Book a strategy call
                     </a>
                     <button type="button" className="tif-btn-restart" onClick={startOver}>
-                      Send another demo &rarr;
+                      Send another sample &rarr;
                     </button>
                   </div>
                 </div>

@@ -21,7 +21,7 @@ export default function Privacy() {
 
       <Section n={2} title="What we collect">
         <p>We only collect what you type into this site. There is no tracking pixel and no advertising network on it.</p>
-        <p><strong>If you request the free email demo</strong> (the Try It Free page), we receive:</p>
+        <p><strong>If you request the free email demo</strong> (the sample sequence page), we receive:</p>
         <Bullets items={[
           'Your first name and business email address, which are required.',
           'Optionally: your company name, industry, biggest bottleneck, the CRM or tools you use now, your website, and anything else you choose to write in the notes box.',
@@ -86,7 +86,7 @@ export default function Privacy() {
       <Section n={8} title="Emails from us">
         <p>
           The demo sequence is three emails over about five days, and you only get it because you asked for it on the
-          Try It Free form. Every one has a one-click unsubscribe link, and unsubscribing stops the sequence
+          sample sequence form. Every one has a one-click unsubscribe link, and unsubscribing stops the sequence
           immediately. We may also reply to you directly about your enquiry. We do not send SMS from this site, and we
           do not add you to a general marketing list you did not ask for.
         </p>
