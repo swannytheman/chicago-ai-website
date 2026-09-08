@@ -5,6 +5,7 @@ import { getAttribution } from './attribution.js';
 import { EXTERNAL_URLS } from './siteConfig.js';
 import { usePageMeta } from './usePageMeta.js';
 import { PAGE_META } from './seo.js';
+import EmailPreview from './EmailPreview.jsx';
 
 // Make.com custom webhook that receives the demo signup. The host here must stay in
 // sync with connect-src in vercel.json, or the browser will refuse the request.
@@ -625,12 +626,6 @@ export default function TryItFree() {
         .tif-preview-label { font-size:.68rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--text-3);margin-bottom:14px;display:flex;align-items:center;gap:8px; }
         .tif-preview-dot { width:5px;height:5px;border-radius:50%;background:var(--green);box-shadow:0 0 6px var(--green);animation:tifBlink 1.5s ease-in-out infinite; }
 
-        .tif-email-mock { background:#0a1020;border:1px solid var(--border);border-radius:10px;overflow:hidden; }
-        .tif-email-header { padding:12px 16px;border-bottom:1px solid var(--border);display:flex;flex-direction:column;gap:4px; }
-        .tif-email-row  { display:flex;gap:8px;font-size:.74rem; }
-        .tif-email-lbl  { color:var(--text-3);font-family:'DM Mono',monospace;min-width:36px; }
-        .tif-email-val  { color:var(--text-2); }
-        .tif-email-body { padding:16px;font-size:.82rem;line-height:1.8;color:var(--text-2);min-height:120px;font-family:'Inter',sans-serif; }
 
         .cursor { display:inline-block;width:2px;height:14px;background:var(--blue-hi);margin-left:2px;vertical-align:middle;animation:tifCursor .8s ease-in-out infinite; }
         @keyframes tifCursor { 0%,100%{opacity:1} 50%{opacity:0} }
@@ -914,22 +909,7 @@ export default function TryItFree() {
                   <div className="tif-preview-dot" />
                   Live Preview — Email 1
                 </div>
-                <div className="tif-email-mock">
-                  <div className="tif-email-header">
-                    <div className="tif-email-row">
-                      <span className="tif-email-lbl">From:</span>
-                      <span className="tif-email-val">{previewFrom}</span>
-                    </div>
-                    <div className="tif-email-row">
-                      <span className="tif-email-lbl">Sub:</span>
-                      <span className="tif-email-val">{previewSubject}</span>
-                    </div>
-                  </div>
-                  <div
-                    className="tif-email-body"
-                    dangerouslySetInnerHTML={{ __html: previewBodyHtml }}
-                  />
-                </div>
+                <EmailPreview from={previewFrom} subject={previewSubject} bodyHtml={previewBodyHtml} />
               </div>
             </div>
           </section>

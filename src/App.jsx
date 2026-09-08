@@ -9,6 +9,7 @@ import { SiteNav, SiteFooter } from './SiteChrome.jsx';
 import { EXTERNAL_URLS, SECURE_LINK_PROPS, sectionId } from './siteConfig.js';
 import { usePageMeta } from './usePageMeta.js';
 import { PAGE_META } from './seo.js';
+import EmailPreview from './EmailPreview.jsx';
 
 const FadeInSection = ({ children, delay = 0, className = '' }) => {
   const [isVisible, setIsVisible] = useState(false);
@@ -136,6 +137,44 @@ function MainSite() {
           </FadeInSection>
         </div>
         <button onClick={() => scrollTo('how-it-works')} className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce cursor-pointer hover:text-emerald-400 transition" type="button" aria-label="Scroll to learn more"><ChevronDown className="w-6 h-6 text-zinc-500 hover:text-emerald-400" aria-hidden="true" /></button>
+      </section>
+
+      <section id="example" className="py-14 md:py-24 border-t border-white/5" aria-labelledby="example-heading">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+            <FadeInSection>
+              <div>
+                <span className="text-sm uppercase tracking-widest text-emerald-400 mb-4 block">What they actually get</span>
+                <h2 id="example-heading" className="text-3xl md:text-4xl font-bold tracking-tight mb-5 leading-[1.15]">A follow-up that sounds like you, sent while you&apos;re still on the job.</h2>
+                <p className="text-zinc-400 leading-relaxed mb-7">First response on the inbound source we wire. Qualify. Offer a time. You take the meeting.</p>
+                <Link to="/try-it-free" className="inline-flex items-center gap-2 text-emerald-300 hover:text-emerald-200 transition font-medium">
+                  See a sample written for your business <ArrowRight className="w-4 h-4" aria-hidden="true" />
+                </Link>
+              </div>
+            </FadeInSection>
+
+            <FadeInSection delay={100}>
+              <div>
+                <div className="flex items-center gap-2 text-xs uppercase tracking-[0.12em] text-zinc-500 mb-3">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 flex-shrink-0" aria-hidden="true" />
+                  <span>Example follow-up &middot; 11 minutes after the form came in</span>
+                </div>
+                <EmailPreview
+                  from="Sarah at Summit Roofing"
+                  to="the homeowner who just requested a quote"
+                  subject="Quick question about your roof estimate"
+                  timestamp="Tue 8:41 PM"
+                  footnote="Example only. We write these in the client's voice after kickoff. This is not the live booking agent — that is what the strategy call scopes."
+                >
+                  <p>Hi Mark &mdash;</p>
+                  <p>Got your note about the leaking flashing on Oakley. I can have someone look at it Thursday morning or Friday after 2.</p>
+                  <p>If the leak is active, say so in a reply and we&apos;ll put you first.</p>
+                  <p>Sarah<br />Summit Roofing</p>
+                </EmailPreview>
+              </div>
+            </FadeInSection>
+          </div>
+        </div>
       </section>
 
       <section id="how-it-works" className="py-14 md:py-28 relative" aria-labelledby="how-it-works-heading">
