@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import Logo from './Logo.jsx';
-import { NAV_ITEMS } from './siteConfig.js';
+import { NAV_ITEMS, EXTERNAL_URLS, SECURE_LINK_PROPS } from './siteConfig.js';
 import { useSectionNav } from './useSectionNav.js';
 
 // `solid` keeps the bar opaque on pages that have no full-bleed hero behind it.
@@ -37,13 +37,15 @@ export function SiteNav({ solid = false }) {
           <Link to="/try-it-free" className="text-emerald-300 px-5 py-2 rounded-full text-sm font-medium transition hover:text-emerald-200 border border-emerald-500/30 hover:border-emerald-400/50 whitespace-nowrap">Sample sequence</Link>
           <button onClick={() => go('cta')} className="bg-white text-black px-6 py-2.5 rounded-full font-medium hover:bg-zinc-100 transition" type="button">Book a strategy call</button>
         </div>
-        <button className="lg:hidden p-2 rounded-lg border border-white/10" onClick={() => setMobileMenuOpen(!mobileMenuOpen)} type="button" aria-expanded={mobileMenuOpen} aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}>{mobileMenuOpen ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}</button>
+        <button className="lg:hidden p-2.5 rounded-lg border border-white/10" onClick={() => setMobileMenuOpen(!mobileMenuOpen)} type="button" aria-expanded={mobileMenuOpen} aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}>{mobileMenuOpen ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}</button>
       </div>
       {mobileMenuOpen && (
         <div className="lg:hidden bg-zinc-900 border border-white/10 mx-4 mt-2 rounded-2xl p-6 space-y-4" role="menu">
           {NAV_ITEMS.map(item => (<button key={item.id} onClick={() => go(item.id)} className="block w-full text-left text-zinc-300 hover:text-white py-2" type="button" role="menuitem">{item.label}</button>))}
           <Link to="/try-it-free" className="block w-full text-center text-emerald-300 px-5 py-3 rounded-full text-sm font-medium border border-emerald-500/30" role="menuitem" onClick={() => setMobileMenuOpen(false)}>See a sample sequence</Link>
-          <button onClick={() => go('cta')} className="w-full bg-white text-black px-5 py-3 rounded-full font-medium" type="button" role="menuitem">Book a strategy call</button>
+          {/* Straight to Calendly: on a phone, scrolling to the CTA band and tapping
+              again is a step too many for the strongest action in the menu. */}
+          <a href={EXTERNAL_URLS.appointments} {...SECURE_LINK_PROPS} className="block w-full text-center bg-white text-black px-5 py-3 rounded-full font-medium" role="menuitem" onClick={() => setMobileMenuOpen(false)}>Book a strategy call</a>
         </div>
       )}
     </nav>

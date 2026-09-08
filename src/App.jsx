@@ -111,20 +111,24 @@ function MainSite() {
         <div className="relative z-10 max-w-5xl mx-auto px-6 text-center">
           <FadeInSection>
             <div className="inline-flex items-center gap-2 border border-emerald-500/20 bg-emerald-500/5 px-5 py-2.5 rounded-full text-sm mb-8 cursor-default">
-              <span className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse" aria-hidden="true" /><span className="text-emerald-300">Expert AI &amp; Automation Team</span><span className="text-zinc-500 mx-1">•</span><span className="text-zinc-400">Chicago, IL</span>
+              <span className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse" aria-hidden="true" /><span className="hidden sm:inline text-emerald-300">Expert AI &amp; Automation Team</span><span className="hidden sm:inline text-zinc-500 mx-1">•</span><span className="text-zinc-400">Chicago, IL</span>
             </div>
           </FadeInSection>
-          <FadeInSection delay={100}><h1 id="hero-heading" className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 leading-tight tracking-tight">AI That Books Meetings<br /><span className="text-gradient">While You Sleep</span></h1></FadeInSection>
-          <FadeInSection delay={200}><p className="text-lg md:text-xl text-zinc-300 max-w-2xl mx-auto mb-10 leading-relaxed">For service businesses that already get inbound leads — insurance, home services, counseling, property management — we build, train, and run an AI sales agent that qualifies every inquiry and books the real ones into your calendar. Our Chicago team runs it, you take the meetings, and you&apos;re live in about 2–4 weeks.</p></FadeInSection>
+          <FadeInSection delay={100}><h1 id="hero-heading" className="text-[2rem] sm:text-5xl md:text-7xl lg:text-8xl font-bold mb-5 md:mb-6 leading-[1.12] sm:leading-tight tracking-tight">AI That Books Meetings<br /><span className="text-gradient">While You Sleep</span></h1></FadeInSection>
+          <FadeInSection delay={200}>
+            {/* Mobile gets who + we run it + timeline; the full paragraph returns at md. */}
+            <p className="md:hidden text-base text-zinc-300 max-w-2xl mx-auto mb-7 leading-relaxed">We build, train, and run an AI sales agent for service businesses that already get inbound leads. You take the meetings, and you&apos;re live in about 2–4 weeks.</p>
+            <p className="hidden md:block text-lg md:text-xl text-zinc-300 max-w-2xl mx-auto mb-10 leading-relaxed">For service businesses that already get inbound leads — insurance, home services, counseling, property management — we build, train, and run an AI sales agent that qualifies every inquiry and books the real ones into your calendar. Our Chicago team runs it, you take the meetings, and you&apos;re live in about 2–4 weeks.</p>
+          </FadeInSection>
           <FadeInSection delay={300}>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
               <button onClick={() => scrollTo('cta')} className="group bg-white text-black px-8 py-4 rounded-full font-semibold text-lg hover:bg-zinc-100 transition flex items-center justify-center gap-2" type="button">Book a strategy call <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" aria-hidden="true" /></button>
               <Link to="/try-it-free" className="group text-emerald-300 border border-emerald-500/30 bg-emerald-500/5 px-8 py-4 rounded-full font-semibold text-lg transition hover:border-emerald-400/50 hover:bg-emerald-500/10 flex items-center justify-center gap-2">See a sample sequence <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" aria-hidden="true" /></Link>
             </div>
             <p className="mt-5 text-sm text-zinc-500">We'll write a 3-email follow-up for your business. No credit card.</p>
           </FadeInSection>
           <FadeInSection delay={400}>
-            <div className="mt-16 flex flex-wrap justify-center gap-6 md:gap-8 text-sm text-zinc-400">
+            <div className="mt-8 md:mt-16 flex flex-wrap justify-center gap-x-6 gap-y-2 md:gap-8 text-sm text-zinc-400">
               <div className="flex items-center gap-2"><Check className="w-4 h-4 text-emerald-400" aria-hidden="true" /> Chicago-based team</div>
               <div className="flex items-center gap-2"><Check className="w-4 h-4 text-emerald-400" aria-hidden="true" /> 35% more closed deals for Luigi Trucking</div>
               <div className="flex items-center gap-2"><Check className="w-4 h-4 text-emerald-400" aria-hidden="true" /> Go live in 2–4 weeks</div>
@@ -134,10 +138,10 @@ function MainSite() {
         <button onClick={() => scrollTo('how-it-works')} className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce cursor-pointer hover:text-emerald-400 transition" type="button" aria-label="Scroll to learn more"><ChevronDown className="w-6 h-6 text-zinc-500 hover:text-emerald-400" aria-hidden="true" /></button>
       </section>
 
-      <section id="how-it-works" className="py-28 relative" aria-labelledby="how-it-works-heading">
+      <section id="how-it-works" className="py-14 md:py-28 relative" aria-labelledby="how-it-works-heading">
         <div className="max-w-7xl mx-auto px-6">
           <FadeInSection>
-            <div className="text-center mb-16">
+            <div className="text-center mb-10 md:mb-16">
               <span className="text-sm uppercase tracking-widest text-emerald-400 mb-4 block">How Your AI Works</span>
               <h2 id="how-it-works-heading" className="text-4xl md:text-5xl font-bold tracking-tight mb-4">Capture. Nurture. Close.</h2>
               <p className="text-lg text-zinc-400 max-w-2xl mx-auto leading-relaxed">A three-phase system we build, run, and manage for you — so every lead gets handled the moment it arrives, and you get your evenings and weekends back.</p>
@@ -165,7 +169,7 @@ function MainSite() {
         </div>
       </section>
 
-      <section id="testimonials" className="py-28 border-t border-white/5" aria-labelledby="testimonials-heading">
+      <section id="testimonials" className="py-14 md:py-28 border-t border-white/5" aria-labelledby="testimonials-heading">
         <div className="max-w-7xl mx-auto px-6">
           <FadeInSection>
             <div className="text-center mb-14">
@@ -219,7 +223,7 @@ function MainSite() {
         </div>
       </section>
 
-      <section id="about" className="py-28 border-t border-white/5" aria-labelledby="about-heading">
+      <section id="about" className="py-14 md:py-28 border-t border-white/5" aria-labelledby="about-heading">
         <div className="max-w-5xl mx-auto px-6">
           <FadeInSection>
             <div className="card rounded-2xl p-8 md:p-12">
@@ -254,10 +258,10 @@ function MainSite() {
         </div>
       </section>
 
-      <section id="scope" className="py-28 border-t border-white/5" aria-labelledby="scope-heading">
+      <section id="scope" className="py-14 md:py-28 border-t border-white/5" aria-labelledby="scope-heading">
         <div className="max-w-6xl mx-auto px-6">
           <FadeInSection>
-            <div className="text-center mb-16">
+            <div className="text-center mb-10 md:mb-16">
               <span className="text-sm uppercase tracking-widest text-emerald-400 mb-4 block">Scope</span>
               <h2 id="scope-heading" className="text-4xl md:text-5xl font-bold tracking-tight mb-4">What &ldquo;live&rdquo; means &mdash; and what we need from you</h2>
               <p className="text-lg text-zinc-400 max-w-2xl mx-auto leading-relaxed">The setup fee is the build. The monthly fee is us running it.</p>
@@ -351,10 +355,10 @@ function MainSite() {
         </div>
       </section>
 
-      <section id="services" className="pt-28 pb-14" aria-labelledby="services-heading">
+      <section id="services" className="pt-14 pb-8 md:pt-28 md:pb-14" aria-labelledby="services-heading">
         <div className="max-w-7xl mx-auto px-6">
           <FadeInSection>
-            <div className="text-center mb-16">
+            <div className="text-center mb-10 md:mb-16">
               <span className="text-sm uppercase tracking-widest text-emerald-400 mb-4 block">Our AI Sales Agent</span>
               <h2 id="services-heading" className="text-4xl md:text-5xl font-bold tracking-tight mb-4">Your 24/7 Sales Machine</h2>
               <p className="text-lg text-zinc-400 max-w-2xl mx-auto leading-relaxed">We build it, train it on your voice, and manage it for you. Here's exactly what's included — and what it costs.</p>
@@ -420,7 +424,7 @@ function MainSite() {
         </div>
       </section>
 
-      <section id="guarantee" className="pb-28" aria-labelledby="guarantee-heading">
+      <section id="guarantee" className="pb-14 md:pb-28" aria-labelledby="guarantee-heading">
         <div className="max-w-4xl mx-auto px-6">
           <FadeInSection>
             <div className="rounded-2xl border border-emerald-500/25 bg-emerald-500/[0.04] p-10 md:p-14 text-center">
@@ -469,10 +473,10 @@ function MainSite() {
         </div>
       </section>
 
-      <section id="process" className="py-28 border-t border-white/5" aria-labelledby="process-heading">
+      <section id="process" className="py-14 md:py-28 border-t border-white/5" aria-labelledby="process-heading">
         <div className="max-w-7xl mx-auto px-6">
           <FadeInSection>
-            <div className="text-center mb-16">
+            <div className="text-center mb-10 md:mb-16">
               <span className="text-sm uppercase tracking-widest text-emerald-400 mb-4 block">Getting Started</span>
               <h2 id="process-heading" className="text-4xl md:text-5xl font-bold tracking-tight mb-4">Live in Weeks, Not Months</h2>
               <p className="text-lg text-zinc-400 max-w-2xl mx-auto leading-relaxed">We handle the build, the integrations we agree on, and the testing. From you we need a kickoff call, an example of a good and a bad lead, calendar access, and any follow-up copy you already use. Here's what a typical rollout looks like.</p>
@@ -497,10 +501,10 @@ function MainSite() {
         </div>
       </section>
 
-      <section id="faq" className="py-28 border-t border-white/5" aria-labelledby="faq-heading">
+      <section id="faq" className="py-14 md:py-28 border-t border-white/5" aria-labelledby="faq-heading">
         <div className="max-w-3xl mx-auto px-6">
           <FadeInSection>
-            <div className="text-center mb-16">
+            <div className="text-center mb-10 md:mb-16">
               <span className="text-sm uppercase tracking-widest text-emerald-400 mb-4 block">FAQ</span>
               <h2 id="faq-heading" className="text-4xl md:text-5xl font-bold tracking-tight mb-4">Got Questions?</h2>
             </div>
@@ -521,7 +525,7 @@ function MainSite() {
         </div>
       </section>
 
-      <section id="cta" className="py-28" aria-labelledby="cta-heading">
+      <section id="cta" className="py-14 md:py-28" aria-labelledby="cta-heading">
         <div className="max-w-5xl mx-auto px-6">
           <FadeInSection>
             <div className="card rounded-2xl p-12 md:p-16 text-center border-emerald-500/15">

@@ -551,6 +551,9 @@ export default function TryItFree() {
         /* -- MOBILE PREVIEW NUDGE -- */
         .tif-preview-nudge { display:none; }
         @media (max-width:900px) {
+          /* iOS zooms the viewport when a focused input is under 16px. */
+          .tif-input, .tif-select, .tif-textarea { font-size:16px; }
+          .tif-btn { width:100%; }
           .tif-preview-nudge {
             display:flex;align-items:center;gap:10px;
             background:rgba(34,211,160,0.08);

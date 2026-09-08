@@ -105,11 +105,11 @@ export default function Contact() {
     <div className="min-h-screen bg-zinc-950 text-white overflow-x-hidden">
       <SiteNav solid />
 
-      <section className="pt-36 pb-20" aria-labelledby="contact-heading">
+      <section className="pt-28 pb-14 md:pt-36 md:pb-20" aria-labelledby="contact-heading">
         <div className="max-w-6xl mx-auto px-6">
-          <div className="text-center max-w-2xl mx-auto mb-16">
+          <div className="text-center max-w-2xl mx-auto mb-10 md:mb-16">
             <span className="text-sm uppercase tracking-widest text-emerald-400 mb-4 block">Contact</span>
-            <h1 id="contact-heading" className="text-4xl md:text-6xl font-bold tracking-tight mb-6">Talk to the Chicago team</h1>
+            <h1 id="contact-heading" className="text-3xl sm:text-4xl md:text-6xl font-bold tracking-tight mb-5 md:mb-6">Talk to the Chicago team</h1>
             <p className="text-lg text-zinc-300 leading-relaxed">
               We implement and run AI sales agents that qualify your leads and book meetings, so your team only talks to serious buyers.
             </p>
@@ -117,7 +117,7 @@ export default function Contact() {
 
           <div className="grid lg:grid-cols-2 gap-6 items-start">
             {/* Primary path: book a call */}
-            <div className="rounded-2xl border border-emerald-500/25 bg-emerald-500/[0.04] p-8 md:p-10">
+            <div className="rounded-2xl border border-emerald-500/25 bg-emerald-500/[0.04] p-6 sm:p-8 md:p-10">
               <div className="w-14 h-14 rounded-2xl flex items-center justify-center mb-6 bg-emerald-500/10 border border-emerald-500/25">
                 <Calendar className="w-7 h-7 text-emerald-400" aria-hidden="true" />
               </div>
@@ -125,7 +125,7 @@ export default function Contact() {
               <p className="text-zinc-300 leading-relaxed mb-8">
                 The fastest way to get answers. We&apos;ll look at how leads reach you today and where an AI agent would actually help.
               </p>
-              <a href={EXTERNAL_URLS.appointments} {...SECURE_LINK_PROPS} className="bg-white text-black px-8 py-4 rounded-full font-semibold hover:bg-zinc-100 transition inline-flex items-center gap-2">
+              <a href={EXTERNAL_URLS.appointments} {...SECURE_LINK_PROPS} className="w-full sm:w-auto bg-white text-black px-8 py-4 rounded-full font-semibold hover:bg-zinc-100 transition inline-flex items-center justify-center gap-2">
                 Book a 30-minute strategy call <ArrowRight className="w-5 h-5" aria-hidden="true" />
               </a>
               <ul className="mt-8 space-y-3 text-sm text-zinc-400">
@@ -136,7 +136,7 @@ export default function Contact() {
             </div>
 
             {/* Secondary path: send a message */}
-            <div className="rounded-2xl border border-white/[0.08] bg-white/[0.03] p-8 md:p-10">
+            <div className="rounded-2xl border border-white/[0.08] bg-white/[0.03] p-6 sm:p-8 md:p-10">
               <h2 className="text-2xl font-bold mb-3">Or send us a message</h2>
               <p className="text-zinc-400 leading-relaxed mb-8">
                 Prefer to write first? Tell us what you&apos;re trying to fix and we&apos;ll come back to you.
