@@ -8,13 +8,16 @@
 
 export const SITE_URL = 'https://www.chicagoaigroup.com';
 export const SITE_NAME = 'Chicago AI Group';
-export const OG_IMAGE = `${SITE_URL}/og-image.png`;
+// ?v= is a cache-bust: scrapers hold the old artwork indefinitely otherwise.
+// Bump it whenever public/og-image.png is re-rendered from scripts/og-card.html.
+export const OG_IMAGE = `${SITE_URL}/og-image.png?v=2`;
+export const OG_IMAGE_ALT = 'Chicago AI Group — AI that books meetings. Book a strategy call.';
 
 export const PAGE_META = {
   home: {
     path: '/',
     title: 'AI sales agents that book meetings | Chicago AI Group',
-    description: 'Managed AI follow-up for Chicago service businesses. We qualify inbound leads, follow up, and book meetings. Built and run for you. Live in 2–4 weeks.',
+    description: 'Managed AI follow-up for Chicago service businesses. We qualify leads and book meetings. Live in 2–4 weeks.',
   },
   sample: {
     path: '/try-it-free',

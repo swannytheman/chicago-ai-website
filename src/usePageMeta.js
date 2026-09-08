@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { SITE_URL, SITE_NAME, OG_IMAGE } from './seo.js';
+import { SITE_URL, SITE_NAME, OG_IMAGE, OG_IMAGE_ALT } from './seo.js';
 
 // Tags this hook owns, so it can update or remove them without disturbing anything
 // hand-written in index.html that happens to share a name.
@@ -44,6 +44,7 @@ export function usePageMeta({ title, description, path, noindex = false }) {
     og('og:image', OG_IMAGE);
     og('og:image:width', '1200');
     og('og:image:height', '630');
+    og('og:image:alt', OG_IMAGE_ALT);
 
     meta('twitter:card', 'summary_large_image');
     meta('twitter:title', title);
