@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import Logo from './Logo.jsx';
 import { getAttribution } from './attribution.js';
 import { EXTERNAL_URLS } from './siteConfig.js';
+import { usePageMeta } from './usePageMeta.js';
+import { PAGE_META } from './seo.js';
 
 // Make.com custom webhook that receives the demo signup. The host here must stay in
 // sync with connect-src in vercel.json, or the browser will refuse the request.
@@ -186,12 +188,7 @@ export default function TryItFree() {
     tick();
   }, []);
 
-  // Page title
-  useEffect(() => {
-    const prev = document.title;
-    document.title = 'Sample Follow-Up Sequence — Chicago AI Group';
-    return () => { document.title = prev; };
-  }, []);
+  usePageMeta(PAGE_META.sample);
 
   // Restore the confirmation if this tab already submitted, so a refresh does not
   // silently re-send. "Send another demo" on the success panel clears this.

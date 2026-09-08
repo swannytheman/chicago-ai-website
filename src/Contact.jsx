@@ -1,9 +1,11 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Calendar, Check, Clock, Shield } from 'lucide-react';
 import { SiteNav, SiteFooter } from './SiteChrome.jsx';
 import { EXTERNAL_URLS, SECURE_LINK_PROPS, CONTACT_EMAIL } from './siteConfig.js';
 import { getAttribution } from './attribution.js';
+import { usePageMeta } from './usePageMeta.js';
+import { PAGE_META } from './seo.js';
 
 // TODO: paste the Make.com webhook for contact enquiries here.
 //
@@ -43,11 +45,7 @@ export default function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [status, setStatus] = useState(null); // 'sent' | 'failed' | 'unconfigured'
 
-  useEffect(() => {
-    const prev = document.title;
-    document.title = 'Contact — Chicago AI Group';
-    return () => { document.title = prev; };
-  }, []);
+  usePageMeta(PAGE_META.contact);
 
   // Everything the visitor typed, as an email we can pre-fill for them.
   function mailtoFallback() {

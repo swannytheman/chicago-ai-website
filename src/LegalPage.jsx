@@ -1,17 +1,14 @@
 import { useEffect } from 'react';
 import { SiteNav, SiteFooter } from './SiteChrome.jsx';
+import { usePageMeta } from './usePageMeta.js';
 
 // Both legal pages share this date so they cannot drift apart.
 export const LAST_UPDATED = '2 September 2026';
 
 // Long-form reading layout: one narrow column, generous leading, the site's chrome.
-export function LegalPage({ title, intro, docTitle, children }) {
-  useEffect(() => {
-    const prev = document.title;
-    document.title = docTitle;
-    window.scrollTo(0, 0);
-    return () => { document.title = prev; };
-  }, [docTitle]);
+export function LegalPage({ title, intro, meta, children }) {
+  usePageMeta(meta);
+  useEffect(() => { window.scrollTo(0, 0); }, []);
 
   return (
     <div className="min-h-screen bg-zinc-950 text-white overflow-x-hidden">

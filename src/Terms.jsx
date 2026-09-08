@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { LegalPage, Section, Bullets } from './LegalPage.jsx';
+import { PAGE_META } from './seo.js';
 import { CONTACT_EMAIL } from './siteConfig.js';
 
 const mailto = `mailto:${CONTACT_EMAIL}`;
@@ -7,7 +8,7 @@ const mailto = `mailto:${CONTACT_EMAIL}`;
 export default function Terms() {
   return (
     <LegalPage
-      docTitle="Terms of Use — Chicago AI Group"
+      meta={PAGE_META.terms}
       title="Terms of Use"
       intro="These terms cover your use of this website. They are short on purpose. Paid work is a separate agreement and is not governed by this page."
     >

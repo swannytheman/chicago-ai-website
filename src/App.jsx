@@ -7,6 +7,8 @@ import Privacy from './Privacy.jsx';
 import Terms from './Terms.jsx';
 import { SiteNav, SiteFooter } from './SiteChrome.jsx';
 import { EXTERNAL_URLS, SECURE_LINK_PROPS, sectionId } from './siteConfig.js';
+import { usePageMeta } from './usePageMeta.js';
+import { PAGE_META } from './seo.js';
 
 const FadeInSection = ({ children, delay = 0, className = '' }) => {
   const [isVisible, setIsVisible] = useState(false);
@@ -27,6 +29,7 @@ const FadeInSection = ({ children, delay = 0, className = '' }) => {
 };
 
 function MainSite() {
+  usePageMeta(PAGE_META.home);
   const [activeFaq, setActiveFaq] = useState(null);
   const [selectedTier, setSelectedTier] = useState(1);
   const { hash } = useLocation();
@@ -545,11 +548,7 @@ function MainSite() {
 // refresh, which means an unknown URL reaches the router rather than the host's 404.
 // Without this it would render nothing at all.
 function NotFound() {
-  useEffect(() => {
-    const prev = document.title;
-    document.title = 'Page Not Found — Chicago AI Group';
-    return () => { document.title = prev; };
-  }, []);
+  usePageMeta(PAGE_META.notFound);
 
   return (
     <div className="min-h-screen bg-zinc-950 text-white flex flex-col overflow-x-hidden">

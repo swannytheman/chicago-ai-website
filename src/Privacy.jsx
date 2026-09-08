@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { LegalPage, Section, Bullets } from './LegalPage.jsx';
+import { PAGE_META } from './seo.js';
 import { EXTERNAL_URLS, SECURE_LINK_PROPS, CONTACT_EMAIL } from './siteConfig.js';
 
 const mailto = `mailto:${CONTACT_EMAIL}`;
@@ -7,7 +8,7 @@ const mailto = `mailto:${CONTACT_EMAIL}`;
 export default function Privacy() {
   return (
     <LegalPage
-      docTitle="Privacy Policy — Chicago AI Group"
+      meta={PAGE_META.privacy}
       title="Privacy Policy"
       intro="This page explains what we collect when you use this website, why we collect it, and how to get it removed. It covers this site only."
     >
