@@ -28,13 +28,72 @@ function escapeHtml(str) {
     .replace(/'/g, '&#39;');
 }
 
+// -- SAMPLE EMAIL GENERATOR --------------------------------------------------
+// House rules, and the whole point of this page. The sample is the PRODUCT: the
+// agent writing AS the visitor's business, TO a made-up inbound customer.
+//
+//   FROM   the visitor's business (their name / trade)
+//   TO     a fictional inbound lead, invented to fit the trade
+//   ABOUT  a realistic inquiry someone in that trade would actually receive
+//   VOICE  the visitor's, not ours
+//
+// Never: address the visitor as if they were the customer, lecture them about the
+// bottleneck they just told us about, mention Chicago AI Group, pricing, strategy
+// calls or "AI sales agent" inside a sample, or imply we mailed their real list.
+//
+// The bottleneck picks the SITUATION only -- after-hours form, needs qualifying,
+// and so on. It never becomes a talking point aimed at the visitor.
+//
+// This template drives the on-page live preview. The three emails that actually
+// land in the inbox are written by the Make.com scenario behind WEBHOOK_URL, which
+// has to enforce the same rules -- see the note above the payload in submitLead().
+
+// A fictional customer per trade, written in second person so the sample reads as
+// a reply addressed to them.
+const SCENARIOS = {
+  'Home Services':       { lead: 'Mark R.',   ask: 'replacing the roof on your garage' },
+  'Real Estate':         { lead: 'Dana P.',   ask: 'seeing the two-bedroom listing' },
+  'Insurance':           { lead: 'Tom H.',    ask: 'covering your two work vans' },
+  'Mortgage / Finance':  { lead: 'Alicia M.', ask: 'pre-approval numbers before you make an offer' },
+  'Marketing Agency':    { lead: 'Priya S.',  ask: 'pricing to run your paid search' },
+  'Retail / E-commerce': { lead: 'Chris L.',  ask: 'whether the bulk order ships before the 20th' },
+  'Restaurants / Food':  { lead: 'Nina B.',   ask: 'catering for 40 people on Friday' },
+  'Health & Wellness':   { lead: 'Sam K.',    ask: 'openings for a first appointment' },
+  'Consulting':          { lead: 'Ravi N.',   ask: 'scope and rates for a short engagement' },
+  'Technology':          { lead: 'Erin W.',   ask: 'whether it works with the setup you already run' },
+  'Legal / Accounting':  { lead: 'Grace T.',  ask: 'closing out last year’s books' },
+};
+const DEFAULT_SCENARIO = { lead: 'Alex T.', ask: 'the work you described' };
+
+function scenarioFor(industry) {
+  return SCENARIOS[industry] || DEFAULT_SCENARIO;
+}
+
+// "Where do leads slip?" sets what is HAPPENING in the sample -- never what we say
+// about it. The visitor's own answer is not quoted back at them.
+const SITUATIONS = {
+  'After-hours forms':        'Your note came in after we had closed for the day, so I am picking it up first thing.',
+  'Slow first reply':         'Wanted to come back to you straight away rather than leave you waiting on this.',
+  'Quotes take too long':     'I can get you a number quickly — no need to wait a week on a price.',
+  'No-shows / they go quiet': 'I have put a reminder on this so it does not get lost at our end.',
+  'Too many junk leads':      'Two quick things so I can price it properly — what timescale are you working to, and is there a budget you are trying to stay inside?',
+};
+
+// The typed-out on-page preview. It is a taste of email 1, not the real generator:
+// the three emails that get sent are written by the model in the Make scenario, which
+// uses typical_inbound to invent both the lead and what they asked for. Here that free
+// text drives the subject line -- where a fragment reads naturally -- while the body
+// uses the industry scenario, which is written in second person and stays grammatical
+// whatever the visitor typed.
 const PREVIEW_TEMPLATE = (biz, industry, bottleneck) => {
-  const safeBiz      = biz      ? escapeHtml(biz)                    : 'your business';
-  const safeIndustry = industry ? escapeHtml(industry.toLowerCase()) : 'local';
-  const painLine = bottleneck && bottleneck !== OTHER_BOTTLENECK
-    ? `Most ${safeIndustry} teams we talk to say the same thing — ${escapeHtml(bottleneck.toLowerCase())}. `
-    : `Most ${safeIndustry} teams we talk to are juggling more leads than they can follow up on. `;
-  return `Hi there,\n\nI noticed you recently reached out to ${safeBiz} — I wanted to follow up and see if you had any questions I could help answer.\n\n${painLine}We've helped a number of them tighten that up, and I'd love to show you what it looks like in practice.\n\nWould you be open to a quick 15-minute call this week?\n\nBest,\n[Your Name]`;
+  const { lead, ask } = scenarioFor(industry);
+  const safeBiz  = biz ? escapeHtml(biz) : 'us';
+  const safeLead = escapeHtml(lead.split(' ')[0]);
+  const sign     = biz ? escapeHtml(biz) : 'The team';
+  const situation = SITUATIONS[bottleneck] ||
+    'I have got everything I need at this end to put a number together for you.';
+
+  return `Hi ${safeLead},\n\nThanks for getting in touch with ${safeBiz} about ${escapeHtml(ask)} — I have got your details.\n\n${escapeHtml(situation)}\n\nAre you free for a short call tomorrow? I can talk you through it and get you a firm number.\n\nBest,\n${sign}`;
 };
 
 const INDUSTRIES = ['Home Services', 'Real Estate', 'Insurance', 'Mortgage / Finance', 'Marketing Agency', 'Retail / E-commerce', 'Restaurants / Food', 'Health & Wellness', 'Consulting', 'Technology', 'Legal / Accounting', 'Other'];
@@ -43,11 +102,11 @@ const OTHER_INDUSTRY = 'Other';
 const OTHER_BOTTLENECK = 'Something else';
 
 const BOTTLENECKS = [
-  'Leads go cold before we follow up',
-  'No consistent follow-up process',
-  'Too much time spent on manual outreach',
-  'Leads arrive unqualified',
-  'Not enough leads coming in',
+  'After-hours forms',
+  'Slow first reply',
+  'Quotes take too long',
+  'No-shows / they go quiet',
+  'Too many junk leads',
   OTHER_BOTTLENECK,
 ];
 
@@ -57,7 +116,7 @@ function normalizeUrl(value) {
   return /^https?:\/\//i.test(trimmed) ? trimmed : `https://${trimmed}`;
 }
 
-const PLACEHOLDER_BODY = '<span style="color:#4a6080;font-style:italic;">Start typing your business description to see a preview...</span>';
+const PLACEHOLDER_BODY = '<span style="color:#4a6080;font-style:italic;">Tell us about the business and the first sample email appears here...</span>';
 
 function isValidEmail(email) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
@@ -144,14 +203,20 @@ export default function TryItFree() {
   const [email, setEmail]                   = useState('');
   const [emailError, setEmailError]         = useState(false);
 
-  // Step 2 -- all optional, used to personalize the sequence
+  // Step 2 -- company, industry, headache and typical inbound are required: without
+  // them the model has nothing to write AS, or anyone to write TO.
   const [bizName, setBizName]               = useState('');
   const [bizType, setBizType]               = useState('');
   const [bizTypeOther, setBizTypeOther]     = useState('');
   const [bottleneck, setBottleneck]         = useState('');
+  const [bottleneckOther, setBottleneckOther] = useState('');
+  const [typicalInbound, setTypicalInbound] = useState('');
+  // Optional
   const [currentTools, setCurrentTools]     = useState('');
   const [website, setWebsite]               = useState('');
   const [notes, setNotes]                   = useState('');
+
+  const [step2Errors, setStep2Errors]       = useState({});
 
   // Security
   const [honeypot, setHoneypot]         = useState('');
@@ -160,8 +225,10 @@ export default function TryItFree() {
 
   // Preview
   const [previewVisible, setPreviewVisible] = useState(false);
-  const [previewSubject, setPreviewSubject] = useState('Quick question about your inquiry');
-  const [previewFrom,    setPreviewFrom]    = useState('Your Name, Chicago AI Group');
+  // From is the visitor's business, To is the invented lead. The sample is the agent
+  // writing AS them, never us writing TO them.
+  const [previewSubject, setPreviewSubject] = useState('Thanks for your inquiry');
+  const [previewFrom,    setPreviewFrom]    = useState('Your business');
   const [previewBodyHtml, setPreviewBodyHtml] = useState(PLACEHOLDER_BODY);
 
   // Typing animation refs
@@ -176,6 +243,10 @@ export default function TryItFree() {
 
   // "Other" resolves to whatever the visitor typed, so downstream always gets a usable industry
   const industry = (bizType === OTHER_INDUSTRY ? bizTypeOther : bizType).trim();
+  // Send what they actually meant. "Something else" on its own tells Make nothing, so
+  // the free-text answer stands in as the label and also rides along in
+  // bottleneck_notes for anyone reporting on the fixed options.
+  const bottleneckLabel = (bottleneck === OTHER_BOTTLENECK ? bottleneckOther : bottleneck).trim();
 
   const typeText = useCallback((text, onUpdate) => {
     clearTimeout(typeTimeoutRef.current);
@@ -230,10 +301,14 @@ export default function TryItFree() {
       }, 1400);
     }
 
-    if (industry) {
-      setPreviewSubject(`Quick question about your ${industry.toLowerCase()} business`);
-    } else if (bizName) {
-      setPreviewSubject(`Quick question — ${bizName}`);
+    // A reply subject on an inbound thread. Free text reads naturally as a fragment
+    // here, which is why typical_inbound lands in the subject rather than the body.
+    if (typicalInbound.trim()) {
+      setPreviewSubject(`Re: ${typicalInbound.trim()}`);
+    } else if (bizName.trim()) {
+      setPreviewSubject(`Thanks for your inquiry — ${bizName.trim()}`);
+    } else {
+      setPreviewSubject('Thanks for your inquiry');
     }
 
     clearTimeout(previewTimeoutRef.current);
@@ -243,12 +318,19 @@ export default function TryItFree() {
     }, 600);
 
     return () => clearTimeout(previewTimeoutRef.current);
-  }, [bizName, industry, bottleneck, typeText]);
+  }, [bizName, industry, bottleneck, typicalInbound, typeText]);
 
-  // From field updates with first name
+  // From is the visitor sending as their own business -- "Sarah at Apex Roofing" --
+  // because that is who the agent writes as. It was previously "<name>, Chicago AI
+  // Group", which made the sample look like us pitching them.
   useEffect(() => {
-    setPreviewFrom(firstName.trim() ? `${firstName.trim()}, Chicago AI Group` : 'Your Name, Chicago AI Group');
-  }, [firstName]);
+    const who = firstName.trim();
+    const biz = bizName.trim();
+    if (who && biz)  setPreviewFrom(`${who} at ${biz}`);
+    else if (biz)    setPreviewFrom(biz);
+    else if (who)    setPreviewFrom(who);
+    else             setPreviewFrom('Your business');
+  }, [firstName, bizName]);
 
   // Clean up on unmount
   useEffect(() => () => {
@@ -285,6 +367,22 @@ export default function TryItFree() {
     // Bot filled the hidden field: show the normal confirmation, send nothing.
     if (honeypot) { markSubmitted(); return; }
 
+    // The four business inputs the sample cannot be written without.
+    const errs = {};
+    if (!bizName.trim())        errs.bizName = 'We sign the emails with this.';
+    if (!bizType)               errs.bizType = 'Pick the closest one.';
+    if (bizType === OTHER_INDUSTRY && !bizTypeOther.trim())
+                                errs.bizTypeOther = 'Tell us in a few words.';
+    if (!bottleneck)            errs.bottleneck = 'Pick the closest one.';
+    if (bottleneck === OTHER_BOTTLENECK && !bottleneckOther.trim())
+                                errs.bottleneckOther = 'Tell us in a few words.';
+    if (!typicalInbound.trim()) errs.typicalInbound = 'We invent the sample customer from this.';
+    setStep2Errors(errs);
+    if (Object.keys(errs).length) {
+      cardRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      return;
+    }
+
     setSubmitError(false);
     setPreviewVisible(false);
     setIsSubmitting(true);
@@ -295,17 +393,41 @@ export default function TryItFree() {
         headers: { 'Content-Type': 'application/json' },
         // Survives the visitor closing the tab the instant they hit submit.
         keepalive: true,
+        // RULES FOR THE MAKE SCENARIO THAT WRITES THE THREE EMAILS.
+        // These cannot be enforced here -- the model prompt lives in Make, not in this
+        // repo -- so the scenario has to carry them. Keep this list and the prompt in
+        // step.
+        //
+        //   FROM     business_name. Sign off as that business, never as a person here.
+        //   TO       a fictional inbound lead invented from typical_inbound + industry.
+        //            Give them a first name. They are NOT the visitor.
+        //   ABOUT    the inquiry described in typical_inbound.
+        //   SITUATION flavoured by bottleneck (after-hours form, slow reply, quote
+        //            delay, no-show, junk lead). Never say the bottleneck back to the
+        //            visitor -- it picks the scene, it is not a talking point.
+        //   VOICE    from notes and website when present.
+        //   EMAIL 3  may offer times or ask a simple question. It may not sell us.
+        //
+        // Never, inside the three samples: address the visitor as if they were the
+        // customer, use first_name as the recipient, mention Chicago AI Group, pricing,
+        // strategy calls or "AI sales agent", or imply we mailed their real list.
+        //
+        // Keys below are what Make already maps -- do not rename them. typical_inbound
+        // and lead_source_detail are additive.
         body: JSON.stringify({
-          email:         email.trim(),
-          first_name:    firstName.trim(),
-          business_name: bizName.trim(),
+          email:              email.trim(),
+          first_name:         firstName.trim(),
+          business_name:      bizName.trim(),
           industry,
-          bottleneck,
-          current_tools: currentTools.trim(),
-          website:       normalizeUrl(website),
-          notes:         notes.trim(),
-          submitted_at:  new Date().toISOString(),
-          page_url:      window.location.href,
+          bottleneck:         bottleneckLabel,
+          bottleneck_notes:   bottleneck === OTHER_BOTTLENECK ? bottleneckOther.trim() : '',
+          typical_inbound:    typicalInbound.trim(),
+          current_tools:      currentTools.trim(),
+          website:            normalizeUrl(website),
+          notes:              notes.trim(),
+          lead_source_detail: 'Try It Free Form',
+          submitted_at:       new Date().toISOString(),
+          page_url:           window.location.href,
           ...getAttribution(),
         }),
       });
@@ -328,10 +450,13 @@ export default function TryItFree() {
     setFirstName(''); setFirstNameError(false);
     setEmail('');     setEmailError(false);
     setBizName(''); setBizType(''); setBizTypeOther('');
-    setBottleneck(''); setCurrentTools(''); setWebsite(''); setNotes('');
+    setBottleneck(''); setBottleneckOther(''); setTypicalInbound('');
+    setCurrentTools(''); setWebsite(''); setNotes('');
+    setStep2Errors({});
     setPreviewVisible(false);
     setPreviewBodyHtml(PLACEHOLDER_BODY);
-    setPreviewSubject('Quick question about your inquiry');
+    setPreviewSubject('Thanks for your inquiry');
+    setPreviewFrom('Your business');
     hasScrolledToPreview.current = false;
     setIsSubmitting(false);
     setSubmitError(false);
@@ -543,7 +668,10 @@ export default function TryItFree() {
         }
         .tif-input::placeholder,.tif-textarea::placeholder { color:var(--text-3); }
         .tif-input:focus,.tif-select:focus,.tif-textarea:focus { border-color:var(--blue);box-shadow:0 0 0 3px var(--blue-soft); }
-        .tif-input.invalid,.tif-textarea.invalid { border-color:#f87171; }
+        .tif-input.invalid,.tif-textarea.invalid,.tif-select.invalid { border-color:#f87171; }
+        /* Helper text under a field. Sits above the error so the two never swap places
+           when validation fires -- the field must not jump as you fill it in. */
+        .tif-field-hint { font-size:.75rem;color:var(--text-3);margin-top:6px;line-height:1.5; }
         .tif-textarea { resize:none;line-height:1.6; }
         .tif-select {
           cursor:pointer;
@@ -720,18 +848,18 @@ export default function TryItFree() {
                 <span className="tif-label-dot" />
                 Sample emails — no credit card
               </div>
-              <h1 className="tif-h1">See what the<br/>follow-up<br/><em>sounds like.</em></h1>
+              <h1 className="tif-h1">See what an AI follow-up<br/>to your next lead<br/><em>would say.</em></h1>
               <p className="tif-sub tif-sub-tight">
-                Tell us what you do. We&rsquo;ll write three short follow-up emails as if a customer just asked for a quote, and send them to you.
+                Tell us what you do. We&rsquo;ll write three short emails as if someone just asked you for a quote, and send them to you.
               </p>
               <p className="tif-sub">
-                This is only a preview in your inbox. We don&rsquo;t email your customers or turn anything on.
+                They&rsquo;re an example of the agent writing in your voice. Preview only &mdash; we don&rsquo;t email your customers.
               </p>
               <div className="tif-proof">
                 {[
-                  'First email in your inbox in under 60 seconds',
-                  'Written for your business — not a generic template',
-                  'Three emails over a few days — unsubscribe anytime',
+                  'Written by AI as your business, to a new lead',
+                  'Based on what you tell us — not a generic template',
+                  'Three emails to your inbox — unsubscribe anytime',
                   'Preview only. Nothing goes to your customers.',
                 ].map((item, i) => (
                   <div className="tif-proof-item" key={i}>
@@ -766,7 +894,7 @@ export default function TryItFree() {
                 {/* Panel 1 -- Email */}
                 <div className={`tif-panel ${step === 1 ? 'active' : ''}`}>
                   <div className="tif-form-title">Where should we send it?</div>
-                  <div className="tif-form-sub">Two fields. Next step is your business so we can write the emails.</div>
+                  <div className="tif-form-sub">Two fields. Next you&rsquo;ll tell us about the business so the AI can write as you.</div>
                   <div className="tif-field">
                     <label className="tif-label-text" htmlFor="tif-first-name">First Name</label>
                     <input
@@ -810,41 +938,67 @@ export default function TryItFree() {
                 <div className={`tif-panel ${step === 2 ? 'active' : ''}`}>
                   <button type="button" className="tif-btn-back" onClick={() => setStep(1)}>&larr; Back</button>
                   <div className="tif-form-title">Tell us about your business</div>
-                  <div className="tif-form-sub">All optional — but the more you share, the more the emails will sound like you.</div>
+                  <div className="tif-form-sub">We use this to write as you, to a customer who just inquired. Not a pitch to you.</div>
 
                   <div className="tif-field-row">
                     <div className="tif-field">
-                      <label className="tif-label-text" htmlFor="tif-biz-name">Company Name</label>
-                      <input id="tif-biz-name" type="text" className="tif-input" placeholder="e.g. Apex Roofing" autoComplete="organization" maxLength={80} value={bizName} onChange={e => setBizName(e.target.value)} />
+                      <label className="tif-label-text" htmlFor="tif-biz-name">Your company name</label>
+                      <input id="tif-biz-name" type="text" className={`tif-input${step2Errors.bizName ? ' invalid' : ''}`} placeholder="e.g. Apex Roofing" autoComplete="organization" maxLength={80} value={bizName}
+                        onChange={e => { setBizName(e.target.value); setStep2Errors(p => ({ ...p, bizName: null })); }} />
+                      <div className={`tif-field-error${step2Errors.bizName ? ' show' : ''}`}>{step2Errors.bizName}</div>
                     </div>
                     <div className="tif-field">
-                      <label className="tif-label-text" htmlFor="tif-biz-type">Industry</label>
-                      <select id="tif-biz-type" className="tif-select" value={bizType} onChange={e => setBizType(e.target.value)}>
+                      <label className="tif-label-text" htmlFor="tif-biz-type">What kind of business?</label>
+                      <select id="tif-biz-type" className={`tif-select${step2Errors.bizType ? ' invalid' : ''}`} value={bizType}
+                        onChange={e => { setBizType(e.target.value); setStep2Errors(p => ({ ...p, bizType: null })); }}>
                         <option value="" disabled>Select one</option>
                         {INDUSTRIES.map(opt => (<option key={opt}>{opt}</option>))}
                       </select>
+                      <div className={`tif-field-error${step2Errors.bizType ? ' show' : ''}`}>{step2Errors.bizType}</div>
                     </div>
                   </div>
 
                   {bizType === OTHER_INDUSTRY && (
                     <div className="tif-field">
                       <label className="tif-label-text" htmlFor="tif-biz-type-other">What industry are you in?</label>
-                      <input id="tif-biz-type-other" type="text" className="tif-input" placeholder="e.g. Commercial landscaping" maxLength={60} autoFocus value={bizTypeOther} onChange={e => setBizTypeOther(e.target.value)} />
+                      <input id="tif-biz-type-other" type="text" className={`tif-input${step2Errors.bizTypeOther ? ' invalid' : ''}`} placeholder="e.g. Commercial landscaping" maxLength={60} autoFocus value={bizTypeOther}
+                        onChange={e => { setBizTypeOther(e.target.value); setStep2Errors(p => ({ ...p, bizTypeOther: null })); }} />
+                      <div className={`tif-field-error${step2Errors.bizTypeOther ? ' show' : ''}`}>{step2Errors.bizTypeOther}</div>
                     </div>
                   )}
 
                   <div className="tif-field">
-                    <label className="tif-label-text" htmlFor="tif-bottleneck">Biggest bottleneck right now</label>
-                    <select id="tif-bottleneck" className="tif-select" value={bottleneck} onChange={e => setBottleneck(e.target.value)}>
+                    <label className="tif-label-text" htmlFor="tif-bottleneck">Where do leads slip?</label>
+                    <select id="tif-bottleneck" className={`tif-select${step2Errors.bottleneck ? ' invalid' : ''}`} value={bottleneck}
+                      onChange={e => { setBottleneck(e.target.value); setStep2Errors(p => ({ ...p, bottleneck: null })); }}>
                       <option value="" disabled>Select one</option>
                       {BOTTLENECKS.map(opt => (<option key={opt}>{opt}</option>))}
                     </select>
+                    <div className="tif-field-hint">This shapes the scenario (what the fake customer asked for). We still write to them, not to you.</div>
+                    <div className={`tif-field-error${step2Errors.bottleneck ? ' show' : ''}`}>{step2Errors.bottleneck}</div>
+                  </div>
+
+                  {bottleneck === OTHER_BOTTLENECK && (
+                    <div className="tif-field">
+                      <label className="tif-label-text" htmlFor="tif-bottleneck-other">Where do they slip?</label>
+                      <input id="tif-bottleneck-other" type="text" className={`tif-input${step2Errors.bottleneckOther ? ' invalid' : ''}`} placeholder="e.g. We quote fast but never chase" maxLength={80} autoFocus value={bottleneckOther}
+                        onChange={e => { setBottleneckOther(e.target.value); setStep2Errors(p => ({ ...p, bottleneckOther: null })); }} />
+                      <div className={`tif-field-error${step2Errors.bottleneckOther ? ' show' : ''}`}>{step2Errors.bottleneckOther}</div>
+                    </div>
+                  )}
+
+                  <div className="tif-field">
+                    <label className="tif-label-text" htmlFor="tif-typical-inbound">Who usually contacts you, and what do they want?</label>
+                    <input id="tif-typical-inbound" type="text" className={`tif-input${step2Errors.typicalInbound ? ' invalid' : ''}`} placeholder="e.g. homeowner asking for a roofing quote" maxLength={160} value={typicalInbound}
+                      onChange={e => { setTypicalInbound(e.target.value); setStep2Errors(p => ({ ...p, typicalInbound: null })); }} />
+                    <div className="tif-field-hint">We invent the sample customer from this. We still email you, not them.</div>
+                    <div className={`tif-field-error${step2Errors.typicalInbound ? ' show' : ''}`}>{step2Errors.typicalInbound}</div>
                   </div>
 
                   <div className="tif-field-row">
                     <div className="tif-field">
                       <label className="tif-label-text" htmlFor="tif-tools">
-                        CRM or Tools <span className="tif-label-opt">(if any)</span>
+                        CRM or Tools <span className="tif-label-opt">(optional)</span>
                       </label>
                       <input id="tif-tools" type="text" className="tif-input" placeholder="e.g. HubSpot, or none yet" maxLength={80} value={currentTools} onChange={e => setCurrentTools(e.target.value)} />
                     </div>
@@ -858,17 +1012,18 @@ export default function TryItFree() {
 
                   <div className="tif-field">
                     <label className="tif-label-text" htmlFor="tif-notes">
-                      Anything else you'd like us to know? <span className="tif-label-opt">(optional)</span>
+                      How you sound <span className="tif-label-opt">(optional)</span>
                     </label>
                     <textarea
                       id="tif-notes"
                       className="tif-textarea"
                       rows={3}
                       maxLength={300}
-                      placeholder="e.g. Most of our leads come from homeowners who requested a quote after a storm. Our average job is $12,000."
+                      placeholder="e.g. Plain and direct, no fluff. We always mention the 10-year workmanship warranty."
                       value={notes}
                       onChange={e => setNotes(e.target.value)}
                     />
+                    <div className="tif-field-hint">Anything about how you sound. No need to repeat where leads slip.</div>
                     <div className={`tif-char-counter${charLen > 240 ? ' near' : ''}`}>{charLen} / 300</div>
                   </div>
 
@@ -906,9 +1061,9 @@ export default function TryItFree() {
                 <div className={`tif-panel ${step === 3 ? 'active' : ''}`}>
                   <div className="tif-success">
                     <div className="tif-success-icon">{'\uD83D\uDE80'}</div>
-                    <div className="tif-success-title">Your first email is on the way</div>
+                    <div className="tif-success-title">Your first sample is on the way</div>
                     <div className="tif-success-sub">
-                      We&rsquo;re writing them now, {name}. Check {email} — the first one is on its way. These are samples for you to read. Nothing goes to your customers.
+                      We&rsquo;re writing them now, {name}. Check {email} &mdash; the first one is on its way. They&rsquo;re examples of follow-ups to a lead, written as {bizName.trim() || 'your business'}. We have not emailed your customers.
                     </div>
                     <div className="tif-timeline">
                       {[
@@ -925,7 +1080,7 @@ export default function TryItFree() {
                         </div>
                       ))}
                     </div>
-                    <p className="tif-upsell">Want this working on your real leads? Book a strategy call.</p>
+                    <p className="tif-upsell">Want this on real leads? Book a strategy call.</p>
                     <a className="tif-btn" href={EXTERNAL_URLS.appointments} target="_blank" rel="noopener noreferrer" style={{display:'block',textDecoration:'none',textAlign:'center'}}>
                       Book a strategy call
                     </a>
@@ -942,7 +1097,15 @@ export default function TryItFree() {
                   <div className="tif-preview-dot" />
                   Live Preview — Email 1
                 </div>
-                <EmailPreview from={previewFrom} subject={previewSubject} bodyHtml={previewBodyHtml} />
+                {/* To: names the invented customer, so it is visible at a glance that
+                    the sample is addressed to a lead and not to the visitor. */}
+                <EmailPreview
+                  from={previewFrom}
+                  to={`${scenarioFor(industry).lead} (sample lead)`}
+                  subject={previewSubject}
+                  bodyHtml={previewBodyHtml}
+                  footnote="Sample only — written as your business to a made-up customer. Nothing is sent to your real leads."
+                />
               </div>
             </div>
           </section>
