@@ -459,6 +459,10 @@ export default function TryItFree() {
           -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
         }
         .tif-sub { font-size:1.05rem;line-height:1.7;color:var(--text-2);max-width:420px;margin-bottom:40px;font-weight:300;animation:tifFadeUp .6s .2s ease both; }
+        /* The hero carries two paragraphs now -- the intro, then the "preview only"
+           note. Same size and colour on purpose: the note is the reassurance people
+           are looking for, so it should not read as dimmed small print. */
+        .tif-sub-tight { margin-bottom:14px; }
         .tif-proof { display:flex;flex-direction:column;gap:12px;animation:tifFadeUp .6s .3s ease both; }
         .tif-proof-item { display:flex;align-items:center;gap:10px;font-size:.85rem;color:var(--text-2); }
         .tif-proof-icon { width:20px;height:20px;border-radius:50%;background:var(--green-glow);border:1px solid rgba(34,211,160,.3);display:flex;align-items:center;justify-content:center;font-size:.65rem;color:var(--green);flex-shrink:0; }
@@ -690,18 +694,21 @@ export default function TryItFree() {
             <div className="tif-hero-left">
               <div className="tif-label">
                 <span className="tif-label-dot" />
-                Live Demo — No Credit Card
+                Sample emails — no credit card
               </div>
-              <h1 className="tif-h1">See AI<br/>follow-up<br/><em>in action.</em></h1>
+              <h1 className="tif-h1">See what the<br/>follow-up<br/><em>sounds like.</em></h1>
+              <p className="tif-sub tif-sub-tight">
+                Tell us what you do. We&rsquo;ll write three short follow-up emails as if a customer just asked for a quote, and send them to you.
+              </p>
               <p className="tif-sub">
-                Tell us about your business and we'll write a 3-email follow-up sequence for it and send it to your inbox. It's a preview of how your follow-ups would read — not the live meeting-booking system.
+                This is only a preview in your inbox. We don&rsquo;t email your customers or turn anything on.
               </p>
               <div className="tif-proof">
                 {[
-                  'First email arrives in under 60 seconds',
-                  'Personalized to your specific business — not a template',
-                  '3-touch sequence over 5 days — unsubscribe anytime',
-                  'Written the way your customers would actually receive it',
+                  'First email in your inbox in under 60 seconds',
+                  'Written for your business — not a generic template',
+                  'Three emails over a few days — unsubscribe anytime',
+                  'Preview only. Nothing goes to your customers.',
                 ].map((item, i) => (
                   <div className="tif-proof-item" key={i}>
                     <div className="tif-proof-icon">&#10003;</div>
@@ -735,7 +742,7 @@ export default function TryItFree() {
                 {/* Panel 1 -- Email */}
                 <div className={`tif-panel ${step === 1 ? 'active' : ''}`}>
                   <div className="tif-form-title">Where should we send it?</div>
-                  <div className="tif-form-sub">Just two things to get started — we'll personalize the sequence on the next step.</div>
+                  <div className="tif-form-sub">Two fields. Next step is your business so we can write the emails.</div>
                   <div className="tif-field">
                     <label className="tif-label-text" htmlFor="tif-first-name">First Name</label>
                     <input
@@ -768,7 +775,9 @@ export default function TryItFree() {
                   </div>
                   <button type="button" className="tif-btn" onClick={goStep1}>Continue &nbsp;&rarr;</button>
                   <div className="tif-legal">
-                    No spam. Unsubscribe in one click. By continuing you agree to receive<br/>a 3-email demo sequence from Chicago AI Group.<br/>
+                    {/* No hard break inside the sentence: it is a different length now,
+                        and forcing one strands a single word on its own line at 390px. */}
+                    No spam. Unsubscribe in one click. By continuing you agree to receive three sample emails from Chicago AI Group.<br/>
                     <Link to="/privacy">Privacy Policy</Link> &middot; <Link to="/terms">Terms of Use</Link>
                   </div>
                 </div>
@@ -777,7 +786,7 @@ export default function TryItFree() {
                 <div className={`tif-panel ${step === 2 ? 'active' : ''}`}>
                   <button type="button" className="tif-btn-back" onClick={() => setStep(1)}>&larr; Back</button>
                   <div className="tif-form-title">Tell us about your business</div>
-                  <div className="tif-form-sub">All optional — but the more you share, the more your demo emails will sound like you.</div>
+                  <div className="tif-form-sub">All optional — but the more you share, the more the emails will sound like you.</div>
 
                   <div className="tif-field-row">
                     <div className="tif-field">
@@ -849,14 +858,14 @@ export default function TryItFree() {
                   {submitError && (
                     <div className="tif-submit-error" role="alert">
                       <strong>That didn't go through.</strong> Your answers are still here &mdash; try again in a moment.
-                      If it keeps failing, email us at <a href="mailto:matt@chicagoaigroup.com">matt@chicagoaigroup.com</a> and we'll set your demo up by hand.
+                      If it keeps failing, email us at <a href="mailto:matt@chicagoaigroup.com">matt@chicagoaigroup.com</a> and we&rsquo;ll write them for you by hand.
                     </div>
                   )}
                   <button type="button" className="tif-btn" onClick={goStep3} disabled={isSubmitting}>
-                    {isSubmitting ? 'Sending\u2026' : submitError ? 'Try Again \u00a0\u2192' : 'Send my sample sequence \u00a0\u2192'}
+                    {isSubmitting ? 'Sending\u2026' : submitError ? 'Try Again \u00a0\u2192' : 'Send my sample emails \u00a0\u2192'}
                   </button>
                   <div className="tif-legal">
-                    Your information is never sold or shared. Used only to personalize your demo.<br/>
+                    Your information is never sold or shared. We use it only to write your emails.<br/>
                     <Link to="/privacy">Privacy Policy</Link> &middot; <Link to="/terms">Terms of Use</Link>
                   </div>
 
@@ -873,15 +882,15 @@ export default function TryItFree() {
                 <div className={`tif-panel ${step === 3 ? 'active' : ''}`}>
                   <div className="tif-success">
                     <div className="tif-success-icon">{'\uD83D\uDE80'}</div>
-                    <div className="tif-success-title">Your sample is on the way</div>
+                    <div className="tif-success-title">Your first email is on the way</div>
                     <div className="tif-success-sub">
-                      We're writing your sample sequence now, {name}. Check {email} — email 1 is on its way. This is preview copy, not a live agent on your leads.
+                      We&rsquo;re writing them now, {name}. Check {email} — the first one is on its way. These are samples for you to read. Nothing goes to your customers.
                     </div>
                     <div className="tif-timeline">
                       {[
-                        { badge: 'Now',   title: 'Email 1 — Personalized Intro',   desc: 'A warm, specific follow-up written by AI based on your business description' },
-                        { badge: 'Day 3', title: 'Email 2 — Different Angle',      desc: 'A second touch with a different approach — still sounds like a real person' },
-                        { badge: 'Day 5', title: 'Email 3 — Soft Close',           desc: 'A brief, honest final check-in that leaves the door open with zero pressure' },
+                        { badge: 'Now',   title: 'Email 1 — First reply',   desc: 'A short, specific reply written for what you do' },
+                        { badge: 'Day 3', title: 'Email 2 — A nudge',      desc: 'A second try from a different angle, still sounding like a person' },
+                        { badge: 'Day 5', title: 'Email 3 — Last check-in', desc: 'A brief final note that leaves the door open, no pressure' },
                       ].map((item, i) => (
                         <div className="tif-et" key={i}>
                           <span className="tif-et-badge">{item.badge}</span>
@@ -892,12 +901,12 @@ export default function TryItFree() {
                         </div>
                       ))}
                     </div>
-                    <p className="tif-upsell">Want this on live leads, not just a sample? Book a strategy call.</p>
+                    <p className="tif-upsell">Want this working on your real leads? Book a strategy call.</p>
                     <a className="tif-btn" href={EXTERNAL_URLS.appointments} target="_blank" rel="noopener noreferrer" style={{display:'block',textDecoration:'none',textAlign:'center'}}>
                       Book a strategy call
                     </a>
                     <button type="button" className="tif-btn-restart" onClick={startOver}>
-                      Send another sample &rarr;
+                      Send another set &rarr;
                     </button>
                   </div>
                 </div>
