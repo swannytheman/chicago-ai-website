@@ -117,9 +117,9 @@ function MainSite() {
           </FadeInSection>
           <FadeInSection delay={100}><h1 id="hero-heading" className="text-[2rem] sm:text-5xl md:text-7xl lg:text-8xl font-bold mb-5 md:mb-6 leading-[1.12] sm:leading-tight tracking-tight">AI That Books Meetings<br /><span className="text-gradient">While You Sleep</span></h1></FadeInSection>
           <FadeInSection delay={200}>
-            {/* Mobile gets who + we run it + timeline; the full paragraph returns at md. */}
-            <p className="md:hidden text-base text-zinc-300 max-w-2xl mx-auto mb-7 leading-relaxed">We build, train, and run an AI sales agent for service businesses that already get inbound leads. You take the meetings, and you&apos;re live in about 2–4 weeks.</p>
-            <p className="hidden md:block text-lg md:text-xl text-zinc-300 max-w-2xl mx-auto mb-10 leading-relaxed">For service businesses that already get inbound leads — insurance, home services, counseling, property management — we build, train, and run an AI sales agent that qualifies every inquiry and books the real ones into your calendar. Our Chicago team runs it, you take the meetings, and you&apos;re live in about 2–4 weeks.</p>
+            {/* One line at every width: it is short enough for the phone fold, so the
+                separate mobile variant this used to carry is no longer needed. */}
+            <p className="text-base md:text-xl text-zinc-300 max-w-2xl mx-auto mb-7 md:mb-10 leading-relaxed">We build and run an AI sales agent for service businesses that already get inbound leads. You take the meetings. Live in about 2–4 weeks.</p>
           </FadeInSection>
           <FadeInSection delay={300}>
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
