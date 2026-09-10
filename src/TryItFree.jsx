@@ -371,7 +371,19 @@ export default function TryItFree() {
           --green-glow: rgba(34,211,160,0.12);
           --r:          12px;
         }
-        html, body { overflow-x: hidden; overscroll-behavior-y: none; }
+        /* clip, not hidden. Per spec, setting one overflow axis to something other than
+           visible computes the other axis from visible to auto -- so overflow-x:hidden
+           quietly turned html, body and .tif-root into scroll containers on BOTH axes.
+           position:sticky pins to its nearest scrolling ancestor, so the nav was
+           sticking to .tif-root, which never scrolls (it just grows with its content)
+           while the document scrolled on html two levels up. The nav therefore scrolled
+           away and never came back, taking the only link back to the main site with it.
+           overflow-x:clip clips without creating a scrollport; the hidden declaration
+           before it is the fallback for browsers predating clip.
+
+           overscroll-behavior-y is gone with it: there is no inner scroller here to
+           chain from, and suppressing the rubber-band made touch scrolling feel stuck. */
+        html, body { overflow-x: hidden; overflow-x: clip; }
         body { background: #06090f; }
         .tif-root * { box-sizing: border-box; }
         .tif-root {
@@ -380,8 +392,8 @@ export default function TryItFree() {
           color: var(--text);
           min-height: 100vh;
           overflow-x: hidden;
+          overflow-x: clip;
           width: 100%;
-          overscroll-behavior-y: none;
         }
 
         /* -- BG ATMOSPHERE -- */
@@ -407,6 +419,12 @@ export default function TryItFree() {
           padding:20px 48px;
           border-bottom:1px solid var(--border);
           background:rgba(6,9,15,0.8);
+          /* Hand-prefixed: this stylesheet is injected as a runtime <style> tag, so
+             PostCSS and autoprefixer never see it. iOS Safari needed -webkit- here
+             until 18, and without the blur this bar is only 80% opaque -- which did
+             not show while the nav was wrongly scrolling away, but does now that
+             content passes underneath it. */
+          -webkit-backdrop-filter:blur(20px);
           backdrop-filter:blur(20px);
           position:sticky;top:0;z-index:100;
         }
