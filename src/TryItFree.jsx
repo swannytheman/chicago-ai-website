@@ -533,7 +533,7 @@ export default function TryItFree() {
         /* Keep paired inputs on a shared baseline even when one label wraps */
         .tif-field-row .tif-field { display:flex;flex-direction:column; }
         .tif-field-row .tif-input, .tif-field-row .tif-select { margin-top:auto; }
-        .tif-char-counter { display:flex;justify-content:flex-end;font-size:.72rem;color:var(--text-3);margin-top:6px;font-family:'DM Mono',monospace;transition:color .2s; }
+        .tif-char-counter { display:flex;justify-content:flex-end;font-size:.72rem;color:var(--text-3);margin-top:6px;font-family:var(--cag-mono);transition:color .2s; }
         .tif-char-counter.near { color:var(--blue-hi); }
         .tif-field-error { font-size:.75rem;color:#f87171;margin-top:6px;display:none; }
         .tif-field-error.show { display:block; }
@@ -620,7 +620,7 @@ export default function TryItFree() {
         .tif-et:nth-child(1){animation-delay:.2s}
         .tif-et:nth-child(2){animation-delay:.35s}
         .tif-et:nth-child(3){animation-delay:.5s}
-        .tif-et-badge { background:var(--blue-soft);border:1px solid rgba(16,185,129,.2);color:var(--blue-hi);font-family:'DM Mono',monospace;font-size:.68rem;padding:3px 10px;border-radius:100px;white-space:nowrap;flex-shrink:0;margin-top:2px; }
+        .tif-et-badge { background:var(--blue-soft);border:1px solid rgba(16,185,129,.2);color:var(--blue-hi);font-family:var(--cag-mono);font-size:.68rem;padding:3px 10px;border-radius:100px;white-space:nowrap;flex-shrink:0;margin-top:2px; }
         .tif-et-strong { display:block;font-size:.84rem;color:var(--text);margin-bottom:2px; }
         .tif-et-span   { font-size:.78rem;color:var(--text-3); }
 

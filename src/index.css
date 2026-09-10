@@ -2,6 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  /* The one mono stack for the whole site. Three elements use a monospace face --
+     the From:/To:/Subject: labels on the email preview, the textarea character
+     counter, and the Now/Day 3/Day 5 badges -- and they used to declare it three
+     slightly different ways, two of which ended in bare `monospace`. Bare
+     `monospace` is the browser's default fixed face, which is Courier New on
+     Windows, so the same site rendered two different mono faces depending on which
+     element you looked at. `ui-monospace` first gets the modern system face
+     (SF Mono, Cascadia Mono); the rest are named fallbacks in OS order.
+
+     Deliberately not a webfont: this is ~30 characters of chrome sitewide, and
+     DM Mono -- which the CSS asked for but nothing ever loaded -- costs ~30KB
+     across two weights plus a render-blocking request to style them. */
+  --cag-mono: ui-monospace, 'Cascadia Mono', 'Segoe UI Mono', Menlo, Consolas, 'Liberation Mono', monospace;
+}
+
 html, body {
   background: #09090b;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
