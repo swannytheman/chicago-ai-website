@@ -119,7 +119,7 @@ function MainSite() {
           <FadeInSection delay={200}>
             {/* One line at every width: it is short enough for the phone fold, so the
                 separate mobile variant this used to carry is no longer needed. */}
-            <p className="text-base md:text-xl text-zinc-300 max-w-2xl mx-auto mb-7 md:mb-10 leading-relaxed">We build and run an AI sales agent for service businesses that already get inbound leads. You take the meetings. Live in about 2–4 weeks.</p>
+            <p className="text-base md:text-xl text-zinc-300 max-w-2xl mx-auto mb-7 md:mb-10 leading-relaxed">We build and run an AI sales agent for service businesses that already get inbound leads. We cultivate your leads, you take the meetings. Live in about 2 weeks.</p>
           </FadeInSection>
           <FadeInSection delay={300}>
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
