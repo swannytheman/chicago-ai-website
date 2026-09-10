@@ -429,7 +429,13 @@ export default function TryItFree() {
           padding:80px 48px 60px;
           max-width:1200px;margin:0 auto;
           display:grid;grid-template-columns:1fr 1fr;gap:80px;
-          align-items:start;min-height:calc(100vh - 77px);
+          /* Capped, not a bare 100vh. The hero's content settles around 780px, so on
+             anything taller than a laptop an uncapped viewport height just injected a
+             void between the form and the stats bar -- 285px at 1080p, 645px at 1440p --
+             and left the page with only ~210px of scroll however big the screen got.
+             The cap keeps the full-height feel where the viewport is near the content
+             height and stops the gap growing past it. */
+          align-items:start;min-height:min(calc(100vh - 77px), 780px);
         }
         .tif-hero-left { padding-top:20px; }
 
