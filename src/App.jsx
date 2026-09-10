@@ -33,7 +33,23 @@ function MainSite() {
   usePageMeta(PAGE_META.home);
   const [activeFaq, setActiveFaq] = useState(null);
   const [selectedTier, setSelectedTier] = useState(1);
+  const planRefs = useRef([]);
   const { hash } = useLocation();
+
+  // A radiogroup is expected to move selection with the arrow keys and expose a single
+  // tab stop; three plain tabbable buttons is not that pattern. Selection follows focus
+  // here, which is correct for radios and keeps the includes panel in step.
+  const onPlanKeyDown = useCallback((e, count) => {
+    const keys = { ArrowDown: 1, ArrowRight: 1, ArrowUp: -1, ArrowLeft: -1 };
+    let next = null;
+    if (e.key in keys) next = (selectedTier + keys[e.key] + count) % count;
+    else if (e.key === 'Home') next = 0;
+    else if (e.key === 'End') next = count - 1;
+    if (next === null) return;
+    e.preventDefault();
+    setSelectedTier(next);
+    planRefs.current[next]?.focus();
+  }, [selectedTier]);
 
   const scrollTo = useCallback((id) => {
     document.getElementById(sectionId(id))?.scrollIntoView({ behavior: 'smooth' });
@@ -54,18 +70,48 @@ function MainSite() {
     icon: Users,
     name: "Sales AI Agent",
     tagline: "A managed AI sales agent for businesses that live on inbound leads",
-    capabilities: [
-      "Replies to new website, form, and ad leads in under 60 seconds",
-      "Qualifies on job type, timing, and fit, so junk never reaches your calendar",
-      "Follows up by email in your voice — and by SMS on Pro and above — until they answer or opt out",
-      "Books the ones worth your time into the calendar you already use",
-      "Connects to the CRM and inbox you already use (Pro and Enterprise)",
-      "We monitor and tune it after go-live — there is no new dashboard to babysit"
-    ],
+    // `forWho` and `includes` live on the plan, not beside it. The section used to
+    // pair a plan picker with one frozen capability list that hedged the difference in
+    // parentheses ("SMS on Pro and above", "CRM ... (Pro and Enterprise)"), so choosing
+    // a plan changed the price and nothing else. These lines agree with the "How the
+    // plans differ" rows in #scope; keep the two in step if either changes.
     pricing: [
-      { tier: "Starter", monthly: "$179", setup: "$2,200", details: "One inbound source. Qualify, follow up, book." },
-      { tier: "Pro", monthly: "$399", setup: "$3,500", details: "Sequences, scoring, and CRM sync on top of Starter.", popular: true },
-      { tier: "Enterprise", monthly: "$649", setup: "$5,900", details: "More sources and locations, copy tests, priority support." }
+      {
+        tier: "Starter", monthly: "$179", setup: "$2,200",
+        details: "One inbound source. Qualify, follow up, book.",
+        forWho: "Your first inbound source — an owner-led service business that just needs follow-up on.",
+        includes: [
+          "One inbound lead source (form, ad inbox, or email)",
+          "First reply in under 60 seconds",
+          "Qualify rules, and booking into the calendar you already use",
+          "Email follow-up",
+          "We monitor it after go-live"
+        ]
+      },
+      {
+        tier: "Pro", monthly: "$399", setup: "$3,500",
+        details: "Sequences, scoring, and CRM sync on top of Starter.", popular: true,
+        forWho: "Teams that already have a CRM, or want SMS and longer sequences.",
+        includes: [
+          "Everything in Starter",
+          "Longer follow-up sequences",
+          "SMS, if you want it and have permission",
+          "Lead scoring",
+          "Sync to the CRM you already use"
+        ]
+      },
+      {
+        tier: "Enterprise", monthly: "$649", setup: "$5,900",
+        details: "More sources and locations, copy tests, priority support.",
+        forWho: "More than one location, brand, or lead source.",
+        includes: [
+          "Everything in Pro",
+          "Additional inbound sources and locations",
+          "Copy tests",
+          "Priority check-ins",
+          "Not cold outbound — more of your existing inbound channels"
+        ]
+      }
     ]
   }), []);
 
@@ -414,15 +460,23 @@ function MainSite() {
                 </div>
                 <div className="grid lg:grid-cols-2 gap-8">
                   <div>
-                    <h4 className="text-xs uppercase tracking-widest text-zinc-500 mb-6 flex items-center gap-2"><Sparkles className="w-4 h-4" aria-hidden="true" /> What It Does For You</h4>
-                    <ul className="space-y-3">
-                      {salesAgent.capabilities.map((cap, idx) => (
-                        <li key={idx} className="flex items-center gap-4 border border-white/5 bg-white/[0.02] rounded-xl p-4 transition hover:bg-white/5">
-                          <div className="w-8 h-8 bg-emerald-500/15 rounded-lg flex items-center justify-center flex-shrink-0"><Check className="w-4 h-4 text-emerald-400" aria-hidden="true" /></div>
-                          <span>{cap}</span>
-                        </li>
-                      ))}
-                    </ul>
+                    {/* Named region rather than a bare list: the heading carries the plan
+                        name, so the region's accessible name changes with the selection and
+                        the radios below point at it via aria-controls. */}
+                    <h4 id="plan-includes-heading" className="text-xs uppercase tracking-widest text-zinc-500 mb-4 flex items-center gap-2"><Sparkles className="w-4 h-4" aria-hidden="true" /> What {selectedPlan.tier} Includes</h4>
+                    <div id="plan-includes" role="region" aria-labelledby="plan-includes-heading">
+                      <p className="text-sm text-zinc-400 leading-relaxed mb-5">
+                        <span className="text-zinc-500">Best for: </span>{selectedPlan.forWho}
+                      </p>
+                      <ul className="space-y-3">
+                        {selectedPlan.includes.map((item, idx) => (
+                          <li key={idx} className="flex items-center gap-4 border border-white/5 bg-white/[0.02] rounded-xl p-4 transition hover:bg-white/5">
+                            <div className="w-8 h-8 bg-emerald-500/15 rounded-lg flex items-center justify-center flex-shrink-0"><Check className="w-4 h-4 text-emerald-400" aria-hidden="true" /></div>
+                            <span>{item}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
                   </div>
                   <div>
                     <h4 className="text-xs uppercase tracking-widest text-zinc-500 mb-6">Choose Your Plan</h4>
@@ -430,7 +484,18 @@ function MainSite() {
                       {salesAgent.pricing.map((plan, idx) => {
                         const isSelected = selectedTier === idx;
                         return (
-                          <button key={idx} onClick={() => setSelectedTier(idx)} className={`w-full rounded-2xl p-5 flex items-center justify-between transition-all duration-300 cursor-pointer ${isSelected ? 'bg-white text-black shadow-lg shadow-white/10' : 'card hover:bg-white/5'}`} type="button" role="radio" aria-checked={isSelected}>
+                          <button
+                            key={idx}
+                            ref={el => { planRefs.current[idx] = el; }}
+                            onClick={() => setSelectedTier(idx)}
+                            onKeyDown={e => onPlanKeyDown(e, salesAgent.pricing.length)}
+                            className={`w-full rounded-2xl p-5 flex items-center justify-between transition-all duration-300 cursor-pointer ${isSelected ? 'bg-white text-black shadow-lg shadow-white/10' : 'card hover:bg-white/5'}`}
+                            type="button"
+                            role="radio"
+                            aria-checked={isSelected}
+                            aria-controls="plan-includes"
+                            tabIndex={isSelected ? 0 : -1}
+                          >
                             <div className="text-left">
                               <div className="flex items-center gap-2">
                                 <span className="font-bold text-lg">{plan.tier}</span>
