@@ -1067,7 +1067,7 @@ export default function TryItFree() {
                     </div>
                     <div className="tif-timeline">
                       {[
-                        { badge: 'Now',   title: 'Email 1 — First reply',   desc: 'A short, specific reply written for what you do' },
+                        { badge: '~5 min', title: 'Email 1 — First reply',  desc: 'A short, specific reply written for what you do' },
                         { badge: 'Day 3', title: 'Email 2 — A nudge',      desc: 'A second try from a different angle, still sounding like a person' },
                         { badge: 'Day 5', title: 'Email 3 — Last check-in', desc: 'A brief final note that leaves the door open, no pressure' },
                       ].map((item, i) => (
@@ -1113,11 +1113,15 @@ export default function TryItFree() {
           {/* STATS BAR */}
           <div className="tif-stats">
             {/* `sr` spells the same figure out for screen readers, where "5+" and
-                "<60s" read poorly. The visible label is unchanged. */}
+                "~5 min" read poorly. The visible label is unchanged.
+
+                Rows 1, 2 and 4 are third-party statistics about follow-up generally.
+                Row 3 is OUR number, so it tracks the real automation -- about five
+                minutes, not the sub-minute figure this used to claim. */}
             {[
               { num: 80, suffix: '%', prefix: '',  label: 'of sales need 5+ follow-ups',      sr: '80% of sales need 5 or more follow-ups' },
               { num: 44, suffix: '%', prefix: '',  label: 'of reps give up after 1 attempt',  sr: '44% of reps give up after 1 attempt' },
-              { num: 60, suffix: 's', prefix: '<', label: 'average response time',            sr: 'Under 60 seconds average response time' },
+              { num: 5,  suffix: ' min', prefix: '~', label: 'typical first reply',           sr: 'Typically within 5 minutes to first reply' },
               { num: 3,  suffix: 'x', prefix: '',  label: 'more replies vs manual follow-up', sr: '3x more replies versus manual follow-up' },
             ].map((s, i) => (
               <div className="tif-stat" key={i} role="group" aria-label={s.sr}>

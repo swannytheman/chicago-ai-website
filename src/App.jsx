@@ -82,7 +82,7 @@ function MainSite() {
         forWho: "Your first inbound source — an owner-led service business that just needs follow-up on.",
         includes: [
           "One inbound lead source (form, ad inbox, or email)",
-          "First reply in under 60 seconds",
+          "First reply typically within 5 minutes",
           "Qualify rules, and booking into the calendar you already use",
           "Email follow-up",
           "We monitor it after go-live"
@@ -125,8 +125,8 @@ function MainSite() {
     { q: "Is this software we log into, or do you run it for us?", a: "We run it. We build the agent, train it on how you talk to customers, connect it to your calendar and inbox, and keep managing it after go-live. You approve how it sounds and you take the meetings. There is no tool for your team to learn and nothing technical for you to do — most of our clients are owners, not engineers." },
     { q: "Who is this for, and who is it not for?", a: "It is for service businesses that already get inbound leads and lose some of them to slow follow-up — commercial insurance, home services and trades, counseling and group practices, property management, and similar appointment businesses. It is not a fit if you have no inbound demand yet, or if what you actually need is a custom CRM rebuild." },
     { q: "What can the agent actually do on day one?", a: "Reply to your inbound leads, qualify them on things like job type, timing and fit, follow up by email (SMS on Pro and above), and book the ones worth your time into your calendar. Which channels it covers is set on the strategy call. It only ever contacts people who already reached out to you." },
-    { q: "What does the 60-day guarantee actually cover?", a: "Two things we operate: a first response under 60 seconds on inbound leads wired into the agent, and follow-up plus a meeting offer for leads that meet the qualify rules we set with you. The 60 days starts when the agent goes live on your real lead flow, not at the kickoff call. Miss either and you get the setup fee and every monthly fee back. It does not guarantee a number of closed deals or a volume of new leads — if the leads are not coming in, that is not something the agent can fix." },
-    { q: "What do you actually turn on in the first month?", a: "One inbound source you already have, a first reply in under 60 seconds, the qualify rules we write with you, and booking into the calendar you already use. Pro and Enterprise add the extra channels and systems we name on the call. We do not turn on the whole internet in week four." },
+    { q: "What does the 60-day guarantee actually cover?", a: "Two things we operate: a first response typically within 5 minutes on inbound leads wired into the agent, and follow-up plus a meeting offer for leads that meet the qualify rules we set with you. The 60 days starts when the agent goes live on your real lead flow, not at the kickoff call. Miss either and you get the setup fee and every monthly fee back. It does not guarantee a number of closed deals or a volume of new leads — if the leads are not coming in, that is not something the agent can fix." },
+    { q: "What do you actually turn on in the first month?", a: "One inbound source you already have, a first reply typically within 5 minutes, the qualify rules we write with you, and booking into the calendar you already use. Pro and Enterprise add the extra channels and systems we name on the call. We do not turn on the whole internet in week four." },
     { q: "How fast can I get started?", a: "Most clients are live within 2-4 weeks. We move fast because we know your time is money. After a quick discovery call, we get to work immediately." },
     { q: "Will the AI sound like a robot?", a: "No. We train each AI on your business, your tone, and your way of talking to customers. People often can't tell they're chatting with AI—that's the whole point." },
     { q: "What if something goes wrong?", a: "We've got your back. All plans include support, and Pro/Enterprise clients get priority access plus regular check-ins to make sure everything runs smoothly." }
@@ -235,7 +235,7 @@ function MainSite() {
           <div className="grid md:grid-cols-3 gap-8 relative">
             <div className="hidden md:block absolute top-16 left-[16.666%] right-[16.666%] h-px bg-gradient-to-r from-emerald-500/20 via-emerald-400/40 to-emerald-500/20" aria-hidden="true" />
             {[
-              { icon: Zap, phase: 'CAPTURE', title: 'Detect Every Lead, Instantly', desc: 'Your agent watches the places your leads actually come from — website forms, ad leads, inbound email, missed calls — and replies within seconds, day or night.' },
+              { icon: Zap, phase: 'CAPTURE', title: 'Detect Every Lead, Day or Night', desc: 'Your agent watches the places your leads actually come from — website forms, ad leads, inbound email, missed calls — and replies within a few minutes, around the clock.' },
               { icon: MessageSquare, phase: 'NURTURE', title: 'Build Trust on Autopilot', desc: 'Follow-ups go out by email, and by SMS on Pro and above, written in your voice, and keep going until they reply or opt out. Only people who already contacted you ever get one.' },
               { icon: Calendar, phase: 'CLOSE', title: 'Book Ready-to-Buy Meetings', desc: 'Only leads that pass qualifying reach your calendar, and the whole conversation comes with them. Your team walks in already knowing the context.' },
             ].map((item, idx) => (
@@ -280,7 +280,7 @@ function MainSite() {
             <div className="grid md:grid-cols-3 gap-5 mb-16">
               {[
                 { stat: '35%', label: 'increase in closed deals', detail: 'Luigi Trucking Insurance' },
-                { stat: '<60 sec', label: 'first response to every lead', detail: 'How every agent we build is configured' },
+                { stat: '~5 min', label: 'first response to every lead', detail: 'How every agent we build is configured' },
                 { stat: '2–4 wks', label: 'from kickoff to fully live', detail: 'Typical implementation' },
               ].map((item, idx) => (
                 <div key={idx} className="card rounded-2xl p-8 text-center cursor-default">
@@ -361,7 +361,7 @@ function MainSite() {
                 <ol className="space-y-5">
                   {[
                     { t: 'Lead intake', d: 'One inbound source you already have: a website form, an ad lead inbox, or a shared email address. We wire it so a new inquiry is seen the moment it lands.' },
-                    { t: 'First response', d: 'The agent replies in under 60 seconds, in your voice, to that source.' },
+                    { t: 'First response', d: 'The agent replies typically within 5 minutes, in your voice, to that source.' },
                     { t: 'Qualify', d: 'A short rule set we write with you — service type, area, timing, fit. Bad-fit leads get a polite close, not your calendar.' },
                     { t: 'Book', d: 'Qualified leads get a link to the calendar you already use, or a hold you confirm.' },
                   ].map((item, i) => (
@@ -394,7 +394,7 @@ function MainSite() {
                     </li>
                   ))}
                 </ul>
-                <p className="text-sm text-zinc-500 leading-relaxed mt-6 pt-6 border-t border-white/10">If a source is not connected, it is not covered by the 60-second guarantee.</p>
+                <p className="text-sm text-zinc-500 leading-relaxed mt-6 pt-6 border-t border-white/10">If a source is not connected, it is not covered by the 5-minute guarantee.</p>
               </div>
             </FadeInSection>
           </div>
@@ -536,12 +536,12 @@ function MainSite() {
                 <Shield className="w-7 h-7 text-emerald-400" aria-hidden="true" />
               </div>
               <h2 id="guarantee-heading" className="text-4xl md:text-5xl font-bold tracking-tight mb-6">Results Guarantee</h2>
-              <p className="text-xl md:text-2xl text-white leading-relaxed mb-12 max-w-2xl mx-auto">We guarantee the part we operate: inbound leads wired into your agent get a first response in under 60 seconds, and leads that meet your qualify rules get followed up and offered a meeting.</p>
+              <p className="text-xl md:text-2xl text-white leading-relaxed mb-12 max-w-2xl mx-auto">We guarantee the part we operate: inbound leads wired into your agent get a first response typically within 5 minutes, and leads that meet your qualify rules get followed up and offered a meeting.</p>
 
               <div className="grid md:grid-cols-3 gap-8 md:gap-6 text-left">
                 {[
                   { title: 'What you get', items: [
-                    'New inbound leads wired into the agent get a first response in under 60 seconds.',
+                    'New inbound leads wired into the agent get a first response typically within 5 minutes.',
                     'Leads that meet the qualify rules we set together get followed up and offered a time on your calendar.',
                     'We build it, train it on your voice, and monitor it. You take the meetings.',
                   ] },
