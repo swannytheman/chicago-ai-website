@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 70" fill="#fff">
+  <circle cx="35" cy="35" r="33" fill="#fff"/>
+  <circle cx="35" cy="35" r="28" fill="none"/>
+  <path d="M35 10 C30 10, 22 20, 22 30 C22 36, 26 40, 35 40 C44 40, 48 36, 48 30 C48 20, 40 10, 35 10Z" fill="#111"/>
+  <path d="M22 24 C18 16, 20 8, 26 8 C28 8, 28 10, 27 13 C26 17, 23 20, 22 24Z" fill="#111"/>
+  <path d="M48 24 C52 16, 50 8, 44 8 C42 8, 42 10, 43 13 C44 17, 47 20, 48 24Z" fill="#111"/>
+  <text x="82" y="28" font-family="'Arial Black', 'Impact', sans-serif" font-weight="900" font-size="19" letter-spacing="0.5">LUIGI TRUCKING</text>
+  <text x="82" y="52" font-family="'Arial Black', 'Impact', sans-serif" font-weight="900" font-size="19" letter-spacing="0.5">INSURANCE</text>
+</svg>
