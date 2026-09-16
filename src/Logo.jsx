@@ -1,37 +1,46 @@
+// The mark comes from the brand files in public/brand/. Those originals are Canva
+// exports -- PNG artwork inside an SVG wrapper, each with an opaque background plate
+// baked in -- so they cannot be dropped straight into a dark page. public/brand/mark.png
+// is the arc symbol lifted out of the dark (reversed) export with the plate removed,
+// trimmed to its ink and sized for retina at the largest place it appears.
+//
+// The wordmark is live text rather than part of the image on purpose. The supplied
+// lockup stacks the name over three lines with a tagline under it, which is unreadable
+// in a 40px header; setting it as text keeps it crisp at every size, lets it inherit
+// the page's colour, and keeps the nav asset small. public/brand/lockup.png holds the
+// designer's full stacked lockup for places with room for it.
+
+const SIZES = {
+  small:   { mark: 32, text: '13px' },
+  default: { mark: 40, text: '15px' },
+  large:   { mark: 64, text: '22px' },
+};
+
 export default function Logo({ size = 'default', showText = true }) {
-  const dimensions = size === 'small' ? 32 : size === 'large' ? 64 : 40;
+  const { mark, text } = SIZES[size] ?? SIZES.default;
+
   return (
     <div className="flex items-center gap-3">
-      <svg width={dimensions} height={dimensions} viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Chicago AI Group Logo">
-        <title>Chicago AI Group Logo</title>
-        <path d="M70 15 A42 42 0 1 0 70 85" stroke="url(#logoGradient)" strokeWidth="6" strokeLinecap="round" fill="none" />
-        <line x1="30" y1="35" x2="50" y2="50" stroke="#64748b" strokeWidth="2" />
-        <line x1="30" y1="65" x2="50" y2="50" stroke="#64748b" strokeWidth="2" />
-        <line x1="30" y1="35" x2="30" y2="65" stroke="#64748b" strokeWidth="2" />
-        <line x1="50" y1="50" x2="68" y2="50" stroke="#64748b" strokeWidth="2" />
-        <circle cx="30" cy="35" r="5" fill="#e2e8f0" />
-        <circle cx="30" cy="65" r="5" fill="#e2e8f0" />
-        <circle cx="68" cy="50" r="4" fill="#e2e8f0" />
-        <circle cx="50" cy="50" r="10" fill="#10b981" filter="url(#blueGlow)" />
-        <circle cx="50" cy="50" r="6" fill="#34d399" />
-        <polygon points="82,38 84,42 88,42 85,45 86,49 82,46 78,49 79,45 76,42 80,42" fill="#34d399" />
-        <defs>
-          <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#ffffff" />
-            <stop offset="100%" stopColor="#94a3b8" />
-          </linearGradient>
-          <filter id="blueGlow" x="-50%" y="-50%" width="200%" height="200%">
-            <feGaussianBlur stdDeviation="3" result="blur" />
-            <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
-          </filter>
-        </defs>
-      </svg>
+      <img
+        src="/brand/mark.png"
+        alt=""
+        aria-hidden="true"
+        width={Math.round(mark * 0.67)}
+        height={mark}
+        style={{ height: mark, width: 'auto', display: 'block' }}
+        decoding="async"
+      />
       {showText && (
-        <div className="flex flex-col leading-none">
-          <span style={{ fontWeight: 600, letterSpacing: '3px', fontSize: size === 'small' ? '12px' : '14px' }}>CHICAGO AI</span>
-          <span style={{ fontWeight: 500, letterSpacing: '5px', fontSize: size === 'small' ? '10px' : '11px', color: '#64748b' }}>GROUP</span>
-        </div>
+        <span
+          className="font-bold text-white whitespace-nowrap"
+          style={{ fontSize: text, letterSpacing: '-0.01em', lineHeight: 1 }}
+        >
+          The Chicago <span className="text-emerald-400">AI</span> Group
+        </span>
       )}
+      {/* The mark is decorative; the name is the accessible label, and when the text is
+          hidden this carries it instead. */}
+      {!showText && <span className="sr-only">The Chicago AI Group</span>}
     </div>
   );
 }
