@@ -313,11 +313,21 @@ function MainSite() {
           <FadeInSection>
             <div className="card rounded-2xl p-8 md:p-12">
               <div className="flex flex-col md:flex-row gap-8 md:gap-12 md:items-start">
-                {/* No photo of Matt exists in the repo, so a monogram rather than a stock face. */}
+                {/* A real photo, which is the whole argument this section makes. Slightly
+                    larger than the monogram it replaces -- at 80px a face is too small to
+                    register on a section headed "you're talking to a person". Cropped square
+                    from the original in brand-source/, so object-cover never has to choose a
+                    crop for us. width/height are set so the card does not reflow as it loads. */}
                 <div className="flex md:flex-col items-center md:items-start gap-4 flex-shrink-0">
-                  <div className="w-20 h-20 rounded-2xl bg-emerald-500/10 border border-emerald-500/25 flex items-center justify-center" aria-hidden="true">
-                    <span className="text-2xl font-bold tracking-wide text-emerald-400">MS</span>
-                  </div>
+                  <img
+                    src="/team/matt-swanson.jpg"
+                    alt="Matt Swanson"
+                    width={112}
+                    height={112}
+                    loading="lazy"
+                    decoding="async"
+                    className="w-24 h-24 md:w-28 md:h-28 rounded-2xl object-cover border border-emerald-500/25 flex-shrink-0"
+                  />
                   <div>
                     <div className="font-semibold">Matt Swanson</div>
                     <div className="text-zinc-500 text-sm">Chicago, IL</div>
