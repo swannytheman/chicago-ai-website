@@ -11,13 +11,13 @@ import EmailPreview from './EmailPreview.jsx';
 // sync with connect-src in vercel.json, or the browser will refuse the request.
 const WEBHOOK_URL = 'https://hook.us2.make.com/l7i2trs8c1k9ooly4h072po7foh5cxt3';
 
-// Normally one submission per browser tab: a refresh re-shows the confirmation
-// rather than firing the sequence at the same person twice.
+// One submission per browser tab: a refresh re-shows the confirmation rather than
+// firing the sample emails at the same person twice. "Send another set" on the
+// success panel is the deliberate way back to an empty form.
 //
-// TEMPORARILY OFF so the Make.com scenario can be exercised repeatedly. While this
-// is false, every refresh returns an empty form and a visitor can submit as many
-// times as they like. Set it back to true before real traffic.
-const BLOCK_REPEAT_SUBMISSIONS = false;
+// Set this to false only to exercise the Make.com scenario repeatedly, and put it
+// back before real traffic -- while it is false a visitor can submit without limit.
+const BLOCK_REPEAT_SUBMISSIONS = true;
 
 function escapeHtml(str) {
   return str

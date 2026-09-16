@@ -116,7 +116,7 @@ function MainSite() {
   }), []);
 
   const testimonial = useMemo(() => ({
-    quote: "We were drowning in lead follow-ups—losing deals just because we couldn't respond fast enough. Now our AI handles first contact instantly, and our sales team closes 35% more deals. They paid for themselves in the first month.",
+    quote: "We were drowning in lead follow-ups—losing deals just because we couldn't respond fast enough. Now our AI handles first contact with the customer within just a few minutes, and our sales team closes 35% more deals. They paid for themselves in the first month.",
     author: "Erik Sandoval",
     title: "VP of Operations, Luigi Trucking Insurance"
   }), []);
