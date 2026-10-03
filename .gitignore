@@ -22,3 +22,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Secrets (e.g. KIE_AI_API_KEY for the scroll-craft skill)
+.env
