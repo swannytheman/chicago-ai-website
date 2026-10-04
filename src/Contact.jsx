@@ -31,7 +31,7 @@ function normalizeUrl(value) {
   return /^https?:\/\//i.test(trimmed) ? trimmed : `https://${trimmed}`;
 }
 
-const FIELD_CLASS = 'w-full bg-white/[0.03] border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-zinc-600 outline-none transition focus:border-emerald-500/50 focus:bg-white/[0.05]';
+const FIELD_CLASS = 'w-full bg-zinc-50 border border-zinc-200 rounded-xl px-4 py-3 text-zinc-900 placeholder:text-zinc-400 outline-none transition focus:border-emerald-500/50 focus:bg-white';
 const LABEL_CLASS = 'block text-xs uppercase tracking-widest text-zinc-500 mb-2';
 
 export default function Contact() {
@@ -102,15 +102,15 @@ export default function Contact() {
   }
 
   return (
-    <div className="min-h-screen bg-zinc-950 text-white overflow-x-hidden">
+    <div className="min-h-screen bg-white text-zinc-900 overflow-x-hidden">
       <SiteNav solid />
 
       <section className="pt-28 pb-14 md:pt-36 md:pb-20" aria-labelledby="contact-heading">
         <div className="max-w-6xl mx-auto px-6">
           <div className="text-center max-w-2xl mx-auto mb-10 md:mb-16">
-            <span className="text-sm uppercase tracking-widest text-emerald-400 mb-4 block">Contact</span>
+            <span className="text-sm uppercase tracking-widest text-emerald-600 mb-4 block">Contact</span>
             <h1 id="contact-heading" className="text-3xl sm:text-4xl md:text-6xl font-bold tracking-tight mb-5 md:mb-6">Talk to the Chicago team</h1>
-            <p className="text-lg text-zinc-300 leading-relaxed">
+            <p className="text-lg text-zinc-700 leading-relaxed">
               We implement and run AI sales agents that qualify your leads and book meetings, so your team only talks to serious buyers.
             </p>
           </div>
@@ -119,33 +119,33 @@ export default function Contact() {
             {/* Primary path: book a call */}
             <div className="rounded-2xl border border-emerald-500/25 bg-emerald-500/[0.04] p-6 sm:p-8 md:p-10">
               <div className="w-14 h-14 rounded-2xl flex items-center justify-center mb-6 bg-emerald-500/10 border border-emerald-500/25">
-                <Calendar className="w-7 h-7 text-emerald-400" aria-hidden="true" />
+                <Calendar className="w-7 h-7 text-emerald-600" aria-hidden="true" />
               </div>
               <h2 className="text-2xl font-bold mb-3">Book a strategy call</h2>
-              <p className="text-zinc-300 leading-relaxed mb-8">
+              <p className="text-zinc-700 leading-relaxed mb-8">
                 The fastest way to get answers. We&apos;ll look at how leads reach you today and where an AI agent would actually help.
               </p>
-              <a href={EXTERNAL_URLS.appointments} {...SECURE_LINK_PROPS} className="w-full sm:w-auto bg-white text-black px-8 py-4 rounded-full font-semibold hover:bg-zinc-100 transition inline-flex items-center justify-center gap-2">
+              <a href={EXTERNAL_URLS.appointments} {...SECURE_LINK_PROPS} className="w-full sm:w-auto bg-zinc-900 text-white px-8 py-4 rounded-full font-semibold hover:bg-zinc-700 transition inline-flex items-center justify-center gap-2">
                 Book a 30-minute strategy call <ArrowRight className="w-5 h-5" aria-hidden="true" />
               </a>
-              <ul className="mt-8 space-y-3 text-sm text-zinc-400">
-                <li className="flex items-center gap-3"><Check className="w-4 h-4 text-emerald-400 flex-shrink-0" aria-hidden="true" /> Free, 30 minutes, no obligation</li>
-                <li className="flex items-center gap-3"><Check className="w-4 h-4 text-emerald-400 flex-shrink-0" aria-hidden="true" /> A working session, not a pitch</li>
-                <li className="flex items-center gap-3"><Check className="w-4 h-4 text-emerald-400 flex-shrink-0" aria-hidden="true" /> Talk to the people who build it</li>
+              <ul className="mt-8 space-y-3 text-sm text-zinc-600">
+                <li className="flex items-center gap-3"><Check className="w-4 h-4 text-emerald-600 flex-shrink-0" aria-hidden="true" /> Free, 30 minutes, no obligation</li>
+                <li className="flex items-center gap-3"><Check className="w-4 h-4 text-emerald-600 flex-shrink-0" aria-hidden="true" /> A working session, not a pitch</li>
+                <li className="flex items-center gap-3"><Check className="w-4 h-4 text-emerald-600 flex-shrink-0" aria-hidden="true" /> Talk to the people who build it</li>
               </ul>
             </div>
 
             {/* Secondary path: send a message */}
-            <div className="rounded-2xl border border-white/[0.08] bg-white/[0.03] p-6 sm:p-8 md:p-10">
+            <div className="rounded-2xl border border-zinc-200 bg-zinc-50 p-6 sm:p-8 md:p-10">
               <h2 className="text-2xl font-bold mb-3">Or send us a message</h2>
-              <p className="text-zinc-400 leading-relaxed mb-8">
+              <p className="text-zinc-600 leading-relaxed mb-8">
                 Prefer to write first? Tell us what you&apos;re trying to fix and we&apos;ll come back to you.
               </p>
 
               {status === 'sent' ? (
-                <div className="rounded-xl border border-emerald-500/30 bg-emerald-500/[0.06] p-6" role="status">
-                  <div className="font-semibold text-emerald-300 mb-2">Thanks &mdash; that&apos;s with us.</div>
-                  <p className="text-sm text-zinc-300 leading-relaxed">
+                <div className="rounded-xl border border-emerald-600/30 bg-emerald-500/[0.06] p-6" role="status">
+                  <div className="font-semibold text-emerald-700 mb-2">Thanks &mdash; that&apos;s with us.</div>
+                  <p className="text-sm text-zinc-700 leading-relaxed">
                     We&apos;ll reply within one business day. If it&apos;s urgent, book a call using the panel on the left.
                   </p>
                 </div>
@@ -156,13 +156,13 @@ export default function Contact() {
                       <label className={LABEL_CLASS} htmlFor="contact-name">Name</label>
                       <input id="contact-name" type="text" className={FIELD_CLASS} placeholder="Sarah Miller" autoComplete="name" maxLength={80}
                         value={name} onChange={e => { setName(e.target.value); setErrors(p => ({ ...p, name: null })); }} />
-                      {errors.name && <p className="text-xs text-red-400 mt-2">{errors.name}</p>}
+                      {errors.name && <p className="text-xs text-red-600 mt-2">{errors.name}</p>}
                     </div>
                     <div>
                       <label className={LABEL_CLASS} htmlFor="contact-email">Work Email</label>
                       <input id="contact-email" type="email" className={FIELD_CLASS} placeholder="you@yourbusiness.com" autoComplete="email" maxLength={120}
                         value={email} onChange={e => { setEmail(e.target.value); setErrors(p => ({ ...p, email: null })); }} />
-                      {errors.email && <p className="text-xs text-red-400 mt-2">{errors.email}</p>}
+                      {errors.email && <p className="text-xs text-red-600 mt-2">{errors.email}</p>}
                     </div>
                   </div>
 
@@ -173,44 +173,44 @@ export default function Contact() {
                         value={company} onChange={e => setCompany(e.target.value)} />
                     </div>
                     <div>
-                      <label className={LABEL_CLASS} htmlFor="contact-website">Website <span className="normal-case tracking-normal text-zinc-600">(optional)</span></label>
+                      <label className={LABEL_CLASS} htmlFor="contact-website">Website <span className="normal-case tracking-normal text-zinc-400">(optional)</span></label>
                       <input id="contact-website" type="text" inputMode="url" className={FIELD_CLASS} placeholder="yourbusiness.com" autoComplete="url" maxLength={120}
                         value={website} onChange={e => setWebsite(e.target.value)} />
                     </div>
                   </div>
 
                   <div className="mb-6">
-                    <label className={LABEL_CLASS} htmlFor="contact-message">Message <span className="normal-case tracking-normal text-zinc-600">(optional)</span></label>
+                    <label className={LABEL_CLASS} htmlFor="contact-message">Message <span className="normal-case tracking-normal text-zinc-400">(optional)</span></label>
                     <textarea id="contact-message" rows={4} className={`${FIELD_CLASS} resize-none leading-relaxed`} maxLength={1000}
                       placeholder="What&apos;s slowing your team down right now?"
                       value={message} onChange={e => setMessage(e.target.value)} />
                   </div>
 
                   {status === 'failed' && (
-                    <div className="rounded-xl border border-red-400/35 bg-red-400/[0.08] p-4 mb-5 text-sm leading-relaxed text-red-300" role="alert">
-                      <strong className="block text-red-200 mb-1">That didn&apos;t go through.</strong>
+                    <div className="rounded-xl border border-red-400/35 bg-red-400/[0.08] p-4 mb-5 text-sm leading-relaxed text-red-700" role="alert">
+                      <strong className="block text-red-800 mb-1">That didn&apos;t go through.</strong>
                       Your answers are still here &mdash; try again in a moment, or{' '}
                       <a className="underline" href={mailtoFallback()}>email us directly</a>.
                     </div>
                   )}
 
                   {status === 'unconfigured' && (
-                    <div className="rounded-xl border border-amber-400/35 bg-amber-400/[0.08] p-4 mb-5 text-sm leading-relaxed text-amber-200" role="alert">
-                      <strong className="block text-amber-100 mb-1">This form isn&apos;t connected yet.</strong>
+                    <div className="rounded-xl border border-amber-400/35 bg-amber-400/[0.08] p-4 mb-5 text-sm leading-relaxed text-amber-800" role="alert">
+                      <strong className="block text-amber-900 mb-1">This form isn&apos;t connected yet.</strong>
                       Rather than lose your message, we&apos;ve put it into an email for you &mdash;{' '}
                       <a className="underline" href={mailtoFallback()}>send it to {CONTACT_EMAIL}</a>, or book a call using the panel on the left.
                     </div>
                   )}
 
                   <button type="submit" disabled={isSubmitting}
-                    className="w-full bg-white text-black px-8 py-4 rounded-full font-semibold hover:bg-zinc-100 transition disabled:opacity-60 inline-flex items-center justify-center gap-2">
+                    className="w-full bg-zinc-900 text-white px-8 py-4 rounded-full font-semibold hover:bg-zinc-700 transition disabled:opacity-60 inline-flex items-center justify-center gap-2">
                     {isSubmitting ? 'Sending…' : <>Send Message <ArrowRight className="w-4 h-4" aria-hidden="true" /></>}
                   </button>
                   <p className="mt-4 text-xs text-zinc-500 text-center leading-relaxed">
                     We use your details only to reply to you.{' '}
-                    <Link to="/privacy" className="underline hover:text-zinc-400">Privacy Policy</Link>
+                    <Link to="/privacy" className="underline hover:text-zinc-700">Privacy Policy</Link>
                     {' · '}
-                    <Link to="/terms" className="underline hover:text-zinc-400">Terms of Use</Link>
+                    <Link to="/terms" className="underline hover:text-zinc-700">Terms of Use</Link>
                   </p>
                 </form>
               )}
@@ -219,8 +219,8 @@ export default function Contact() {
 
           {/* Small print */}
           <div className="mt-12 flex flex-wrap justify-center gap-x-8 gap-y-3 text-sm text-zinc-500">
-            <span className="inline-flex items-center gap-2"><Clock className="w-4 h-4 text-emerald-400/70" aria-hidden="true" /> We reply within 1 business day</span>
-            <span className="inline-flex items-center gap-2"><Shield className="w-4 h-4 text-emerald-400/70" aria-hidden="true" /> The call is free and there&apos;s no pitch theater</span>
+            <span className="inline-flex items-center gap-2"><Clock className="w-4 h-4 text-emerald-600/70" aria-hidden="true" /> We reply within 1 business day</span>
+            <span className="inline-flex items-center gap-2"><Shield className="w-4 h-4 text-emerald-600/70" aria-hidden="true" /> The call is free and there&apos;s no pitch theater</span>
           </div>
         </div>
       </section>

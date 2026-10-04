@@ -106,10 +106,10 @@ export default function Terms() {
       <Section n={11} title="How to reach us">
         <p>
           Questions about these terms: email{' '}
-          <a href={mailto} className="text-emerald-300 hover:text-emerald-200 underline">{CONTACT_EMAIL}</a> or use the{' '}
-          <Link to="/contact" className="text-emerald-300 hover:text-emerald-200 underline">Contact page</Link>.
+          <a href={mailto} className="text-emerald-700 hover:text-emerald-800 underline">{CONTACT_EMAIL}</a> or use the{' '}
+          <Link to="/contact" className="text-emerald-700 hover:text-emerald-800 underline">Contact page</Link>.
         </p>
-        <p className="text-zinc-400">See also our <Link to="/privacy" className="text-emerald-300 hover:text-emerald-200 underline">Privacy Policy</Link>.</p>
+        <p className="text-zinc-600">See also our <Link to="/privacy" className="text-emerald-700 hover:text-emerald-800 underline">Privacy Policy</Link>.</p>
       </Section>
     </LegalPage>
   );

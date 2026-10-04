@@ -32,10 +32,10 @@ export default function Logo({ size = 'default', showText = true }) {
       />
       {showText && (
         <span
-          className="font-bold text-white whitespace-nowrap"
+          className="font-bold text-zinc-900 whitespace-nowrap"
           style={{ fontSize: text, letterSpacing: '-0.01em', lineHeight: 1 }}
         >
-          The Chicago <span className="text-emerald-400">AI</span> Group
+          The Chicago <span className="text-emerald-600">AI</span> Group
         </span>
       )}
       {/* The mark is decorative; the name is the accessible label, and when the text is

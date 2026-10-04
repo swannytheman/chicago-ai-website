@@ -27,8 +27,8 @@ export default function Privacy() {
           'Your first name and business email address, which are required.',
           'Optionally: your company name, industry, biggest bottleneck, the CRM or tools you use now, your website, and anything else you choose to write in the notes box.',
         ]} />
-        <p><strong>If you send us a message</strong> from the <Link to="/contact" className="text-emerald-300 hover:text-emerald-200 underline">Contact page</Link>, we receive your name, work email, and the company, website and message you provide.</p>
-        <p><strong>With either form</strong>, we also record the time you submitted it, the page you submitted it from, the page you first arrived on, the site that referred you, and any campaign tags in that link — the <code className="text-zinc-400">utm_</code> values and Google or Meta click identifiers that get appended when you arrive from an ad or a newsletter. That is how we know which campaign a lead came from.</p>
+        <p><strong>If you send us a message</strong> from the <Link to="/contact" className="text-emerald-700 hover:text-emerald-800 underline">Contact page</Link>, we receive your name, work email, and the company, website and message you provide.</p>
+        <p><strong>With either form</strong>, we also record the time you submitted it, the page you submitted it from, the page you first arrived on, the site that referred you, and any campaign tags in that link — the <code className="text-zinc-600">utm_</code> values and Google or Meta click identifiers that get appended when you arrive from an ad or a newsletter. That is how we know which campaign a lead came from.</p>
         <p><strong>If you book a strategy call</strong>, you leave this site for Calendly and give your details to them directly. We see the booking Calendly passes back to us. We do not control what Calendly collects; their privacy policy applies.</p>
         <p><strong>Server logs.</strong> Our host records ordinary request logs, including IP addresses, for security and reliability. We do not use them to build a profile of you.</p>
       </Section>
@@ -81,7 +81,7 @@ export default function Privacy() {
       </Section>
 
       <Section n={7} title="Your choices">
-        <p>You can ask us to show you what we hold about you, correct it, or delete it. Email <a href={mailto} className="text-emerald-300 hover:text-emerald-200 underline">{CONTACT_EMAIL}</a> or use the <Link to="/contact" className="text-emerald-300 hover:text-emerald-200 underline">Contact page</Link>. We will not make you jump through hoops, and we will not charge you for it.</p>
+        <p>You can ask us to show you what we hold about you, correct it, or delete it. Email <a href={mailto} className="text-emerald-700 hover:text-emerald-800 underline">{CONTACT_EMAIL}</a> or use the <Link to="/contact" className="text-emerald-700 hover:text-emerald-800 underline">Contact page</Link>. We will not make you jump through hoops, and we will not charge you for it.</p>
       </Section>
 
       <Section n={8} title="Emails from us">
@@ -110,11 +110,11 @@ export default function Privacy() {
       <Section n={11} title="How to reach us">
         <p>
           Questions about this policy, or about anything we hold: email{' '}
-          <a href={mailto} className="text-emerald-300 hover:text-emerald-200 underline">{CONTACT_EMAIL}</a>, use the{' '}
-          <Link to="/contact" className="text-emerald-300 hover:text-emerald-200 underline">Contact page</Link>, or{' '}
-          <a href={EXTERNAL_URLS.appointments} {...SECURE_LINK_PROPS} className="text-emerald-300 hover:text-emerald-200 underline">book a call</a>.
+          <a href={mailto} className="text-emerald-700 hover:text-emerald-800 underline">{CONTACT_EMAIL}</a>, use the{' '}
+          <Link to="/contact" className="text-emerald-700 hover:text-emerald-800 underline">Contact page</Link>, or{' '}
+          <a href={EXTERNAL_URLS.appointments} {...SECURE_LINK_PROPS} className="text-emerald-700 hover:text-emerald-800 underline">book a call</a>.
         </p>
-        <p className="text-zinc-400">See also our <Link to="/terms" className="text-emerald-300 hover:text-emerald-200 underline">Terms of Use</Link>.</p>
+        <p className="text-zinc-600">See also our <Link to="/terms" className="text-emerald-700 hover:text-emerald-800 underline">Terms of Use</Link>.</p>
       </Section>
     </LegalPage>
   );
