@@ -512,7 +512,7 @@ export default function TryItFree() {
         body { background: #ffffff; }
         .tif-root * { box-sizing: border-box; }
         .tif-root {
-          font-family: 'Inter', sans-serif;
+          font-family: 'Inter Variable', Inter, sans-serif;
           background: var(--bg);
           color: var(--text);
           min-height: 100vh;
@@ -598,8 +598,8 @@ export default function TryItFree() {
         }
         @keyframes tifBlink { 0%,100%{opacity:1} 50%{opacity:.3} }
         .tif-h1 {
-          font-size:3.6rem;font-weight:700;
-          line-height:1.25;letter-spacing:-.025em;color:var(--text);
+          font-size:3.6rem;font-weight:600;
+          line-height:1.08;letter-spacing:-.032em;text-wrap:balance;color:var(--text);
           margin-bottom:24px;animation:tifFadeUp .6s .1s ease both;
         }
         .tif-h1 em {
@@ -607,7 +607,7 @@ export default function TryItFree() {
           background:linear-gradient(135deg,#10b981 0%,#059669 50%,#047857 100%);
           -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
         }
-        .tif-sub { font-size:1.05rem;line-height:1.7;color:var(--text-2);max-width:420px;margin-bottom:40px;font-weight:300;animation:tifFadeUp .6s .2s ease both; }
+        .tif-sub { font-size:1.0625rem;line-height:1.65;color:var(--text-2);max-width:440px;margin-bottom:40px;font-weight:400;text-wrap:pretty;animation:tifFadeUp .6s .2s ease both; }
         /* The hero carries two paragraphs now -- the intro, then the "preview only"
            note. Same size and colour on purpose: the note is the reassurance people
            are looking for, so it should not read as dimmed small print. */
@@ -652,7 +652,7 @@ export default function TryItFree() {
         .tif-panel.active { display:block;animation:tifPanelIn .4s ease; }
         @keyframes tifPanelIn { from{opacity:0;transform:translateX(16px)} to{opacity:1;transform:translateX(0)} }
 
-        .tif-form-title { font-size:1.4rem;font-weight:700;color:var(--text);margin-bottom:6px; }
+        .tif-form-title { font-size:1.4rem;font-weight:600;letter-spacing:-.02em;color:var(--text);margin-bottom:6px; }
         .tif-form-sub   { font-size:.85rem;color:var(--text-2);margin-bottom:28px;line-height:1.5; }
 
         /* Fields */
@@ -662,7 +662,7 @@ export default function TryItFree() {
         .tif-input, .tif-select, .tif-textarea {
           width:100%;background:var(--bg-input);border:1px solid var(--border);
           border-radius:10px;padding:13px 16px;
-          font-size:.9rem;font-family:'Inter',sans-serif;color:var(--text);
+          font-size:.9rem;font-family:'Inter Variable',Inter,sans-serif;color:var(--text);
           outline:none;transition:border-color .2s,box-shadow .2s;
           -webkit-appearance:none;
         }
@@ -695,7 +695,7 @@ export default function TryItFree() {
           width:100%;padding:15px 24px;
           background:linear-gradient(135deg,#059669,#047857);
           border:none;border-radius:100px;color:white;
-          font-size:.95rem;font-weight:700;letter-spacing:.02em;
+          font-size:.95rem;font-weight:600;letter-spacing:.005em;
           cursor:pointer;transition:all .2s;
           position:relative;overflow:hidden;margin-top:8px;
         }
@@ -731,13 +731,13 @@ export default function TryItFree() {
         .tif-btn-back {
           background:none;border:none;color:var(--text-3);font-size:.82rem;cursor:pointer;
           padding:8px 0;display:flex;align-items:center;gap:6px;margin-bottom:20px;
-          transition:color .2s;font-family:'Inter',sans-serif;
+          transition:color .2s;font-family:'Inter Variable',Inter,sans-serif;
         }
         .tif-btn-back:hover { color:var(--text-2); }
         .tif-btn-restart {
           background:none;border:none;color:var(--text-2);font-size:.82rem;cursor:pointer;
           padding:10px 0;margin-top:14px;width:100%;text-align:center;
-          transition:color .2s;font-family:'Inter',sans-serif;
+          transition:color .2s;font-family:'Inter Variable',Inter,sans-serif;
         }
         .tif-btn-restart:hover { color:var(--blue-hi); }
         .tif-submit-error {
@@ -763,7 +763,7 @@ export default function TryItFree() {
           animation:tifPopIn .5s cubic-bezier(.175,.885,.32,1.275) both;
         }
         @keyframes tifPopIn { from{transform:scale(0);opacity:0} to{transform:scale(1);opacity:1} }
-        .tif-success-title { font-size:1.5rem;font-weight:700;color:var(--text);margin-bottom:12px; }
+        .tif-success-title { font-size:1.5rem;font-weight:600;letter-spacing:-.02em;color:var(--text);margin-bottom:12px; }
         .tif-success-sub   { font-size:.88rem;color:var(--text-2);line-height:1.7;max-width:320px;margin:0 auto 28px; }
 
         .tif-timeline { display:flex;flex-direction:column;gap:0;text-align:left;margin-bottom:24px; }
@@ -796,7 +796,7 @@ export default function TryItFree() {
         .tif-footer a:hover { color:var(--blue-hi); }
         .tif-footer i { color:var(--border-hi);font-style:normal; }
         .tif-stat  { text-align:center;min-width:0; }
-        .tif-stat-num { font-size:3rem;font-weight:700;color:var(--text);display:block;line-height:1;margin-bottom:4px; }
+        .tif-stat-num { font-size:3rem;font-weight:600;letter-spacing:-.045em;font-variant-numeric:tabular-nums;color:var(--text);display:block;line-height:1;margin-bottom:4px; }
         .tif-stat-num span { color:var(--blue-hi); }
         .tif-stat-label { font-size:.78rem;color:var(--text-3);letter-spacing:.04em; }
 

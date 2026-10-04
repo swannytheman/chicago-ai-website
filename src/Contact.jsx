@@ -32,7 +32,7 @@ function normalizeUrl(value) {
 }
 
 const FIELD_CLASS = 'w-full bg-zinc-50 border border-zinc-200 rounded-xl px-4 py-3 text-zinc-900 placeholder:text-zinc-400 outline-none transition focus:border-emerald-500/50 focus:bg-white';
-const LABEL_CLASS = 'block text-xs uppercase tracking-widest text-zinc-500 mb-2';
+const LABEL_CLASS = 'block t-label mb-2';
 
 export default function Contact() {
   const [name, setName] = useState('');
@@ -108,9 +108,9 @@ export default function Contact() {
       <section className="pt-28 pb-14 md:pt-36 md:pb-20" aria-labelledby="contact-heading">
         <div className="max-w-6xl mx-auto px-6">
           <div className="text-center max-w-2xl mx-auto mb-10 md:mb-16">
-            <span className="text-sm uppercase tracking-widest text-emerald-600 mb-4 block">Contact</span>
-            <h1 id="contact-heading" className="text-3xl sm:text-4xl md:text-6xl font-bold tracking-tight mb-5 md:mb-6">Talk to the Chicago team</h1>
-            <p className="text-lg text-zinc-700 leading-relaxed">
+            <span className="t-eyebrow mb-4">Contact</span>
+            <h1 id="contact-heading" className="t-h1 mb-6">Talk to the Chicago team</h1>
+            <p className="t-lede">
               We implement and run AI sales agents that qualify your leads and book meetings, so your team only talks to serious buyers.
             </p>
           </div>
@@ -121,11 +121,11 @@ export default function Contact() {
               <div className="w-14 h-14 rounded-2xl flex items-center justify-center mb-6 bg-emerald-500/10 border border-emerald-500/25">
                 <Calendar className="w-7 h-7 text-emerald-600" aria-hidden="true" />
               </div>
-              <h2 className="text-2xl font-bold mb-3">Book a strategy call</h2>
+              <h2 className="text-2xl font-semibold tracking-[-0.025em] mb-3">Book a strategy call</h2>
               <p className="text-zinc-700 leading-relaxed mb-8">
                 The fastest way to get answers. We&apos;ll look at how leads reach you today and where an AI agent would actually help.
               </p>
-              <a href={EXTERNAL_URLS.appointments} {...SECURE_LINK_PROPS} className="w-full sm:w-auto bg-zinc-900 text-white px-8 py-4 rounded-full font-semibold hover:bg-zinc-700 transition inline-flex items-center justify-center gap-2">
+              <a href={EXTERNAL_URLS.appointments} {...SECURE_LINK_PROPS} className="w-full sm:w-auto bg-zinc-900 text-white px-8 py-4 rounded-full font-medium hover:bg-zinc-700 transition inline-flex items-center justify-center gap-2">
                 Book a 30-minute strategy call <ArrowRight className="w-5 h-5" aria-hidden="true" />
               </a>
               <ul className="mt-8 space-y-3 text-sm text-zinc-600">
@@ -137,7 +137,7 @@ export default function Contact() {
 
             {/* Secondary path: send a message */}
             <div className="rounded-2xl border border-zinc-200 bg-zinc-50 p-6 sm:p-8 md:p-10">
-              <h2 className="text-2xl font-bold mb-3">Or send us a message</h2>
+              <h2 className="text-2xl font-semibold tracking-[-0.025em] mb-3">Or send us a message</h2>
               <p className="text-zinc-600 leading-relaxed mb-8">
                 Prefer to write first? Tell us what you&apos;re trying to fix and we&apos;ll come back to you.
               </p>
@@ -203,7 +203,7 @@ export default function Contact() {
                   )}
 
                   <button type="submit" disabled={isSubmitting}
-                    className="w-full bg-zinc-900 text-white px-8 py-4 rounded-full font-semibold hover:bg-zinc-700 transition disabled:opacity-60 inline-flex items-center justify-center gap-2">
+                    className="w-full bg-zinc-900 text-white px-8 py-4 rounded-full font-medium hover:bg-zinc-700 transition disabled:opacity-60 inline-flex items-center justify-center gap-2">
                     {isSubmitting ? 'Sending…' : <>Send Message <ArrowRight className="w-4 h-4" aria-hidden="true" /></>}
                   </button>
                   <p className="mt-4 text-xs text-zinc-500 text-center leading-relaxed">

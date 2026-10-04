@@ -13,7 +13,7 @@ const CSS = `
   .cag-email-val { color:#3f3f46; min-width:0; overflow-wrap:anywhere; }
   .cag-email-time { margin-left:auto; color:#71717a; font-size:12px; white-space:nowrap; flex-shrink:0; }
   .cag-email-body { padding:16px; font-size:15px; line-height:1.75; color:#27272a;
-                    font-family:'Inter',system-ui,sans-serif; min-height:120px; }
+                    font-family:'Inter Variable',Inter,system-ui,sans-serif; min-height:120px; }
   .cag-email-body p { margin:0 0 14px; }
   .cag-email-body p:last-child { margin-bottom:0; }
   .cag-email-foot { padding:12px 16px; border-top:1px solid #e4e4e7; font-size:12px; line-height:1.6; color:#71717a; }

@@ -161,16 +161,16 @@ function MainSite() {
               <span className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse" aria-hidden="true" /><span className="hidden sm:inline text-emerald-700">Expert AI &amp; Automation Team</span><span className="hidden sm:inline text-zinc-500 mx-1">•</span><span className="text-zinc-600">Chicago, IL</span>
             </div>
           </FadeInSection>
-          <FadeInSection delay={100}><h1 id="hero-heading" className="text-[2rem] sm:text-5xl md:text-7xl lg:text-8xl font-bold mb-5 md:mb-6 leading-[1.12] sm:leading-tight tracking-tight">AI That Books Meetings<br /><span className="text-gradient">While You Sleep</span></h1></FadeInSection>
+          <FadeInSection delay={100}><h1 id="hero-heading" className="t-display mb-6 md:mb-8">AI That Books Meetings<br /><span className="text-gradient">While You Sleep</span></h1></FadeInSection>
           <FadeInSection delay={200}>
             {/* One line at every width: it is short enough for the phone fold, so the
                 separate mobile variant this used to carry is no longer needed. */}
-            <p className="text-base md:text-xl text-zinc-700 max-w-2xl mx-auto mb-7 md:mb-10 leading-relaxed">We build and run an AI sales agent for service businesses that already get inbound leads. We cultivate your leads, you take the meetings. Live in about 2–4 weeks.</p>
+            <p className="t-lede md:text-xl text-zinc-700 max-w-2xl mx-auto mb-8 md:mb-10">We build and run an AI sales agent for service businesses that already get inbound leads. We cultivate your leads, you take the meetings. Live in about <span className="whitespace-nowrap">2–4 weeks</span>.</p>
           </FadeInSection>
           <FadeInSection delay={300}>
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
-              <button onClick={() => scrollTo('cta')} className="group bg-zinc-900 text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-zinc-700 transition flex items-center justify-center gap-2" type="button">Book a strategy call <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" aria-hidden="true" /></button>
-              <Link to="/try-it-free" className="group text-emerald-700 border border-emerald-600/30 bg-emerald-500/5 px-8 py-4 rounded-full font-semibold text-lg transition hover:border-emerald-600/60 hover:bg-emerald-500/10 flex items-center justify-center gap-2">See a sample sequence <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" aria-hidden="true" /></Link>
+              <button onClick={() => scrollTo('cta')} className="group bg-zinc-900 text-white px-8 py-4 rounded-full font-medium text-lg hover:bg-zinc-700 transition flex items-center justify-center gap-2" type="button">Book a strategy call <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" aria-hidden="true" /></button>
+              <Link to="/try-it-free" className="group text-emerald-700 border border-emerald-600/30 bg-emerald-500/5 px-8 py-4 rounded-full font-medium text-lg transition hover:border-emerald-600/60 hover:bg-emerald-500/10 flex items-center justify-center gap-2">See a sample sequence <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" aria-hidden="true" /></Link>
             </div>
             <p className="mt-5 text-sm text-zinc-500">We'll write a 3-email follow-up for your business. No credit card.</p>
           </FadeInSection>
@@ -182,7 +182,7 @@ function MainSite() {
             </div>
           </FadeInSection>
         </div>
-        <button onClick={() => scrollTo('how-it-works')} className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce cursor-pointer hover:text-emerald-600 transition" type="button" aria-label="Scroll to learn more"><ChevronDown className="w-6 h-6 text-zinc-500 hover:text-emerald-600" aria-hidden="true" /></button>
+        <button onClick={() => scrollTo('how-it-works')} className="hidden md:block absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce cursor-pointer hover:text-emerald-600 transition" type="button" aria-label="Scroll to learn more"><ChevronDown className="w-6 h-6 text-zinc-500 hover:text-emerald-600" aria-hidden="true" /></button>
       </section>
 
       <section id="example" className="py-14 md:py-24 border-t border-zinc-200" aria-labelledby="example-heading">
@@ -190,8 +190,8 @@ function MainSite() {
           <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
             <FadeInSection>
               <div>
-                <span className="text-sm uppercase tracking-widest text-emerald-600 mb-4 block">What they actually get</span>
-                <h2 id="example-heading" className="text-3xl md:text-4xl font-bold tracking-tight mb-5 leading-[1.15]">A follow-up that sounds like you, sent while you&apos;re still on the job.</h2>
+                <span className="t-eyebrow mb-4">What they actually get</span>
+                <h2 id="example-heading" className="t-h2 mb-5">A follow-up that sounds like you, sent while you&apos;re still on the job.</h2>
                 <p className="text-zinc-600 leading-relaxed mb-7">First response on the inbound source we wire. Qualify. Offer a time. You take the meeting.</p>
                 <Link to="/try-it-free" className="inline-flex items-center gap-2 text-emerald-700 hover:text-emerald-800 transition font-medium">
                   See a sample written for your business <ArrowRight className="w-4 h-4" aria-hidden="true" />
@@ -201,7 +201,7 @@ function MainSite() {
 
             <FadeInSection delay={100}>
               <div>
-                <div className="flex items-center gap-2 text-xs uppercase tracking-[0.12em] text-zinc-500 mb-3">
+                <div className="flex items-center gap-2 t-label mb-3">
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 flex-shrink-0" aria-hidden="true" />
                   <span>Example follow-up &middot; 11 minutes after the form came in</span>
                 </div>
@@ -227,9 +227,9 @@ function MainSite() {
         <div className="max-w-7xl mx-auto px-6">
           <FadeInSection>
             <div className="text-center mb-10 md:mb-16">
-              <span className="text-sm uppercase tracking-widest text-emerald-600 mb-4 block">How Your AI Works</span>
-              <h2 id="how-it-works-heading" className="text-4xl md:text-5xl font-bold tracking-tight mb-4">Capture. Nurture. Close.</h2>
-              <p className="text-lg text-zinc-600 max-w-2xl mx-auto leading-relaxed">A three-phase system we build, run, and manage for you — so every lead gets handled the moment it arrives, and you get your evenings and weekends back.</p>
+              <span className="t-eyebrow mb-4">How Your AI Works</span>
+              <h2 id="how-it-works-heading" className="t-h2 mb-5">Capture. Nurture. Close.</h2>
+              <p className="t-lede max-w-2xl mx-auto">A three-phase system we build, run, and manage for you — so every lead gets handled the moment it arrives, and you get your evenings and weekends back.</p>
             </div>
           </FadeInSection>
           <div className="grid md:grid-cols-3 gap-8 relative">
@@ -244,8 +244,8 @@ function MainSite() {
                   <div className="w-14 h-14 mx-auto rounded-2xl flex items-center justify-center mb-5 bg-emerald-500/10 border border-emerald-500/20 relative z-10">
                     <item.icon className="w-6 h-6 text-emerald-600" aria-hidden="true" />
                   </div>
-                  <div className="text-xs font-semibold text-emerald-600/80 tracking-[0.2em] mb-3">{item.phase}</div>
-                  <h3 className="text-xl font-bold mb-3">{item.title}</h3>
+                  <div className="t-eyebrow mb-3">{item.phase}</div>
+                  <h3 className="t-h3 mb-3">{item.title}</h3>
                   <p className="text-zinc-600 text-sm leading-relaxed">{item.desc}</p>
                 </div>
               </FadeInSection>
@@ -258,9 +258,9 @@ function MainSite() {
         <div className="max-w-7xl mx-auto px-6">
           <FadeInSection>
             <div className="text-center mb-14">
-              <span className="text-sm uppercase tracking-widest text-emerald-600 mb-4 block">Proven Results</span>
-              <h2 id="testimonials-heading" className="text-4xl md:text-5xl font-bold tracking-tight mb-4">Built for Chicago service businesses</h2>
-              <p className="text-lg text-zinc-600 max-w-2xl mx-auto leading-relaxed">We start with firms that live on inbound quotes and appointments — commercial insurance, counseling and group practices, property management, and trades.</p>
+              <span className="t-eyebrow mb-4">Proven Results</span>
+              <h2 id="testimonials-heading" className="t-h2 mb-5">Built for Chicago service businesses</h2>
+              <p className="t-lede max-w-2xl mx-auto">We start with firms that live on inbound quotes and appointments — commercial insurance, counseling and group practices, property management, and trades.</p>
             </div>
           </FadeInSection>
 
@@ -284,7 +284,7 @@ function MainSite() {
                 { stat: '2–4 wks', label: 'from kickoff to fully live', detail: 'Typical implementation' },
               ].map((item, idx) => (
                 <div key={idx} className="card rounded-2xl p-8 text-center cursor-default">
-                  <div className="text-4xl font-bold text-emerald-600 mb-2">{item.stat}</div>
+                  <div className="t-stat text-emerald-600 mb-3">{item.stat}</div>
                   <div className="text-zinc-900 font-semibold mb-1">{item.label}</div>
                   <div className="text-zinc-500 text-sm">{item.detail}</div>
                 </div>
@@ -295,7 +295,7 @@ function MainSite() {
           <FadeInSection delay={300}>
             <figure className="max-w-4xl mx-auto card rounded-2xl p-8 md:p-12">
               <div className="flex gap-1 mb-8" role="img" aria-label="5 star rating">{[...Array(5)].map((_, i) => (<Star key={i} className="w-5 h-5 fill-emerald-500 text-emerald-500" aria-hidden="true" />))}</div>
-              <blockquote className="text-xl md:text-2xl mb-8 leading-relaxed text-zinc-800">"{testimonial.quote}"</blockquote>
+              <blockquote className="text-xl md:text-[1.75rem] font-medium tracking-[-0.02em] leading-[1.4] mb-8 text-zinc-900">"{testimonial.quote}"</blockquote>
               <figcaption className="flex items-center gap-4">
                 <div className="w-12 h-12 bg-emerald-500/10 border border-emerald-500/20 rounded-full flex items-center justify-center font-bold text-lg text-emerald-600" aria-hidden="true">{testimonial.author.charAt(0)}</div>
                 <div>
@@ -316,7 +316,7 @@ function MainSite() {
                 {/* No photo of Matt exists in the repo, so a monogram rather than a stock face. */}
                 <div className="flex md:flex-col items-center md:items-start gap-4 flex-shrink-0">
                   <div className="w-20 h-20 rounded-2xl bg-emerald-500/10 border border-emerald-500/25 flex items-center justify-center" aria-hidden="true">
-                    <span className="text-2xl font-bold tracking-wide text-emerald-600">MS</span>
+                    <span className="text-2xl font-semibold tracking-[-0.02em] text-emerald-700">MS</span>
                   </div>
                   <div>
                     <div className="font-semibold">Matt Swanson</div>
@@ -325,15 +325,15 @@ function MainSite() {
                 </div>
 
                 <div>
-                  <span className="text-sm uppercase tracking-widest text-emerald-600 mb-4 block">About</span>
-                  <h2 id="about-heading" className="text-3xl md:text-4xl font-bold tracking-tight mb-6">You&apos;re talking to a person in Chicago, not a platform.</h2>
+                  <span className="t-eyebrow mb-4">About</span>
+                  <h2 id="about-heading" className="t-h2 mb-6">You&apos;re talking to a person in Chicago, not a platform.</h2>
                   <div className="space-y-4 text-zinc-700 leading-relaxed">
                     <p>Chicago AI Group is run by Matt Swanson. I work with owner-led service businesses — insurance, practices, property, trades — that already get inbound leads and lose them overnight. I build the agent, train it on how you actually talk to customers, and keep it running. You take the meetings.</p>
                     <p>This started because generic AI tools dump another dashboard on a busy owner. The useful version is the one someone sets up and watches.</p>
                   </div>
                   <p className="text-emerald-700 font-semibold mt-6">The strategy call is with me.</p>
                   <div className="mt-8 flex flex-col sm:flex-row gap-4 sm:items-center">
-                    <a href={EXTERNAL_URLS.appointments} {...SECURE_LINK_PROPS} className="bg-zinc-900 text-white px-8 py-4 rounded-full font-semibold hover:bg-zinc-700 transition inline-flex items-center justify-center gap-2">Book a strategy call <ArrowRight className="w-4 h-4" aria-hidden="true" /></a>
+                    <a href={EXTERNAL_URLS.appointments} {...SECURE_LINK_PROPS} className="bg-zinc-900 text-white px-8 py-4 rounded-full font-medium hover:bg-zinc-700 transition inline-flex items-center justify-center gap-2">Book a strategy call <ArrowRight className="w-4 h-4" aria-hidden="true" /></a>
                     <Link to="/contact" className="text-zinc-600 hover:text-zinc-900 transition text-sm underline underline-offset-4">Or send a note</Link>
                   </div>
                 </div>
@@ -347,16 +347,16 @@ function MainSite() {
         <div className="max-w-6xl mx-auto px-6">
           <FadeInSection>
             <div className="text-center mb-10 md:mb-16">
-              <span className="text-sm uppercase tracking-widest text-emerald-600 mb-4 block">Scope</span>
-              <h2 id="scope-heading" className="text-4xl md:text-5xl font-bold tracking-tight mb-4">What &ldquo;live&rdquo; means &mdash; and what we need from you</h2>
-              <p className="text-lg text-zinc-600 max-w-2xl mx-auto leading-relaxed">The setup fee is the build. The monthly fee is us running it.</p>
+              <span className="t-eyebrow mb-4">Scope</span>
+              <h2 id="scope-heading" className="t-h2 mb-5">What &ldquo;live&rdquo; means &mdash; and what we need from you</h2>
+              <p className="t-lede max-w-2xl mx-auto">The setup fee is the build. The monthly fee is us running it.</p>
             </div>
           </FadeInSection>
 
           <div className="grid md:grid-cols-2 gap-6 mb-6">
             <FadeInSection>
               <div className="card rounded-2xl p-8 h-full">
-                <h3 className="text-xl font-bold mb-1">Live on day one</h3>
+                <h3 className="t-h3 mb-1">Live on day one</h3>
                 <p className="text-sm text-zinc-500 mb-6">The default build, on Starter.</p>
                 <ol className="space-y-5">
                   {[
@@ -379,7 +379,7 @@ function MainSite() {
 
             <FadeInSection delay={100}>
               <div className="card rounded-2xl p-8 h-full">
-                <h3 className="text-xl font-bold mb-1">What we need from you</h3>
+                <h3 className="t-h3 mb-1">What we need from you</h3>
                 <p className="text-sm text-zinc-500 mb-6">Miss these and the build slips.</p>
                 <ul className="space-y-4">
                   {[
@@ -401,7 +401,7 @@ function MainSite() {
 
           <FadeInSection delay={150}>
             <div className="card rounded-2xl p-8 mb-6">
-              <h3 className="text-xl font-bold mb-6">Not included unless we scope it</h3>
+              <h3 className="t-h3 mb-6">Not included unless we scope it</h3>
               <ul className="grid md:grid-cols-2 gap-x-8 gap-y-3">
                 {[
                   'Extra lead sources beyond the first — more forms, missed-call and voicemail follow-up, SMS as a second channel',
@@ -421,7 +421,7 @@ function MainSite() {
 
           <FadeInSection delay={200}>
             <div className="card rounded-2xl p-8">
-              <h3 className="text-xl font-bold mb-1">How the plans differ</h3>
+              <h3 className="t-h3 mb-1">How the plans differ</h3>
               <p className="text-sm text-zinc-500 mb-6">Same build. More surface area.</p>
               <div className="space-y-4">
                 {[
@@ -430,7 +430,7 @@ function MainSite() {
                   { tier: 'Enterprise', d: 'Pro plus additional sources or locations, copy tests, and priority check-ins.' },
                 ].map((row, i) => (
                   <div key={i} className="flex flex-col sm:flex-row sm:gap-6">
-                    <div className="font-bold text-emerald-600 sm:w-32 flex-shrink-0 mb-1 sm:mb-0">{row.tier}</div>
+                    <div className="font-semibold text-emerald-700 sm:w-32 flex-shrink-0 mb-1 sm:mb-0">{row.tier}</div>
                     <p className="text-zinc-700 leading-relaxed">{row.d}</p>
                   </div>
                 ))}
@@ -444,9 +444,9 @@ function MainSite() {
         <div className="max-w-7xl mx-auto px-6">
           <FadeInSection>
             <div className="text-center mb-10 md:mb-16">
-              <span className="text-sm uppercase tracking-widest text-emerald-600 mb-4 block">Our AI Sales Agent</span>
-              <h2 id="services-heading" className="text-4xl md:text-5xl font-bold tracking-tight mb-4">Your 24/7 Sales Machine</h2>
-              <p className="text-lg text-zinc-600 max-w-2xl mx-auto leading-relaxed">We build it, train it on your voice, and manage it for you. Here's exactly what's included — and what it costs.</p>
+              <span className="t-eyebrow mb-4">Our AI Sales Agent</span>
+              <h2 id="services-heading" className="t-h2 mb-5">Your 24/7 Sales Machine</h2>
+              <p className="t-lede max-w-2xl mx-auto">We build it, train it on your voice, and manage it for you. Here's exactly what's included — and what it costs.</p>
             </div>
           </FadeInSection>
           <FadeInSection delay={200}>
@@ -456,14 +456,14 @@ function MainSite() {
                   <div className="w-16 h-16 bg-gradient-to-br from-zinc-900 to-zinc-700 rounded-2xl flex items-center justify-center flex-shrink-0">
                     <Users className="w-8 h-8 text-white" aria-hidden="true" />
                   </div>
-                  <div><h3 className="text-3xl font-bold mb-2">{salesAgent.name}</h3><p className="text-zinc-600 text-lg">{salesAgent.tagline}</p></div>
+                  <div><h3 className="text-3xl font-semibold tracking-[-0.03em] mb-2">{salesAgent.name}</h3><p className="text-zinc-600 text-lg">{salesAgent.tagline}</p></div>
                 </div>
                 <div className="grid lg:grid-cols-2 gap-8">
                   <div>
                     {/* Named region rather than a bare list: the heading carries the plan
                         name, so the region's accessible name changes with the selection and
                         the radios below point at it via aria-controls. */}
-                    <h4 id="plan-includes-heading" className="text-xs uppercase tracking-widest text-zinc-500 mb-4 flex items-center gap-2"><Sparkles className="w-4 h-4" aria-hidden="true" /> What {selectedPlan.tier} Includes</h4>
+                    <h4 id="plan-includes-heading" className="t-label mb-4 flex items-center gap-2"><Sparkles className="w-4 h-4" aria-hidden="true" /> What {selectedPlan.tier} Includes</h4>
                     <div id="plan-includes" role="region" aria-labelledby="plan-includes-heading">
                       <p className="text-sm text-zinc-600 leading-relaxed mb-5">
                         <span className="text-zinc-500">Best for: </span>{selectedPlan.forWho}
@@ -479,7 +479,7 @@ function MainSite() {
                     </div>
                   </div>
                   <div>
-                    <h4 className="text-xs uppercase tracking-widest text-zinc-500 mb-6">Choose Your Plan</h4>
+                    <h4 className="t-label mb-6">Choose Your Plan</h4>
                     <div className="space-y-4" role="radiogroup" aria-label="Pricing plans">
                       {salesAgent.pricing.map((plan, idx) => {
                         const isSelected = selectedTier === idx;
@@ -498,13 +498,13 @@ function MainSite() {
                           >
                             <div className="text-left">
                               <div className="flex items-center gap-2">
-                                <span className="font-bold text-lg">{plan.tier}</span>
+                                <span className="font-semibold text-lg tracking-[-0.01em]">{plan.tier}</span>
                                 {plan.popular && <span className={`text-xs px-2 py-0.5 rounded-full ${isSelected ? 'bg-white text-zinc-900' : 'bg-zinc-900 text-white'}`}>Popular</span>}
                               </div>
                               <div className={`text-sm ${isSelected ? 'text-zinc-400' : 'text-zinc-600'}`}>{plan.details}</div>
                             </div>
                             <div className="text-right flex-shrink-0 pl-4">
-                              <div className="text-2xl font-bold">{plan.monthly}<span className={`text-sm font-normal ${isSelected ? 'text-zinc-400' : 'text-zinc-600'}`}>/mo</span></div>
+                              <div className="text-2xl font-semibold tracking-[-0.03em] tabular-nums">{plan.monthly}<span className={`text-sm font-normal ${isSelected ? 'text-zinc-400' : 'text-zinc-600'}`}>/mo</span></div>
                               <div className={`text-sm font-medium ${isSelected ? 'text-zinc-300' : 'text-zinc-700'}`}>+ {plan.setup} setup</div>
                             </div>
                           </button>
@@ -518,8 +518,8 @@ function MainSite() {
                   </div>
                 </div>
                 <div className="mt-10 pt-8 border-t border-zinc-200 flex flex-col sm:flex-row gap-4 items-center">
-                  <button onClick={() => scrollTo('cta')} className="bg-zinc-900 text-white px-8 py-4 rounded-full font-semibold hover:bg-zinc-700 transition flex items-center justify-center gap-2" type="button">Book a call about {selectedPlan.tier} <ChevronRight className="w-4 h-4" aria-hidden="true" /></button>
-                  <Link to="/try-it-free" className="text-emerald-700 px-8 py-4 rounded-full font-semibold transition flex items-center justify-center gap-2 border border-emerald-600/30 hover:border-emerald-600/60 hover:bg-emerald-500/5">See a sample sequence <ArrowRight className="w-4 h-4" aria-hidden="true" /></Link>
+                  <button onClick={() => scrollTo('cta')} className="bg-zinc-900 text-white px-8 py-4 rounded-full font-medium hover:bg-zinc-700 transition flex items-center justify-center gap-2" type="button">Book a call about {selectedPlan.tier} <ChevronRight className="w-4 h-4" aria-hidden="true" /></button>
+                  <Link to="/try-it-free" className="text-emerald-700 px-8 py-4 rounded-full font-medium transition flex items-center justify-center gap-2 border border-emerald-600/30 hover:border-emerald-600/60 hover:bg-emerald-500/5">See a sample sequence <ArrowRight className="w-4 h-4" aria-hidden="true" /></Link>
                   <span className="text-zinc-500 text-sm">{selectedPlan.monthly}/mo + {selectedPlan.setup} one-time setup • Cancel anytime<br />Plans start after a strategy call — the sample sequence is free either way.</span>
                 </div>
               </div>
@@ -535,8 +535,8 @@ function MainSite() {
               <div className="w-14 h-14 mx-auto rounded-2xl flex items-center justify-center mb-6 bg-emerald-500/10 border border-emerald-500/25">
                 <Shield className="w-7 h-7 text-emerald-600" aria-hidden="true" />
               </div>
-              <h2 id="guarantee-heading" className="text-4xl md:text-5xl font-bold tracking-tight mb-6">Results Guarantee</h2>
-              <p className="text-xl md:text-2xl text-zinc-900 leading-relaxed mb-12 max-w-2xl mx-auto">We guarantee the part we operate: inbound leads wired into your agent get a first response typically within 5 minutes, and leads that meet your qualify rules get followed up and offered a meeting.</p>
+              <h2 id="guarantee-heading" className="t-h2 mb-6">Results Guarantee</h2>
+              <p className="text-xl md:text-2xl text-zinc-900 font-medium tracking-[-0.015em] leading-[1.45] mb-12 max-w-2xl mx-auto">We guarantee the part we operate: inbound leads wired into your agent get a first response typically within 5 minutes, and leads that meet your qualify rules get followed up and offered a meeting.</p>
 
               <div className="grid md:grid-cols-3 gap-8 md:gap-6 text-left">
                 {[
@@ -558,7 +558,7 @@ function MainSite() {
                   ] },
                 ].map((block, i) => (
                   <div key={i}>
-                    <h3 className="text-xs uppercase tracking-widest text-emerald-600 mb-4">{block.title}</h3>
+                    <h3 className="t-eyebrow mb-4">{block.title}</h3>
                     <ul className="space-y-3">
                       {block.items.map((item, j) => (
                         <li key={j} className="flex gap-3 text-sm text-zinc-700 leading-relaxed">
@@ -581,9 +581,9 @@ function MainSite() {
         <div className="max-w-7xl mx-auto px-6">
           <FadeInSection>
             <div className="text-center mb-10 md:mb-16">
-              <span className="text-sm uppercase tracking-widest text-emerald-600 mb-4 block">Getting Started</span>
-              <h2 id="process-heading" className="text-4xl md:text-5xl font-bold tracking-tight mb-4">Live in Weeks, Not Months</h2>
-              <p className="text-lg text-zinc-600 max-w-2xl mx-auto leading-relaxed">We handle the build, the integrations we agree on, and the testing. From you we need a kickoff call, an example of a good and a bad lead, calendar access, and any follow-up copy you already use. Here's what a typical rollout looks like.</p>
+              <span className="t-eyebrow mb-4">Getting Started</span>
+              <h2 id="process-heading" className="t-h2 mb-5">Live in Weeks, Not Months</h2>
+              <p className="t-lede max-w-2xl mx-auto">We handle the build, the integrations we agree on, and the testing. From you we need a kickoff call, an example of a good and a bad lead, calendar access, and any follow-up copy you already use. Here's what a typical rollout looks like.</p>
             </div>
           </FadeInSection>
           <div className="grid md:grid-cols-4 gap-6 relative">
@@ -595,8 +595,8 @@ function MainSite() {
                     <div className="w-20 h-20 card rounded-2xl flex items-center justify-center"><step.icon className="w-8 h-8 text-zinc-700" aria-hidden="true" /></div>
                     <div className="absolute -top-2 -right-2 w-8 h-8 bg-emerald-600 text-white rounded-full flex items-center justify-center font-bold text-sm" aria-label={`Step ${idx + 1}`}>{idx + 1}</div>
                   </div>
-                  <div className="text-xs font-semibold text-emerald-600/80 tracking-[0.2em] uppercase mb-2">{step.when}</div>
-                  <h3 className="text-xl font-semibold mb-2">{step.title}</h3>
+                  <div className="t-eyebrow mb-2">{step.when}</div>
+                  <h3 className="t-h3 mb-2">{step.title}</h3>
                   <p className="text-zinc-600 text-sm leading-relaxed">{step.desc}</p>
                 </div>
               </FadeInSection>
@@ -609,8 +609,8 @@ function MainSite() {
         <div className="max-w-3xl mx-auto px-6">
           <FadeInSection>
             <div className="text-center mb-10 md:mb-16">
-              <span className="text-sm uppercase tracking-widest text-emerald-600 mb-4 block">FAQ</span>
-              <h2 id="faq-heading" className="text-4xl md:text-5xl font-bold tracking-tight mb-4">Got Questions?</h2>
+              <span className="t-eyebrow mb-4">FAQ</span>
+              <h2 id="faq-heading" className="t-h2 mb-5">Got Questions?</h2>
             </div>
           </FadeInSection>
           <div className="space-y-3">
@@ -618,7 +618,7 @@ function MainSite() {
               <FadeInSection key={idx} delay={idx * 100}>
                 <div className="card rounded-2xl overflow-hidden transition hover:bg-zinc-100">
                   <button onClick={() => setActiveFaq(activeFaq === idx ? null : idx)} className="w-full p-6 flex items-center justify-between text-left" type="button" aria-expanded={activeFaq === idx}>
-                    <span className="font-semibold text-lg pr-4">{faq.q}</span>
+                    <span className="font-semibold text-[1.0625rem] tracking-[-0.01em] pr-4">{faq.q}</span>
                     <ChevronDown className={`w-5 h-5 flex-shrink-0 transition-transform duration-300 ${activeFaq === idx ? 'rotate-180' : ''}`} aria-hidden="true" />
                   </button>
                   <div className={`overflow-hidden transition-all duration-300 ${activeFaq === idx ? 'max-h-[32rem] pb-6' : 'max-h-0'}`} aria-hidden={activeFaq !== idx}><p className="px-6 text-zinc-600 leading-relaxed">{faq.a}</p></div>
@@ -633,13 +633,13 @@ function MainSite() {
         <div className="max-w-5xl mx-auto px-6">
           <FadeInSection>
             <div className="card rounded-2xl p-12 md:p-16 text-center border-emerald-500/15">
-              <h2 id="cta-heading" className="text-4xl md:text-5xl font-bold tracking-tight mb-6">Let's See If We're a Fit</h2>
-              <p className="text-xl text-zinc-700 mb-10 max-w-2xl mx-auto leading-relaxed">One 30-minute call: we look at how leads reach you now, where they go cold, and whether a managed AI agent is worth building for your business. If it is, you're live in about 2–4 weeks.</p>
-              <a href={EXTERNAL_URLS.appointments} {...SECURE_LINK_PROPS} className="bg-zinc-900 text-white px-10 py-5 rounded-full font-semibold text-lg hover:bg-zinc-700 transition inline-flex items-center gap-3">Book a strategy call <ArrowRight className="w-5 h-5" aria-hidden="true" /></a>
+              <h2 id="cta-heading" className="t-h2 mb-6">Let's See If We're a Fit</h2>
+              <p className="t-lede md:text-xl mb-10 max-w-2xl mx-auto">One 30-minute call: we look at how leads reach you now, where they go cold, and whether a managed AI agent is worth building for your business. If it is, you're live in about 2–4 weeks.</p>
+              <a href={EXTERNAL_URLS.appointments} {...SECURE_LINK_PROPS} className="bg-zinc-900 text-white px-10 py-5 rounded-full font-medium text-lg hover:bg-zinc-700 transition inline-flex items-center gap-3">Book a strategy call <ArrowRight className="w-5 h-5" aria-hidden="true" /></a>
               <p className="text-zinc-500 text-sm mt-6">Free • 30 minutes • Zero obligation</p>
               <div className="mt-10 pt-8 border-t border-zinc-200 max-w-xl mx-auto">
                 <p className="text-zinc-700 mb-5">Not ready to talk? Read a sample first &mdash; we'll write three follow-up emails for your business so you can judge the copy. It's a preview, not the live system; setup still starts with a call.</p>
-                <Link to="/try-it-free" className="group text-emerald-700 border border-emerald-600/30 bg-emerald-500/5 px-8 py-4 rounded-full font-semibold transition hover:border-emerald-600/60 hover:bg-emerald-500/10 inline-flex items-center gap-2">See a sample sequence <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" aria-hidden="true" /></Link>
+                <Link to="/try-it-free" className="group text-emerald-700 border border-emerald-600/30 bg-emerald-500/5 px-8 py-4 rounded-full font-medium transition hover:border-emerald-600/60 hover:bg-emerald-500/10 inline-flex items-center gap-2">See a sample sequence <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" aria-hidden="true" /></Link>
                 <p className="text-zinc-500 text-sm mt-4">We'll write a 3-email follow-up for your business. No credit card.</p>
               </div>
             </div>
@@ -663,12 +663,12 @@ function NotFound() {
       <SiteNav solid />
       <div className="flex-1 flex items-center justify-center px-6 pt-36 pb-24">
         <div className="text-center max-w-md">
-          <div className="text-sm uppercase tracking-widest text-emerald-600 mb-4">404</div>
-          <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">We couldn't find that page</h1>
+          <div className="t-eyebrow mb-4">404</div>
+          <h1 className="t-h1 mb-5">We couldn't find that page</h1>
           <p className="text-zinc-600 leading-relaxed mb-10">The link may be out of date, or the address may have a typo.</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link to="/" className="bg-zinc-900 text-white px-8 py-4 rounded-full font-semibold hover:bg-zinc-700 transition inline-flex items-center justify-center gap-2">Back to Home</Link>
-            <Link to="/contact" className="text-emerald-700 border border-emerald-600/30 bg-emerald-500/5 px-8 py-4 rounded-full font-semibold transition hover:border-emerald-600/60 hover:bg-emerald-500/10 inline-flex items-center justify-center gap-2">Contact Us <ArrowRight className="w-4 h-4" aria-hidden="true" /></Link>
+            <Link to="/" className="bg-zinc-900 text-white px-8 py-4 rounded-full font-medium hover:bg-zinc-700 transition inline-flex items-center justify-center gap-2">Back to Home</Link>
+            <Link to="/contact" className="text-emerald-700 border border-emerald-600/30 bg-emerald-500/5 px-8 py-4 rounded-full font-medium transition hover:border-emerald-600/60 hover:bg-emerald-500/10 inline-flex items-center justify-center gap-2">Contact Us <ArrowRight className="w-4 h-4" aria-hidden="true" /></Link>
           </div>
         </div>
       </div>
