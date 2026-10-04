@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import { Routes, Route, Link, useLocation } from 'react-router-dom';
-import { Users, ChevronRight, Check, Star, ArrowRight, Zap, ChevronDown, Plus, MessageSquare, BarChart3, Shield, Sparkles, Calendar, Rocket } from 'lucide-react';
+import { Users, ChevronRight, Check, Star, ArrowRight, Zap, Plus, MessageSquare, BarChart3, Shield, Sparkles, Calendar, Rocket } from 'lucide-react';
 import TryItFree from './TryItFree.jsx';
 import Contact from './Contact.jsx';
 import Privacy from './Privacy.jsx';
@@ -10,6 +10,7 @@ import { EXTERNAL_URLS, SECURE_LINK_PROPS, sectionId } from './siteConfig.js';
 import { usePageMeta } from './usePageMeta.js';
 import { PAGE_META } from './seo.js';
 import EmailPreview from './EmailPreview.jsx';
+import HeroDemo from './HeroDemo.jsx';
 
 const FadeInSection = ({ children, delay = 0, className = '' }) => {
   const [isVisible, setIsVisible] = useState(false);
@@ -193,42 +194,42 @@ function MainSite() {
 
       <SiteNav />
 
-      <section className="min-h-screen flex items-center justify-center relative pt-20" aria-labelledby="hero-heading">
+      {/* Not full-height on purpose: the top of the next section showing below the fold
+          invites the scroll that the old bouncing arrow used to ask for. */}
+      <section className="relative overflow-hidden pt-32 pb-20 md:pt-40 md:pb-28" aria-labelledby="hero-heading">
         <div className="absolute inset-0 bg-gradient-to-b from-emerald-50 via-white to-white" aria-hidden="true" />
-        <div className="relative z-10 max-w-5xl mx-auto px-6 text-center">
-          <FadeInSection>
-            <div className="inline-flex items-center gap-3 text-sm mb-8 md:mb-10">
-              <span className="relative flex w-2 h-2" aria-hidden="true">
-                <span className="absolute inline-flex w-full h-full rounded-full bg-emerald-400 opacity-60 motion-safe:animate-ping" />
-                <span className="relative inline-flex w-2 h-2 rounded-full bg-emerald-500" />
-              </span>
-              <span className="hidden sm:inline font-medium text-zinc-900">Expert AI &amp; Automation Team</span>
-              <span className="hidden sm:inline w-px h-4 bg-zinc-300" aria-hidden="true" />
-              <span className="text-zinc-600">Chicago, IL</span>
-            </div>
-          </FadeInSection>
-          <FadeInSection delay={100}><h1 id="hero-heading" className="t-display mb-6 md:mb-8">AI That Books Meetings<br /><span className="text-gradient">While You Sleep</span></h1></FadeInSection>
-          <FadeInSection delay={200}>
-            {/* One line at every width: it is short enough for the phone fold, so the
-                separate mobile variant this used to carry is no longer needed. */}
-            <p className="t-lede md:text-xl text-zinc-700 max-w-2xl mx-auto mb-8 md:mb-10">We build and run an AI sales agent for service businesses that already get inbound leads. We cultivate your leads, you take the meetings. Live in about <span className="whitespace-nowrap">2–4 weeks</span>.</p>
-          </FadeInSection>
-          <FadeInSection delay={300}>
-            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
-              <button onClick={() => scrollTo('cta')} className="group bg-zinc-900 text-white px-8 py-4 rounded-full font-medium text-lg hover:bg-zinc-700 transition flex items-center justify-center gap-2" type="button">Book a strategy call <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" aria-hidden="true" /></button>
-              <Link to="/try-it-free" className="group text-emerald-700 border border-emerald-600/30 bg-emerald-500/5 px-8 py-4 rounded-full font-medium text-lg transition hover:border-emerald-600/60 hover:bg-emerald-500/10 flex items-center justify-center gap-2">See a sample sequence <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" aria-hidden="true" /></Link>
-            </div>
-            <p className="mt-5 text-sm text-zinc-500">We'll write a 3-email follow-up for your business. No credit card.</p>
-          </FadeInSection>
-          <FadeInSection delay={400}>
-            <div className="mt-8 md:mt-16 flex flex-wrap justify-center gap-x-6 gap-y-2 md:gap-8 text-sm text-zinc-600">
-              <div className="flex items-center gap-2"><Check className="w-4 h-4 text-emerald-600" aria-hidden="true" /> Chicago-based team</div>
-              <div className="flex items-center gap-2"><Check className="w-4 h-4 text-emerald-600" aria-hidden="true" /> 35% more closed deals for Luigi Trucking</div>
-              <div className="flex items-center gap-2"><Check className="w-4 h-4 text-emerald-600" aria-hidden="true" /> Go live in 2–4 weeks</div>
-            </div>
+        <div className="relative z-10 max-w-7xl mx-auto px-6 grid grid-cols-1 xl:grid-cols-12 gap-14 xl:gap-16 items-center">
+          <div className="xl:col-span-6 text-center xl:text-left">
+            <FadeInSection>
+              <div className="inline-flex items-center gap-3 text-sm mb-8">
+                <span className="relative flex w-2 h-2" aria-hidden="true">
+                  <span className="absolute inline-flex w-full h-full rounded-full bg-emerald-400 opacity-60 motion-safe:animate-ping" />
+                  <span className="relative inline-flex w-2 h-2 rounded-full bg-emerald-500" />
+                </span>
+                <span className="hidden sm:inline font-medium text-zinc-900">Expert AI &amp; Automation Team</span>
+                <span className="hidden sm:inline w-px h-4 bg-zinc-300" aria-hidden="true" />
+                <span className="text-zinc-600">Chicago, IL</span>
+              </div>
+            </FadeInSection>
+            {/* Sized down from the full t-display scale: on wide screens it shares the row with the
+                demo. The layout only splits at xl -- below that the demo is too tall to sit
+                beside the copy without pushing the buttons under the fold. */}
+            <FadeInSection delay={100}><h1 id="hero-heading" className="t-display text-[clamp(2.5rem,1.3rem+4vw,4.75rem)] mb-6">AI That Books Meetings <span className="text-gradient block">While You Sleep</span></h1></FadeInSection>
+            <FadeInSection delay={200}>
+              <p className="t-lede md:text-xl text-zinc-700 max-w-xl mx-auto xl:mx-0 mb-9">We build and run an AI sales agent for service businesses that already get inbound leads. We cultivate your leads, you take the meetings. Live in about <span className="whitespace-nowrap">2–4 weeks</span>.</p>
+            </FadeInSection>
+            <FadeInSection delay={300}>
+              <div className="flex flex-col sm:flex-row gap-3 justify-center xl:justify-start">
+                <button onClick={() => scrollTo('cta')} className="group bg-zinc-900 text-white px-7 py-4 rounded-full font-medium text-lg hover:bg-zinc-700 transition flex items-center justify-center gap-2" type="button">Book a strategy call <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" aria-hidden="true" /></button>
+                <Link to="/try-it-free" className="group text-emerald-700 border border-emerald-600/30 bg-white/70 px-7 py-4 rounded-full font-medium text-lg transition hover:border-emerald-600/60 hover:bg-white flex items-center justify-center gap-2">See a sample sequence <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" aria-hidden="true" /></Link>
+              </div>
+            </FadeInSection>
+          </div>
+
+          <FadeInSection delay={250} className="xl:col-span-6 w-full max-w-xl mx-auto xl:max-w-none min-w-0">
+            <HeroDemo />
           </FadeInSection>
         </div>
-        <button onClick={() => scrollTo('how-it-works')} className="hidden md:block absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce cursor-pointer hover:text-emerald-600 transition" type="button" aria-label="Scroll to learn more"><ChevronDown className="w-6 h-6 text-zinc-500 hover:text-emerald-600" aria-hidden="true" /></button>
       </section>
 
       <Section id="example" labelledBy="example-heading">
@@ -248,13 +249,13 @@ function MainSite() {
             <div>
               <div className="flex items-center gap-2 t-label mb-4">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 flex-shrink-0" aria-hidden="true" />
-                <span>Example follow-up &middot; 11 minutes after the form came in</span>
+                <span>Example follow-up &middot; 4 minutes after the form came in</span>
               </div>
               <EmailPreview
                 from="Sarah at Summit Roofing"
                 to="the homeowner who just requested a quote"
                 subject="Quick question about your roof estimate"
-                timestamp="Tue 8:41 PM"
+                timestamp="Tue 8:34 PM"
                 footnote="Example only. We write these in the client's voice after kickoff. This is not the live booking agent — that is what the strategy call scopes."
               >
                 <p>Hi Mark &mdash;</p>
