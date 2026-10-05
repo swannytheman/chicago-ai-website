@@ -12,6 +12,7 @@ import { PAGE_META } from './seo.js';
 import EmailPreview from './EmailPreview.jsx';
 import HeroDemo from './HeroDemo.jsx';
 import { HeadshotPortrait, HeadshotAvatar } from './Headshot.jsx';
+import ScrollToTop from './ScrollToTop.jsx';
 
 const FadeInSection = ({ children, delay = 0, className = '' }) => {
   const [isVisible, setIsVisible] = useState(false);
@@ -764,13 +765,16 @@ function NotFound() {
 
 export default function App() {
   return (
-    <Routes>
-      <Route path="/" element={<MainSite />} />
-      <Route path="/try-it-free" element={<TryItFree />} />
-      <Route path="/contact" element={<Contact />} />
-      <Route path="/privacy" element={<Privacy />} />
-      <Route path="/terms" element={<Terms />} />
-      <Route path="*" element={<NotFound />} />
-    </Routes>
+    <>
+      <ScrollToTop />
+      <Routes>
+        <Route path="/" element={<MainSite />} />
+        <Route path="/try-it-free" element={<TryItFree />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/privacy" element={<Privacy />} />
+        <Route path="/terms" element={<Terms />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </>
   );
 }
