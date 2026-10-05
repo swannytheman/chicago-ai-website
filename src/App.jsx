@@ -259,8 +259,8 @@ function MainSite() {
                 footnote="Example only. We write these in the client's voice after kickoff. This is not the live booking agent — that is what the strategy call scopes."
               >
                 <p>Hi Mark &mdash;</p>
-                <p>Got your note about the leaking flashing on Oakley. I can have someone look at it Thursday morning or Friday after 2.</p>
-                <p>If the leak is active, say so in a reply and we&apos;ll put you first.</p>
+                <p>Sorry to hear about the roof leak on Oakley. I can have someone look at it Thursday morning or Friday after 2.</p>
+                <p>If water is coming in right now, reply and we&apos;ll put you first.</p>
                 <p>Sarah<br />Summit Roofing</p>
               </EmailPreview>
             </div>

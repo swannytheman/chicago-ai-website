@@ -10,7 +10,7 @@ import { CalendarCheck, RotateCcw } from 'lucide-react';
 // the hero never shifts while it plays. The full text is in the DOM for screen
 // readers; only the typed overlay is hidden from them.
 
-const REPLY = "Hi Mark — got your note about the flashing on Oakley. I can have someone look at it Thursday morning or Friday after 2. If the leak is active, reply and we'll put you first.";
+const REPLY = "Hi Mark — sorry to hear about the roof leak on Oakley. I can have someone look at it Thursday morning or Friday after 2. If water is coming in right now, reply and we'll put you first.";
 
 // ms. Step n becomes visible at STEP_AT[n]; the reply types between steps 2 and 3.
 const STEP_AT = [400, 1500];
@@ -101,7 +101,7 @@ export default function HeroDemo() {
           <div className="font-medium text-zinc-900">New quote request</div>
           <div className="text-xs text-zinc-500 mb-2.5">Website form &middot; Mark R.</div>
           <p className="rounded-xl bg-zinc-50 border border-zinc-200 px-3.5 py-2.5 text-sm text-zinc-700 leading-relaxed">
-            Leak around the flashing at the back of the house on Oakley. Can someone take a look this week?
+            Our roof is leaking near the back of the house on Oakley. Can someone take a look this week?
           </p>
         </Step>
 
