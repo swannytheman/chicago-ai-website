@@ -23,3 +23,11 @@ Two things to know before reusing these:
 
 If the logo is ever redrawn, ask for a true outlined SVG, genuine transparency, and a
 single-line horizontal lockup for the 40px site header.
+
+## Headshot
+
+`headshot-original.jpeg` is Matt's original headshot (1284×1813, 1.5 MB). It lives
+here rather than in `public/` for the same reason as the logos: the site never loads
+it. The web copies in `public/team/` (a 4:5 portrait at 480 and 800 wide, and a 192px
+square avatar, each as WebP and JPEG, metadata stripped) are cut from it; see
+`src/Headshot.jsx`. Regenerate those from this file if the photo changes.

@@ -11,6 +11,7 @@ import { usePageMeta } from './usePageMeta.js';
 import { PAGE_META } from './seo.js';
 import EmailPreview from './EmailPreview.jsx';
 import HeroDemo from './HeroDemo.jsx';
+import { HeadshotPortrait, HeadshotAvatar } from './Headshot.jsx';
 
 const FadeInSection = ({ children, delay = 0, className = '' }) => {
   const [isVisible, setIsVisible] = useState(false);
@@ -353,11 +354,13 @@ function MainSite() {
       <Section id="about" labelledBy="about-heading">
         <FadeInSection>
           <div className="grid lg:grid-cols-12 gap-10 lg:gap-16">
-            {/* No photo of Matt exists in the repo, so a monogram rather than a stock face. */}
+            {/* Portrait on wide screens; on phones a round avatar beside the name, so the
+                photo does not push the story a full screen down. */}
             <div className="lg:col-span-4 flex lg:flex-col items-center lg:items-start gap-5">
-              <div className="w-20 h-20 lg:w-28 lg:h-28 rounded-2xl bg-emerald-50 border border-emerald-600/20 flex items-center justify-center flex-shrink-0" aria-hidden="true">
-                <span className="text-2xl lg:text-3xl font-semibold tracking-[-0.02em] text-emerald-700">MS</span>
+              <div className="hidden lg:block w-full max-w-[320px] overflow-hidden rounded-2xl border border-zinc-200 bg-zinc-100 shadow-[0_24px_48px_-24px_rgba(24,24,27,0.25)]">
+                <HeadshotPortrait className="w-full h-auto aspect-[4/5]" />
               </div>
+              <HeadshotAvatar size={80} alt="Matt Swanson" className="lg:hidden border border-zinc-200" />
               <div>
                 <div className="font-semibold text-lg">Matt Swanson</div>
                 <div className="text-zinc-500">Chicago, IL</div>
@@ -679,7 +682,10 @@ function MainSite() {
             <h2 id="cta-heading" className="t-h1 mb-6">Let&apos;s See If We&apos;re a Fit</h2>
             <p className="t-lede md:text-xl max-w-2xl mx-auto mb-10">One 30-minute call: we look at how leads reach you now, where they go cold, and whether a managed AI agent is worth building for your business. If it is, you&apos;re live in about <span className="whitespace-nowrap">2–4 weeks</span>.</p>
             <a href={EXTERNAL_URLS.appointments} {...SECURE_LINK_PROPS} className="group bg-zinc-900 text-white px-10 py-5 rounded-full font-medium text-lg hover:bg-zinc-700 transition inline-flex items-center gap-3">Book a strategy call <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" aria-hidden="true" /></a>
-            <p className="text-zinc-500 text-sm mt-6">Free • 30 minutes • Zero obligation</p>
+            <p className="text-zinc-500 text-sm mt-6 flex items-center justify-center gap-2.5">
+              <HeadshotAvatar size={28} className="border border-white shadow-sm" />
+              <span>Free • 30 minutes with Matt • Zero obligation</span>
+            </p>
             <div className="mt-16 pt-10 border-t border-emerald-600/15 max-w-xl mx-auto">
               <p className="text-zinc-700 leading-relaxed mb-6">Not ready to talk? Read a sample first &mdash; we&apos;ll write three follow-up emails for your business so you can judge the copy. It&apos;s a preview, not the live system; setup still starts with a call.</p>
               <Link to="/try-it-free" className="group text-emerald-700 border border-emerald-600/30 bg-white/70 px-8 py-4 rounded-full font-medium transition hover:border-emerald-600/60 hover:bg-white inline-flex items-center gap-2">See a sample sequence <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" aria-hidden="true" /></Link>

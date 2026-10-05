@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Calendar, Check, Clock, Shield } from 'lucide-react';
+import { ArrowRight, Check, Clock, Shield } from 'lucide-react';
 import { SiteNav, SiteFooter } from './SiteChrome.jsx';
 import { EXTERNAL_URLS, SECURE_LINK_PROPS, CONTACT_EMAIL } from './siteConfig.js';
 import { getAttribution } from './attribution.js';
+import { HeadshotAvatar } from './Headshot.jsx';
 import { usePageMeta } from './usePageMeta.js';
 import { PAGE_META } from './seo.js';
 
@@ -118,8 +119,13 @@ export default function Contact() {
           <div className="grid lg:grid-cols-2 gap-6 items-start">
             {/* Primary path: book a call */}
             <div className="rounded-2xl border border-emerald-500/25 bg-emerald-500/[0.04] p-6 sm:p-8 md:p-10">
-              <div className="w-14 h-14 rounded-2xl flex items-center justify-center mb-6 bg-emerald-500/10 border border-emerald-500/25">
-                <Calendar className="w-7 h-7 text-emerald-600" aria-hidden="true" />
+              {/* The person on the call, rather than a calendar icon. */}
+              <div className="flex items-center gap-4 mb-6">
+                <HeadshotAvatar size={56} className="border-2 border-white shadow-sm" />
+                <div>
+                  <div className="font-semibold">Matt Swanson</div>
+                  <div className="text-sm text-zinc-500">Chicago AI Group</div>
+                </div>
               </div>
               <h2 className="text-2xl font-semibold tracking-[-0.025em] mb-3">Book a strategy call</h2>
               <p className="text-zinc-700 leading-relaxed mb-8">
