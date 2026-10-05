@@ -165,6 +165,15 @@ function MainSite() {
     title: "VP of Operations, Luigi Trucking Insurance"
   }), []);
 
+  // Second voice, shown smaller under the featured quote: Luigi's carries the number,
+  // this one speaks to Matt as the builder. Quoted as received, bar a doubled space.
+  const crownTestimonial = useMemo(() => ({
+    quote: "Matt is an incredible workflow developer, we built an insanely complex CRM that did pretty well and helped assist our overall operation greatly",
+    title: "Owner, Crown Counseling",
+    logo: '/logos/crown-counseling.svg',
+    logoAlt: 'Crown Counseling',
+  }), []);
+
   const faqs = useMemo(() => [
     { q: "Is this software we log into, or do you run it for us?", a: "We run it. We build the agent, train it on how you talk to customers, connect it to your calendar and inbox, and keep managing it after go-live. You approve how it sounds and you take the meetings. There is no tool for your team to learn and nothing technical for you to do — most of our clients are owners, not engineers." },
     { q: "Who is this for, and who is it not for?", a: "It is for service businesses that already get inbound leads and lose some of them to slow follow-up — commercial insurance, home services and trades, counseling and group practices, property management, and similar appointment businesses. It is not a fit if you have no inbound demand yet, or if what you actually need is a custom CRM rebuild." },
@@ -349,6 +358,18 @@ function MainSite() {
             </figcaption>
           </figure>
         </FadeInSection>
+
+        <FadeInSection delay={250}>
+          <figure className="max-w-4xl mx-auto mt-16 md:mt-20 pt-12 md:pt-16 border-t border-zinc-200">
+            <div className="flex gap-1 mb-6" role="img" aria-label="5 star rating">{[...Array(5)].map((_, i) => (<Star key={i} className="w-4 h-4 fill-emerald-500 text-emerald-500" aria-hidden="true" />))}</div>
+            <blockquote className="text-xl md:text-2xl font-medium tracking-[-0.02em] leading-[1.4] text-zinc-900">&ldquo;{crownTestimonial.quote}.&rdquo;</blockquote>
+            <figcaption className="flex items-center gap-4 mt-8">
+              <img src={crownTestimonial.logo} alt={crownTestimonial.logoAlt} className="h-8 w-auto invert opacity-70" />
+              <span className="w-px h-6 bg-zinc-200" aria-hidden="true" />
+              <div className="text-zinc-500 text-sm">{crownTestimonial.title}</div>
+            </figcaption>
+          </figure>
+        </FadeInSection>
       </Section>
 
       <Section id="about" labelledBy="about-heading">
@@ -371,9 +392,25 @@ function MainSite() {
               <span className="t-eyebrow mb-4">About</span>
               <h2 id="about-heading" className="t-h2 mb-8">You&apos;re talking to a person in Chicago, not a platform.</h2>
               <div className="space-y-5 t-lede text-zinc-700 max-w-2xl">
-                <p>Chicago AI Group is run by Matt Swanson. I work with owner-led service businesses — insurance, practices, property, trades — that already get inbound leads and lose them overnight. I build the agent, train it on how you actually talk to customers, and keep it running. You take the meetings.</p>
+                <p>Chicago AI Group is run by Matt Swanson. I came to AI from sales, not software: I helped sell and manage over $100 million in sales at Tesla as a Sales Manager and Advisor, and sold over $7 million with the Chicago Cubs Premier Sales team. At Tesla, I led my team to the region&apos;s best customer response time. I know what a slow follow-up costs, because I&apos;ve spent my career on the other side of it.</p>
+                <p>Now I work with owner-led service businesses — insurance, practices, property, trades — that already get inbound leads and lose them overnight. I build the agent, train it on how you actually talk to customers, and keep it running. You take the meetings.</p>
                 <p>This started because generic AI tools dump another dashboard on a busy owner. The useful version is the one someone sets up and watches.</p>
               </div>
+
+              {/* Track record, set like the Results stats: big figure, one plain line under it. */}
+              <dl className="mt-10 grid sm:grid-cols-3 border-y border-zinc-200 divide-y sm:divide-y-0 sm:divide-x divide-zinc-200 max-w-3xl">
+                {[
+                  { stat: '$100M+', label: 'in sales sold and managed at Tesla' },
+                  { stat: '#1', label: 'rated Tesla showroom in North America. I managed it, with top customer-experience scores' },
+                  { stat: '$7M+', label: 'sold with the Chicago Cubs Premier Sales team, finishing #1 on the team in % to goal' },
+                ].map((item, i) => (
+                  <div key={i} className="flex flex-col-reverse justify-end py-6 sm:px-6 sm:first:pl-0 sm:last:pr-0">
+                    <dt className="text-sm text-zinc-600 leading-snug">{item.label}</dt>
+                    <dd className="text-3xl font-semibold tracking-[-0.035em] tabular-nums text-emerald-600 mb-2">{item.stat}</dd>
+                  </div>
+                ))}
+              </dl>
+
               <p className="text-emerald-700 font-semibold mt-8">The strategy call is with me.</p>
               <div className="mt-8 flex flex-col sm:flex-row gap-5 sm:items-center">
                 <a href={EXTERNAL_URLS.appointments} {...SECURE_LINK_PROPS} className="bg-zinc-900 text-white px-8 py-4 rounded-full font-medium hover:bg-zinc-700 transition inline-flex items-center justify-center gap-2">Book a strategy call <ArrowRight className="w-4 h-4" aria-hidden="true" /></a>

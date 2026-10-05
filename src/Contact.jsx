@@ -1,26 +1,23 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Check, Clock, Shield } from 'lucide-react';
+import { ArrowRight, Check, Shield } from 'lucide-react';
 import { SiteNav, SiteFooter } from './SiteChrome.jsx';
 import { EXTERNAL_URLS, SECURE_LINK_PROPS, CONTACT_EMAIL } from './siteConfig.js';
-import { getAttribution } from './attribution.js';
 import { HeadshotAvatar } from './Headshot.jsx';
 import { usePageMeta } from './usePageMeta.js';
 import { PAGE_META } from './seo.js';
 
-// TODO: paste the Make.com webhook for contact enquiries here.
+// Make.com webhook for contact enquiries. Its own hook, not the Try It Free one (see
+// WEBHOOK_URL in TryItFree.jsx): that scenario emails a three-email demo sequence, so
+// an enquiry sent there would get marketing emails nobody asked for.
 //
-// Deliberately empty until one exists. Do NOT reuse the Try It Free hook
-// (see WEBHOOK_URL in TryItFree.jsx): that scenario replies with a three-email demo
-// sequence, so a contact enquiry sent there would get marketing emails nobody asked
-// for. Create a second webhook, or route on the form_type field this posts.
-//
-// While this is empty the form does not pretend to send. It validates, then hands the
-// visitor their message pre-filled as an email so the enquiry still reaches us.
-//
-// A hook on a host other than hook.us2.make.com also needs adding to connect-src in
-// vercel.json, or the browser will refuse the request.
-const CONTACT_WEBHOOK_URL = '';
+// The form only POSTs JSON here; nothing is emailed from the browser. A hook on a host
+// other than hook.us2.make.com also needs adding to connect-src in vercel.json, or the
+// browser will refuse the request.
+const CONTACT_WEBHOOK_URL = 'https://hook.us2.make.com/lofq2qmzeyblqzint5lrgss0g6c1yrig';
+
+// Tags every enquiry from this page so the scenario can tell where a lead came from.
+const LEAD_SOURCE_DETAIL = 'Contact Us Form';
 
 function isValidEmail(email) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
@@ -44,11 +41,12 @@ export default function Contact() {
 
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [status, setStatus] = useState(null); // 'sent' | 'failed' | 'unconfigured'
+  const [status, setStatus] = useState(null); // 'sent' | 'failed'
 
   usePageMeta(PAGE_META.contact);
 
-  // Everything the visitor typed, as an email we can pre-fill for them.
+  // Everything the visitor typed, pre-filled into an email. Only offered as a link in
+  // the error message, for the visitor to use if they choose; never sent automatically.
   function mailtoFallback() {
     const body = [
       `Name: ${name.trim()}`,
@@ -69,11 +67,6 @@ export default function Contact() {
     setErrors(nextErrors);
     if (Object.keys(nextErrors).length) return;
 
-    if (!CONTACT_WEBHOOK_URL) {
-      setStatus('unconfigured');
-      return;
-    }
-
     setStatus(null);
     setIsSubmitting(true);
     try {
@@ -81,19 +74,22 @@ export default function Contact() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         keepalive: true,
+        // name and email are validated above; the rest go as empty strings when blank,
+        // so the scenario always receives the same keys.
         body: JSON.stringify({
-          form_type: 'contact',
           name: name.trim(),
           email: email.trim(),
           company: company.trim(),
           website: normalizeUrl(website),
           message: message.trim(),
+          lead_source_detail: LEAD_SOURCE_DETAIL,
           submitted_at: new Date().toISOString(),
           page_url: window.location.href,
-          ...getAttribution(),
         }),
       });
-      if (!res.ok) throw new Error(`Webhook responded ${res.status}`);
+      // Make answers 200 once it has accepted the payload. Anything else is a failure,
+      // and the visitor's answers stay in the form so they can try again.
+      if (res.status !== 200) throw new Error(`Webhook responded ${res.status}`);
       setStatus('sent');
     } catch {
       setStatus('failed');
@@ -152,7 +148,7 @@ export default function Contact() {
                 <div className="rounded-xl border border-emerald-600/30 bg-emerald-500/[0.06] p-6" role="status">
                   <div className="font-semibold text-emerald-700 mb-2">Thanks &mdash; that&apos;s with us.</div>
                   <p className="text-sm text-zinc-700 leading-relaxed">
-                    We&apos;ll reply within one business day. If it&apos;s urgent, book a call using the panel on the left.
+                    If it&apos;s urgent, book a call using the panel on the left.
                   </p>
                 </div>
               ) : (
@@ -200,14 +196,6 @@ export default function Contact() {
                     </div>
                   )}
 
-                  {status === 'unconfigured' && (
-                    <div className="rounded-xl border border-amber-400/35 bg-amber-400/[0.08] p-4 mb-5 text-sm leading-relaxed text-amber-800" role="alert">
-                      <strong className="block text-amber-900 mb-1">This form isn&apos;t connected yet.</strong>
-                      Rather than lose your message, we&apos;ve put it into an email for you &mdash;{' '}
-                      <a className="underline" href={mailtoFallback()}>send it to {CONTACT_EMAIL}</a>, or book a call using the panel on the left.
-                    </div>
-                  )}
-
                   <button type="submit" disabled={isSubmitting}
                     className="w-full bg-zinc-900 text-white px-8 py-4 rounded-full font-medium hover:bg-zinc-700 transition disabled:opacity-60 inline-flex items-center justify-center gap-2">
                     {isSubmitting ? 'Sending…' : <>Send Message <ArrowRight className="w-4 h-4" aria-hidden="true" /></>}
@@ -225,7 +213,6 @@ export default function Contact() {
 
           {/* Small print */}
           <div className="mt-12 flex flex-wrap justify-center gap-x-8 gap-y-3 text-sm text-zinc-500">
-            <span className="inline-flex items-center gap-2"><Clock className="w-4 h-4 text-emerald-600/70" aria-hidden="true" /> We reply within 1 business day</span>
             <span className="inline-flex items-center gap-2"><Shield className="w-4 h-4 text-emerald-600/70" aria-hidden="true" /> The call is free and there&apos;s no pitch theater</span>
           </div>
         </div>
