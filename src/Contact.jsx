@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Check, Shield } from 'lucide-react';
 import { SiteNav, SiteFooter } from './SiteChrome.jsx';
-import { EXTERNAL_URLS, SECURE_LINK_PROPS, CONTACT_EMAIL } from './siteConfig.js';
+import { EXTERNAL_URLS, SECURE_LINK_PROPS } from './siteConfig.js';
 import { HeadshotAvatar } from './Headshot.jsx';
 import { usePageMeta } from './usePageMeta.js';
 import { PAGE_META } from './seo.js';
@@ -11,7 +11,8 @@ import { PAGE_META } from './seo.js';
 // WEBHOOK_URL in TryItFree.jsx): that scenario emails a three-email demo sequence, so
 // an enquiry sent there would get marketing emails nobody asked for.
 //
-// The form only POSTs JSON here; nothing is emailed from the browser. A hook on a host
+// The form only POSTs JSON here; nothing is emailed from the browser, and the error
+// message offers the booking panel rather than an email link. A hook on a host
 // other than hook.us2.make.com also needs adding to connect-src in vercel.json, or the
 // browser will refuse the request.
 const CONTACT_WEBHOOK_URL = 'https://hook.us2.make.com/lofq2qmzeyblqzint5lrgss0g6c1yrig';
@@ -44,20 +45,6 @@ export default function Contact() {
   const [status, setStatus] = useState(null); // 'sent' | 'failed'
 
   usePageMeta(PAGE_META.contact);
-
-  // Everything the visitor typed, pre-filled into an email. Only offered as a link in
-  // the error message, for the visitor to use if they choose; never sent automatically.
-  function mailtoFallback() {
-    const body = [
-      `Name: ${name.trim()}`,
-      `Email: ${email.trim()}`,
-      company.trim() && `Company: ${company.trim()}`,
-      website.trim() && `Website: ${normalizeUrl(website)}`,
-      '',
-      message.trim() || '(no message)',
-    ].filter(Boolean).join('\n');
-    return `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent('Website enquiry')}&body=${encodeURIComponent(body)}`;
-  }
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -191,8 +178,7 @@ export default function Contact() {
                   {status === 'failed' && (
                     <div className="rounded-xl border border-red-400/35 bg-red-400/[0.08] p-4 mb-5 text-sm leading-relaxed text-red-700" role="alert">
                       <strong className="block text-red-800 mb-1">That didn&apos;t go through.</strong>
-                      Your answers are still here &mdash; try again in a moment, or{' '}
-                      <a className="underline" href={mailtoFallback()}>email us directly</a>.
+                      Your answers are still here &mdash; try again in a moment, or book a call using the panel on the left.
                     </div>
                   )}
 

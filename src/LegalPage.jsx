@@ -3,7 +3,7 @@ import { SiteNav, SiteFooter } from './SiteChrome.jsx';
 import { usePageMeta } from './usePageMeta.js';
 
 // Both legal pages share this date so they cannot drift apart.
-export const LAST_UPDATED = '2 September 2026';
+export const LAST_UPDATED = '5 October 2026';
 
 // Long-form reading layout: one narrow column, generous leading, the site's chrome.
 export function LegalPage({ title, intro, meta, children }) {

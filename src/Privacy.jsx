@@ -28,7 +28,8 @@ export default function Privacy() {
           'Optionally: your company name, industry, biggest bottleneck, the CRM or tools you use now, your website, and anything else you choose to write in the notes box.',
         ]} />
         <p><strong>If you send us a message</strong> from the <Link to="/contact" className="text-emerald-700 hover:text-emerald-800 underline">Contact page</Link>, we receive your name, work email, and the company, website and message you provide.</p>
-        <p><strong>With either form</strong>, we also record the time you submitted it, the page you submitted it from, the page you first arrived on, the site that referred you, and any campaign tags in that link — the <code className="text-zinc-600">utm_</code> values and Google or Meta click identifiers that get appended when you arrive from an ad or a newsletter. That is how we know which campaign a lead came from.</p>
+        <p><strong>With either form</strong>, we also record the time you submitted it and the page you submitted it from.</p>
+        <p><strong>With a demo request only</strong>, we also record the page you first arrived on, the site that referred you, and any campaign tags in that link — the <code className="text-zinc-600">utm_</code> values and Google or Meta click identifiers that get appended when you arrive from an ad or a newsletter. That is how we know which campaign a demo request came from. The Contact page form does not send these.</p>
         <p><strong>If you book a strategy call</strong>, you leave this site for Calendly and give your details to them directly. We see the booking Calendly passes back to us. We do not control what Calendly collects; their privacy policy applies.</p>
         <p><strong>Server logs.</strong> Our host records ordinary request logs, including IP addresses, for security and reliability. We do not use them to build a profile of you.</p>
       </Section>
@@ -52,7 +53,7 @@ export default function Privacy() {
           We do use your browser&apos;s <strong>session storage</strong>, which holds a small amount of data and is erased
           when you close the tab. It remembers that you already submitted the demo form (so a refresh does not send
           you a second sequence), the first name and email you entered so we can show your confirmation, and the
-          campaign tags described above. This never leaves your browser except as part of a form you submit.
+          campaign tags described above. This never leaves your browser except as part of a demo request you submit.
         </p>
       </Section>
 
