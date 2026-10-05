@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Check, Clock, Shield } from 'lucide-react';
+import { ArrowRight, Check, Shield } from 'lucide-react';
 import { SiteNav, SiteFooter } from './SiteChrome.jsx';
 import { EXTERNAL_URLS, SECURE_LINK_PROPS, CONTACT_EMAIL } from './siteConfig.js';
 import { getAttribution } from './attribution.js';
@@ -152,7 +152,7 @@ export default function Contact() {
                 <div className="rounded-xl border border-emerald-600/30 bg-emerald-500/[0.06] p-6" role="status">
                   <div className="font-semibold text-emerald-700 mb-2">Thanks &mdash; that&apos;s with us.</div>
                   <p className="text-sm text-zinc-700 leading-relaxed">
-                    We&apos;ll reply within one business day. If it&apos;s urgent, book a call using the panel on the left.
+                    If it&apos;s urgent, book a call using the panel on the left.
                   </p>
                 </div>
               ) : (
@@ -225,7 +225,6 @@ export default function Contact() {
 
           {/* Small print */}
           <div className="mt-12 flex flex-wrap justify-center gap-x-8 gap-y-3 text-sm text-zinc-500">
-            <span className="inline-flex items-center gap-2"><Clock className="w-4 h-4 text-emerald-600/70" aria-hidden="true" /> We reply within 1 business day</span>
             <span className="inline-flex items-center gap-2"><Shield className="w-4 h-4 text-emerald-600/70" aria-hidden="true" /> The call is free and there&apos;s no pitch theater</span>
           </div>
         </div>

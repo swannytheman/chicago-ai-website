@@ -392,7 +392,7 @@ function MainSite() {
               <span className="t-eyebrow mb-4">About</span>
               <h2 id="about-heading" className="t-h2 mb-8">You&apos;re talking to a person in Chicago, not a platform.</h2>
               <div className="space-y-5 t-lede text-zinc-700 max-w-2xl">
-                <p>Chicago AI Group is run by Matt Swanson. I came to AI from sales, not software: I helped sell and manage over $100 million in sales at Tesla as a Sales Manager and Advisor, and sold over $7 million with the Chicago Cubs Premier Sales team. I know what a slow follow-up costs, because I&apos;ve spent my career on the other side of it.</p>
+                <p>Chicago AI Group is run by Matt Swanson. I came to AI from sales, not software: I helped sell and manage over $100 million in sales at Tesla as a Sales Manager and Advisor, and sold over $7 million with the Chicago Cubs Premier Sales team. At Tesla, I led my team to the region&apos;s best customer response time. I know what a slow follow-up costs, because I&apos;ve spent my career on the other side of it.</p>
                 <p>Now I work with owner-led service businesses — insurance, practices, property, trades — that already get inbound leads and lose them overnight. I build the agent, train it on how you actually talk to customers, and keep it running. You take the meetings.</p>
                 <p>This started because generic AI tools dump another dashboard on a busy owner. The useful version is the one someone sets up and watches.</p>
               </div>
