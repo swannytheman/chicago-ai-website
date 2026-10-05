@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { SiteNav, SiteFooter } from './SiteChrome.jsx';
 import { usePageMeta } from './usePageMeta.js';
 
@@ -8,7 +7,6 @@ export const LAST_UPDATED = '5 October 2026';
 // Long-form reading layout: one narrow column, generous leading, the site's chrome.
 export function LegalPage({ title, intro, meta, children }) {
   usePageMeta(meta);
-  useEffect(() => { window.scrollTo(0, 0); }, []);
 
   return (
     <div className="min-h-screen bg-white text-zinc-900 overflow-x-hidden">
