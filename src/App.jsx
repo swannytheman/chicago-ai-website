@@ -402,7 +402,7 @@ function MainSite() {
                 {[
                   { stat: '$100M+', label: 'in sales sold and managed at Tesla' },
                   { stat: '#1', label: 'rated Tesla showroom in North America. I managed it, with top customer-experience scores' },
-                  { stat: '$7M+', label: 'sold with the Chicago Cubs Premier Sales team' },
+                  { stat: '$7M+', label: 'sold with the Chicago Cubs Premier Sales team, finishing #1 on the team in % to goal' },
                 ].map((item, i) => (
                   <div key={i} className="flex flex-col-reverse justify-end py-6 sm:px-6 sm:first:pl-0 sm:last:pr-0">
                     <dt className="text-sm text-zinc-600 leading-snug">{item.label}</dt>
