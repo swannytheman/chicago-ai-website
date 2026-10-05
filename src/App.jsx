@@ -165,6 +165,15 @@ function MainSite() {
     title: "VP of Operations, Luigi Trucking Insurance"
   }), []);
 
+  // Second voice, shown smaller under the featured quote: Luigi's carries the number,
+  // this one speaks to Matt as the builder. Quoted as received, bar a doubled space.
+  const crownTestimonial = useMemo(() => ({
+    quote: "Matt is an incredible workflow developer, we built an insanely complex CRM that did pretty well and helped assist our overall operation greatly",
+    title: "Owner, Crown Counseling",
+    logo: '/logos/crown-counseling.svg',
+    logoAlt: 'Crown Counseling',
+  }), []);
+
   const faqs = useMemo(() => [
     { q: "Is this software we log into, or do you run it for us?", a: "We run it. We build the agent, train it on how you talk to customers, connect it to your calendar and inbox, and keep managing it after go-live. You approve how it sounds and you take the meetings. There is no tool for your team to learn and nothing technical for you to do — most of our clients are owners, not engineers." },
     { q: "Who is this for, and who is it not for?", a: "It is for service businesses that already get inbound leads and lose some of them to slow follow-up — commercial insurance, home services and trades, counseling and group practices, property management, and similar appointment businesses. It is not a fit if you have no inbound demand yet, or if what you actually need is a custom CRM rebuild." },
@@ -346,6 +355,18 @@ function MainSite() {
                 <div className="font-semibold">{testimonial.author}</div>
                 <div className="text-zinc-500 text-sm">{testimonial.title}</div>
               </div>
+            </figcaption>
+          </figure>
+        </FadeInSection>
+
+        <FadeInSection delay={250}>
+          <figure className="max-w-4xl mx-auto mt-16 md:mt-20 pt-12 md:pt-16 border-t border-zinc-200">
+            <div className="flex gap-1 mb-6" role="img" aria-label="5 star rating">{[...Array(5)].map((_, i) => (<Star key={i} className="w-4 h-4 fill-emerald-500 text-emerald-500" aria-hidden="true" />))}</div>
+            <blockquote className="text-xl md:text-2xl font-medium tracking-[-0.02em] leading-[1.4] text-zinc-900">&ldquo;{crownTestimonial.quote}.&rdquo;</blockquote>
+            <figcaption className="flex items-center gap-4 mt-8">
+              <img src={crownTestimonial.logo} alt={crownTestimonial.logoAlt} className="h-8 w-auto invert opacity-70" />
+              <span className="w-px h-6 bg-zinc-200" aria-hidden="true" />
+              <div className="text-zinc-500 text-sm">{crownTestimonial.title}</div>
             </figcaption>
           </figure>
         </FadeInSection>
