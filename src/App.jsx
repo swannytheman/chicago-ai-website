@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import { Routes, Route, Link, useLocation } from 'react-router-dom';
-import { Users, ChevronRight, Check, Star, ArrowRight, Zap, ChevronDown, MessageSquare, BarChart3, Shield, Sparkles, Calendar, Rocket } from 'lucide-react';
+import { Users, ChevronRight, Check, Star, ArrowRight, Zap, Plus, MessageSquare, BarChart3, Shield, Sparkles, Calendar, Rocket } from 'lucide-react';
 import TryItFree from './TryItFree.jsx';
 import Contact from './Contact.jsx';
 import Privacy from './Privacy.jsx';
@@ -10,6 +10,7 @@ import { EXTERNAL_URLS, SECURE_LINK_PROPS, sectionId } from './siteConfig.js';
 import { usePageMeta } from './usePageMeta.js';
 import { PAGE_META } from './seo.js';
 import EmailPreview from './EmailPreview.jsx';
+import HeroDemo from './HeroDemo.jsx';
 
 const FadeInSection = ({ children, delay = 0, className = '' }) => {
   const [isVisible, setIsVisible] = useState(false);
@@ -28,6 +29,48 @@ const FadeInSection = ({ children, delay = 0, className = '' }) => {
     </div>
   );
 };
+
+// Home page layout primitives. Sections are separated by a hairline inset to the
+// content width and generous vertical space rather than each being boxed in a card;
+// framing is kept for the two blocks meant to stand out, pricing and the guarantee.
+function Section({ id, labelledBy, rule = true, bottom = 'pb-24 md:pb-32', children }) {
+  return (
+    <section id={id} className="scroll-mt-16" aria-labelledby={labelledBy}>
+      <div className="max-w-7xl mx-auto px-6">
+        <div className={`${rule ? 'border-t border-zinc-200 pt-16 md:pt-24' : ''} ${bottom}`}>
+          {children}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// Eyebrow and heading on the left, supporting line on the right, bottoms aligned.
+// Stacks on narrower screens.
+function SectionHeader({ eyebrow, title, headingId, lede }) {
+  return (
+    <FadeInSection>
+      <div className="grid lg:grid-cols-12 gap-x-16 gap-y-5 lg:items-end mb-14 md:mb-20">
+        <div className="lg:col-span-7">
+          <span className="t-eyebrow mb-4">{eyebrow}</span>
+          <h2 id={headingId} className="t-h2">{title}</h2>
+        </div>
+        {lede && <p className="t-lede lg:col-span-5">{lede}</p>}
+      </div>
+    </FadeInSection>
+  );
+}
+
+// A column opened by a hairline with a short emerald lead-in: the open-layout
+// stand-in for a card.
+function AccentRule({ children }) {
+  return (
+    <div className="relative border-t border-zinc-200 pt-8 h-full">
+      <span className="absolute -top-px left-0 h-0.5 w-12 bg-emerald-600" aria-hidden="true" />
+      {children}
+    </div>
+  );
+}
 
 function MainSite() {
   usePageMeta(PAGE_META.home);
@@ -143,505 +186,504 @@ function MainSite() {
   const selectedPlan = salesAgent.pricing[selectedTier];
 
   return (
-    <div className="min-h-screen bg-zinc-950 text-white overflow-x-hidden">
+    <div className="min-h-screen bg-white text-zinc-900 overflow-x-hidden">
       <style>{`
-        .card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); }
-        .card-hover:hover { background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.12); }
-        .text-gradient { background: linear-gradient(135deg, #fff 0%, #94a3b8 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .text-gradient { background: linear-gradient(135deg, #18181b 0%, #059669 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
         html { scroll-behavior: smooth; }
       `}</style>
 
       <SiteNav />
 
-      <section className="min-h-screen flex items-center justify-center relative pt-20" aria-labelledby="hero-heading">
-        <div className="absolute inset-0 bg-gradient-to-b from-zinc-900 via-zinc-950 to-zinc-950" aria-hidden="true" />
-        <div className="relative z-10 max-w-5xl mx-auto px-6 text-center">
-          <FadeInSection>
-            <div className="inline-flex items-center gap-2 border border-emerald-500/20 bg-emerald-500/5 px-5 py-2.5 rounded-full text-sm mb-8 cursor-default">
-              <span className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse" aria-hidden="true" /><span className="hidden sm:inline text-emerald-300">Expert AI &amp; Automation Team</span><span className="hidden sm:inline text-zinc-500 mx-1">•</span><span className="text-zinc-400">Chicago, IL</span>
-            </div>
-          </FadeInSection>
-          <FadeInSection delay={100}><h1 id="hero-heading" className="text-[2rem] sm:text-5xl md:text-7xl lg:text-8xl font-bold mb-5 md:mb-6 leading-[1.12] sm:leading-tight tracking-tight">AI That Books Meetings<br /><span className="text-gradient">While You Sleep</span></h1></FadeInSection>
-          <FadeInSection delay={200}>
-            {/* One line at every width: it is short enough for the phone fold, so the
-                separate mobile variant this used to carry is no longer needed. */}
-            <p className="text-base md:text-xl text-zinc-300 max-w-2xl mx-auto mb-7 md:mb-10 leading-relaxed">We build and run an AI sales agent for service businesses that already get inbound leads. We cultivate your leads, you take the meetings. Live in about 2–4 weeks.</p>
-          </FadeInSection>
-          <FadeInSection delay={300}>
-            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
-              <button onClick={() => scrollTo('cta')} className="group bg-white text-black px-8 py-4 rounded-full font-semibold text-lg hover:bg-zinc-100 transition flex items-center justify-center gap-2" type="button">Book a strategy call <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" aria-hidden="true" /></button>
-              <Link to="/try-it-free" className="group text-emerald-300 border border-emerald-500/30 bg-emerald-500/5 px-8 py-4 rounded-full font-semibold text-lg transition hover:border-emerald-400/50 hover:bg-emerald-500/10 flex items-center justify-center gap-2">See a sample sequence <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" aria-hidden="true" /></Link>
-            </div>
-            <p className="mt-5 text-sm text-zinc-500">We'll write a 3-email follow-up for your business. No credit card.</p>
-          </FadeInSection>
-          <FadeInSection delay={400}>
-            <div className="mt-8 md:mt-16 flex flex-wrap justify-center gap-x-6 gap-y-2 md:gap-8 text-sm text-zinc-400">
-              <div className="flex items-center gap-2"><Check className="w-4 h-4 text-emerald-400" aria-hidden="true" /> Chicago-based team</div>
-              <div className="flex items-center gap-2"><Check className="w-4 h-4 text-emerald-400" aria-hidden="true" /> 35% more closed deals for Luigi Trucking</div>
-              <div className="flex items-center gap-2"><Check className="w-4 h-4 text-emerald-400" aria-hidden="true" /> Go live in 2–4 weeks</div>
-            </div>
-          </FadeInSection>
-        </div>
-        <button onClick={() => scrollTo('how-it-works')} className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce cursor-pointer hover:text-emerald-400 transition" type="button" aria-label="Scroll to learn more"><ChevronDown className="w-6 h-6 text-zinc-500 hover:text-emerald-400" aria-hidden="true" /></button>
-      </section>
-
-      <section id="example" className="py-14 md:py-24 border-t border-white/5" aria-labelledby="example-heading">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+      {/* Not full-height on purpose: the top of the next section showing below the fold
+          invites the scroll that the old bouncing arrow used to ask for. */}
+      <section className="relative overflow-hidden pt-32 pb-20 md:pt-40 md:pb-28" aria-labelledby="hero-heading">
+        <div className="absolute inset-0 bg-gradient-to-b from-emerald-50 via-white to-white" aria-hidden="true" />
+        <div className="relative z-10 max-w-7xl mx-auto px-6 grid grid-cols-1 xl:grid-cols-12 gap-14 xl:gap-16 items-center">
+          <div className="xl:col-span-6 text-center xl:text-left">
             <FadeInSection>
-              <div>
-                <span className="text-sm uppercase tracking-widest text-emerald-400 mb-4 block">What they actually get</span>
-                <h2 id="example-heading" className="text-3xl md:text-4xl font-bold tracking-tight mb-5 leading-[1.15]">A follow-up that sounds like you, sent while you&apos;re still on the job.</h2>
-                <p className="text-zinc-400 leading-relaxed mb-7">First response on the inbound source we wire. Qualify. Offer a time. You take the meeting.</p>
-                <Link to="/try-it-free" className="inline-flex items-center gap-2 text-emerald-300 hover:text-emerald-200 transition font-medium">
-                  See a sample written for your business <ArrowRight className="w-4 h-4" aria-hidden="true" />
-                </Link>
+              <div className="inline-flex items-center gap-3 text-sm mb-8">
+                <span className="relative flex w-2 h-2" aria-hidden="true">
+                  <span className="absolute inline-flex w-full h-full rounded-full bg-emerald-400 opacity-60 motion-safe:animate-ping" />
+                  <span className="relative inline-flex w-2 h-2 rounded-full bg-emerald-500" />
+                </span>
+                <span className="hidden sm:inline font-medium text-zinc-900">Expert AI &amp; Automation Team</span>
+                <span className="hidden sm:inline w-px h-4 bg-zinc-300" aria-hidden="true" />
+                <span className="text-zinc-600">Chicago, IL</span>
               </div>
             </FadeInSection>
-
-            <FadeInSection delay={100}>
-              <div>
-                <div className="flex items-center gap-2 text-xs uppercase tracking-[0.12em] text-zinc-500 mb-3">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 flex-shrink-0" aria-hidden="true" />
-                  <span>Example follow-up &middot; 11 minutes after the form came in</span>
-                </div>
-                <EmailPreview
-                  from="Sarah at Summit Roofing"
-                  to="the homeowner who just requested a quote"
-                  subject="Quick question about your roof estimate"
-                  timestamp="Tue 8:41 PM"
-                  footnote="Example only. We write these in the client's voice after kickoff. This is not the live booking agent — that is what the strategy call scopes."
-                >
-                  <p>Hi Mark &mdash;</p>
-                  <p>Got your note about the leaking flashing on Oakley. I can have someone look at it Thursday morning or Friday after 2.</p>
-                  <p>If the leak is active, say so in a reply and we&apos;ll put you first.</p>
-                  <p>Sarah<br />Summit Roofing</p>
-                </EmailPreview>
+            {/* Sized down from the full t-display scale: on wide screens it shares the row with the
+                demo. The layout only splits at xl -- below that the demo is too tall to sit
+                beside the copy without pushing the buttons under the fold. */}
+            <FadeInSection delay={100}><h1 id="hero-heading" className="t-display text-[clamp(2.5rem,1.3rem+4vw,4.75rem)] mb-6">AI That Books Meetings <span className="text-gradient block">While You Sleep</span></h1></FadeInSection>
+            <FadeInSection delay={200}>
+              <p className="t-lede md:text-xl text-zinc-700 max-w-xl mx-auto xl:mx-0 mb-9">We build and run an AI sales agent for service businesses that already get inbound leads. We cultivate your leads, you take the meetings. Live in about <span className="whitespace-nowrap">2–4 weeks</span>.</p>
+            </FadeInSection>
+            <FadeInSection delay={300}>
+              <div className="flex flex-col sm:flex-row gap-3 justify-center xl:justify-start">
+                <button onClick={() => scrollTo('cta')} className="group bg-zinc-900 text-white px-7 py-4 rounded-full font-medium text-lg hover:bg-zinc-700 transition flex items-center justify-center gap-2" type="button">Book a strategy call <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" aria-hidden="true" /></button>
+                <Link to="/try-it-free" className="group text-emerald-700 border border-emerald-600/30 bg-white/70 px-7 py-4 rounded-full font-medium text-lg transition hover:border-emerald-600/60 hover:bg-white flex items-center justify-center gap-2">See a sample sequence <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" aria-hidden="true" /></Link>
               </div>
             </FadeInSection>
           </div>
+
+          <FadeInSection delay={250} className="xl:col-span-6 w-full max-w-xl mx-auto xl:max-w-none min-w-0">
+            <HeroDemo />
+          </FadeInSection>
         </div>
       </section>
 
-      <section id="how-it-works" className="py-14 md:py-28 relative" aria-labelledby="how-it-works-heading">
-        <div className="max-w-7xl mx-auto px-6">
-          <FadeInSection>
-            <div className="text-center mb-10 md:mb-16">
-              <span className="text-sm uppercase tracking-widest text-emerald-400 mb-4 block">How Your AI Works</span>
-              <h2 id="how-it-works-heading" className="text-4xl md:text-5xl font-bold tracking-tight mb-4">Capture. Nurture. Close.</h2>
-              <p className="text-lg text-zinc-400 max-w-2xl mx-auto leading-relaxed">A three-phase system we build, run, and manage for you — so every lead gets handled the moment it arrives, and you get your evenings and weekends back.</p>
+      <Section id="example" labelledBy="example-heading">
+        <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+          <FadeInSection className="lg:col-span-5">
+            <div>
+              <span className="t-eyebrow mb-4">What they actually get</span>
+              <h2 id="example-heading" className="t-h2 mb-6">A follow-up that sounds like you, sent while you&apos;re still on the job.</h2>
+              <p className="t-lede mb-8">First response on the inbound source we wire. Qualify. Offer a time. You take the meeting.</p>
+              <Link to="/try-it-free" className="group inline-flex items-center gap-2 text-emerald-700 hover:text-emerald-800 transition font-medium">
+                See a sample written for your business <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" aria-hidden="true" />
+              </Link>
             </div>
           </FadeInSection>
-          <div className="grid md:grid-cols-3 gap-8 relative">
-            <div className="hidden md:block absolute top-16 left-[16.666%] right-[16.666%] h-px bg-gradient-to-r from-emerald-500/20 via-emerald-400/40 to-emerald-500/20" aria-hidden="true" />
-            {[
-              { icon: Zap, phase: 'CAPTURE', title: 'Detect Every Lead, Day or Night', desc: 'Your agent watches the places your leads actually come from — website forms, ad leads, inbound email, missed calls — and replies within a few minutes, around the clock.' },
-              { icon: MessageSquare, phase: 'NURTURE', title: 'Build Trust on Autopilot', desc: 'Follow-ups go out by email, and by SMS on Pro and above, written in your voice, and keep going until they reply or opt out. Only people who already contacted you ever get one.' },
-              { icon: Calendar, phase: 'CLOSE', title: 'Book Ready-to-Buy Meetings', desc: 'Only leads that pass qualifying reach your calendar, and the whole conversation comes with them. Your team walks in already knowing the context.' },
-            ].map((item, idx) => (
-              <FadeInSection key={idx} delay={idx * 150}>
-                <div className="card card-hover rounded-2xl p-8 text-center relative transition h-full">
-                  <div className="w-14 h-14 mx-auto rounded-2xl flex items-center justify-center mb-5 bg-emerald-500/10 border border-emerald-500/20 relative z-10">
-                    <item.icon className="w-6 h-6 text-emerald-400" aria-hidden="true" />
+
+          <FadeInSection delay={100} className="lg:col-span-7">
+            <div>
+              <div className="flex items-center gap-2 t-label mb-4">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 flex-shrink-0" aria-hidden="true" />
+                <span>Example follow-up &middot; 4 minutes after the form came in</span>
+              </div>
+              <EmailPreview
+                from="Sarah at Summit Roofing"
+                to="the homeowner who just requested a quote"
+                subject="Quick question about your roof estimate"
+                timestamp="Tue 8:34 PM"
+                footnote="Example only. We write these in the client's voice after kickoff. This is not the live booking agent — that is what the strategy call scopes."
+              >
+                <p>Hi Mark &mdash;</p>
+                <p>Sorry to hear about the roof leak on Oakley. I can have someone look at it Thursday morning or Friday after 2.</p>
+                <p>If water is coming in right now, reply and we&apos;ll put you first.</p>
+                <p>Sarah<br />Summit Roofing</p>
+              </EmailPreview>
+            </div>
+          </FadeInSection>
+        </div>
+      </Section>
+
+      <Section id="how-it-works" labelledBy="how-it-works-heading">
+        <SectionHeader
+          eyebrow="How Your AI Works"
+          headingId="how-it-works-heading"
+          title="Capture. Nurture. Close."
+          lede="A three-phase system we build, run, and manage for you — so every lead gets handled the moment it arrives, and you get your evenings and weekends back."
+        />
+        <ol className="grid md:grid-cols-3 gap-x-12 gap-y-14">
+          {[
+            { icon: Zap, phase: 'Capture', title: 'Detect Every Lead, Day or Night', desc: 'Your agent watches the places your leads actually come from — website forms, ad leads, inbound email, missed calls — and replies within a few minutes, around the clock.' },
+            { icon: MessageSquare, phase: 'Nurture', title: 'Build Trust on Autopilot', desc: 'Follow-ups go out by email, and by SMS on Pro and above, written in your voice, and keep going until they reply or opt out. Only people who already contacted you ever get one.' },
+            { icon: Calendar, phase: 'Close', title: 'Book Ready-to-Buy Meetings', desc: 'Only leads that pass qualifying reach your calendar, and the whole conversation comes with them. Your team walks in already knowing the context.' },
+          ].map((item, idx) => (
+            <li key={idx}>
+              <FadeInSection delay={idx * 120} className="h-full">
+                <AccentRule>
+                  <div className="flex items-center justify-between mb-10">
+                    <span className="t-eyebrow">{item.phase}</span>
+                    <span className="text-sm font-medium text-zinc-400 tabular-nums" aria-hidden="true">{String(idx + 1).padStart(2, '0')}</span>
                   </div>
-                  <div className="text-xs font-semibold text-emerald-400/80 tracking-[0.2em] mb-3">{item.phase}</div>
-                  <h3 className="text-xl font-bold mb-3">{item.title}</h3>
-                  <p className="text-zinc-400 text-sm leading-relaxed">{item.desc}</p>
-                </div>
+                  <item.icon className="w-6 h-6 text-emerald-600 mb-5" strokeWidth={1.75} aria-hidden="true" />
+                  <h3 className="t-h3 mb-3">{item.title}</h3>
+                  <p className="text-zinc-600 leading-relaxed">{item.desc}</p>
+                </AccentRule>
               </FadeInSection>
-            ))}
-          </div>
-        </div>
-      </section>
+            </li>
+          ))}
+        </ol>
+      </Section>
 
-      <section id="testimonials" className="py-14 md:py-28 border-t border-white/5" aria-labelledby="testimonials-heading">
-        <div className="max-w-7xl mx-auto px-6">
-          <FadeInSection>
-            <div className="text-center mb-14">
-              <span className="text-sm uppercase tracking-widest text-emerald-400 mb-4 block">Proven Results</span>
-              <h2 id="testimonials-heading" className="text-4xl md:text-5xl font-bold tracking-tight mb-4">Built for Chicago service businesses</h2>
-              <p className="text-lg text-zinc-400 max-w-2xl mx-auto leading-relaxed">We start with firms that live on inbound quotes and appointments — commercial insurance, counseling and group practices, property management, and trades.</p>
-            </div>
-          </FadeInSection>
+      <Section id="testimonials" labelledBy="testimonials-heading">
+        <SectionHeader
+          eyebrow="Proven Results"
+          headingId="testimonials-heading"
+          title="Built for Chicago service businesses"
+          lede="We start with firms that live on inbound quotes and appointments — commercial insurance, counseling and group practices, property management, and trades."
+        />
 
-          <FadeInSection delay={100}>
-            <div className="flex flex-wrap items-center justify-center gap-10 md:gap-16 mb-16 py-8 border-y border-white/5">
+        <FadeInSection delay={100}>
+          {/* Logos and numbers share one ruled band: a single frame for the proof,
+              rather than a row of logos and three separate stat cards. */}
+          <div className="border-y border-zinc-200 divide-y divide-zinc-200">
+            <div className="flex flex-wrap items-center justify-center gap-x-16 gap-y-8 py-10 md:py-12">
               {[
                 { src: '/logos/luigi-trucking.svg', alt: 'Luigi Trucking Insurance Agency' },
                 { src: '/logos/crown-counseling.svg', alt: 'Crown Counseling' },
                 { src: '/logos/prg-management.svg', alt: 'PRG Management' },
               ].map((logo, idx) => (
-                <img key={idx} src={logo.src} alt={logo.alt} className="h-10 md:h-12 w-auto object-contain opacity-40 hover:opacity-70 transition-opacity duration-300" />
+                <img key={idx} src={logo.src} alt={logo.alt} className="h-9 md:h-11 w-auto object-contain invert opacity-50 hover:opacity-80 transition-opacity duration-300" />
               ))}
             </div>
-          </FadeInSection>
-
-          <FadeInSection delay={200}>
-            <div className="grid md:grid-cols-3 gap-5 mb-16">
+            <div className="grid md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-zinc-200">
               {[
                 { stat: '35%', label: 'increase in closed deals', detail: 'Luigi Trucking Insurance' },
                 { stat: '~5 min', label: 'first response to every lead', detail: 'How every agent we build is configured' },
                 { stat: '2–4 wks', label: 'from kickoff to fully live', detail: 'Typical implementation' },
               ].map((item, idx) => (
-                <div key={idx} className="card rounded-2xl p-8 text-center cursor-default">
-                  <div className="text-4xl font-bold text-emerald-400 mb-2">{item.stat}</div>
-                  <div className="text-white font-semibold mb-1">{item.label}</div>
+                <div key={idx} className="flex flex-col items-center text-center py-10 md:py-14 px-6">
+                  <div className="t-stat text-emerald-600 mb-4">{item.stat}</div>
+                  <div className="font-medium text-zinc-900 mb-1">{item.label}</div>
                   <div className="text-zinc-500 text-sm">{item.detail}</div>
                 </div>
               ))}
             </div>
-          </FadeInSection>
-
-          <FadeInSection delay={300}>
-            <figure className="max-w-4xl mx-auto card rounded-2xl p-8 md:p-12">
-              <div className="flex gap-1 mb-8" role="img" aria-label="5 star rating">{[...Array(5)].map((_, i) => (<Star key={i} className="w-5 h-5 fill-emerald-400 text-emerald-400" aria-hidden="true" />))}</div>
-              <blockquote className="text-xl md:text-2xl mb-8 leading-relaxed text-zinc-200">"{testimonial.quote}"</blockquote>
-              <figcaption className="flex items-center gap-4">
-                <div className="w-12 h-12 bg-emerald-500/10 border border-emerald-500/20 rounded-full flex items-center justify-center font-bold text-lg text-emerald-400" aria-hidden="true">{testimonial.author.charAt(0)}</div>
-                <div>
-                  <div className="font-semibold text-lg">{testimonial.author}</div>
-                  <div className="text-zinc-400 text-sm">{testimonial.title}</div>
-                </div>
-              </figcaption>
-            </figure>
-          </FadeInSection>
-        </div>
-      </section>
-
-      <section id="about" className="py-14 md:py-28 border-t border-white/5" aria-labelledby="about-heading">
-        <div className="max-w-5xl mx-auto px-6">
-          <FadeInSection>
-            <div className="card rounded-2xl p-8 md:p-12">
-              <div className="flex flex-col md:flex-row gap-8 md:gap-12 md:items-start">
-                {/* No photo of Matt exists in the repo, so a monogram rather than a stock face. */}
-                <div className="flex md:flex-col items-center md:items-start gap-4 flex-shrink-0">
-                  <div className="w-20 h-20 rounded-2xl bg-emerald-500/10 border border-emerald-500/25 flex items-center justify-center" aria-hidden="true">
-                    <span className="text-2xl font-bold tracking-wide text-emerald-400">MS</span>
-                  </div>
-                  <div>
-                    <div className="font-semibold">Matt Swanson</div>
-                    <div className="text-zinc-500 text-sm">Chicago, IL</div>
-                  </div>
-                </div>
-
-                <div>
-                  <span className="text-sm uppercase tracking-widest text-emerald-400 mb-4 block">About</span>
-                  <h2 id="about-heading" className="text-3xl md:text-4xl font-bold tracking-tight mb-6">You&apos;re talking to a person in Chicago, not a platform.</h2>
-                  <div className="space-y-4 text-zinc-300 leading-relaxed">
-                    <p>Chicago AI Group is run by Matt Swanson. I work with owner-led service businesses — insurance, practices, property, trades — that already get inbound leads and lose them overnight. I build the agent, train it on how you actually talk to customers, and keep it running. You take the meetings.</p>
-                    <p>This started because generic AI tools dump another dashboard on a busy owner. The useful version is the one someone sets up and watches.</p>
-                  </div>
-                  <p className="text-emerald-300 font-semibold mt-6">The strategy call is with me.</p>
-                  <div className="mt-8 flex flex-col sm:flex-row gap-4 sm:items-center">
-                    <a href={EXTERNAL_URLS.appointments} {...SECURE_LINK_PROPS} className="bg-white text-black px-8 py-4 rounded-full font-semibold hover:bg-zinc-100 transition inline-flex items-center justify-center gap-2">Book a strategy call <ArrowRight className="w-4 h-4" aria-hidden="true" /></a>
-                    <Link to="/contact" className="text-zinc-400 hover:text-white transition text-sm underline underline-offset-4">Or send a note</Link>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </FadeInSection>
-        </div>
-      </section>
-
-      <section id="scope" className="py-14 md:py-28 border-t border-white/5" aria-labelledby="scope-heading">
-        <div className="max-w-6xl mx-auto px-6">
-          <FadeInSection>
-            <div className="text-center mb-10 md:mb-16">
-              <span className="text-sm uppercase tracking-widest text-emerald-400 mb-4 block">Scope</span>
-              <h2 id="scope-heading" className="text-4xl md:text-5xl font-bold tracking-tight mb-4">What &ldquo;live&rdquo; means &mdash; and what we need from you</h2>
-              <p className="text-lg text-zinc-400 max-w-2xl mx-auto leading-relaxed">The setup fee is the build. The monthly fee is us running it.</p>
-            </div>
-          </FadeInSection>
-
-          <div className="grid md:grid-cols-2 gap-6 mb-6">
-            <FadeInSection>
-              <div className="card rounded-2xl p-8 h-full">
-                <h3 className="text-xl font-bold mb-1">Live on day one</h3>
-                <p className="text-sm text-zinc-500 mb-6">The default build, on Starter.</p>
-                <ol className="space-y-5">
-                  {[
-                    { t: 'Lead intake', d: 'One inbound source you already have: a website form, an ad lead inbox, or a shared email address. We wire it so a new inquiry is seen the moment it lands.' },
-                    { t: 'First response', d: 'The agent replies typically within 5 minutes, in your voice, to that source.' },
-                    { t: 'Qualify', d: 'A short rule set we write with you — service type, area, timing, fit. Bad-fit leads get a polite close, not your calendar.' },
-                    { t: 'Book', d: 'Qualified leads get a link to the calendar you already use, or a hold you confirm.' },
-                  ].map((item, i) => (
-                    <li key={i} className="flex gap-4">
-                      <span className="w-6 h-6 rounded-full bg-emerald-500/15 text-emerald-400 text-xs font-bold flex items-center justify-center flex-shrink-0 mt-0.5" aria-hidden="true">{i + 1}</span>
-                      <div>
-                        <div className="font-semibold mb-1">{item.t}</div>
-                        <p className="text-sm text-zinc-400 leading-relaxed">{item.d}</p>
-                      </div>
-                    </li>
-                  ))}
-                </ol>
-              </div>
-            </FadeInSection>
-
-            <FadeInSection delay={100}>
-              <div className="card rounded-2xl p-8 h-full">
-                <h3 className="text-xl font-bold mb-1">What we need from you</h3>
-                <p className="text-sm text-zinc-500 mb-6">Miss these and the build slips.</p>
-                <ul className="space-y-4">
-                  {[
-                    'A kickoff call, and one example of a good lead next to one you do not want.',
-                    'Access to the lead source and the calendar we agree to use.',
-                    'How you actually sound — a few sent emails, call notes, or twenty minutes on the phone. We do not guess your voice.',
-                    'Someone who will take the meetings the agent books.',
-                  ].map((item, i) => (
-                    <li key={i} className="flex gap-3">
-                      <Check className="w-5 h-5 text-emerald-400 flex-shrink-0 mt-0.5" aria-hidden="true" />
-                      <span className="text-zinc-300 leading-relaxed">{item}</span>
-                    </li>
-                  ))}
-                </ul>
-                <p className="text-sm text-zinc-500 leading-relaxed mt-6 pt-6 border-t border-white/10">If a source is not connected, it is not covered by the 5-minute guarantee.</p>
-              </div>
-            </FadeInSection>
           </div>
+        </FadeInSection>
 
-          <FadeInSection delay={150}>
-            <div className="card rounded-2xl p-8 mb-6">
-              <h3 className="text-xl font-bold mb-6">Not included unless we scope it</h3>
-              <ul className="grid md:grid-cols-2 gap-x-8 gap-y-3">
+        <FadeInSection delay={200}>
+          <figure className="max-w-4xl mx-auto mt-20 md:mt-28">
+            <div className="flex gap-1 mb-8" role="img" aria-label="5 star rating">{[...Array(5)].map((_, i) => (<Star key={i} className="w-5 h-5 fill-emerald-500 text-emerald-500" aria-hidden="true" />))}</div>
+            <blockquote className="text-2xl md:text-[2rem] font-medium tracking-[-0.025em] leading-[1.35] text-zinc-900">&ldquo;{testimonial.quote}&rdquo;</blockquote>
+            <figcaption className="flex items-center gap-4 mt-10">
+              <div className="w-12 h-12 bg-emerald-50 border border-emerald-600/20 rounded-full flex items-center justify-center font-semibold text-lg text-emerald-700" aria-hidden="true">{testimonial.author.charAt(0)}</div>
+              <div>
+                <div className="font-semibold">{testimonial.author}</div>
+                <div className="text-zinc-500 text-sm">{testimonial.title}</div>
+              </div>
+            </figcaption>
+          </figure>
+        </FadeInSection>
+      </Section>
+
+      <Section id="about" labelledBy="about-heading">
+        <FadeInSection>
+          <div className="grid lg:grid-cols-12 gap-10 lg:gap-16">
+            {/* No photo of Matt exists in the repo, so a monogram rather than a stock face. */}
+            <div className="lg:col-span-4 flex lg:flex-col items-center lg:items-start gap-5">
+              <div className="w-20 h-20 lg:w-28 lg:h-28 rounded-2xl bg-emerald-50 border border-emerald-600/20 flex items-center justify-center flex-shrink-0" aria-hidden="true">
+                <span className="text-2xl lg:text-3xl font-semibold tracking-[-0.02em] text-emerald-700">MS</span>
+              </div>
+              <div>
+                <div className="font-semibold text-lg">Matt Swanson</div>
+                <div className="text-zinc-500">Chicago, IL</div>
+              </div>
+            </div>
+
+            <div className="lg:col-span-8">
+              <span className="t-eyebrow mb-4">About</span>
+              <h2 id="about-heading" className="t-h2 mb-8">You&apos;re talking to a person in Chicago, not a platform.</h2>
+              <div className="space-y-5 t-lede text-zinc-700 max-w-2xl">
+                <p>Chicago AI Group is run by Matt Swanson. I work with owner-led service businesses — insurance, practices, property, trades — that already get inbound leads and lose them overnight. I build the agent, train it on how you actually talk to customers, and keep it running. You take the meetings.</p>
+                <p>This started because generic AI tools dump another dashboard on a busy owner. The useful version is the one someone sets up and watches.</p>
+              </div>
+              <p className="text-emerald-700 font-semibold mt-8">The strategy call is with me.</p>
+              <div className="mt-8 flex flex-col sm:flex-row gap-5 sm:items-center">
+                <a href={EXTERNAL_URLS.appointments} {...SECURE_LINK_PROPS} className="bg-zinc-900 text-white px-8 py-4 rounded-full font-medium hover:bg-zinc-700 transition inline-flex items-center justify-center gap-2">Book a strategy call <ArrowRight className="w-4 h-4" aria-hidden="true" /></a>
+                <Link to="/contact" className="text-zinc-600 hover:text-zinc-900 transition text-sm underline underline-offset-4 text-center sm:text-left">Or send a note</Link>
+              </div>
+            </div>
+          </div>
+        </FadeInSection>
+      </Section>
+
+      <Section id="scope" labelledBy="scope-heading">
+        <SectionHeader
+          eyebrow="Scope"
+          headingId="scope-heading"
+          title={<>What &ldquo;live&rdquo; means &mdash; and what we need from you</>}
+          lede="The setup fee is the build. The monthly fee is us running it."
+        />
+
+        <div className="grid md:grid-cols-2 gap-x-16 gap-y-16">
+          <FadeInSection>
+            <AccentRule>
+              <h3 className="t-h3 mb-1">Live on day one</h3>
+              <p className="text-sm text-zinc-500 mb-8">The default build, on Starter.</p>
+              <ol className="space-y-6">
                 {[
-                  'Extra lead sources beyond the first — more forms, missed-call and voicemail follow-up, SMS as a second channel',
-                  'CRM write-back and lead scoring (Pro)',
-                  'A second brand, location, or agent voice, and copy tests (Enterprise)',
-                  'Generating new leads, running ads, or rebuilding your website',
-                  'The agent taking payment or closing the job',
+                  { t: 'Lead intake', d: 'One inbound source you already have: a website form, an ad lead inbox, or a shared email address. We wire it so a new inquiry is seen the moment it lands.' },
+                  { t: 'First response', d: 'The agent replies typically within 5 minutes, in your voice, to that source.' },
+                  { t: 'Qualify', d: 'A short rule set we write with you — service type, area, timing, fit. Bad-fit leads get a polite close, not your calendar.' },
+                  { t: 'Book', d: 'Qualified leads get a link to the calendar you already use, or a hold you confirm.' },
                 ].map((item, i) => (
-                  <li key={i} className="flex gap-3 text-zinc-400 leading-relaxed">
-                    <span className="text-zinc-600 mt-0.5 flex-shrink-0" aria-hidden="true">&minus;</span>
-                    <span>{item}</span>
+                  <li key={i} className="flex gap-5">
+                    <span className="text-sm font-semibold text-emerald-700 tabular-nums w-6 flex-shrink-0 pt-0.5" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+                    <div>
+                      <div className="font-semibold mb-1">{item.t}</div>
+                      <p className="text-zinc-600 leading-relaxed">{item.d}</p>
+                    </div>
+                  </li>
+                ))}
+              </ol>
+            </AccentRule>
+          </FadeInSection>
+
+          <FadeInSection delay={100}>
+            <AccentRule>
+              <h3 className="t-h3 mb-1">What we need from you</h3>
+              <p className="text-sm text-zinc-500 mb-8">Miss these and the build slips.</p>
+              <ul className="space-y-5">
+                {[
+                  'A kickoff call, and one example of a good lead next to one you do not want.',
+                  'Access to the lead source and the calendar we agree to use.',
+                  'How you actually sound — a few sent emails, call notes, or twenty minutes on the phone. We do not guess your voice.',
+                  'Someone who will take the meetings the agent books.',
+                ].map((item, i) => (
+                  <li key={i} className="flex gap-4">
+                    <Check className="w-5 h-5 text-emerald-600 flex-shrink-0 mt-0.5" aria-hidden="true" />
+                    <span className="text-zinc-700 leading-relaxed">{item}</span>
                   </li>
                 ))}
               </ul>
-            </div>
-          </FadeInSection>
-
-          <FadeInSection delay={200}>
-            <div className="card rounded-2xl p-8">
-              <h3 className="text-xl font-bold mb-1">How the plans differ</h3>
-              <p className="text-sm text-zinc-500 mb-6">Same build. More surface area.</p>
-              <div className="space-y-4">
-                {[
-                  { tier: 'Starter', d: 'One inbound source. First response, qualify, book, email follow-up. We monitor it.' },
-                  { tier: 'Pro', d: 'Starter plus longer sequences, SMS if you want it and have permission, lead scoring, and CRM sync to the system you already use.' },
-                  { tier: 'Enterprise', d: 'Pro plus additional sources or locations, copy tests, and priority check-ins.' },
-                ].map((row, i) => (
-                  <div key={i} className="flex flex-col sm:flex-row sm:gap-6">
-                    <div className="font-bold text-emerald-400 sm:w-32 flex-shrink-0 mb-1 sm:mb-0">{row.tier}</div>
-                    <p className="text-zinc-300 leading-relaxed">{row.d}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
+              <p className="text-sm text-zinc-500 leading-relaxed mt-8 pt-6 border-t border-zinc-200">If a source is not connected, it is not covered by the 5-minute guarantee.</p>
+            </AccentRule>
           </FadeInSection>
         </div>
-      </section>
 
-      <section id="services" className="pt-14 pb-8 md:pt-28 md:pb-14" aria-labelledby="services-heading">
-        <div className="max-w-7xl mx-auto px-6">
-          <FadeInSection>
-            <div className="text-center mb-10 md:mb-16">
-              <span className="text-sm uppercase tracking-widest text-emerald-400 mb-4 block">Our AI Sales Agent</span>
-              <h2 id="services-heading" className="text-4xl md:text-5xl font-bold tracking-tight mb-4">Your 24/7 Sales Machine</h2>
-              <p className="text-lg text-zinc-400 max-w-2xl mx-auto leading-relaxed">We build it, train it on your voice, and manage it for you. Here's exactly what's included — and what it costs.</p>
+        <FadeInSection delay={150}>
+          <div className="mt-20 md:mt-28 grid lg:grid-cols-12 gap-x-16 gap-y-6">
+            <h3 className="t-h3 lg:col-span-4">Not included unless we scope it</h3>
+            <ul className="lg:col-span-8 border-t border-zinc-200 divide-y divide-zinc-200">
+              {[
+                'Extra lead sources beyond the first — more forms, missed-call and voicemail follow-up, SMS as a second channel',
+                'CRM write-back and lead scoring (Pro)',
+                'A second brand, location, or agent voice, and copy tests (Enterprise)',
+                'Generating new leads, running ads, or rebuilding your website',
+                'The agent taking payment or closing the job',
+              ].map((item, i) => (
+                <li key={i} className="flex gap-4 py-4 text-zinc-600 leading-relaxed">
+                  <span className="text-zinc-400 flex-shrink-0" aria-hidden="true">&minus;</span>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </FadeInSection>
+
+        <FadeInSection delay={200}>
+          <div className="mt-16 md:mt-20 grid lg:grid-cols-12 gap-x-16 gap-y-6">
+            <div className="lg:col-span-4">
+              <h3 className="t-h3 mb-1">How the plans differ</h3>
+              <p className="text-sm text-zinc-500">Same build. More surface area.</p>
             </div>
-          </FadeInSection>
-          <FadeInSection delay={200}>
-            <div className="card rounded-2xl overflow-hidden">
-              <div className="p-8 md:p-12">
-                <div className="flex flex-col md:flex-row md:items-start gap-6 mb-8">
-                  <div className="w-16 h-16 bg-gradient-to-br from-white to-zinc-300 rounded-2xl flex items-center justify-center flex-shrink-0">
-                    <Users className="w-8 h-8 text-black" aria-hidden="true" />
-                  </div>
-                  <div><h3 className="text-3xl font-bold mb-2">{salesAgent.name}</h3><p className="text-zinc-400 text-lg">{salesAgent.tagline}</p></div>
+            <dl className="lg:col-span-8 border-t border-zinc-200 divide-y divide-zinc-200">
+              {[
+                { tier: 'Starter', d: 'One inbound source. First response, qualify, book, email follow-up. We monitor it.' },
+                { tier: 'Pro', d: 'Starter plus longer sequences, SMS if you want it and have permission, lead scoring, and CRM sync to the system you already use.' },
+                { tier: 'Enterprise', d: 'Pro plus additional sources or locations, copy tests, and priority check-ins.' },
+              ].map((row, i) => (
+                <div key={i} className="flex flex-col sm:flex-row sm:gap-8 py-5">
+                  <dt className="font-semibold text-emerald-700 sm:w-32 flex-shrink-0 mb-1 sm:mb-0">{row.tier}</dt>
+                  <dd className="text-zinc-700 leading-relaxed">{row.d}</dd>
                 </div>
-                <div className="grid lg:grid-cols-2 gap-8">
-                  <div>
-                    {/* Named region rather than a bare list: the heading carries the plan
-                        name, so the region's accessible name changes with the selection and
-                        the radios below point at it via aria-controls. */}
-                    <h4 id="plan-includes-heading" className="text-xs uppercase tracking-widest text-zinc-500 mb-4 flex items-center gap-2"><Sparkles className="w-4 h-4" aria-hidden="true" /> What {selectedPlan.tier} Includes</h4>
-                    <div id="plan-includes" role="region" aria-labelledby="plan-includes-heading">
-                      <p className="text-sm text-zinc-400 leading-relaxed mb-5">
-                        <span className="text-zinc-500">Best for: </span>{selectedPlan.forWho}
-                      </p>
-                      <ul className="space-y-3">
-                        {selectedPlan.includes.map((item, idx) => (
-                          <li key={idx} className="flex items-center gap-4 border border-white/5 bg-white/[0.02] rounded-xl p-4 transition hover:bg-white/5">
-                            <div className="w-8 h-8 bg-emerald-500/15 rounded-lg flex items-center justify-center flex-shrink-0"><Check className="w-4 h-4 text-emerald-400" aria-hidden="true" /></div>
-                            <span>{item}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
-                  <div>
-                    <h4 className="text-xs uppercase tracking-widest text-zinc-500 mb-6">Choose Your Plan</h4>
-                    <div className="space-y-4" role="radiogroup" aria-label="Pricing plans">
-                      {salesAgent.pricing.map((plan, idx) => {
-                        const isSelected = selectedTier === idx;
-                        return (
-                          <button
-                            key={idx}
-                            ref={el => { planRefs.current[idx] = el; }}
-                            onClick={() => setSelectedTier(idx)}
-                            onKeyDown={e => onPlanKeyDown(e, salesAgent.pricing.length)}
-                            className={`w-full rounded-2xl p-5 flex items-center justify-between transition-all duration-300 cursor-pointer ${isSelected ? 'bg-white text-black shadow-lg shadow-white/10' : 'card hover:bg-white/5'}`}
-                            type="button"
-                            role="radio"
-                            aria-checked={isSelected}
-                            aria-controls="plan-includes"
-                            tabIndex={isSelected ? 0 : -1}
-                          >
-                            <div className="text-left">
-                              <div className="flex items-center gap-2">
-                                <span className="font-bold text-lg">{plan.tier}</span>
-                                {plan.popular && <span className={`text-xs px-2 py-0.5 rounded-full ${isSelected ? 'bg-black text-white' : 'bg-white/15 text-white'}`}>Popular</span>}
-                              </div>
-                              <div className={`text-sm ${isSelected ? 'text-zinc-600' : 'text-zinc-400'}`}>{plan.details}</div>
-                            </div>
-                            <div className="text-right flex-shrink-0 pl-4">
-                              <div className="text-2xl font-bold">{plan.monthly}<span className={`text-sm font-normal ${isSelected ? 'text-zinc-600' : 'text-zinc-400'}`}>/mo</span></div>
-                              <div className={`text-sm font-medium ${isSelected ? 'text-zinc-700' : 'text-zinc-300'}`}>+ {plan.setup} setup</div>
-                            </div>
-                          </button>
-                        );
-                      })}
-                    </div>
-                    <p className="mt-5 text-sm text-zinc-500 text-center leading-relaxed">Setup is a one-time fee that covers the build, your integrations, and training the AI on your voice. Monthly billing starts the day you go live.</p>
-                    <button onClick={() => scrollTo('guarantee')} className="mt-3 w-full flex items-center justify-center gap-2 text-sm text-emerald-300 hover:text-emerald-200 transition py-2" type="button">
-                      <Shield className="w-4 h-4 flex-shrink-0" aria-hidden="true" /> Both refundable under our 60-day Results Guarantee — response time and follow-up on scoped inbound leads
-                    </button>
-                  </div>
-                </div>
-                <div className="mt-10 pt-8 border-t border-white/10 flex flex-col sm:flex-row gap-4 items-center">
-                  <button onClick={() => scrollTo('cta')} className="bg-white text-black px-8 py-4 rounded-full font-semibold hover:bg-zinc-100 transition flex items-center justify-center gap-2" type="button">Book a call about {selectedPlan.tier} <ChevronRight className="w-4 h-4" aria-hidden="true" /></button>
-                  <Link to="/try-it-free" className="text-emerald-300 px-8 py-4 rounded-full font-semibold transition flex items-center justify-center gap-2 border border-emerald-500/30 hover:border-emerald-400/50 hover:bg-emerald-500/5">See a sample sequence <ArrowRight className="w-4 h-4" aria-hidden="true" /></Link>
-                  <span className="text-zinc-500 text-sm">{selectedPlan.monthly}/mo + {selectedPlan.setup} one-time setup • Cancel anytime<br />Plans start after a strategy call — the sample sequence is free either way.</span>
-                </div>
-              </div>
-            </div>
-          </FadeInSection>
-        </div>
-      </section>
+              ))}
+            </dl>
+          </div>
+        </FadeInSection>
+      </Section>
 
-      <section id="guarantee" className="pb-14 md:pb-28" aria-labelledby="guarantee-heading">
-        <div className="max-w-4xl mx-auto px-6">
-          <FadeInSection>
-            <div className="rounded-2xl border border-emerald-500/25 bg-emerald-500/[0.04] p-10 md:p-14 text-center">
-              <div className="w-14 h-14 mx-auto rounded-2xl flex items-center justify-center mb-6 bg-emerald-500/10 border border-emerald-500/25">
-                <Shield className="w-7 h-7 text-emerald-400" aria-hidden="true" />
+      {/* Pricing and the guarantee are the two framed blocks on the page, on purpose:
+          everything else is open layout, so these are what the eye lands on. */}
+      <Section id="services" labelledBy="services-heading" bottom="pb-10 md:pb-14">
+        <SectionHeader
+          eyebrow="Our AI Sales Agent"
+          headingId="services-heading"
+          title="Your 24/7 Sales Machine"
+          lede="We build it, train it on your voice, and manage it for you. Here's exactly what's included — and what it costs."
+        />
+        <FadeInSection delay={150}>
+          <div className="rounded-3xl border border-zinc-200 bg-white shadow-[0_1px_2px_rgba(24,24,27,0.04),0_32px_64px_-32px_rgba(24,24,27,0.18)] overflow-hidden">
+            <div className="p-6 sm:p-8 md:p-12">
+              <div className="flex flex-col md:flex-row md:items-center gap-6 mb-10">
+                <div className="w-14 h-14 bg-gradient-to-br from-zinc-900 to-zinc-700 rounded-2xl flex items-center justify-center flex-shrink-0">
+                  <Users className="w-7 h-7 text-white" aria-hidden="true" />
+                </div>
+                <div><h3 className="text-3xl font-semibold tracking-[-0.03em] mb-1">{salesAgent.name}</h3><p className="text-zinc-600 text-lg">{salesAgent.tagline}</p></div>
               </div>
-              <h2 id="guarantee-heading" className="text-4xl md:text-5xl font-bold tracking-tight mb-6">Results Guarantee</h2>
-              <p className="text-xl md:text-2xl text-white leading-relaxed mb-12 max-w-2xl mx-auto">We guarantee the part we operate: inbound leads wired into your agent get a first response typically within 5 minutes, and leads that meet your qualify rules get followed up and offered a meeting.</p>
-
-              <div className="grid md:grid-cols-3 gap-8 md:gap-6 text-left">
-                {[
-                  { title: 'What you get', items: [
-                    'New inbound leads wired into the agent get a first response typically within 5 minutes.',
-                    'Leads that meet the qualify rules we set together get followed up and offered a time on your calendar.',
-                    'We build it, train it on your voice, and monitor it. You take the meetings.',
-                  ] },
-                  { title: 'The 60 days', items: [
-                    'The clock starts when the agent goes live on your real lead flow — not at the kickoff call.',
-                    'If after 60 days live we are not hitting that response time, or scoped inbound leads are not being followed up and offered a meeting, you get back the one-time setup fee and every monthly fee you have paid.',
-                    'Ask through the Contact page. We do not make you chase it.',
-                  ] },
-                  { title: 'What we need from you', items: [
-                    'The agent stays on and connected to the lead sources we agreed — forms, ads, inbox.',
-                    'You still have inbound leads coming in. This is not a lead-generation guarantee.',
-                    'You keep the qualify rules and calendar we set up together, and you show up to booked meetings.',
-                    'Outreach goes only to people who already contacted you, or where you have permission.',
-                  ] },
-                ].map((block, i) => (
-                  <div key={i}>
-                    <h3 className="text-xs uppercase tracking-widest text-emerald-400 mb-4">{block.title}</h3>
-                    <ul className="space-y-3">
-                      {block.items.map((item, j) => (
-                        <li key={j} className="flex gap-3 text-sm text-zinc-300 leading-relaxed">
-                          <span className="mt-2 w-1.5 h-1.5 rounded-full bg-emerald-400/70 flex-shrink-0" aria-hidden="true" />
-                          <span>{item}</span>
+              <div className="grid lg:grid-cols-2 gap-10 lg:gap-14">
+                <div>
+                  {/* Named region rather than a bare list: the heading carries the plan
+                      name, so the region's accessible name changes with the selection and
+                      the radios below point at it via aria-controls. */}
+                  <h4 id="plan-includes-heading" className="t-label mb-4 flex items-center gap-2"><Sparkles className="w-4 h-4" aria-hidden="true" /> What {selectedPlan.tier} Includes</h4>
+                  <div id="plan-includes" role="region" aria-labelledby="plan-includes-heading">
+                    <p className="text-sm text-zinc-600 leading-relaxed mb-5">
+                      <span className="text-zinc-500">Best for: </span>{selectedPlan.forWho}
+                    </p>
+                    <ul className="border-t border-zinc-200 divide-y divide-zinc-200">
+                      {selectedPlan.includes.map((item, idx) => (
+                        <li key={idx} className="flex items-center gap-4 py-4">
+                          <div className="w-7 h-7 bg-emerald-50 border border-emerald-600/15 rounded-full flex items-center justify-center flex-shrink-0"><Check className="w-3.5 h-3.5 text-emerald-700" strokeWidth={2.5} aria-hidden="true" /></div>
+                          <span className="text-zinc-800">{item}</span>
                         </li>
                       ))}
                     </ul>
                   </div>
-                ))}
-              </div>
-
-              <p className="text-base md:text-lg text-emerald-300 leading-relaxed mt-12 max-w-2xl mx-auto">If we miss our side of that, we refund you. If there were no leads to work, that is not a system failure.</p>
-            </div>
-          </FadeInSection>
-        </div>
-      </section>
-
-      <section id="process" className="py-14 md:py-28 border-t border-white/5" aria-labelledby="process-heading">
-        <div className="max-w-7xl mx-auto px-6">
-          <FadeInSection>
-            <div className="text-center mb-10 md:mb-16">
-              <span className="text-sm uppercase tracking-widest text-emerald-400 mb-4 block">Getting Started</span>
-              <h2 id="process-heading" className="text-4xl md:text-5xl font-bold tracking-tight mb-4">Live in Weeks, Not Months</h2>
-              <p className="text-lg text-zinc-400 max-w-2xl mx-auto leading-relaxed">We handle the build, the integrations we agree on, and the testing. From you we need a kickoff call, an example of a good and a bad lead, calendar access, and any follow-up copy you already use. Here's what a typical rollout looks like.</p>
-            </div>
-          </FadeInSection>
-          <div className="grid md:grid-cols-4 gap-6 relative">
-            <div className="hidden md:block absolute top-10 left-[12.5%] right-[12.5%] h-px bg-gradient-to-r from-emerald-500/20 via-emerald-400/40 to-emerald-500/20" aria-hidden="true" />
-            {process.map((step, idx) => (
-              <FadeInSection key={idx} delay={idx * 150}>
-                <div className="text-center">
-                  <div className="relative w-20 h-20 mx-auto mb-6 z-10 bg-zinc-950 rounded-2xl">
-                    <div className="w-20 h-20 card rounded-2xl flex items-center justify-center"><step.icon className="w-8 h-8 text-zinc-300" aria-hidden="true" /></div>
-                    <div className="absolute -top-2 -right-2 w-8 h-8 bg-emerald-500 text-white rounded-full flex items-center justify-center font-bold text-sm" aria-label={`Step ${idx + 1}`}>{idx + 1}</div>
+                </div>
+                <div>
+                  <h4 className="t-label mb-4">Choose Your Plan</h4>
+                  <div className="space-y-3" role="radiogroup" aria-label="Pricing plans">
+                    {salesAgent.pricing.map((plan, idx) => {
+                      const isSelected = selectedTier === idx;
+                      return (
+                        <button
+                          key={idx}
+                          ref={el => { planRefs.current[idx] = el; }}
+                          onClick={() => setSelectedTier(idx)}
+                          onKeyDown={e => onPlanKeyDown(e, salesAgent.pricing.length)}
+                          className={`w-full rounded-2xl p-5 flex items-center justify-between border transition-all duration-300 cursor-pointer ${isSelected ? 'bg-zinc-900 border-zinc-900 text-white shadow-lg shadow-zinc-900/10' : 'bg-white border-zinc-200 hover:border-zinc-300 hover:bg-zinc-50'}`}
+                          type="button"
+                          role="radio"
+                          aria-checked={isSelected}
+                          aria-controls="plan-includes"
+                          tabIndex={isSelected ? 0 : -1}
+                        >
+                          <div className="text-left">
+                            <div className="flex items-center gap-2">
+                              <span className="font-semibold text-lg tracking-[-0.01em]">{plan.tier}</span>
+                              {plan.popular && <span className={`text-xs font-medium px-2 py-0.5 rounded-full ${isSelected ? 'bg-white text-zinc-900' : 'bg-emerald-50 text-emerald-700 border border-emerald-600/20'}`}>Popular</span>}
+                            </div>
+                            <div className={`text-sm ${isSelected ? 'text-zinc-400' : 'text-zinc-600'}`}>{plan.details}</div>
+                          </div>
+                          <div className="text-right flex-shrink-0 pl-4">
+                            <div className="text-2xl font-semibold tracking-[-0.03em] tabular-nums">{plan.monthly}<span className={`text-sm font-normal ${isSelected ? 'text-zinc-400' : 'text-zinc-600'}`}>/mo</span></div>
+                            <div className={`text-sm font-medium tabular-nums ${isSelected ? 'text-zinc-300' : 'text-zinc-700'}`}>+ {plan.setup} setup</div>
+                          </div>
+                        </button>
+                      );
+                    })}
                   </div>
-                  <div className="text-xs font-semibold text-emerald-400/80 tracking-[0.2em] uppercase mb-2">{step.when}</div>
-                  <h3 className="text-xl font-semibold mb-2">{step.title}</h3>
-                  <p className="text-zinc-400 text-sm leading-relaxed">{step.desc}</p>
+                  <p className="mt-5 text-sm text-zinc-500 text-center leading-relaxed">Setup is a one-time fee that covers the build, your integrations, and training the AI on your voice. Monthly billing starts the day you go live.</p>
+                  <button onClick={() => scrollTo('guarantee')} className="mt-3 w-full flex items-center justify-center gap-2 text-sm text-emerald-700 hover:text-emerald-800 transition py-2" type="button">
+                    <Shield className="w-4 h-4 flex-shrink-0" aria-hidden="true" /> Both refundable under our 60-day Results Guarantee — response time and follow-up on scoped inbound leads
+                  </button>
                 </div>
-              </FadeInSection>
-            ))}
+              </div>
+              <div className="mt-10 pt-8 border-t border-zinc-200 flex flex-col sm:flex-row gap-4 items-center">
+                <button onClick={() => scrollTo('cta')} className="w-full sm:w-auto bg-zinc-900 text-white px-8 py-4 rounded-full font-medium hover:bg-zinc-700 transition flex items-center justify-center gap-2" type="button">Book a call about {selectedPlan.tier} <ChevronRight className="w-4 h-4" aria-hidden="true" /></button>
+                <Link to="/try-it-free" className="w-full sm:w-auto text-emerald-700 px-8 py-4 rounded-full font-medium transition flex items-center justify-center gap-2 border border-emerald-600/30 hover:border-emerald-600/60 hover:bg-emerald-500/5">See a sample sequence <ArrowRight className="w-4 h-4" aria-hidden="true" /></Link>
+                <span className="text-zinc-500 text-sm text-center sm:text-left">{selectedPlan.monthly}/mo + {selectedPlan.setup} one-time setup • Cancel anytime<br />Plans start after a strategy call — the sample sequence is free either way.</span>
+              </div>
+            </div>
           </div>
-        </div>
-      </section>
+        </FadeInSection>
+      </Section>
 
-      <section id="faq" className="py-14 md:py-28 border-t border-white/5" aria-labelledby="faq-heading">
-        <div className="max-w-3xl mx-auto px-6">
-          <FadeInSection>
-            <div className="text-center mb-10 md:mb-16">
-              <span className="text-sm uppercase tracking-widest text-emerald-400 mb-4 block">FAQ</span>
-              <h2 id="faq-heading" className="text-4xl md:text-5xl font-bold tracking-tight mb-4">Got Questions?</h2>
+      <Section id="guarantee" labelledBy="guarantee-heading" rule={false}>
+        <FadeInSection>
+          <div className="rounded-3xl border border-emerald-600/15 bg-gradient-to-b from-emerald-50 to-emerald-50/30 px-6 py-12 sm:p-10 md:p-16">
+            <div className="text-center max-w-3xl mx-auto">
+              <div className="w-12 h-12 mx-auto rounded-xl flex items-center justify-center mb-6 bg-white border border-emerald-600/20 shadow-sm">
+                <Shield className="w-6 h-6 text-emerald-600" aria-hidden="true" />
+              </div>
+              <h2 id="guarantee-heading" className="t-h2 mb-6">Results Guarantee</h2>
+              <p className="text-xl md:text-2xl text-zinc-900 font-medium tracking-[-0.015em] leading-[1.45]">We guarantee the part we operate: inbound leads wired into your agent get a first response typically within 5 minutes, and leads that meet your qualify rules get followed up and offered a meeting.</p>
+            </div>
+
+            <div className="grid md:grid-cols-3 gap-10 md:gap-0 md:divide-x divide-emerald-600/15 text-left mt-14 pt-12 border-t border-emerald-600/15">
+              {[
+                { title: 'What you get', items: [
+                  'New inbound leads wired into the agent get a first response typically within 5 minutes.',
+                  'Leads that meet the qualify rules we set together get followed up and offered a time on your calendar.',
+                  'We build it, train it on your voice, and monitor it. You take the meetings.',
+                ] },
+                { title: 'The 60 days', items: [
+                  'The clock starts when the agent goes live on your real lead flow — not at the kickoff call.',
+                  'If after 60 days live we are not hitting that response time, or scoped inbound leads are not being followed up and offered a meeting, you get back the one-time setup fee and every monthly fee you have paid.',
+                  'Ask through the Contact page. We do not make you chase it.',
+                ] },
+                { title: 'What we need from you', items: [
+                  'The agent stays on and connected to the lead sources we agreed — forms, ads, inbox.',
+                  'You still have inbound leads coming in. This is not a lead-generation guarantee.',
+                  'You keep the qualify rules and calendar we set up together, and you show up to booked meetings.',
+                  'Outreach goes only to people who already contacted you, or where you have permission.',
+                ] },
+              ].map((block, i) => (
+                <div key={i} className="md:px-8 first:md:pl-0 last:md:pr-0">
+                  <h3 className="t-eyebrow mb-5">{block.title}</h3>
+                  <ul className="space-y-3">
+                    {block.items.map((item, j) => (
+                      <li key={j} className="flex gap-3 text-sm text-zinc-700 leading-relaxed">
+                        <span className="mt-2 w-1.5 h-1.5 rounded-full bg-emerald-500 flex-shrink-0" aria-hidden="true" />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+
+            <p className="text-base md:text-lg text-emerald-800 font-medium leading-relaxed mt-12 max-w-2xl mx-auto text-center">If we miss our side of that, we refund you. If there were no leads to work, that is not a system failure.</p>
+          </div>
+        </FadeInSection>
+      </Section>
+
+      <Section id="process" labelledBy="process-heading">
+        <SectionHeader
+          eyebrow="Getting Started"
+          headingId="process-heading"
+          title="Live in Weeks, Not Months"
+          lede="We handle the build, the integrations we agree on, and the testing. From you we need a kickoff call, an example of a good and a bad lead, calendar access, and any follow-up copy you already use. Here's what a typical rollout looks like."
+        />
+        {/* A timeline rather than four boxes: one rule runs through the steps —
+            horizontally on desktop, down the left edge on phones. */}
+        <ol className="relative grid md:grid-cols-4 gap-x-10 gap-y-12">
+          <span className="hidden md:block absolute top-[5px] left-0 right-0 h-px bg-zinc-200" aria-hidden="true" />
+          <span className="md:hidden absolute top-2 bottom-2 left-[5px] w-px bg-zinc-200" aria-hidden="true" />
+          {process.map((step, idx) => (
+            <li key={idx} className="relative pl-10 md:pl-0">
+              {/* The dot sits outside FadeInSection on purpose: that wrapper animates
+                  transform, which would make it the dot's containing block and pull the
+                  dot off the phone timeline rule. */}
+              <span className="absolute left-0 top-1 md:static md:block w-[11px] h-[11px] rounded-full bg-white border-2 border-emerald-600 md:mb-10" aria-hidden="true" />
+              <FadeInSection delay={idx * 120}>
+                <div className="flex items-center gap-3 mb-3">
+                  <span className="text-sm font-medium text-zinc-400 tabular-nums">Step {idx + 1}</span>
+                  <span className="w-1 h-1 rounded-full bg-zinc-300" aria-hidden="true" />
+                  <span className="t-eyebrow">{step.when}</span>
+                </div>
+                <h3 className="t-h3 mb-2">{step.title}</h3>
+                <p className="text-zinc-600 leading-relaxed">{step.desc}</p>
+              </FadeInSection>
+            </li>
+          ))}
+        </ol>
+      </Section>
+
+      <Section id="faq" labelledBy="faq-heading">
+        <div className="grid lg:grid-cols-12 gap-x-16 gap-y-10">
+          <FadeInSection className="lg:col-span-4">
+            <div className="lg:sticky lg:top-28">
+              <span className="t-eyebrow mb-4">FAQ</span>
+              <h2 id="faq-heading" className="t-h2 mb-5">Got Questions?</h2>
+              <p className="text-zinc-600 leading-relaxed">Not covered here? <Link to="/contact" className="text-emerald-700 hover:text-emerald-800 underline underline-offset-4">Send us a note</Link> and we&apos;ll answer it directly.</p>
             </div>
           </FadeInSection>
-          <div className="space-y-3">
+          <div className="lg:col-span-8 border-y border-zinc-200 divide-y divide-zinc-200">
             {faqs.map((faq, idx) => (
-              <FadeInSection key={idx} delay={idx * 100}>
-                <div className="card rounded-2xl overflow-hidden transition hover:bg-white/5">
-                  <button onClick={() => setActiveFaq(activeFaq === idx ? null : idx)} className="w-full p-6 flex items-center justify-between text-left" type="button" aria-expanded={activeFaq === idx}>
-                    <span className="font-semibold text-lg pr-4">{faq.q}</span>
-                    <ChevronDown className={`w-5 h-5 flex-shrink-0 transition-transform duration-300 ${activeFaq === idx ? 'rotate-180' : ''}`} aria-hidden="true" />
+              <FadeInSection key={idx} delay={idx * 60}>
+                <div>
+                  <button onClick={() => setActiveFaq(activeFaq === idx ? null : idx)} className="group w-full py-6 flex items-start justify-between gap-6 text-left" type="button" aria-expanded={activeFaq === idx}>
+                    <span className="font-medium text-lg tracking-[-0.01em] text-zinc-900 group-hover:text-emerald-700 transition-colors">{faq.q}</span>
+                    <span className={`mt-0.5 w-7 h-7 rounded-full border flex items-center justify-center flex-shrink-0 transition-all duration-300 ${activeFaq === idx ? 'bg-zinc-900 border-zinc-900 text-white rotate-45' : 'border-zinc-300 text-zinc-600 group-hover:border-zinc-400'}`} aria-hidden="true">
+                      <Plus className="w-4 h-4" />
+                    </span>
                   </button>
-                  <div className={`overflow-hidden transition-all duration-300 ${activeFaq === idx ? 'max-h-[32rem] pb-6' : 'max-h-0'}`} aria-hidden={activeFaq !== idx}><p className="px-6 text-zinc-400 leading-relaxed">{faq.a}</p></div>
+                  <div className={`overflow-hidden transition-all duration-300 ${activeFaq === idx ? 'max-h-[32rem] pb-7' : 'max-h-0'}`} aria-hidden={activeFaq !== idx}><p className="pr-12 text-zinc-600 leading-relaxed">{faq.a}</p></div>
                 </div>
               </FadeInSection>
             ))}
           </div>
         </div>
-      </section>
+      </Section>
 
-      <section id="cta" className="py-14 md:py-28" aria-labelledby="cta-heading">
-        <div className="max-w-5xl mx-auto px-6">
+      <section id="cta" className="relative overflow-hidden border-t border-zinc-200 scroll-mt-16" aria-labelledby="cta-heading">
+        <div className="absolute inset-0 bg-gradient-to-b from-white via-emerald-50/50 to-emerald-50" aria-hidden="true" />
+        <div className="relative max-w-4xl mx-auto px-6 py-24 md:py-36 text-center">
           <FadeInSection>
-            <div className="card rounded-2xl p-12 md:p-16 text-center border-emerald-500/15">
-              <h2 id="cta-heading" className="text-4xl md:text-5xl font-bold tracking-tight mb-6">Let's See If We're a Fit</h2>
-              <p className="text-xl text-zinc-300 mb-10 max-w-2xl mx-auto leading-relaxed">One 30-minute call: we look at how leads reach you now, where they go cold, and whether a managed AI agent is worth building for your business. If it is, you're live in about 2–4 weeks.</p>
-              <a href={EXTERNAL_URLS.appointments} {...SECURE_LINK_PROPS} className="bg-white text-black px-10 py-5 rounded-full font-semibold text-lg hover:bg-zinc-100 transition inline-flex items-center gap-3">Book a strategy call <ArrowRight className="w-5 h-5" aria-hidden="true" /></a>
-              <p className="text-zinc-500 text-sm mt-6">Free • 30 minutes • Zero obligation</p>
-              <div className="mt-10 pt-8 border-t border-white/10 max-w-xl mx-auto">
-                <p className="text-zinc-300 mb-5">Not ready to talk? Read a sample first &mdash; we'll write three follow-up emails for your business so you can judge the copy. It's a preview, not the live system; setup still starts with a call.</p>
-                <Link to="/try-it-free" className="group text-emerald-300 border border-emerald-500/30 bg-emerald-500/5 px-8 py-4 rounded-full font-semibold transition hover:border-emerald-400/50 hover:bg-emerald-500/10 inline-flex items-center gap-2">See a sample sequence <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" aria-hidden="true" /></Link>
-                <p className="text-zinc-500 text-sm mt-4">We'll write a 3-email follow-up for your business. No credit card.</p>
-              </div>
+            <h2 id="cta-heading" className="t-h1 mb-6">Let&apos;s See If We&apos;re a Fit</h2>
+            <p className="t-lede md:text-xl max-w-2xl mx-auto mb-10">One 30-minute call: we look at how leads reach you now, where they go cold, and whether a managed AI agent is worth building for your business. If it is, you&apos;re live in about <span className="whitespace-nowrap">2–4 weeks</span>.</p>
+            <a href={EXTERNAL_URLS.appointments} {...SECURE_LINK_PROPS} className="group bg-zinc-900 text-white px-10 py-5 rounded-full font-medium text-lg hover:bg-zinc-700 transition inline-flex items-center gap-3">Book a strategy call <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" aria-hidden="true" /></a>
+            <p className="text-zinc-500 text-sm mt-6">Free • 30 minutes • Zero obligation</p>
+            <div className="mt-16 pt-10 border-t border-emerald-600/15 max-w-xl mx-auto">
+              <p className="text-zinc-700 leading-relaxed mb-6">Not ready to talk? Read a sample first &mdash; we&apos;ll write three follow-up emails for your business so you can judge the copy. It&apos;s a preview, not the live system; setup still starts with a call.</p>
+              <Link to="/try-it-free" className="group text-emerald-700 border border-emerald-600/30 bg-white/70 px-8 py-4 rounded-full font-medium transition hover:border-emerald-600/60 hover:bg-white inline-flex items-center gap-2">See a sample sequence <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" aria-hidden="true" /></Link>
+              <p className="text-zinc-500 text-sm mt-4">We&apos;ll write a 3-email follow-up for your business. No credit card.</p>
             </div>
           </FadeInSection>
         </div>
@@ -659,16 +701,16 @@ function NotFound() {
   usePageMeta(PAGE_META.notFound);
 
   return (
-    <div className="min-h-screen bg-zinc-950 text-white flex flex-col overflow-x-hidden">
+    <div className="min-h-screen bg-white text-zinc-900 flex flex-col overflow-x-hidden">
       <SiteNav solid />
       <div className="flex-1 flex items-center justify-center px-6 pt-36 pb-24">
         <div className="text-center max-w-md">
-          <div className="text-sm uppercase tracking-widest text-emerald-400 mb-4">404</div>
-          <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">We couldn't find that page</h1>
-          <p className="text-zinc-400 leading-relaxed mb-10">The link may be out of date, or the address may have a typo.</p>
+          <div className="t-eyebrow mb-4">404</div>
+          <h1 className="t-h1 mb-5">We couldn't find that page</h1>
+          <p className="text-zinc-600 leading-relaxed mb-10">The link may be out of date, or the address may have a typo.</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link to="/" className="bg-white text-black px-8 py-4 rounded-full font-semibold hover:bg-zinc-100 transition inline-flex items-center justify-center gap-2">Back to Home</Link>
-            <Link to="/contact" className="text-emerald-300 border border-emerald-500/30 bg-emerald-500/5 px-8 py-4 rounded-full font-semibold transition hover:border-emerald-400/50 hover:bg-emerald-500/10 inline-flex items-center justify-center gap-2">Contact Us <ArrowRight className="w-4 h-4" aria-hidden="true" /></Link>
+            <Link to="/" className="bg-zinc-900 text-white px-8 py-4 rounded-full font-medium hover:bg-zinc-700 transition inline-flex items-center justify-center gap-2">Back to Home</Link>
+            <Link to="/contact" className="text-emerald-700 border border-emerald-600/30 bg-emerald-500/5 px-8 py-4 rounded-full font-medium transition hover:border-emerald-600/60 hover:bg-emerald-500/10 inline-flex items-center justify-center gap-2">Contact Us <ArrowRight className="w-4 h-4" aria-hidden="true" /></Link>
           </div>
         </div>
       </div>

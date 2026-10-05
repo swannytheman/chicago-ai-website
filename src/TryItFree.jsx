@@ -116,7 +116,7 @@ function normalizeUrl(value) {
   return /^https?:\/\//i.test(trimmed) ? trimmed : `https://${trimmed}`;
 }
 
-const PLACEHOLDER_BODY = '<span style="color:#4a6080;font-style:italic;">Tell us about the business and the first sample email appears here...</span>';
+const PLACEHOLDER_BODY = '<span style="color:#71717a;font-style:italic;">Tell us about the business and the first sample email appears here...</span>';
 
 function isValidEmail(email) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
@@ -479,21 +479,21 @@ export default function TryItFree() {
       <style>{`
         /* -- TOKENS -- */
         .tif-root {
-          --bg:         #06090f;
-          --bg-2:       #0a0f1a;
-          --bg-card:    #0d1422;
-          --bg-input:   #0a111d;
-          --border:     #1a2638;
-          --border-hi:  #243550;
-          --blue:       #10b981;
-          --blue-hi:    #34d399;
-          --blue-glow:  rgba(16,185,129,0.18);
-          --blue-soft:  rgba(16,185,129,0.08);
-          --text:       #e8eef8;
-          --text-2:     #8fa3bf;
-          --text-3:     #4a6080;
-          --green:      #22d3a0;
-          --green-glow: rgba(34,211,160,0.12);
+          --bg:         #ffffff;
+          --bg-2:       #fafafa;
+          --bg-card:    #ffffff;
+          --bg-input:   #fafafa;
+          --border:     #e4e4e7;
+          --border-hi:  #d4d4d8;
+          --blue:       #059669;
+          --blue-hi:    #047857;
+          --blue-glow:  rgba(5,150,105,0.18);
+          --blue-soft:  rgba(5,150,105,0.08);
+          --text:       #18181b;
+          --text-2:     #52525b;
+          --text-3:     #71717a;
+          --green:      #059669;
+          --green-glow: rgba(5,150,105,0.10);
           --r:          12px;
         }
         /* clip, not hidden. Per spec, setting one overflow axis to something other than
@@ -509,10 +509,10 @@ export default function TryItFree() {
            overscroll-behavior-y is gone with it: there is no inner scroller here to
            chain from, and suppressing the rubber-band made touch scrolling feel stuck. */
         html, body { overflow-x: hidden; overflow-x: clip; }
-        body { background: #06090f; }
+        body { background: #ffffff; }
         .tif-root * { box-sizing: border-box; }
         .tif-root {
-          font-family: 'Inter', sans-serif;
+          font-family: 'Inter Variable', Inter, sans-serif;
           background: var(--bg);
           color: var(--text);
           min-height: 100vh;
@@ -523,9 +523,9 @@ export default function TryItFree() {
 
         /* -- BG ATMOSPHERE -- */
         .tif-bg { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; clip-path: inset(0); }
-        .tif-orb { position: absolute; border-radius: 50%; filter: blur(120px); opacity: 0.35; }
-        .tif-orb-1 { width:600px;height:600px;top:-200px;right:-100px;background:radial-gradient(circle,#059669 0%,transparent 70%);animation:tifDrift1 18s ease-in-out infinite alternate; }
-        .tif-orb-2 { width:400px;height:400px;bottom:0;left:-100px;background:radial-gradient(circle,#064e3b 0%,transparent 70%);animation:tifDrift2 22s ease-in-out infinite alternate; }
+        .tif-orb { position: absolute; border-radius: 50%; filter: blur(120px); opacity: 0.18; }
+        .tif-orb-1 { width:600px;height:600px;top:-200px;right:-100px;background:radial-gradient(circle,#6ee7b7 0%,transparent 70%);animation:tifDrift1 18s ease-in-out infinite alternate; }
+        .tif-orb-2 { width:400px;height:400px;bottom:0;left:-100px;background:radial-gradient(circle,#a7f3d0 0%,transparent 70%);animation:tifDrift2 22s ease-in-out infinite alternate; }
         .tif-orb-3 { width:300px;height:300px;top:50%;left:50%;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(16,185,129,.15) 0%,transparent 70%);animation:tifPulse 8s ease-in-out infinite; }
         @keyframes tifDrift1 { from{transform:translate(0,0) scale(1)} to{transform:translate(-60px,80px) scale(1.1)} }
         @keyframes tifDrift2 { from{transform:translate(0,0) scale(1)} to{transform:translate(60px,-40px) scale(0.9)} }
@@ -533,7 +533,7 @@ export default function TryItFree() {
 
         .tif-grid {
           position: fixed; inset: 0;
-          background-image: linear-gradient(rgba(16,185,129,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(16,185,129,.025) 1px,transparent 1px);
+          background-image: linear-gradient(rgba(5,150,105,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(5,150,105,.04) 1px,transparent 1px);
           background-size: 60px 60px;
           pointer-events: none; z-index: 0;
         }
@@ -543,7 +543,7 @@ export default function TryItFree() {
           display:flex;align-items:center;justify-content:space-between;
           padding:20px 48px;
           border-bottom:1px solid var(--border);
-          background:rgba(6,9,15,0.8);
+          background:rgba(255,255,255,0.8);
           /* Hand-prefixed: this stylesheet is injected as a runtime <style> tag, so
              PostCSS and autoprefixer never see it. iOS Safari needed -webkit- here
              until 18, and without the blur this bar is only 80% opaque -- which did
@@ -598,23 +598,23 @@ export default function TryItFree() {
         }
         @keyframes tifBlink { 0%,100%{opacity:1} 50%{opacity:.3} }
         .tif-h1 {
-          font-size:3.6rem;font-weight:700;
-          line-height:1.25;letter-spacing:-.025em;color:#fff;
+          font-size:3.6rem;font-weight:600;
+          line-height:1.08;letter-spacing:-.032em;text-wrap:balance;color:var(--text);
           margin-bottom:24px;animation:tifFadeUp .6s .1s ease both;
         }
         .tif-h1 em {
           font-style:normal;
-          background:linear-gradient(135deg,#34d399 0%,#10b981 50%,#059669 100%);
+          background:linear-gradient(135deg,#10b981 0%,#059669 50%,#047857 100%);
           -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
         }
-        .tif-sub { font-size:1.05rem;line-height:1.7;color:var(--text-2);max-width:420px;margin-bottom:40px;font-weight:300;animation:tifFadeUp .6s .2s ease both; }
+        .tif-sub { font-size:1.0625rem;line-height:1.65;color:var(--text-2);max-width:440px;margin-bottom:40px;font-weight:400;text-wrap:pretty;animation:tifFadeUp .6s .2s ease both; }
         /* The hero carries two paragraphs now -- the intro, then the "preview only"
            note. Same size and colour on purpose: the note is the reassurance people
            are looking for, so it should not read as dimmed small print. */
         .tif-sub-tight { margin-bottom:14px; }
         .tif-proof { display:flex;flex-direction:column;gap:12px;animation:tifFadeUp .6s .3s ease both; }
         .tif-proof-item { display:flex;align-items:center;gap:10px;font-size:.85rem;color:var(--text-2); }
-        .tif-proof-icon { width:20px;height:20px;border-radius:50%;background:var(--green-glow);border:1px solid rgba(34,211,160,.3);display:flex;align-items:center;justify-content:center;font-size:.65rem;color:var(--green);flex-shrink:0; }
+        .tif-proof-icon { width:20px;height:20px;border-radius:50%;background:var(--green-glow);border:1px solid rgba(5,150,105,.3);display:flex;align-items:center;justify-content:center;font-size:.65rem;color:var(--green);flex-shrink:0; }
 
         @keyframes tifFadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
 
@@ -623,7 +623,7 @@ export default function TryItFree() {
           background:var(--bg-card);border:1px solid var(--border);border-radius:20px;
           padding:40px;position:relative;overflow:hidden;
           animation:tifFadeUp .6s .15s ease both;
-          box-shadow:0 40px 80px rgba(0,0,0,.4),0 0 0 1px rgba(16,185,129,.05);
+          box-shadow:0 30px 60px rgba(24,24,27,.08),0 0 0 1px rgba(5,150,105,.05);
         }
         .tif-card::before {
           content:'';position:absolute;top:0;left:0;right:0;height:1px;
@@ -652,7 +652,7 @@ export default function TryItFree() {
         .tif-panel.active { display:block;animation:tifPanelIn .4s ease; }
         @keyframes tifPanelIn { from{opacity:0;transform:translateX(16px)} to{opacity:1;transform:translateX(0)} }
 
-        .tif-form-title { font-size:1.4rem;font-weight:700;color:#fff;margin-bottom:6px; }
+        .tif-form-title { font-size:1.4rem;font-weight:600;letter-spacing:-.02em;color:var(--text);margin-bottom:6px; }
         .tif-form-sub   { font-size:.85rem;color:var(--text-2);margin-bottom:28px;line-height:1.5; }
 
         /* Fields */
@@ -662,40 +662,40 @@ export default function TryItFree() {
         .tif-input, .tif-select, .tif-textarea {
           width:100%;background:var(--bg-input);border:1px solid var(--border);
           border-radius:10px;padding:13px 16px;
-          font-size:.9rem;font-family:'Inter',sans-serif;color:var(--text);
+          font-size:.9rem;font-family:'Inter Variable',Inter,sans-serif;color:var(--text);
           outline:none;transition:border-color .2s,box-shadow .2s;
           -webkit-appearance:none;
         }
         .tif-input::placeholder,.tif-textarea::placeholder { color:var(--text-3); }
         .tif-input:focus,.tif-select:focus,.tif-textarea:focus { border-color:var(--blue);box-shadow:0 0 0 3px var(--blue-soft); }
-        .tif-input.invalid,.tif-textarea.invalid,.tif-select.invalid { border-color:#f87171; }
+        .tif-input.invalid,.tif-textarea.invalid,.tif-select.invalid { border-color:#dc2626; }
         /* Helper text under a field. Sits above the error so the two never swap places
            when validation fires -- the field must not jump as you fill it in. */
         .tif-field-hint { font-size:.75rem;color:var(--text-3);margin-top:6px;line-height:1.5; }
         .tif-textarea { resize:none;line-height:1.6; }
         .tif-select {
           cursor:pointer;
-          background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238fa3bf' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+          background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2352525b' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
           background-repeat: no-repeat;
           background-position: right 14px center;
           padding-right: 38px;
         }
-        .tif-select option { background:#0d1422; }
+        .tif-select option { background:#ffffff; }
         .tif-field-row { display:grid;grid-template-columns:1fr 1fr;gap:14px; }
         /* Keep paired inputs on a shared baseline even when one label wraps */
         .tif-field-row .tif-field { display:flex;flex-direction:column; }
         .tif-field-row .tif-input, .tif-field-row .tif-select { margin-top:auto; }
         .tif-char-counter { display:flex;justify-content:flex-end;font-size:.72rem;color:var(--text-3);margin-top:6px;font-family:var(--cag-mono);transition:color .2s; }
         .tif-char-counter.near { color:var(--blue-hi); }
-        .tif-field-error { font-size:.75rem;color:#f87171;margin-top:6px;display:none; }
+        .tif-field-error { font-size:.75rem;color:#dc2626;margin-top:6px;display:none; }
         .tif-field-error.show { display:block; }
 
         /* Buttons */
         .tif-btn {
           width:100%;padding:15px 24px;
-          background:linear-gradient(135deg,#10b981,#059669);
+          background:linear-gradient(135deg,#059669,#047857);
           border:none;border-radius:100px;color:white;
-          font-size:.95rem;font-weight:700;letter-spacing:.02em;
+          font-size:.95rem;font-weight:600;letter-spacing:.005em;
           cursor:pointer;transition:all .2s;
           position:relative;overflow:hidden;margin-top:8px;
         }
@@ -713,40 +713,40 @@ export default function TryItFree() {
           .tif-btn { width:100%; }
           .tif-preview-nudge {
             display:flex;align-items:center;gap:10px;
-            background:rgba(34,211,160,0.08);
-            border:1px solid rgba(34,211,160,0.3);
+            background:rgba(5,150,105,0.08);
+            border:1px solid rgba(5,150,105,0.3);
             border-radius:10px;padding:13px 16px;
             font-size:.84rem;color:var(--green);
             cursor:pointer;margin-top:14px;
             animation:tifFadeUp .4s ease both,tifNudgePulse 2.4s ease-in-out 0.6s 3;
             transition:background .2s;
           }
-          .tif-preview-nudge:active { background:rgba(34,211,160,0.16); }
+          .tif-preview-nudge:active { background:rgba(5,150,105,0.16); }
           .tif-preview-nudge-icon { font-size:1rem;flex-shrink:0; }
         }
         @keyframes tifNudgePulse {
-          0%,100% { box-shadow:0 0 0 0 rgba(34,211,160,0.4); }
-          50%      { box-shadow:0 0 0 6px rgba(34,211,160,0); }
+          0%,100% { box-shadow:0 0 0 0 rgba(5,150,105,0.4); }
+          50%      { box-shadow:0 0 0 6px rgba(5,150,105,0); }
         }
         .tif-btn-back {
           background:none;border:none;color:var(--text-3);font-size:.82rem;cursor:pointer;
           padding:8px 0;display:flex;align-items:center;gap:6px;margin-bottom:20px;
-          transition:color .2s;font-family:'Inter',sans-serif;
+          transition:color .2s;font-family:'Inter Variable',Inter,sans-serif;
         }
         .tif-btn-back:hover { color:var(--text-2); }
         .tif-btn-restart {
           background:none;border:none;color:var(--text-2);font-size:.82rem;cursor:pointer;
           padding:10px 0;margin-top:14px;width:100%;text-align:center;
-          transition:color .2s;font-family:'Inter',sans-serif;
+          transition:color .2s;font-family:'Inter Variable',Inter,sans-serif;
         }
         .tif-btn-restart:hover { color:var(--blue-hi); }
         .tif-submit-error {
-          background:rgba(248,113,113,0.08);border:1px solid rgba(248,113,113,0.35);
+          background:#fef2f2;border:1px solid #fecaca;
           border-radius:var(--r);padding:14px 16px;margin-bottom:16px;
-          font-size:.82rem;line-height:1.6;color:#fca5a5;
+          font-size:.82rem;line-height:1.6;color:#b91c1c;
         }
-        .tif-submit-error strong { color:#fecaca;display:block;margin-bottom:2px; }
-        .tif-submit-error a { color:#fca5a5;text-decoration:underline; }
+        .tif-submit-error strong { color:#7f1d1d;display:block;margin-bottom:2px; }
+        .tif-submit-error a { color:#b91c1c;text-decoration:underline; }
 
         /* Legal */
         .tif-upsell { font-size:.84rem;color:var(--text-2);line-height:1.6;text-align:center;margin:0 0 14px; }
@@ -757,13 +757,13 @@ export default function TryItFree() {
         .tif-success { text-align:center;padding:20px 0; }
         .tif-success-icon {
           width:72px;height:72px;border-radius:50%;
-          background:var(--green-glow);border:1px solid rgba(34,211,160,.3);
+          background:var(--green-glow);border:1px solid rgba(5,150,105,.3);
           display:flex;align-items:center;justify-content:center;
           margin:0 auto 24px;font-size:1.8rem;
           animation:tifPopIn .5s cubic-bezier(.175,.885,.32,1.275) both;
         }
         @keyframes tifPopIn { from{transform:scale(0);opacity:0} to{transform:scale(1);opacity:1} }
-        .tif-success-title { font-size:1.5rem;font-weight:700;color:#fff;margin-bottom:12px; }
+        .tif-success-title { font-size:1.5rem;font-weight:600;letter-spacing:-.02em;color:var(--text);margin-bottom:12px; }
         .tif-success-sub   { font-size:.88rem;color:var(--text-2);line-height:1.7;max-width:320px;margin:0 auto 28px; }
 
         .tif-timeline { display:flex;flex-direction:column;gap:0;text-align:left;margin-bottom:24px; }
@@ -796,7 +796,7 @@ export default function TryItFree() {
         .tif-footer a:hover { color:var(--blue-hi); }
         .tif-footer i { color:var(--border-hi);font-style:normal; }
         .tif-stat  { text-align:center;min-width:0; }
-        .tif-stat-num { font-size:3rem;font-weight:700;color:#fff;display:block;line-height:1;margin-bottom:4px; }
+        .tif-stat-num { font-size:3rem;font-weight:600;letter-spacing:-.045em;font-variant-numeric:tabular-nums;color:var(--text);display:block;line-height:1;margin-bottom:4px; }
         .tif-stat-num span { color:var(--blue-hi); }
         .tif-stat-label { font-size:.78rem;color:var(--text-3);letter-spacing:.04em; }
 
