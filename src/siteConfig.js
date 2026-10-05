@@ -19,6 +19,7 @@ export const SECURE_LINK_PROPS = {
 export const NAV_ITEMS = [
   { label: 'How It Works', id: 'how-it-works' },
   { label: 'Results', id: 'testimonials' },
+  { label: 'About', id: 'about' },
   { label: 'Pricing', id: 'services' },
   { label: 'FAQ', id: 'faq' },
 ];

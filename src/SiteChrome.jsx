@@ -27,8 +27,10 @@ export function SiteNav({ solid = false }) {
         <Link to="/" aria-label="Chicago AI Group home" className="transition hover:opacity-75">
           <Logo size="default" />
         </Link>
-        {/* lg, not md: "Sample sequence" plus the call button no longer fit a 768px bar. */}
-        <div className="hidden lg:flex items-center gap-8">
+        {/* xl, not lg: with About added, the five links, "Sample sequence" and the call
+            button no longer fit a 1024px bar (the button wrapped and the links ran into
+            the logo). Below 1280 the menu button takes over. */}
+        <div className="hidden xl:flex items-center gap-8">
           {NAV_ITEMS.map(item => (
             <button key={item.id} onClick={() => go(item.id)} className="text-[0.9375rem] font-medium text-zinc-600 hover:text-zinc-900 transition relative group whitespace-nowrap" type="button" aria-label={`Navigate to ${item.label} section`}>
               {item.label}<span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-emerald-400 transition-all group-hover:w-full" aria-hidden="true" />
@@ -37,10 +39,10 @@ export function SiteNav({ solid = false }) {
           <Link to="/try-it-free" className="text-emerald-700 px-5 py-2 rounded-full text-sm font-medium transition hover:text-emerald-800 border border-emerald-600/30 hover:border-emerald-600/60 whitespace-nowrap">Sample sequence</Link>
           <button onClick={() => go('cta')} className="bg-zinc-900 text-white px-6 py-2.5 rounded-full text-[0.9375rem] font-medium hover:bg-zinc-700 transition" type="button">Book a strategy call</button>
         </div>
-        <button className="lg:hidden p-2.5 rounded-lg border border-zinc-200" onClick={() => setMobileMenuOpen(!mobileMenuOpen)} type="button" aria-expanded={mobileMenuOpen} aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}>{mobileMenuOpen ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}</button>
+        <button className="xl:hidden p-2.5 rounded-lg border border-zinc-200" onClick={() => setMobileMenuOpen(!mobileMenuOpen)} type="button" aria-expanded={mobileMenuOpen} aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}>{mobileMenuOpen ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}</button>
       </div>
       {mobileMenuOpen && (
-        <div className="lg:hidden bg-white border border-zinc-200 shadow-lg mx-4 mt-2 rounded-2xl p-6 space-y-4" role="menu">
+        <div className="xl:hidden bg-white border border-zinc-200 shadow-lg mx-4 mt-2 rounded-2xl p-6 space-y-4" role="menu">
           {NAV_ITEMS.map(item => (<button key={item.id} onClick={() => go(item.id)} className="block w-full text-left text-zinc-700 hover:text-zinc-900 py-2" type="button" role="menuitem">{item.label}</button>))}
           <Link to="/try-it-free" className="block w-full text-center text-emerald-700 px-5 py-3 rounded-full text-sm font-medium border border-emerald-600/30" role="menuitem" onClick={() => setMobileMenuOpen(false)}>See a sample sequence</Link>
           {/* Straight to Calendly: on a phone, scrolling to the CTA band and tapping
