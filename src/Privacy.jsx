@@ -21,7 +21,7 @@ export default function Privacy() {
       </Section>
 
       <Section n={2} title="What we collect">
-        <p>We only collect what you type into this site. There is no tracking pixel and no advertising network on it.</p>
+        <p>We collect what you type into this site, plus anonymous visit statistics, described below. There is no tracking pixel and no advertising network on it.</p>
         <p><strong>If you request the free email demo</strong> (the sample sequence page), we receive:</p>
         <Bullets items={[
           'Your first name and business email address, which are required.',
@@ -31,6 +31,7 @@ export default function Privacy() {
         <p><strong>With either form</strong>, we also record the time you submitted it and the page you submitted it from.</p>
         <p><strong>With a demo request only</strong>, we also record the page you first arrived on, the site that referred you, and any campaign tags in that link — the <code className="text-zinc-600">utm_</code> values and Google or Meta click identifiers that get appended when you arrive from an ad or a newsletter. That is how we know which campaign a demo request came from. The Contact page form does not send these.</p>
         <p><strong>If you book a strategy call</strong>, you leave this site for Calendly and give your details to them directly. We see the booking Calendly passes back to us. We do not control what Calendly collects; their privacy policy applies.</p>
+        <p><strong>Visit statistics.</strong> We use Vercel Web Analytics to count visits: which pages are viewed, the site that referred you, any <code className="text-zinc-600">utm_</code> campaign tags in the link, and your country, browser, operating system and device type. It sets no cookies, does not identify you by name or email, and does not follow you to other sites. Vercel tells repeat visits apart within a single day using a short-lived identifier it resets daily. We strip every other part of the link, including ad click identifiers, before anything is sent.</p>
         <p><strong>Server logs.</strong> Our host records ordinary request logs, including IP addresses, for security and reliability. We do not use them to build a profile of you.</p>
       </Section>
 
@@ -47,7 +48,8 @@ export default function Privacy() {
       <Section n={4} title="Cookies and browser storage">
         <p>
           This site sets <strong>no cookies</strong>. There is no Google Analytics, no Meta pixel, no tag manager,
-          and no advertising or cross-site tracking of any kind.
+          and no advertising or cross-site tracking of any kind. Our visit statistics come from Vercel Web Analytics,
+          which works without cookies (see section 2).
         </p>
         <p>
           We do use your browser&apos;s <strong>session storage</strong>, which holds a small amount of data and is erased
@@ -60,10 +62,9 @@ export default function Privacy() {
       <Section n={5} title="The companies that help us run this">
         <p>We keep the list short, and each one only handles what it needs to. As of the date on this page:</p>
         <Bullets items={[
-          <><strong>Vercel</strong> hosts the site and serves these pages.</>,
+          <><strong>Vercel</strong> hosts the site, serves these pages, and provides our anonymous visit statistics.</>,
           <><strong>Make.com</strong> receives what you submit through our forms and routes it to us and to our CRM.</>,
           <><strong>Calendly</strong> handles scheduling if you book a call.</>,
-          <><strong>Google Fonts</strong> serves the typeface this site uses, which means Google receives your IP address when a page loads.</>,
           <>An <strong>email delivery provider</strong> sends the demo sequence and our replies.</>,
         ]} />
         <p>
