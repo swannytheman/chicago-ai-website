@@ -7,7 +7,7 @@ import Privacy from './Privacy.jsx';
 import Terms from './Terms.jsx';
 import Roofing from './Roofing.jsx';
 import { SiteNav, SiteFooter } from './SiteChrome.jsx';
-import { EXTERNAL_URLS, SECURE_LINK_PROPS, sectionId } from './siteConfig.js';
+import { EXTERNAL_URLS, SECURE_LINK_PROPS, PLAN_PRICES, sectionId } from './siteConfig.js';
 import { usePageMeta } from './usePageMeta.js';
 import { PAGE_META } from './seo.js';
 import EmailPreview from './EmailPreview.jsx';
@@ -65,7 +65,7 @@ function MainSite() {
     // plans differ" rows in #scope; keep the two in step if either changes.
     pricing: [
       {
-        tier: "Starter", monthly: "$179", setup: "$2,200",
+        tier: "Starter", ...PLAN_PRICES.Starter,
         details: "One inbound source. Qualify, follow up, book.",
         forWho: "Your first inbound source — an owner-led service business that just needs follow-up on.",
         includes: [
@@ -77,7 +77,7 @@ function MainSite() {
         ]
       },
       {
-        tier: "Pro", monthly: "$399", setup: "$3,500",
+        tier: "Pro", ...PLAN_PRICES.Pro,
         details: "Sequences, scoring, and CRM sync on top of Starter.", popular: true,
         forWho: "Teams that already have a CRM, or want SMS and longer sequences.",
         includes: [
@@ -89,7 +89,7 @@ function MainSite() {
         ]
       },
       {
-        tier: "Enterprise", monthly: "$649", setup: "$5,900",
+        tier: "Enterprise", ...PLAN_PRICES.Enterprise,
         details: "More sources and locations, copy tests, priority support.",
         forWho: "More than one location, brand, or lead source.",
         includes: [

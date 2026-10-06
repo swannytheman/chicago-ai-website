@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { ArrowRight, Check, Shield, Star, Inbox, ListChecks, CalendarCheck } from 'lucide-react';
 import { SiteNav, SiteFooter } from './SiteChrome.jsx';
-import { EXTERNAL_URLS, SECURE_LINK_PROPS } from './siteConfig.js';
+import { EXTERNAL_URLS, SECURE_LINK_PROPS, PLAN_PRICES } from './siteConfig.js';
 import { usePageMeta } from './usePageMeta.js';
 import { PAGE_META } from './seo.js';
 import HeroDemo from './HeroDemo.jsx';
@@ -18,13 +18,12 @@ import { FadeInSection, Section, SectionHeader, AccentRule } from './PageLayout.
 // so "Book a strategy call" and "Pricing" in the top bar stay on this page instead of
 // sending a roofer to the homepage's general pricing.
 //
-// Prices here are the roofing prices and are independent of the homepage plans.
+// Prices come from PLAN_PRICES in siteConfig.js, shared with the homepage plan picker.
 
 const PLANS = [
   {
     tier: 'Starter',
-    monthly: '$499',
-    setup: '$2,500',
+    ...PLAN_PRICES.Starter,
     includes: [
       'One inbound source',
       'First response in about five minutes',
@@ -36,8 +35,7 @@ const PLANS = [
   },
   {
     tier: 'Pro',
-    monthly: '$999',
-    setup: '$3,500',
+    ...PLAN_PRICES.Pro,
     featured: true,
     includes: [
       'Everything in Starter',
@@ -49,8 +47,7 @@ const PLANS = [
   },
   {
     tier: 'Enterprise',
-    monthly: '$1,800',
-    setup: '$5,900',
+    ...PLAN_PRICES.Enterprise,
     includes: [
       'Everything in Pro',
       'Additional sources or locations',
@@ -307,7 +304,7 @@ export default function Roofing() {
               </div>
             ))}
           </div>
-          <p className="mt-12 text-center text-2xl md:text-[1.75rem] font-medium tracking-[-0.02em] text-zinc-900 text-balance">One extra booked inspection pays for the year.</p>
+          <p className="mt-12 text-center text-2xl md:text-[1.75rem] font-medium tracking-[-0.02em] text-zinc-900 text-balance">One closed replacement can cover a year of Starter.</p>
           <p className="mt-3 text-center text-sm text-zinc-500">Roof replacements commonly run $8,000 to $15,000.</p>
         </FadeInSection>
       </Section>
