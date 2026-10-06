@@ -21,7 +21,9 @@ function prefersReducedMotion() {
   return typeof window !== 'undefined' && window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
 }
 
-export default function HeroDemo() {
+// `caption` labels the card; /roofing uses it to say the example was written in the
+// client's voice after kickoff and is not a live transcript.
+export default function HeroDemo({ caption = 'Illustrative example of one lead' }) {
   // With reduced motion the card starts, and stays, in its finished state.
   const [still] = useState(prefersReducedMotion);
   const [run, setRun] = useState(0);
@@ -142,7 +144,7 @@ export default function HeroDemo() {
       </ol>
 
       <figcaption className="flex items-center justify-between gap-4 px-5 sm:px-6 py-3.5 border-t border-zinc-200 text-xs text-zinc-500">
-        <span>Illustrative example of one lead</span>
+        <span>{caption}</span>
         {/* No replay when motion is reduced: there is nothing to replay. */}
         {!still && <button
           type="button"

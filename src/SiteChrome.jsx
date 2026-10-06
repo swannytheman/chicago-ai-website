@@ -69,6 +69,7 @@ export function SiteFooter() {
             <button onClick={() => goToSection('how-it-works')} className="hover:text-zinc-900 transition" type="button">How It Works</button>
             <button onClick={() => goToSection('about')} className="hover:text-zinc-900 transition" type="button">About</button>
             <Link to="/try-it-free" className="hover:text-zinc-900 transition">Sample sequence</Link>
+            <Link to="/roofing" className="hover:text-zinc-900 transition">Roofing</Link>
             <Link to="/contact" className="hover:text-zinc-900 transition">Contact</Link>
             <Link to="/privacy" className="hover:text-zinc-900 transition">Privacy</Link>
             <Link to="/terms" className="hover:text-zinc-900 transition">Terms</Link>
