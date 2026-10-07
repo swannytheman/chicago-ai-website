@@ -10,8 +10,8 @@ export const SITE_URL = 'https://www.chicagoaigroup.com';
 export const SITE_NAME = 'Chicago AI Group';
 // ?v= is a cache-bust: scrapers hold the old artwork indefinitely otherwise.
 // Bump it whenever public/og-image.png is re-rendered from scripts/og-card.html.
-export const OG_IMAGE = `${SITE_URL}/og-image.png?v=2`;
-export const OG_IMAGE_ALT = 'Chicago AI Group — AI that books meetings. Book a strategy call.';
+export const OG_IMAGE = `${SITE_URL}/og-image.png?v=3`;
+export const OG_IMAGE_ALT = 'Chicago AI Group — The lead came in at 8:30pm. Someone else got the job. Book a strategy call.';
 
 export const PAGE_META = {
   home: {
