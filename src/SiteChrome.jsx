@@ -24,7 +24,7 @@ export function SiteNav({ solid = false }) {
   return (
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${opaque ? 'bg-white/80 backdrop-blur-md border-b border-zinc-200 py-3' : 'bg-transparent py-5'}`} role="navigation" aria-label="Main navigation">
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
-        <Link to="/" aria-label="Chicago AI Group home" className="transition hover:opacity-75">
+        <Link to="/" aria-label="Chicago AI Group home" className="block py-1.5 -my-1.5 transition hover:opacity-75">
           <Logo size="default" />
         </Link>
         {/* xl, not lg: with About added, the five links, "Sample sequence" and the call
@@ -42,8 +42,8 @@ export function SiteNav({ solid = false }) {
         <button className="xl:hidden p-2.5 rounded-lg border border-zinc-200" onClick={() => setMobileMenuOpen(!mobileMenuOpen)} type="button" aria-expanded={mobileMenuOpen} aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}>{mobileMenuOpen ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}</button>
       </div>
       {mobileMenuOpen && (
-        <div className="xl:hidden bg-white border border-zinc-200 shadow-lg mx-4 mt-2 rounded-2xl p-6 space-y-4" role="menu">
-          {NAV_ITEMS.map(item => (<button key={item.id} onClick={() => go(item.id)} className="block w-full text-left text-zinc-700 hover:text-zinc-900 py-2" type="button" role="menuitem">{item.label}</button>))}
+        <div className="xl:hidden bg-white border border-zinc-200 shadow-lg mx-4 mt-2 rounded-2xl p-6 space-y-3" role="menu">
+          {NAV_ITEMS.map(item => (<button key={item.id} onClick={() => go(item.id)} className="block w-full text-left text-zinc-700 hover:text-zinc-900 py-2.5" type="button" role="menuitem">{item.label}</button>))}
           <Link to="/try-it-free" className="block w-full text-center text-emerald-700 px-5 py-3 rounded-full text-sm font-medium border border-emerald-600/30" role="menuitem" onClick={() => setMobileMenuOpen(false)}>See a sample sequence</Link>
           {/* Straight to Calendly: on a phone, scrolling to the CTA band and tapping
               again is a step too many for the strongest action in the menu. */}
@@ -61,10 +61,12 @@ export function SiteFooter() {
     <footer className="py-12 border-t border-zinc-200" role="contentinfo">
       <div className="max-w-7xl mx-auto px-6">
         <div className="flex flex-col md:flex-row justify-between items-center gap-8">
-          <Link to="/" aria-label="Chicago AI Group home" className="transition hover:opacity-75">
+          <Link to="/" aria-label="Chicago AI Group home" className="block py-1.5 -my-1.5 transition hover:opacity-75">
             <Logo size="small" />
           </Link>
-          <nav className="flex flex-wrap justify-center gap-x-8 gap-y-3 text-zinc-600" aria-label="Footer navigation">
+          {/* Each link gets a 44px-tall tap area (py-2.5 on 24px text); the row gap
+              shrinks to match, so the footer looks the same. */}
+          <nav className="flex flex-wrap justify-center gap-x-8 text-zinc-600 [&>*]:py-2.5 [&>*]:min-h-[44px] [&>*]:min-w-[44px]" aria-label="Footer navigation">
             <button onClick={() => goToSection('services')} className="hover:text-zinc-900 transition" type="button">Pricing</button>
             <button onClick={() => goToSection('how-it-works')} className="hover:text-zinc-900 transition" type="button">How It Works</button>
             <button onClick={() => goToSection('about')} className="hover:text-zinc-900 transition" type="button">About</button>

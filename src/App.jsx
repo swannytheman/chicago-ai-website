@@ -151,12 +151,14 @@ function MainSite() {
 
       {/* Not full-height on purpose: the top of the next section showing below the fold
           invites the scroll that the old bouncing arrow used to ask for. */}
-      <section className="relative overflow-hidden pt-32 pb-20 md:pt-40 md:pb-28" aria-labelledby="hero-heading">
+      {/* Phones get less top padding and no location line (the logo just above already
+          says Chicago), so both buttons sit above the fold on a 568px-tall iPhone SE. */}
+      <section className="relative overflow-hidden pt-24 pb-16 sm:pt-32 sm:pb-20 md:pt-40 md:pb-28" aria-labelledby="hero-heading">
         <div className="absolute inset-0 bg-gradient-to-b from-emerald-50 via-white to-white" aria-hidden="true" />
         <div className="relative z-10 max-w-7xl mx-auto px-6 grid grid-cols-1 xl:grid-cols-12 gap-14 xl:gap-16 items-center">
           <div className="xl:col-span-6 text-center xl:text-left">
             <FadeInSection>
-              <div className="inline-flex items-center gap-3 text-sm mb-8">
+              <div className="hidden sm:inline-flex items-center gap-3 text-sm mb-8">
                 <span className="relative flex w-2 h-2" aria-hidden="true">
                   <span className="absolute inline-flex w-full h-full rounded-full bg-emerald-400 opacity-60 motion-safe:animate-ping" />
                   <span className="relative inline-flex w-2 h-2 rounded-full bg-emerald-500" />
@@ -173,7 +175,7 @@ function MainSite() {
                 the trade landing pages. The demo beside it shows the same 8:30pm request. */}
             <FadeInSection delay={100}><h1 id="hero-heading" className="t-display text-[clamp(2.5rem,1.3rem+4vw,4.75rem)] mb-6">The lead came in at 8:30pm. <span className="text-gradient block">Someone else got the job.</span></h1></FadeInSection>
             <FadeInSection delay={200}>
-              <p className="t-lede md:text-xl text-zinc-700 max-w-xl mx-auto xl:mx-0 mb-9">We reply to your inbound leads in about five minutes, in your voice, and book the ones worth your time. We build it and run it. You take the meeting. Live in <span className="whitespace-nowrap">2–4 weeks</span>.</p>
+              <p className="t-lede md:text-xl text-zinc-700 max-w-xl mx-auto xl:mx-0 mb-8 md:mb-9">We reply to your inbound leads in about five minutes, in your voice, and book the ones worth your time. We build it and run it. You take the meeting. Live in <span className="whitespace-nowrap">2–4 weeks</span>.</p>
             </FadeInSection>
             <FadeInSection delay={300}>
               <div className="flex flex-col sm:flex-row gap-3 justify-center xl:justify-start">
@@ -196,7 +198,7 @@ function MainSite() {
               <span className="t-eyebrow mb-4">What they actually get</span>
               <h2 id="example-heading" className="t-h2 mb-6">A follow-up that sounds like you, sent while you&apos;re still on the job.</h2>
               <p className="t-lede mb-8">First response on the inbound source we wire. Qualify. Offer a time. You take the meeting.</p>
-              <Link to="/try-it-free" className="group inline-flex items-center gap-2 text-emerald-700 hover:text-emerald-800 transition font-medium">
+              <Link to="/try-it-free" className="group inline-flex items-center gap-2 py-2.5 -my-2.5 text-emerald-700 hover:text-emerald-800 transition font-medium">
                 See a sample written for your business <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" aria-hidden="true" />
               </Link>
             </div>
@@ -361,7 +363,7 @@ function MainSite() {
               <p className="text-emerald-700 font-semibold mt-8">The strategy call is with me.</p>
               <div className="mt-8 flex flex-col sm:flex-row gap-5 sm:items-center">
                 <a href={EXTERNAL_URLS.appointments} {...SECURE_LINK_PROPS} className="bg-zinc-900 text-white px-8 py-4 rounded-full font-medium hover:bg-zinc-700 transition inline-flex items-center justify-center gap-2">Book a strategy call <ArrowRight className="w-4 h-4" aria-hidden="true" /></a>
-                <Link to="/contact" className="text-zinc-600 hover:text-zinc-900 transition text-sm underline underline-offset-4 text-center sm:text-left">Or send a note</Link>
+                <Link to="/contact" className="inline-block py-3 -my-3 text-zinc-600 hover:text-zinc-900 transition text-sm underline underline-offset-4 text-center sm:text-left">Or send a note</Link>
               </div>
             </div>
           </div>
