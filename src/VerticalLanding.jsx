@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Check, Shield, Star, Inbox, ListChecks, CalendarCheck } from 'lucide-react';
 import { SiteNav, SiteFooter } from './SiteChrome.jsx';
@@ -87,6 +88,10 @@ function SampleButton() {
 export default function VerticalLanding({ content: c }) {
   usePageMeta(c.meta);
   const plans = plansFor(c.pricing.bookItem);
+  // The dark card follows the plan the visitor picks, as on the homepage plan picker.
+  // Pro (the featured plan) starts selected. Selection is visual emphasis only: each
+  // card's button books the same call, so there is no form value behind it.
+  const [selectedTier, setSelectedTier] = useState(() => plans.find(p => p.featured)?.tier ?? plans[0].tier);
 
   return (
     <div className="min-h-screen bg-white text-zinc-900 overflow-x-hidden">
@@ -245,27 +250,34 @@ export default function VerticalLanding({ content: c }) {
         />
         <FadeInSection delay={100}>
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 lg:items-stretch">
-            {plans.map(plan => (
+            {plans.map(plan => {
+              const selected = plan.tier === selectedTier;
+              return (
               <div
                 key={plan.tier}
-                className={`rounded-3xl p-7 md:p-8 flex flex-col border ${plan.featured
+                // Click anywhere on a card to pick it; tabbing to its button picks it too,
+                // so keyboard users see the same emphasis.
+                onClick={() => setSelectedTier(plan.tier)}
+                onFocusCapture={() => setSelectedTier(plan.tier)}
+                data-selected={selected || undefined}
+                className={`rounded-3xl p-7 md:p-8 flex flex-col border transition-all duration-300 ${selected
                   ? 'bg-zinc-900 border-zinc-900 text-white shadow-[0_32px_64px_-32px_rgba(24,24,27,0.45)] lg:-my-3 lg:py-11'
-                  : 'bg-white border-zinc-200'}`}
+                  : 'bg-white border-zinc-200 cursor-pointer hover:border-zinc-300 hover:bg-zinc-50'}`}
               >
                 <div className="flex items-center gap-2 mb-6">
                   <h3 className="text-lg font-semibold tracking-[-0.01em]">{plan.tier}</h3>
-                  {plan.featured && <span className="text-xs font-medium px-2 py-0.5 rounded-full bg-white text-zinc-900">Recommended</span>}
+                  {plan.featured && <span className={`text-xs font-medium px-2 py-0.5 rounded-full ${selected ? 'bg-white text-zinc-900' : 'bg-emerald-50 text-emerald-700 border border-emerald-600/20'}`}>Recommended</span>}
                 </div>
                 <div className="mb-1">
                   <span className="text-5xl font-semibold tracking-[-0.04em] tabular-nums">{plan.monthly}</span>
-                  <span className={`text-base ${plan.featured ? 'text-zinc-400' : 'text-zinc-500'}`}>/mo</span>
+                  <span className={`text-base ${selected ? 'text-zinc-400' : 'text-zinc-500'}`}>/mo</span>
                 </div>
-                <div className={`text-sm font-medium tabular-nums mb-8 ${plan.featured ? 'text-zinc-300' : 'text-zinc-700'}`}>+ {plan.setup} one-time setup</div>
-                <ul className={`space-y-3 mb-10 pt-6 border-t ${plan.featured ? 'border-white/15' : 'border-zinc-200'}`}>
+                <div className={`text-sm font-medium tabular-nums mb-8 ${selected ? 'text-zinc-300' : 'text-zinc-700'}`}>+ {plan.setup} one-time setup</div>
+                <ul className={`space-y-3 mb-10 pt-6 border-t ${selected ? 'border-white/15' : 'border-zinc-200'}`}>
                   {plan.includes.map(item => (
                     <li key={item} className="flex gap-3 text-sm leading-relaxed">
-                      <Check className={`w-4 h-4 flex-shrink-0 mt-0.5 ${plan.featured ? 'text-emerald-400' : 'text-emerald-600'}`} strokeWidth={2.5} aria-hidden="true" />
-                      <span className={plan.featured ? 'text-zinc-200' : 'text-zinc-700'}>{item}</span>
+                      <Check className={`w-4 h-4 flex-shrink-0 mt-0.5 ${selected ? 'text-emerald-400' : 'text-emerald-600'}`} strokeWidth={2.5} aria-hidden="true" />
+                      <span className={selected ? 'text-zinc-200' : 'text-zinc-700'}>{item}</span>
                     </li>
                   ))}
                 </ul>
@@ -273,7 +285,7 @@ export default function VerticalLanding({ content: c }) {
                   href={EXTERNAL_URLS.appointments}
                   {...SECURE_LINK_PROPS}
                   aria-label={`Book a call about ${plan.tier}`}
-                  className={`mt-auto w-full px-4 sm:px-6 py-3.5 rounded-full font-medium text-[0.9375rem] sm:text-base whitespace-nowrap transition inline-flex items-center justify-center gap-2 ${plan.featured
+                  className={`mt-auto w-full px-4 sm:px-6 py-3.5 rounded-full font-medium text-[0.9375rem] sm:text-base whitespace-nowrap transition inline-flex items-center justify-center gap-2 ${selected
                     ? 'bg-white text-zinc-900 hover:bg-zinc-200'
                     : 'border border-zinc-300 text-zinc-900 hover:border-zinc-400 hover:bg-zinc-50'}`}
                 >
@@ -284,7 +296,8 @@ export default function VerticalLanding({ content: c }) {
                   <ArrowRight className="w-4 h-4" aria-hidden="true" />
                 </a>
               </div>
-            ))}
+              );
+            })}
           </div>
           <p className="mt-12 text-center text-2xl md:text-[1.75rem] font-medium tracking-[-0.02em] text-zinc-900 text-balance">{c.pricing.payback}</p>
           {c.pricing.paybackNote && <p className="mt-3 text-center text-sm text-zinc-500">{c.pricing.paybackNote}</p>}
