@@ -10,14 +10,14 @@ export const SITE_URL = 'https://www.chicagoaigroup.com';
 export const SITE_NAME = 'Chicago AI Group';
 // ?v= is a cache-bust: scrapers hold the old artwork indefinitely otherwise.
 // Bump it whenever public/og-image.png is re-rendered from scripts/og-card.html.
-export const OG_IMAGE = `${SITE_URL}/og-image.png?v=2`;
-export const OG_IMAGE_ALT = 'Chicago AI Group — AI that books meetings. Book a strategy call.';
+export const OG_IMAGE = `${SITE_URL}/og-image.png?v=3`;
+export const OG_IMAGE_ALT = 'Chicago AI Group — The lead came in at 8:30pm. Someone else got the job. Book a strategy call.';
 
 export const PAGE_META = {
   home: {
     path: '/',
-    title: 'AI sales agents that book meetings | Chicago AI Group',
-    description: 'Managed AI follow-up for Chicago service businesses. We qualify leads and book meetings. Live in 2–4 weeks.',
+    title: 'Inbound leads answered in five minutes | Chicago AI Group',
+    description: 'We reply to your inbound leads in about five minutes, in your voice, and book the ones worth your time. We build it and run it. Live in 2–4 weeks.',
   },
   // The landing page sales and ads use for residential roofers.
   roofing: {

@@ -57,8 +57,8 @@ function MainSite() {
 
   const salesAgent = useMemo(() => ({
     icon: Users,
-    name: "Sales AI Agent",
-    tagline: "A managed AI sales agent for businesses that live on inbound leads",
+    name: "Managed lead follow-up",
+    tagline: "We answer, qualify and book your inbound leads. Built and run for you.",
     // `forWho` and `includes` live on the plan, not beside it. The section used to
     // pair a plan picker with one frozen capability list that hedged the difference in
     // parentheses ("SMS on Pro and above", "CRM ... (Pro and Enterprise)"), so choosing
@@ -126,7 +126,7 @@ function MainSite() {
     { q: "What does the 60-day guarantee actually cover?", a: "Two things we operate: a first response typically within 5 minutes on inbound leads wired into the agent, and follow-up plus a meeting offer for leads that meet the qualify rules we set with you. The 60 days starts when the agent goes live on your real lead flow, not at the kickoff call. Miss either and you get the setup fee and every monthly fee back. It does not guarantee a number of closed deals or a volume of new leads — if the leads are not coming in, that is not something the agent can fix." },
     { q: "What do you actually turn on in the first month?", a: "One inbound source you already have, a first reply typically within 5 minutes, the qualify rules we write with you, and booking into the calendar you already use. Pro and Enterprise add the extra channels and systems we name on the call. We do not turn on the whole internet in week four." },
     { q: "How fast can I get started?", a: "Most clients are live within 2-4 weeks. We move fast because we know your time is money. After a quick discovery call, we get to work immediately." },
-    { q: "Will the AI sound like a robot?", a: "No. We train each AI on your business, your tone, and your way of talking to customers. People often can't tell they're chatting with AI—that's the whole point." },
+    { q: "Will it sound like us?", a: "Yes, that's the point. We train it on your business, your tone, and the way your office actually writes to customers, and you approve how it sounds before anything goes out." },
     { q: "What if something goes wrong?", a: "We've got your back. All plans include support, and Pro/Enterprise clients get priority access plus regular check-ins to make sure everything runs smoothly." }
   ], []);
 
@@ -161,7 +161,7 @@ function MainSite() {
                   <span className="absolute inline-flex w-full h-full rounded-full bg-emerald-400 opacity-60 motion-safe:animate-ping" />
                   <span className="relative inline-flex w-2 h-2 rounded-full bg-emerald-500" />
                 </span>
-                <span className="hidden sm:inline font-medium text-zinc-900">Expert AI &amp; Automation Team</span>
+                <span className="hidden sm:inline font-medium text-zinc-900">For service businesses that run on inbound leads</span>
                 <span className="hidden sm:inline w-px h-4 bg-zinc-300" aria-hidden="true" />
                 <span className="text-zinc-600">Chicago, IL</span>
               </div>
@@ -169,9 +169,11 @@ function MainSite() {
             {/* Sized down from the full t-display scale: on wide screens it shares the row with the
                 demo. The layout only splits at xl -- below that the demo is too tall to sit
                 beside the copy without pushing the buttons under the fold. */}
-            <FadeInSection delay={100}><h1 id="hero-heading" className="t-display text-[clamp(2.5rem,1.3rem+4vw,4.75rem)] mb-6">AI That Books Meetings <span className="text-gradient block">While You Sleep</span></h1></FadeInSection>
+            {/* Leads with the job that is lost, not with the technology -- the same pattern as
+                the trade landing pages. The demo beside it shows the same 8:30pm request. */}
+            <FadeInSection delay={100}><h1 id="hero-heading" className="t-display text-[clamp(2.5rem,1.3rem+4vw,4.75rem)] mb-6">The lead came in at 8:30pm. <span className="text-gradient block">Someone else got the job.</span></h1></FadeInSection>
             <FadeInSection delay={200}>
-              <p className="t-lede md:text-xl text-zinc-700 max-w-xl mx-auto xl:mx-0 mb-9">We build and run an AI sales agent for service businesses that already get inbound leads. We cultivate your leads, you take the meetings. Live in about <span className="whitespace-nowrap">2–4 weeks</span>.</p>
+              <p className="t-lede md:text-xl text-zinc-700 max-w-xl mx-auto xl:mx-0 mb-9">We reply to your inbound leads in about five minutes, in your voice, and book the ones worth your time. We build it and run it. You take the meeting. Live in <span className="whitespace-nowrap">2–4 weeks</span>.</p>
             </FadeInSection>
             <FadeInSection delay={300}>
               <div className="flex flex-col sm:flex-row gap-3 justify-center xl:justify-start">
@@ -225,16 +227,16 @@ function MainSite() {
 
       <Section id="how-it-works" labelledBy="how-it-works-heading">
         <SectionHeader
-          eyebrow="How Your AI Works"
+          eyebrow="How it works"
           headingId="how-it-works-heading"
-          title="Capture. Nurture. Close."
-          lede="A three-phase system we build, run, and manage for you — so every lead gets handled the moment it arrives, and you get your evenings and weekends back."
+          title="Answer. Follow up. Book."
+          lede="We build it and run it, so every lead gets handled the moment it arrives and you get your evenings back. The writing is handled by an agent trained on how your office actually emails customers, so it reads like you sent it."
         />
         <ol className="grid md:grid-cols-3 gap-x-12 gap-y-14">
           {[
-            { icon: Zap, phase: 'Capture', title: 'Detect Every Lead, Day or Night', desc: 'Your agent watches the places your leads actually come from — website forms, ad leads, inbound email, missed calls — and replies within a few minutes, around the clock.' },
-            { icon: MessageSquare, phase: 'Nurture', title: 'Build Trust on Autopilot', desc: 'Follow-ups go out by email, and by SMS on Pro and above, written in your voice, and keep going until they reply or opt out. Only people who already contacted you ever get one.' },
-            { icon: Calendar, phase: 'Close', title: 'Book Ready-to-Buy Meetings', desc: 'Only leads that pass qualifying reach your calendar, and the whole conversation comes with them. Your team walks in already knowing the context.' },
+            { icon: Zap, phase: 'Answer', title: 'Answer every lead, day or night', desc: 'Your agent watches the places your leads actually come from — website forms, ad leads, inbound email, missed calls — and replies within a few minutes, around the clock.' },
+            { icon: MessageSquare, phase: 'Follow up', title: 'Follow up until they answer', desc: 'Follow-ups go out by email, and by SMS on Pro and above, written in your voice, and keep going until they reply or opt out. Only people who already contacted you ever get one.' },
+            { icon: Calendar, phase: 'Book', title: 'Book the ones worth your time', desc: 'Only leads that pass qualifying reach your calendar, and the whole conversation comes with them. Your team walks in already knowing the context.' },
           ].map((item, idx) => (
             <li key={idx}>
               <FadeInSection delay={idx * 120} className="h-full">
@@ -466,9 +468,9 @@ function MainSite() {
           everything else is open layout, so these are what the eye lands on. */}
       <Section id="services" labelledBy="services-heading" bottom="pb-10 md:pb-14">
         <SectionHeader
-          eyebrow="Our AI Sales Agent"
+          eyebrow="Pricing"
           headingId="services-heading"
-          title="Your 24/7 Sales Machine"
+          title="Lead follow-up, built and run for you"
           lede="We build it, train it on your voice, and manage it for you. Here's exactly what's included — and what it costs."
         />
         <FadeInSection delay={150}>
@@ -533,7 +535,7 @@ function MainSite() {
                       );
                     })}
                   </div>
-                  <p className="mt-5 text-sm text-zinc-500 text-center leading-relaxed">Setup is a one-time fee that covers the build, your integrations, and training the AI on your voice. Monthly billing starts the day you go live.</p>
+                  <p className="mt-5 text-sm text-zinc-500 text-center leading-relaxed">Setup is a one-time fee that covers the build, your integrations, and training it on your voice. Monthly billing starts the day you go live.</p>
                   <button onClick={() => scrollTo('guarantee')} className="mt-3 w-full flex items-center justify-center gap-2 text-sm text-emerald-700 hover:text-emerald-800 transition py-2" type="button">
                     <Shield className="w-4 h-4 flex-shrink-0" aria-hidden="true" /> Both refundable under our 60-day Results Guarantee — response time and follow-up on scoped inbound leads
                   </button>
@@ -662,7 +664,7 @@ function MainSite() {
         <div className="relative max-w-4xl mx-auto px-6 py-24 md:py-36 text-center">
           <FadeInSection>
             <h2 id="cta-heading" className="t-h1 mb-6">Let&apos;s See If We&apos;re a Fit</h2>
-            <p className="t-lede md:text-xl max-w-2xl mx-auto mb-10">One 30-minute call: we look at how leads reach you now, where they go cold, and whether a managed AI agent is worth building for your business. If it is, you&apos;re live in about <span className="whitespace-nowrap">2–4 weeks</span>.</p>
+            <p className="t-lede md:text-xl max-w-2xl mx-auto mb-10">One 30-minute call: we look at how leads reach you now, where they go cold, and whether this is worth building for your business. If it is, you&apos;re live in about <span className="whitespace-nowrap">2–4 weeks</span>.</p>
             <a href={EXTERNAL_URLS.appointments} {...SECURE_LINK_PROPS} className="group bg-zinc-900 text-white px-10 py-5 rounded-full font-medium text-lg hover:bg-zinc-700 transition inline-flex items-center gap-3">Book a strategy call <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" aria-hidden="true" /></a>
             <p className="text-zinc-500 text-sm mt-6 flex items-center justify-center gap-2.5">
               <HeadshotAvatar size={28} className="border border-white shadow-sm" />

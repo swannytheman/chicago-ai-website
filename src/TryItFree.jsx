@@ -848,16 +848,16 @@ export default function TryItFree() {
                 <span className="tif-label-dot" />
                 Sample emails — no credit card
               </div>
-              <h1 className="tif-h1">See what an AI follow-up<br/>to your next lead<br/><em>would say.</em></h1>
+              <h1 className="tif-h1">See what your next lead<br/>would hear back<br/><em>while you&rsquo;re on a job.</em></h1>
               <p className="tif-sub tif-sub-tight">
                 Tell us what you do. We&rsquo;ll write three short emails as if someone just asked you for a quote, and send them to you.
               </p>
               <p className="tif-sub">
-                They&rsquo;re an example of the agent writing in your voice. Preview only &mdash; we don&rsquo;t email your customers.
+                They&rsquo;re written by the same agent we&rsquo;d train on your voice. Preview only &mdash; we don&rsquo;t email your customers.
               </p>
               <div className="tif-proof">
                 {[
-                  'Written by AI as your business, to a new lead',
+                  'Written as your business, to a new lead',
                   'Based on what you tell us — not a generic template',
                   'Three emails to your inbox — unsubscribe anytime',
                   'Preview only. Nothing goes to your customers.',
@@ -894,7 +894,7 @@ export default function TryItFree() {
                 {/* Panel 1 -- Email */}
                 <div className={`tif-panel ${step === 1 ? 'active' : ''}`}>
                   <div className="tif-form-title">Where should we send it?</div>
-                  <div className="tif-form-sub">Two fields. Next you&rsquo;ll tell us about the business so the AI can write as you.</div>
+                  <div className="tif-form-sub">Two fields. Next you&rsquo;ll tell us about the business so we can write as you.</div>
                   <div className="tif-field">
                     <label className="tif-label-text" htmlFor="tif-first-name">First Name</label>
                     <input

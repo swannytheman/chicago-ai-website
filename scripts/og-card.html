@@ -11,61 +11,65 @@
   After changing the PNG, bump the ?v= cache-bust on og:image and twitter:image
   in src/seo.js and index.html, or scrapers will keep serving the old card.
 
+  It matches the live site: white background, the self-hosted Inter (loaded from
+  node_modules, so `npm install` first; no network font request, so it renders the
+  same anywhere), emerald accent, near-black pill button. Like the site, it leads
+  with the lost job, not with the technology.
+
   Keep type inside the 60px safe zone (this layout uses 72/80px padding) and keep
   the CTA large enough to read where Slack renders the card at ~400px wide.
 -->
 <html>
 <head>
 <meta charset="utf-8">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
+  @font-face {
+    font-family: 'Inter Variable';
+    font-style: normal;
+    font-weight: 100 900;
+    src: url(../node_modules/@fontsource-variable/inter/files/inter-latin-opsz-normal.woff2) format('woff2-variations');
+  }
   * { margin:0; padding:0; box-sizing:border-box; }
-  body { width:1200px; height:630px; background:#09090b; font-family:'Inter',system-ui,sans-serif; color:#fff;
-         display:flex; flex-direction:column; justify-content:space-between; padding:72px 80px; position:relative; overflow:hidden; }
-  .glow { position:absolute; width:900px; height:900px; border-radius:50%; right:-320px; top:-380px;
-          background:radial-gradient(circle, rgba(16,185,129,0.16) 0%, rgba(16,185,129,0) 68%); }
-  .grid { position:absolute; inset:0;
-          background-image:linear-gradient(rgba(255,255,255,0.028) 1px, transparent 1px),
-                           linear-gradient(90deg, rgba(255,255,255,0.028) 1px, transparent 1px);
-          background-size:64px 64px; }
-  .row { display:flex; align-items:center; gap:18px; position:relative; }
-  .word { display:flex; flex-direction:column; line-height:1; }
-  .word .a { font-weight:600; letter-spacing:4px; font-size:22px; }
-  .word .b { font-weight:500; letter-spacing:7px; font-size:16px; color:#64748b; }
-  h1 { position:relative; font-size:86px; font-weight:800; letter-spacing:-2.5px; line-height:1.06; max-width:900px; }
-  h1 em { font-style:normal; background:linear-gradient(135deg,#fff 0%,#94a3b8 100%);
-          -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+  body { width:1200px; height:630px; background:#fff; color:#18181b;
+         font-family:'Inter Variable',system-ui,sans-serif; font-optical-sizing:auto;
+         display:flex; flex-direction:column; justify-content:space-between;
+         padding:72px 80px; position:relative; overflow:hidden; }
+  /* The same soft emerald wash the site's hero sits on. */
+  .wash { position:absolute; inset:0; background:linear-gradient(180deg,#ecfdf5 0%,#ffffff 62%); }
+  .rule { position:absolute; left:80px; right:80px; bottom:176px; height:1px; background:#e4e4e7; }
+  .row { display:flex; align-items:center; gap:16px; position:relative; }
+  .word { font-size:30px; font-weight:600; letter-spacing:-0.6px; }
+  .word b { font-weight:600; color:#059669; }
+  h1 { position:relative; font-size:74px; font-weight:600; letter-spacing:-2.6px; line-height:1.04; }
+  h1 em { font-style:normal; display:block;
+          background:linear-gradient(135deg,#18181b 0%,#059669 100%);
+          -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
   .bottom { position:relative; display:flex; align-items:center; justify-content:space-between; gap:40px; }
-  .meta { display:flex; align-items:center; gap:12px; font-size:20px; color:#8fa3bf; white-space:nowrap; }
-  .dot { width:9px; height:9px; border-radius:50%; background:#34d399; }
-  .sep { color:#3f3f46; }
-  /* Site's primary button: solid white pill, dark label. Sized to stay legible
+  .meta { display:flex; align-items:center; gap:12px; font-size:22px; color:#52525b; white-space:nowrap; }
+  .dot { width:10px; height:10px; border-radius:50%; background:#10b981; }
+  .sep { color:#d4d4d8; }
+  /* The site's primary button: near-black pill, white label. Sized to stay legible
      when the card is scaled down to roughly a third for an inline unfurl. */
-  .cta { background:#fff; color:#09090b; font-size:34px; font-weight:700; letter-spacing:-0.4px;
-         padding:22px 44px; border-radius:999px; white-space:nowrap;
-         box-shadow:0 0 0 1px rgba(255,255,255,0.08), 0 18px 50px rgba(0,0,0,0.45); }
+  .cta { background:#18181b; color:#fff; font-size:32px; font-weight:600; letter-spacing:-0.4px;
+         padding:22px 42px; border-radius:999px; white-space:nowrap;
+         box-shadow:0 18px 40px -16px rgba(24,24,27,0.45); }
 </style>
 </head>
 <body>
-  <div class="glow"></div>
-  <div class="grid"></div>
+  <div class="wash"></div>
+  <div class="rule"></div>
 
   <div class="row">
-    <!-- The same mark the site uses. This card previously drew the old hand-drawn
-         symbol, so anyone sharing a link saw a different logo from the one on the
-         page they landed on. Path is relative to this file, which sits in scripts/. -->
-    <img src="../public/brand/mark.png" alt="" height="64" style="height:64px;width:auto;display:block" />
-    <div class="word"><span class="a">THE CHICAGO AI</span><span class="b">GROUP</span></div>
+    <!-- The same mark the site uses. Path is relative to this file, in scripts/. -->
+    <img src="../public/brand/mark.png" alt="" style="height:60px;width:auto;display:block" />
+    <div class="word">The Chicago <b>AI</b> Group</div>
   </div>
 
-  <h1>AI that books<br><em>meetings.</em></h1>
+  <h1>The lead came in at 8:30pm.<em>Someone else got the job.</em></h1>
 
   <div class="bottom">
     <div class="meta">
-      <span class="dot"></span><span>Chicago, IL</span>
-      <span class="sep">•</span><span>Built, trained, and run for you</span>
+      <span class="dot"></span><span>Inbound leads answered in about five minutes</span>
     </div>
     <div class="cta">Book a strategy call &rarr;</div>
   </div>
