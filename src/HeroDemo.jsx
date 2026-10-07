@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { CalendarCheck, RotateCcw } from 'lucide-react';
+import { SUMMIT_ROOFING } from './demoScenarios.js';
 
 // The homepage hero's product shot: one inbound lead, from form to booked meeting,
 // played out in a few seconds so a visitor sees what the agent does before reading
@@ -10,7 +11,6 @@ import { CalendarCheck, RotateCcw } from 'lucide-react';
 // the hero never shifts while it plays. The full text is in the DOM for screen
 // readers; only the typed overlay is hidden from them.
 
-const REPLY = "Hi Mark — sorry to hear about the roof leak on Oakley. I can have someone look at it Thursday morning or Friday after 2. If water is coming in right now, reply and we'll put you first.";
 
 // ms. Step n becomes visible at STEP_AT[n]; the reply types between steps 2 and 3.
 const STEP_AT = [400, 1500];
@@ -21,7 +21,10 @@ function prefersReducedMotion() {
   return typeof window !== 'undefined' && window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
 }
 
-export default function HeroDemo() {
+// `caption` labels the card; the landing pages use it to say the example was written
+// in the client's voice after kickoff and is not a live transcript.
+export default function HeroDemo({ caption = 'Illustrative example of one lead', scenario = SUMMIT_ROOFING }) {
+  const REPLY = scenario.reply;
   // With reduced motion the card starts, and stays, in its finished state.
   const [still] = useState(prefersReducedMotion);
   const [run, setRun] = useState(0);
@@ -70,7 +73,7 @@ export default function HeroDemo() {
     }, STEP_AT[1]));
 
     return () => { timers.forEach(clearTimeout); clearInterval(typer); };
-  }, [run, still, inView]);
+  }, [run, still, inView, REPLY]);
 
   const done = step >= 4 && typed >= REPLY.length;
   const shown = (n) => `transition-all duration-500 ease-out ${step >= n ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'}`;
@@ -83,7 +86,7 @@ export default function HeroDemo() {
     >
       <div className="flex items-center justify-between gap-4 px-5 sm:px-6 py-4 border-b border-zinc-200 bg-zinc-50/80">
         <div className="min-w-0">
-          <div className="font-semibold tracking-[-0.01em] truncate">Summit Roofing</div>
+          <div className="font-semibold tracking-[-0.01em] truncate">{scenario.company}</div>
           <div className="text-xs text-zinc-500">Inbound leads &middot; Tuesday evening</div>
         </div>
         <span className="inline-flex items-center gap-2 rounded-full border border-emerald-600/20 bg-emerald-50 px-3 py-1 text-xs font-medium text-emerald-800 flex-shrink-0">
@@ -98,10 +101,10 @@ export default function HeroDemo() {
         <span className="absolute left-[calc(1.25rem+5px)] sm:left-[calc(1.5rem+4.5rem+1rem+5px)] top-8 bottom-10 w-px bg-zinc-200" aria-hidden="true" />
 
         <Step time="8:30 PM" className={shown(1)}>
-          <div className="font-medium text-zinc-900">New quote request</div>
-          <div className="text-xs text-zinc-500 mb-2.5">Website form &middot; Mark R.</div>
+          <div className="font-medium text-zinc-900">{scenario.requestTitle}</div>
+          <div className="text-xs text-zinc-500 mb-2.5">Website form &middot; {scenario.leadName}</div>
           <p className="rounded-xl bg-zinc-50 border border-zinc-200 px-3.5 py-2.5 text-sm text-zinc-700 leading-relaxed">
-            Our roof is leaking near the back of the house on Oakley. Can someone take a look this week?
+            {scenario.request}
           </p>
         </Step>
 
@@ -110,9 +113,9 @@ export default function HeroDemo() {
             <span className="font-medium text-zinc-900">Reply sent</span>
             <span className="rounded-full bg-emerald-50 border border-emerald-600/20 px-2 py-px text-[11px] font-semibold text-emerald-800 tabular-nums">4 min</span>
           </div>
-          <div className="text-xs text-zinc-500 mb-2.5">From Sarah at Summit Roofing</div>
+          <div className="text-xs text-zinc-500 mb-2.5">From {scenario.sender}</div>
           <div className="rounded-xl border border-zinc-200 px-3.5 py-2.5">
-            <div className="text-xs text-zinc-500 mb-1.5 truncate"><span className="font-medium text-zinc-700">Re:</span> Quick question about your roof estimate</div>
+            <div className="text-xs text-zinc-500 mb-1.5 truncate"><span className="font-medium text-zinc-700">Re:</span> {scenario.subject}</div>
             <p className="relative text-sm text-zinc-800 leading-relaxed">
               <span className="opacity-0">{REPLY}</span>
               <span className="absolute inset-0" aria-hidden="true">
@@ -123,26 +126,26 @@ export default function HeroDemo() {
           </div>
         </Step>
 
-        <Step time="8:52 PM" className={shown(3)}>
-          <div className="font-medium text-zinc-900 mb-2">Mark replied</div>
+        <Step time={scenario.leadReplyTime} className={shown(3)}>
+          <div className="font-medium text-zinc-900 mb-2">{scenario.leadName.split(' ')[0]} replied</div>
           <p className="inline-block rounded-xl rounded-tl-sm bg-zinc-900 text-white px-3.5 py-2 text-sm leading-relaxed">
-            Thursday morning works. Thanks for the quick reply.
+            {scenario.leadReply}
           </p>
         </Step>
 
-        <Step time="8:52 PM" className={shown(4)} accent last>
+        <Step time={scenario.leadReplyTime} className={shown(4)} accent last>
           <div className="flex items-start gap-3 rounded-xl border border-emerald-600/20 bg-emerald-50 px-3.5 py-3">
             <CalendarCheck className="w-5 h-5 text-emerald-700 flex-shrink-0 mt-0.5" aria-hidden="true" />
             <div>
-              <div className="font-semibold text-emerald-900">Meeting booked</div>
-              <div className="text-sm text-emerald-900/80">Thu 9:00 AM &middot; Roof inspection with Mark R.</div>
+              <div className="font-semibold text-emerald-900">{scenario.bookedTitle}</div>
+              <div className="text-sm text-emerald-900/80">{scenario.booked}</div>
             </div>
           </div>
         </Step>
       </ol>
 
       <figcaption className="flex items-center justify-between gap-4 px-5 sm:px-6 py-3.5 border-t border-zinc-200 text-xs text-zinc-500">
-        <span>Illustrative example of one lead</span>
+        <span>{caption}</span>
         {/* No replay when motion is reduced: there is nothing to replay. */}
         {!still && <button
           type="button"

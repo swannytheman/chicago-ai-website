@@ -27,3 +27,11 @@ export const NAV_ITEMS = [
 export function sectionId(id) {
   return id.toLowerCase().replace(/[^a-z0-9-]/g, '');
 }
+
+// The public plan prices. The homepage plan picker and the /roofing pricing cards both
+// read from here, so the two pages cannot quote different numbers.
+export const PLAN_PRICES = {
+  Starter: { monthly: '$499', setup: '$2,500' },
+  Pro: { monthly: '$999', setup: '$3,500' },
+  Enterprise: { monthly: '$1,800', setup: '$5,900' },
+};

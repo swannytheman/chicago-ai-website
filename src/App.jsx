@@ -5,74 +5,18 @@ import TryItFree from './TryItFree.jsx';
 import Contact from './Contact.jsx';
 import Privacy from './Privacy.jsx';
 import Terms from './Terms.jsx';
+import Roofing from './Roofing.jsx';
+import Hvac from './Hvac.jsx';
 import { SiteNav, SiteFooter } from './SiteChrome.jsx';
-import { EXTERNAL_URLS, SECURE_LINK_PROPS, sectionId } from './siteConfig.js';
+import { EXTERNAL_URLS, SECURE_LINK_PROPS, PLAN_PRICES, sectionId } from './siteConfig.js';
 import { usePageMeta } from './usePageMeta.js';
 import { PAGE_META } from './seo.js';
 import EmailPreview from './EmailPreview.jsx';
 import HeroDemo from './HeroDemo.jsx';
 import { HeadshotPortrait, HeadshotAvatar } from './Headshot.jsx';
 import ScrollToTop from './ScrollToTop.jsx';
+import { FadeInSection, Section, SectionHeader, AccentRule } from './PageLayout.jsx';
 
-const FadeInSection = ({ children, delay = 0, className = '' }) => {
-  const [isVisible, setIsVisible] = useState(false);
-  const ref = useRef(null);
-
-  useEffect(() => {
-    const currentRef = ref.current;
-    const observer = new IntersectionObserver(([entry]) => { if (entry.isIntersecting) setIsVisible(true); }, { threshold: 0.1 });
-    if (currentRef) observer.observe(currentRef);
-    return () => { if (currentRef) observer.unobserve(currentRef); observer.disconnect(); };
-  }, []);
-
-  return (
-    <div ref={ref} className={`transition-all duration-700 ${className}`} style={{ transitionDelay: `${delay}ms`, opacity: isVisible ? 1 : 0, transform: isVisible ? 'translateY(0)' : 'translateY(20px)' }}>
-      {children}
-    </div>
-  );
-};
-
-// Home page layout primitives. Sections are separated by a hairline inset to the
-// content width and generous vertical space rather than each being boxed in a card;
-// framing is kept for the two blocks meant to stand out, pricing and the guarantee.
-function Section({ id, labelledBy, rule = true, bottom = 'pb-24 md:pb-32', children }) {
-  return (
-    <section id={id} className="scroll-mt-16" aria-labelledby={labelledBy}>
-      <div className="max-w-7xl mx-auto px-6">
-        <div className={`${rule ? 'border-t border-zinc-200 pt-16 md:pt-24' : ''} ${bottom}`}>
-          {children}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-// Eyebrow and heading on the left, supporting line on the right, bottoms aligned.
-// Stacks on narrower screens.
-function SectionHeader({ eyebrow, title, headingId, lede }) {
-  return (
-    <FadeInSection>
-      <div className="grid lg:grid-cols-12 gap-x-16 gap-y-5 lg:items-end mb-14 md:mb-20">
-        <div className="lg:col-span-7">
-          <span className="t-eyebrow mb-4">{eyebrow}</span>
-          <h2 id={headingId} className="t-h2">{title}</h2>
-        </div>
-        {lede && <p className="t-lede lg:col-span-5">{lede}</p>}
-      </div>
-    </FadeInSection>
-  );
-}
-
-// A column opened by a hairline with a short emerald lead-in: the open-layout
-// stand-in for a card.
-function AccentRule({ children }) {
-  return (
-    <div className="relative border-t border-zinc-200 pt-8 h-full">
-      <span className="absolute -top-px left-0 h-0.5 w-12 bg-emerald-600" aria-hidden="true" />
-      {children}
-    </div>
-  );
-}
 
 function MainSite() {
   usePageMeta(PAGE_META.home);
@@ -122,7 +66,7 @@ function MainSite() {
     // plans differ" rows in #scope; keep the two in step if either changes.
     pricing: [
       {
-        tier: "Starter", monthly: "$179", setup: "$2,200",
+        tier: "Starter", ...PLAN_PRICES.Starter,
         details: "One inbound source. Qualify, follow up, book.",
         forWho: "Your first inbound source — an owner-led service business that just needs follow-up on.",
         includes: [
@@ -134,7 +78,7 @@ function MainSite() {
         ]
       },
       {
-        tier: "Pro", monthly: "$399", setup: "$3,500",
+        tier: "Pro", ...PLAN_PRICES.Pro,
         details: "Sequences, scoring, and CRM sync on top of Starter.", popular: true,
         forWho: "Teams that already have a CRM, or want SMS and longer sequences.",
         includes: [
@@ -146,7 +90,7 @@ function MainSite() {
         ]
       },
       {
-        tier: "Enterprise", monthly: "$649", setup: "$5,900",
+        tier: "Enterprise", ...PLAN_PRICES.Enterprise,
         details: "More sources and locations, copy tests, priority support.",
         forWho: "More than one location, brand, or lead source.",
         includes: [
@@ -769,6 +713,8 @@ export default function App() {
       <ScrollToTop />
       <Routes>
         <Route path="/" element={<MainSite />} />
+        <Route path="/roofing" element={<Roofing />} />
+        <Route path="/hvac" element={<Hvac />} />
         <Route path="/try-it-free" element={<TryItFree />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/privacy" element={<Privacy />} />

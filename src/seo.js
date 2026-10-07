@@ -19,6 +19,18 @@ export const PAGE_META = {
     title: 'AI sales agents that book meetings | Chicago AI Group',
     description: 'Managed AI follow-up for Chicago service businesses. We qualify leads and book meetings. Live in 2–4 weeks.',
   },
+  // The landing page sales and ads use for residential roofers.
+  roofing: {
+    path: '/roofing',
+    title: 'Roofing leads answered in five minutes | Chicago AI Group',
+    description: 'We reply to inbound roofing quote requests in about five minutes, in your voice, and book the inspection. You take the meeting. Live in 2–4 weeks.',
+  },
+  // The landing page sales and ads use for residential heating and cooling companies.
+  hvac: {
+    path: '/hvac',
+    title: 'HVAC leads answered in five minutes | Chicago AI Group',
+    description: 'We reply to inbound heating and cooling requests in about five minutes, in your voice, and book the visit. Your team shows up. Live in 2–4 weeks.',
+  },
   sample: {
     path: '/try-it-free',
     title: 'Sample follow-up sequence | Chicago AI Group',
