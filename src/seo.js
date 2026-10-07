@@ -16,8 +16,8 @@ export const OG_IMAGE_ALT = 'Chicago AI Group — AI that books meetings. Book a
 export const PAGE_META = {
   home: {
     path: '/',
-    title: 'AI sales agents that book meetings | Chicago AI Group',
-    description: 'Managed AI follow-up for Chicago service businesses. We qualify leads and book meetings. Live in 2–4 weeks.',
+    title: 'Inbound leads answered in five minutes | Chicago AI Group',
+    description: 'We reply to your inbound leads in about five minutes, in your voice, and book the ones worth your time. We build it and run it. Live in 2–4 weeks.',
   },
   // The landing page sales and ads use for residential roofers.
   roofing: {
