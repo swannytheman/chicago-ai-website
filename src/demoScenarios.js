@@ -18,18 +18,19 @@ export const SUMMIT_ROOFING = {
   booked: 'Thu 9:00 AM · Roof inspection with Mark R.',
 };
 
-// /hvac: an AC that quits on a hot evening. The system is old enough that the visit
+// /hvac: a furnace that quits on a freezing evening (the winter version; swap back to
+// an AC call for summer). The system is old enough that the visit
 // doubles as a replacement estimate, which is where the job value is.
 export const LAKESIDE_HVAC = {
   company: 'Lakeside Heating & Cooling',
   requestTitle: 'New service request',
   leadName: 'Dana K.',
-  request: "Our AC stopped cooling tonight and it's 84° upstairs. The system is about 15 years old, so we might be ready to replace it. Can someone come out?",
+  request: "Our heat just went out and it's already down to 61° inside. The furnace is about 15 years old, so we might be ready to replace it. Can someone come out?",
   sender: 'Chris at Lakeside Heating & Cooling',
-  subject: 'Getting someone out to look at your AC',
-  reply: "Hi Dana — sorry the AC quit on you tonight. I can have a technician out tomorrow between 8 and 10 or after 1 to diagnose it and walk you through repair or replacement. If it's getting too hot inside, reply and we'll put you first.",
+  subject: 'Getting someone out to look at your heat',
+  reply: "Hi Dana — sorry the heat went out on you tonight. I can have a technician out tomorrow between 8 and 10 or after 1 to diagnose it and walk you through repair or replacement. If the house is getting too cold, reply and we'll put you first.",
   leadReply: '8 to 10 tomorrow works. Thank you!',
   leadReplyTime: '8:41 PM',
   bookedTitle: 'Visit booked',
-  booked: 'Wed 8–10 AM · AC diagnostic and replacement estimate, Dana K.',
+  booked: 'Wed 8–10 AM · Furnace diagnostic and replacement estimate, Dana K.',
 };
