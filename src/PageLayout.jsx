@@ -1,18 +1,25 @@
 import { useState, useEffect, useRef } from 'react';
 
+// Visitors who set "Reduce Motion" on their phone or computer see content at once,
+// with no fade or slide.
+const prefersReducedMotion = () =>
+  typeof window !== 'undefined' && window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+
 export const FadeInSection = ({ children, delay = 0, className = '' }) => {
-  const [isVisible, setIsVisible] = useState(false);
+  const [still] = useState(prefersReducedMotion);
+  const [isVisible, setIsVisible] = useState(still);
   const ref = useRef(null);
 
   useEffect(() => {
+    if (still) return undefined;
     const currentRef = ref.current;
     const observer = new IntersectionObserver(([entry]) => { if (entry.isIntersecting) setIsVisible(true); }, { threshold: 0.1 });
     if (currentRef) observer.observe(currentRef);
     return () => { if (currentRef) observer.unobserve(currentRef); observer.disconnect(); };
-  }, []);
+  }, [still]);
 
   return (
-    <div ref={ref} className={`transition-all duration-700 ${className}`} style={{ transitionDelay: `${delay}ms`, opacity: isVisible ? 1 : 0, transform: isVisible ? 'translateY(0)' : 'translateY(20px)' }}>
+    <div ref={ref} className={`${still ? '' : 'transition-all duration-700'} ${className}`} style={{ transitionDelay: `${delay}ms`, opacity: isVisible ? 1 : 0, transform: isVisible ? 'translateY(0)' : 'translateY(20px)' }}>
       {children}
     </div>
   );

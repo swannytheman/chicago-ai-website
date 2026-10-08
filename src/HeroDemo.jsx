@@ -86,7 +86,7 @@ export default function HeroDemo({ caption = 'Illustrative example of one lead',
     >
       <div className="flex items-center justify-between gap-4 px-5 sm:px-6 py-4 border-b border-zinc-200 bg-zinc-50/80">
         <div className="min-w-0">
-          <div className="font-semibold tracking-[-0.01em] truncate">{scenario.company}</div>
+          <div className="font-semibold tracking-[-0.01em] break-words">{scenario.company}</div>
           <div className="text-xs text-zinc-500">Inbound leads &middot; Tuesday evening</div>
         </div>
         <span className="inline-flex items-center gap-2 rounded-full border border-emerald-600/20 bg-emerald-50 px-3 py-1 text-xs font-medium text-emerald-800 flex-shrink-0">
@@ -111,11 +111,11 @@ export default function HeroDemo({ caption = 'Illustrative example of one lead',
         <Step time="8:34 PM" className={shown(2)} accent>
           <div className="flex items-center gap-2">
             <span className="font-medium text-zinc-900">Reply sent</span>
-            <span className="rounded-full bg-emerald-50 border border-emerald-600/20 px-2 py-px text-[11px] font-semibold text-emerald-800 tabular-nums">4 min</span>
+            <span className="rounded-full bg-emerald-50 border border-emerald-600/20 px-2 py-px text-xs font-semibold text-emerald-800 tabular-nums">4 min</span>
           </div>
           <div className="text-xs text-zinc-500 mb-2.5">From {scenario.sender}</div>
           <div className="rounded-xl border border-zinc-200 px-3.5 py-2.5">
-            <div className="text-xs text-zinc-500 mb-1.5 truncate"><span className="font-medium text-zinc-700">Re:</span> {scenario.subject}</div>
+            <div className="text-xs text-zinc-500 mb-1.5 break-words"><span className="font-medium text-zinc-700">Re:</span> {scenario.subject}</div>
             <p className="relative text-sm text-zinc-800 leading-relaxed">
               <span className="opacity-0">{REPLY}</span>
               <span className="absolute inset-0" aria-hidden="true">
@@ -171,7 +171,7 @@ function Step({ time, accent = false, last = false, className = '', children }) 
       <span className={`relative z-10 mt-1 w-[11px] h-[11px] rounded-full flex-shrink-0 ${accent ? 'bg-emerald-600' : 'bg-white border-2 border-zinc-300'}`} aria-hidden="true" />
       <div className="min-w-0 flex-1">
         {/* Phones drop the time gutter for width and show the time above the step. */}
-        <div className="sm:hidden text-[11px] font-medium text-zinc-400 tabular-nums mb-1" style={MONO}>{time}</div>
+        <div className="sm:hidden text-xs font-medium text-zinc-400 tabular-nums mb-1" style={MONO}>{time}</div>
         {children}
       </div>
     </li>

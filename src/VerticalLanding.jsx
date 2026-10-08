@@ -96,32 +96,34 @@ export default function VerticalLanding({ content: c }) {
   return (
     <div className="min-h-screen bg-white text-zinc-900 overflow-x-hidden">
       <style>{`
-        .text-gradient { background: linear-gradient(135deg, #18181b 0%, #059669 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        /* padding/margin: the gradient only paints inside the box, and the tight headline
+           line-height left descenders (g, j, p) outside it, cut off. */
+        .text-gradient { background: linear-gradient(135deg, #18181b 0%, #059669 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; padding-bottom: 0.18em; margin-bottom: -0.18em; }
         html { scroll-behavior: smooth; }
       `}</style>
 
       <SiteNav />
 
       {/* 1. Hero: the request that dies overnight. */}
-      <section className="relative overflow-hidden pt-32 pb-20 md:pt-44 md:pb-28" aria-labelledby={`${c.slug}-hero-heading`}>
+      <section className="relative overflow-hidden pt-24 pb-16 sm:pt-32 sm:pb-20 md:pt-44 md:pb-28" aria-labelledby={`${c.slug}-hero-heading`}>
         <div className="absolute inset-0 bg-gradient-to-b from-emerald-50 via-white to-white" aria-hidden="true" />
         {/* Centered: the brief keeps the hero to words and two buttons, and left-aligned
             text alone leaves the right half of a wide screen empty. */}
         <div className="relative z-10 max-w-7xl mx-auto px-6 text-center">
           <div className="max-w-5xl mx-auto">
             <FadeInSection>
-              <div className="inline-flex items-center gap-3 text-sm mb-8">
+              <div className="inline-flex items-center gap-3 text-sm mb-6 sm:mb-8">
                 <span className="w-2 h-2 rounded-full bg-emerald-500" aria-hidden="true" />
                 <span className="font-medium text-zinc-900">{c.audience}</span>
               </div>
             </FadeInSection>
             <FadeInSection delay={100}>
-              <h1 id={`${c.slug}-hero-heading`} className="t-display text-[clamp(2.5rem,1.2rem+4.2vw,4.75rem)] mb-7">
+              <h1 id={`${c.slug}-hero-heading`} className="t-display text-[clamp(2.25rem,1.2rem+4.2vw,4.75rem)] mb-6 sm:mb-7">
                 {c.headline.lead} <span className="text-gradient block">{c.headline.punch}</span>
               </h1>
             </FadeInSection>
             <FadeInSection delay={200}>
-              <p className="t-lede md:text-xl text-zinc-700 max-w-2xl mx-auto mb-9">{c.subhead}</p>
+              <p className="t-lede md:text-xl text-zinc-700 max-w-2xl mx-auto mb-8 sm:mb-9">{c.subhead}</p>
             </FadeInSection>
             <FadeInSection delay={300}>
               <div className="flex flex-col sm:flex-row gap-3 justify-center">

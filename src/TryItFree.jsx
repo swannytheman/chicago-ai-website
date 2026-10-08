@@ -559,11 +559,11 @@ export default function TryItFree() {
         .tif-nav-link {
           font-size:.875rem;color:var(--text);text-decoration:none;letter-spacing:.01em;
           display:inline-flex;align-items:center;gap:8px;white-space:nowrap;
-          border:1px solid var(--border-hi);border-radius:999px;padding:9px 18px;
+          border:1px solid var(--border-hi);border-radius:999px;padding:11px 18px;
           transition:color .2s,border-color .2s,background .2s;
         }
         .tif-nav-link:hover { color:var(--blue-hi);border-color:var(--blue);background:var(--blue-soft); }
-        .tif-nav-logo { display:inline-flex;text-decoration:none;transition:opacity .2s; }
+        .tif-nav-logo { display:inline-flex;text-decoration:none;transition:opacity .2s;padding:2px 0; }
         .tif-nav-logo:hover { opacity:.72; }
 
         /* -- LAYOUT -- */
@@ -587,7 +587,7 @@ export default function TryItFree() {
           display:inline-flex;align-items:center;gap:8px;
           background:var(--blue-soft);border:1px solid rgba(16,185,129,.2);
           border-radius:100px;padding:6px 16px;
-          font-size:.72rem;font-weight:500;letter-spacing:.1em;
+          font-size:.75rem;font-weight:500;letter-spacing:.1em;
           color:var(--blue-hi);text-transform:uppercase;
           margin-bottom:32px;animation:tifFadeUp .6s ease both;
         }
@@ -632,7 +632,7 @@ export default function TryItFree() {
 
         /* Steps */
         .tif-steps { display:flex;align-items:center;margin-bottom:36px; }
-        .tif-step { display:flex;align-items:center;gap:8px;font-size:.72rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--text-3);transition:color .3s; }
+        .tif-step { display:flex;align-items:center;gap:8px;font-size:.75rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--text-3);transition:color .3s; }
         .tif-step.active { color:var(--blue-hi); }
         .tif-step.done   { color:var(--green); }
         .tif-step-num {
@@ -685,7 +685,7 @@ export default function TryItFree() {
         /* Keep paired inputs on a shared baseline even when one label wraps */
         .tif-field-row .tif-field { display:flex;flex-direction:column; }
         .tif-field-row .tif-input, .tif-field-row .tif-select { margin-top:auto; }
-        .tif-char-counter { display:flex;justify-content:flex-end;font-size:.72rem;color:var(--text-3);margin-top:6px;font-family:var(--cag-mono);transition:color .2s; }
+        .tif-char-counter { display:flex;justify-content:flex-end;font-size:.75rem;color:var(--text-3);margin-top:6px;font-family:var(--cag-mono);transition:color .2s; }
         .tif-char-counter.near { color:var(--blue-hi); }
         .tif-field-error { font-size:.75rem;color:#dc2626;margin-top:6px;display:none; }
         .tif-field-error.show { display:block; }
@@ -750,7 +750,7 @@ export default function TryItFree() {
 
         /* Legal */
         .tif-upsell { font-size:.84rem;color:var(--text-2);line-height:1.6;text-align:center;margin:0 0 14px; }
-        .tif-legal { font-size:.72rem;color:var(--text-3);text-align:center;margin-top:16px;line-height:1.5; }
+        .tif-legal { font-size:.75rem;color:var(--text-3);text-align:center;margin-top:16px;line-height:1.5; }
         .tif-legal a { color:var(--text-3);text-decoration:underline; }
 
         /* -- SUCCESS -- */
@@ -792,7 +792,7 @@ export default function TryItFree() {
            want the full site nav's worth of exits, but the policies have to be
            reachable from the page that collects the most data. */
         .tif-footer { border-top:1px solid var(--border);max-width:1200px;margin:0 auto;padding:22px 48px;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:6px 18px;font-size:.78rem;color:var(--text-3); }
-        .tif-footer a { color:var(--text-2);text-decoration:none;transition:color .2s; }
+        .tif-footer a { color:var(--text-2);text-decoration:none;transition:color .2s;display:inline-block;padding:13px 4px;margin:-13px -4px; }
         .tif-footer a:hover { color:var(--blue-hi); }
         .tif-footer i { color:var(--border-hi);font-style:normal; }
         .tif-stat  { text-align:center;min-width:0; }

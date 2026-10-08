@@ -41,7 +41,9 @@
   .word { font-size:30px; font-weight:600; letter-spacing:-0.6px; }
   .word b { font-weight:600; color:#059669; }
   h1 { position:relative; font-size:74px; font-weight:600; letter-spacing:-2.6px; line-height:1.04; }
-  h1 em { font-style:normal; display:block;
+  /* padding/margin: the gradient only paints inside the box, and the tight line-height
+     left descenders (g, j) outside it, cut off. */
+  h1 em { font-style:normal; display:block; padding-bottom:0.18em; margin-bottom:-0.18em;
           background:linear-gradient(135deg,#18181b 0%,#059669 100%);
           -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
   .bottom { position:relative; display:flex; align-items:center; justify-content:space-between; gap:40px; }
