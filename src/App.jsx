@@ -143,7 +143,9 @@ function MainSite() {
   return (
     <div className="min-h-screen bg-white text-zinc-900 overflow-x-hidden">
       <style>{`
-        .text-gradient { background: linear-gradient(135deg, #18181b 0%, #059669 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        /* padding/margin: the gradient only paints inside the box, and the tight headline
+           line-height left descenders (g, j, p) outside it, cut off. */
+        .text-gradient { background: linear-gradient(135deg, #18181b 0%, #059669 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; padding-bottom: 0.18em; margin-bottom: -0.18em; }
         html { scroll-behavior: smooth; }
       `}</style>
 
