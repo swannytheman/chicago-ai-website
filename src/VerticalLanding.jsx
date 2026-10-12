@@ -8,12 +8,12 @@ import HeroDemo from './HeroDemo.jsx';
 import { HeadshotAvatar } from './Headshot.jsx';
 import { FadeInSection, Section, SectionHeader, AccentRule } from './PageLayout.jsx';
 
-// One template for the trade landing pages (/roofing, /hvac). Each is the one URL
-// sales and ads use for that trade, and has to be the whole pitch for someone who
+// One template for the trade landing pages (/roofing, /hvac, /plumbing). Each is the one
+// URL sales and ads use for that trade, and has to be the whole pitch for someone who
 // never sees the homepage, so it carries its own example, pricing, guarantee and close.
 // Structure, prices and the guarantee are shared; every trade-specific line comes from
-// the `content` object the page passes in (see Roofing.jsx and Hvac.jsx). It reuses the
-// homepage's layout primitives and type scale rather than introducing anything new.
+// the `content` object the page passes in (see Roofing.jsx, Hvac.jsx, Plumbing.jsx). It
+// reuses the homepage's layout primitives and type scale rather than introducing anything new.
 //
 // Section ids that match the global nav (how-it-works, testimonials, services, cta)
 // are deliberate: useSectionNav scrolls to a matching section on the current page,

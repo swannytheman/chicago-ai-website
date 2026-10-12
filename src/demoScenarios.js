@@ -34,3 +34,20 @@ export const LAKESIDE_HVAC = {
   bookedTitle: 'Visit booked',
   booked: 'Wed 8–10 AM · Furnace diagnostic and replacement estimate, Dana K.',
 };
+
+// /plumbing: a water heater that gives out on a weeknight. Not a burst pipe -- those
+// get a phone call, not a web form -- but a leaking, 12-year-old tank is a real form
+// lead, and the visit doubles as a replacement estimate.
+export const HALSTED_PLUMBING = {
+  company: 'Halsted Plumbing',
+  requestTitle: 'New service request',
+  leadName: 'Jen M.',
+  request: "Our water heater is leaking from the bottom and we have no hot water. It's about 12 years old. Can someone come out tomorrow?",
+  sender: 'Mike at Halsted Plumbing',
+  subject: 'Getting your hot water back',
+  reply: "Hi Jen — sorry about the water heater. I can have a plumber out tomorrow between 8 and 10 or after 1 to check it and walk you through repair or replacement. If the leak is getting worse, shut the cold water valve on top of the tank and reply, and we'll put you first.",
+  leadReply: '8 to 10 works. Thanks!',
+  leadReplyTime: '8:44 PM',
+  bookedTitle: 'Visit booked',
+  booked: 'Wed 8–10 AM · Water heater replacement estimate, Jen M.',
+};

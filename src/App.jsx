@@ -7,6 +7,7 @@ import Privacy from './Privacy.jsx';
 import Terms from './Terms.jsx';
 import Roofing from './Roofing.jsx';
 import Hvac from './Hvac.jsx';
+import Plumbing from './Plumbing.jsx';
 import { SiteNav, SiteFooter } from './SiteChrome.jsx';
 import { EXTERNAL_URLS, SECURE_LINK_PROPS, PLAN_PRICES, sectionId } from './siteConfig.js';
 import { usePageMeta } from './usePageMeta.js';
@@ -721,6 +722,7 @@ export default function App() {
         <Route path="/" element={<MainSite />} />
         <Route path="/roofing" element={<Roofing />} />
         <Route path="/hvac" element={<Hvac />} />
+        <Route path="/plumbing" element={<Plumbing />} />
         <Route path="/try-it-free" element={<TryItFree />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/privacy" element={<Privacy />} />
