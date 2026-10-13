@@ -37,7 +37,7 @@ export function SiteNav({ solid = false }) {
             </button>
           ))}
           <Link to="/try-it-free" className="text-emerald-700 px-5 py-2 rounded-full text-sm font-medium transition hover:text-emerald-800 border border-emerald-600/30 hover:border-emerald-600/60 whitespace-nowrap">Sample sequence</Link>
-          <button onClick={() => go('cta')} className="bg-zinc-900 text-white px-6 py-2.5 rounded-full text-[0.9375rem] font-medium hover:bg-zinc-700 transition" type="button">Book a strategy call</button>
+          <button onClick={() => go('cta')} className="bg-zinc-900 text-white px-6 py-2.5 rounded-full text-[0.9375rem] font-medium hover:bg-zinc-700 transition" type="button">Book a 15-minute call</button>
         </div>
         <button className="xl:hidden p-2.5 rounded-lg border border-zinc-200" onClick={() => setMobileMenuOpen(!mobileMenuOpen)} type="button" aria-expanded={mobileMenuOpen} aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}>{mobileMenuOpen ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}</button>
       </div>
@@ -47,7 +47,7 @@ export function SiteNav({ solid = false }) {
           <Link to="/try-it-free" className="block w-full text-center text-emerald-700 px-5 py-3 rounded-full text-sm font-medium border border-emerald-600/30" role="menuitem" onClick={() => setMobileMenuOpen(false)}>See a sample sequence</Link>
           {/* Straight to Calendly: on a phone, scrolling to the CTA band and tapping
               again is a step too many for the strongest action in the menu. */}
-          <a href={EXTERNAL_URLS.appointments} {...SECURE_LINK_PROPS} className="block w-full text-center bg-zinc-900 text-white px-5 py-3 rounded-full font-medium" role="menuitem" onClick={() => setMobileMenuOpen(false)}>Book a strategy call</a>
+          <a href={EXTERNAL_URLS.appointments} {...SECURE_LINK_PROPS} className="block w-full text-center bg-zinc-900 text-white px-5 py-3 rounded-full font-medium" role="menuitem" onClick={() => setMobileMenuOpen(false)}>Book a 15-minute call</a>
         </div>
       )}
     </nav>

@@ -30,7 +30,7 @@ export default function Terms() {
       <Section n={3} title="No account, and nothing here is the paid product">
         <p>
           Browsing the site does not create an account. Neither does requesting the free email demo or booking a
-          strategy call: they are ways to see how we work and to talk to us, not the service itself.
+          call: they are ways to see how we work and to talk to us, not the service itself.
         </p>
         <p>
           <strong>Paid work begins only after a separate written agreement or invoice</strong> between us. That agreement,

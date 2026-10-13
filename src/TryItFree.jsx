@@ -1080,9 +1080,9 @@ export default function TryItFree() {
                         </div>
                       ))}
                     </div>
-                    <p className="tif-upsell">Want this on real leads? Book a strategy call.</p>
+                    <p className="tif-upsell">Want this on real leads? Book a 15-minute call.</p>
                     <a className="tif-btn" href={EXTERNAL_URLS.appointments} target="_blank" rel="noopener noreferrer" style={{display:'block',textDecoration:'none',textAlign:'center'}}>
-                      Book a strategy call
+                      Book a 15-minute call
                     </a>
                     <button type="button" className="tif-btn-restart" onClick={startOver}>
                       Send another set &rarr;

@@ -17,7 +17,7 @@ import { FadeInSection, Section, SectionHeader, AccentRule } from './PageLayout.
 //
 // Section ids that match the global nav (how-it-works, testimonials, services, cta)
 // are deliberate: useSectionNav scrolls to a matching section on the current page,
-// so "Book a strategy call" and "Pricing" in the top bar stay on the landing page
+// so "Book a 15-minute call" and "Pricing" in the top bar stay on the landing page
 // instead of sending a visitor to the homepage.
 
 // Prices come from PLAN_PRICES in siteConfig.js, shared with the homepage plan picker.
@@ -68,7 +68,7 @@ const LUIGI = {
   title: 'VP of Operations, Luigi Trucking Insurance',
 };
 
-function BookButton({ size = 'lg', children = 'Book a strategy call' }) {
+function BookButton({ size = 'lg', children = 'Book a 15-minute call' }) {
   const pad = size === 'xl' ? 'px-10 py-5' : 'px-7 py-4';
   return (
     <a href={EXTERNAL_URLS.appointments} {...SECURE_LINK_PROPS} className={`group bg-zinc-900 text-white ${pad} rounded-full font-medium text-lg hover:bg-zinc-700 transition inline-flex items-center justify-center gap-2`}>
@@ -338,14 +338,14 @@ export default function VerticalLanding({ content: c }) {
         <div className="relative max-w-4xl mx-auto px-6 py-24 md:py-36 text-center">
           <FadeInSection>
             <h2 id={`${c.slug}-cta-heading`} className="t-h1 mb-6">Is this worth building for your company?</h2>
-            <p className="t-lede md:text-xl max-w-2xl mx-auto mb-10">One 30-minute call on how {c.close.requests} reach you now, where they go cold, and whether this is worth building. If it is, you&apos;re live in about <span className="whitespace-nowrap">2–4 weeks</span>.</p>
+            <p className="t-lede md:text-xl max-w-2xl mx-auto mb-10">One 15-minute call on how {c.close.requests} reach you now, where they go cold, and whether this is worth building. If it is, you&apos;re live in about <span className="whitespace-nowrap">2–4 weeks</span>.</p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <BookButton />
               <SampleButton />
             </div>
             <p className="text-zinc-500 text-sm mt-6 flex items-center justify-center gap-2.5">
               <HeadshotAvatar size={28} className="border border-white shadow-sm" />
-              <span>Free • 30 minutes with Matt • Zero obligation</span>
+              <span>Free • 15 minutes with Matt • Zero obligation</span>
             </p>
             <p className="text-zinc-600 leading-relaxed mt-14 pt-10 border-t border-emerald-600/15 max-w-xl mx-auto">
               The sample sequence is three follow-up emails written for your {c.close.company}. No credit card. It&apos;s a preview of the writing, not the live system; setup still starts with a call.
