@@ -24,6 +24,17 @@ export const NAV_ITEMS = [
   { label: 'FAQ', id: 'faq' },
 ];
 
+// The trade landing pages, in the order the "Industries" menu and the footer list them.
+// To add one: build the page (copy Plumbing.jsx), add its <Route> in App.jsx and its
+// PAGE_META entry in seo.js, then add a line here; the nav dropdown, the mobile menu
+// and the footer all read from this list.
+export const USE_CASES = [
+  { path: '/roofing', label: 'Roofing', blurb: 'Quote requests, booked as inspections' },
+  { path: '/hvac', label: 'HVAC', blurb: 'Heating and cooling calls, booked as visits' },
+  { path: '/plumbing', label: 'Plumbing', blurb: 'Repairs and estimates, booked as visits' },
+  { path: '/medspa', label: 'Med Spa', blurb: 'Treatment inquiries, booked as consults' },
+];
+
 export function sectionId(id) {
   return id.toLowerCase().replace(/[^a-z0-9-]/g, '');
 }

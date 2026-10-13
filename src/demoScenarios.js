@@ -51,3 +51,20 @@ export const HALSTED_PLUMBING = {
   bookedTitle: 'Visit booked',
   booked: 'Wed 8–10 AM · Water heater replacement estimate, Jen M.',
 };
+
+// /medspa: a first-time Botox inquiry from someone browsing in the evening. The reply
+// answers warmly but leaves the clinical side and pricing to the consult, which is
+// how a med spa front desk handles it and keeps the agent out of medical advice.
+export const WELLS_STREET_AESTHETICS = {
+  company: 'Wells Street Aesthetics',
+  requestTitle: 'New consult request',
+  leadName: 'Priya S.',
+  request: "Hi! I've never done Botox and I'm curious about my forehead lines. What does it cost, and do you have anything this week?",
+  sender: 'Alexis at Wells Street Aesthetics',
+  subject: 'Your first Botox consult',
+  reply: "Hi Priya — thanks for reaching out! Lots of our clients start right where you are. The first step is a complimentary consult with one of our nurse injectors, who will talk through your goals and pricing. I have Thursday at 5:30 or Saturday at 11. Would either work?",
+  leadReply: 'Saturday at 11 please!',
+  leadReplyTime: '8:47 PM',
+  bookedTitle: 'Consult booked',
+  booked: 'Sat 11:00 AM · New-client Botox consult, Priya S.',
+};
