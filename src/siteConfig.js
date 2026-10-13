@@ -2,7 +2,7 @@
 // drift apart.
 
 export const EXTERNAL_URLS = {
-  appointments: 'https://calendly.com/matt-chicagoaigroup/30min',
+  appointments: 'https://calendly.com/matt-chicagoaigroup/15min',
 };
 
 // Where we can be reached by email. This address is also offered as a fallback on the

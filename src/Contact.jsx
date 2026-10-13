@@ -110,15 +110,15 @@ export default function Contact() {
                   <div className="text-sm text-zinc-500">Chicago AI Group</div>
                 </div>
               </div>
-              <h2 className="text-2xl font-semibold tracking-[-0.025em] mb-3">Book a strategy call</h2>
+              <h2 className="text-2xl font-semibold tracking-[-0.025em] mb-3">Book a 15-minute call</h2>
               <p className="text-zinc-700 leading-relaxed mb-8">
                 The fastest way to get answers. We&apos;ll look at how leads reach you today and where an AI agent would actually help.
               </p>
               <a href={EXTERNAL_URLS.appointments} {...SECURE_LINK_PROPS} className="w-full sm:w-auto bg-zinc-900 text-white px-8 py-4 rounded-full font-medium hover:bg-zinc-700 transition inline-flex items-center justify-center gap-2">
-                Book a 30-minute strategy call <ArrowRight className="w-5 h-5" aria-hidden="true" />
+                Pick a time <ArrowRight className="w-5 h-5" aria-hidden="true" />
               </a>
               <ul className="mt-8 space-y-3 text-sm text-zinc-600">
-                <li className="flex items-center gap-3"><Check className="w-4 h-4 text-emerald-600 flex-shrink-0" aria-hidden="true" /> Free, 30 minutes, no obligation</li>
+                <li className="flex items-center gap-3"><Check className="w-4 h-4 text-emerald-600 flex-shrink-0" aria-hidden="true" /> Free, 15 minutes, no obligation</li>
                 <li className="flex items-center gap-3"><Check className="w-4 h-4 text-emerald-600 flex-shrink-0" aria-hidden="true" /> A working session, not a pitch</li>
                 <li className="flex items-center gap-3"><Check className="w-4 h-4 text-emerald-600 flex-shrink-0" aria-hidden="true" /> Talk to the people who build it</li>
               </ul>

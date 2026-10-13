@@ -7,6 +7,7 @@ import Privacy from './Privacy.jsx';
 import Terms from './Terms.jsx';
 import Roofing from './Roofing.jsx';
 import Hvac from './Hvac.jsx';
+import Plumbing from './Plumbing.jsx';
 import { SiteNav, SiteFooter } from './SiteChrome.jsx';
 import { EXTERNAL_URLS, SECURE_LINK_PROPS, PLAN_PRICES, sectionId } from './siteConfig.js';
 import { usePageMeta } from './usePageMeta.js';
@@ -122,7 +123,7 @@ function MainSite() {
   const faqs = useMemo(() => [
     { q: "Is this software we log into, or do you run it for us?", a: "We run it. We build the agent, train it on how you talk to customers, connect it to your calendar and inbox, and keep managing it after go-live. You approve how it sounds and you take the meetings. There is no tool for your team to learn and nothing technical for you to do — most of our clients are owners, not engineers." },
     { q: "Who is this for, and who is it not for?", a: "It is for service businesses that already get inbound leads and lose some of them to slow follow-up — commercial insurance, home services and trades, counseling and group practices, property management, and similar appointment businesses. It is not a fit if you have no inbound demand yet, or if what you actually need is a custom CRM rebuild." },
-    { q: "What can the agent actually do on day one?", a: "Reply to your inbound leads, qualify them on things like job type, timing and fit, follow up by email (SMS on Pro and above), and book the ones worth your time into your calendar. Which channels it covers is set on the strategy call. It only ever contacts people who already reached out to you." },
+    { q: "What can the agent actually do on day one?", a: "Reply to your inbound leads, qualify them on things like job type, timing and fit, follow up by email (SMS on Pro and above), and book the ones worth your time into your calendar. Which channels it covers is set on the 15-minute call. It only ever contacts people who already reached out to you." },
     { q: "What does the 60-day guarantee actually cover?", a: "Two things we operate: a first response typically within 5 minutes on inbound leads wired into the agent, and follow-up plus a meeting offer for leads that meet the qualify rules we set with you. The 60 days starts when the agent goes live on your real lead flow, not at the kickoff call. Miss either and you get the setup fee and every monthly fee back. It does not guarantee a number of closed deals or a volume of new leads — if the leads are not coming in, that is not something the agent can fix." },
     { q: "What do you actually turn on in the first month?", a: "One inbound source you already have, a first reply typically within 5 minutes, the qualify rules we write with you, and booking into the calendar you already use. Pro and Enterprise add the extra channels and systems we name on the call. We do not turn on the whole internet in week four." },
     { q: "How fast can I get started?", a: "Most clients are live within 2-4 weeks. We move fast because we know your time is money. After a quick discovery call, we get to work immediately." },
@@ -181,7 +182,7 @@ function MainSite() {
             </FadeInSection>
             <FadeInSection delay={300}>
               <div className="flex flex-col sm:flex-row gap-3 justify-center xl:justify-start">
-                <button onClick={() => scrollTo('cta')} className="group bg-zinc-900 text-white px-7 py-4 rounded-full font-medium text-lg hover:bg-zinc-700 transition flex items-center justify-center gap-2" type="button">Book a strategy call <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" aria-hidden="true" /></button>
+                <button onClick={() => scrollTo('cta')} className="group bg-zinc-900 text-white px-7 py-4 rounded-full font-medium text-lg hover:bg-zinc-700 transition flex items-center justify-center gap-2" type="button">Book a 15-minute call <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" aria-hidden="true" /></button>
                 <Link to="/try-it-free" className="group text-emerald-700 border border-emerald-600/30 bg-white/70 px-7 py-4 rounded-full font-medium text-lg transition hover:border-emerald-600/60 hover:bg-white flex items-center justify-center gap-2">See a sample sequence <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" aria-hidden="true" /></Link>
               </div>
             </FadeInSection>
@@ -217,7 +218,7 @@ function MainSite() {
                 to="the homeowner who just requested a quote"
                 subject="Quick question about your roof estimate"
                 timestamp="Tue 8:34 PM"
-                footnote="Example only. We write these in the client's voice after kickoff. This is not the live booking agent — that is what the strategy call scopes."
+                footnote="Example only. We write these in the client's voice after kickoff. This is not the live booking agent — that is what the 15-minute call scopes."
               >
                 <p>Hi Mark &mdash;</p>
                 <p>Sorry to hear about the roof leak on Oakley. I can have someone look at it Thursday morning or Friday after 2.</p>
@@ -362,9 +363,9 @@ function MainSite() {
                 ))}
               </dl>
 
-              <p className="text-emerald-700 font-semibold mt-8">The strategy call is with me.</p>
+              <p className="text-emerald-700 font-semibold mt-8">The call is with me.</p>
               <div className="mt-8 flex flex-col sm:flex-row gap-5 sm:items-center">
-                <a href={EXTERNAL_URLS.appointments} {...SECURE_LINK_PROPS} className="bg-zinc-900 text-white px-8 py-4 rounded-full font-medium hover:bg-zinc-700 transition inline-flex items-center justify-center gap-2">Book a strategy call <ArrowRight className="w-4 h-4" aria-hidden="true" /></a>
+                <a href={EXTERNAL_URLS.appointments} {...SECURE_LINK_PROPS} className="bg-zinc-900 text-white px-8 py-4 rounded-full font-medium hover:bg-zinc-700 transition inline-flex items-center justify-center gap-2">Book a 15-minute call <ArrowRight className="w-4 h-4" aria-hidden="true" /></a>
                 <Link to="/contact" className="inline-block py-3 -my-3 text-zinc-600 hover:text-zinc-900 transition text-sm underline underline-offset-4 text-center sm:text-left">Or send a note</Link>
               </div>
             </div>
@@ -548,7 +549,7 @@ function MainSite() {
               <div className="mt-10 pt-8 border-t border-zinc-200 flex flex-col sm:flex-row gap-4 items-center">
                 <button onClick={() => scrollTo('cta')} className="w-full sm:w-auto bg-zinc-900 text-white px-8 py-4 rounded-full font-medium hover:bg-zinc-700 transition flex items-center justify-center gap-2" type="button">Book a call about {selectedPlan.tier} <ChevronRight className="w-4 h-4" aria-hidden="true" /></button>
                 <Link to="/try-it-free" className="w-full sm:w-auto text-emerald-700 px-8 py-4 rounded-full font-medium transition flex items-center justify-center gap-2 border border-emerald-600/30 hover:border-emerald-600/60 hover:bg-emerald-500/5">See a sample sequence <ArrowRight className="w-4 h-4" aria-hidden="true" /></Link>
-                <span className="text-zinc-500 text-sm text-center sm:text-left">{selectedPlan.monthly}/mo + {selectedPlan.setup} one-time setup • Cancel anytime<br />Plans start after a strategy call — the sample sequence is free either way.</span>
+                <span className="text-zinc-500 text-sm text-center sm:text-left">{selectedPlan.monthly}/mo + {selectedPlan.setup} one-time setup • Cancel anytime<br />Plans start after a 15-minute call — the sample sequence is free either way.</span>
               </div>
             </div>
           </div>
@@ -668,11 +669,11 @@ function MainSite() {
         <div className="relative max-w-4xl mx-auto px-6 py-24 md:py-36 text-center">
           <FadeInSection>
             <h2 id="cta-heading" className="t-h1 mb-6">Let&apos;s See If We&apos;re a Fit</h2>
-            <p className="t-lede md:text-xl max-w-2xl mx-auto mb-10">One 30-minute call: we look at how leads reach you now, where they go cold, and whether this is worth building for your business. If it is, you&apos;re live in about <span className="whitespace-nowrap">2–4 weeks</span>.</p>
-            <a href={EXTERNAL_URLS.appointments} {...SECURE_LINK_PROPS} className="group bg-zinc-900 text-white px-10 py-5 rounded-full font-medium text-lg hover:bg-zinc-700 transition inline-flex items-center gap-3">Book a strategy call <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" aria-hidden="true" /></a>
+            <p className="t-lede md:text-xl max-w-2xl mx-auto mb-10">One 15-minute call: we look at how leads reach you now, where they go cold, and whether this is worth building for your business. If it is, you&apos;re live in about <span className="whitespace-nowrap">2–4 weeks</span>.</p>
+            <a href={EXTERNAL_URLS.appointments} {...SECURE_LINK_PROPS} className="group bg-zinc-900 text-white px-10 py-5 rounded-full font-medium text-lg hover:bg-zinc-700 transition inline-flex items-center gap-3">Book a 15-minute call <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" aria-hidden="true" /></a>
             <p className="text-zinc-500 text-sm mt-6 flex items-center justify-center gap-2.5">
               <HeadshotAvatar size={28} className="border border-white shadow-sm" />
-              <span>Free • 30 minutes with Matt • Zero obligation</span>
+              <span>Free • 15 minutes with Matt • Zero obligation</span>
             </p>
             <div className="mt-16 pt-10 border-t border-emerald-600/15 max-w-xl mx-auto">
               <p className="text-zinc-700 leading-relaxed mb-6">Not ready to talk? Read a sample first &mdash; we&apos;ll write three follow-up emails for your business so you can judge the copy. It&apos;s a preview, not the live system; setup still starts with a call.</p>
@@ -721,6 +722,7 @@ export default function App() {
         <Route path="/" element={<MainSite />} />
         <Route path="/roofing" element={<Roofing />} />
         <Route path="/hvac" element={<Hvac />} />
+        <Route path="/plumbing" element={<Plumbing />} />
         <Route path="/try-it-free" element={<TryItFree />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/privacy" element={<Privacy />} />

@@ -12,13 +12,13 @@ const HVAC = {
   trade: 'HVAC',
   audience: 'For residential heating and cooling companies',
   headline: {
-    lead: 'The AC quit at 8:30pm.',
+    lead: 'The heat just went out. It’s 8:30pm.',
     punch: 'Someone else booked the visit.',
   },
   subhead: <>We reply to your inbound heating and cooling leads in about five minutes, in your voice, and book the ones worth a visit. Your team shows up. Live in <span className="whitespace-nowrap">2–4 weeks</span>.</>,
   example: {
     title: 'Tuesday night form. Reply four minutes later. Technician there Wednesday.',
-    body: "A homeowner's AC quits on a hot Tuesday night, and they fill in your form at 8:30 while your techs are off the clock. Four minutes later they have a reply that sounds like your office, with two arrival windows for the morning. They pick 8 to 10, and it is on your calendar before anyone at your company has seen the lead.",
+    body: "A homeowner's furnace quits on a freezing Tuesday night, and they fill in your form at 8:30 while your techs are off the clock. Four minutes later they have a reply that sounds like your office, with two arrival windows for the morning. They pick 8 to 10, and it is on your calendar before anyone at your company has seen the lead.",
     scenario: LAKESIDE_HVAC,
   },
   steps: {

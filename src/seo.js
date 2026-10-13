@@ -10,8 +10,8 @@ export const SITE_URL = 'https://www.chicagoaigroup.com';
 export const SITE_NAME = 'Chicago AI Group';
 // ?v= is a cache-bust: scrapers hold the old artwork indefinitely otherwise.
 // Bump it whenever public/og-image.png is re-rendered from scripts/og-card.html.
-export const OG_IMAGE = `${SITE_URL}/og-image.png?v=4`;
-export const OG_IMAGE_ALT = 'Chicago AI Group — The lead came in at 8:30pm. Someone else got the job. Book a strategy call.';
+export const OG_IMAGE = `${SITE_URL}/og-image.png?v=5`;
+export const OG_IMAGE_ALT = 'Chicago AI Group — The lead came in at 8:30pm. Someone else got the job. Book a 15-minute call.';
 
 export const PAGE_META = {
   home: {
@@ -31,6 +31,12 @@ export const PAGE_META = {
     title: 'HVAC leads answered in five minutes | Chicago AI Group',
     description: 'We reply to inbound heating and cooling requests in about five minutes, in your voice, and book the visit. Your team shows up. Live in 2–4 weeks.',
   },
+  // The landing page sales and ads use for residential plumbing companies.
+  plumbing: {
+    path: '/plumbing',
+    title: 'Plumbing leads answered in five minutes | Chicago AI Group',
+    description: 'We reply to inbound plumbing requests in about five minutes, in your voice, and book the visit. Your team shows up. Live in 2–4 weeks.',
+  },
   sample: {
     path: '/try-it-free',
     title: 'Sample follow-up sequence | Chicago AI Group',
@@ -39,7 +45,7 @@ export const PAGE_META = {
   contact: {
     path: '/contact',
     title: 'Contact | Chicago AI Group',
-    description: 'Book a 30-minute strategy call with Matt Swanson or send a note.',
+    description: 'Book a 15-minute call with Matt Swanson or send a note.',
   },
   privacy: {
     path: '/privacy',
