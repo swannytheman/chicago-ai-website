@@ -37,6 +37,12 @@ export const PAGE_META = {
     title: 'Plumbing leads answered in five minutes | Chicago AI Group',
     description: 'We reply to inbound plumbing requests in about five minutes, in your voice, and book the visit. Your team shows up. Live in 2–4 weeks.',
   },
+  // The landing page sales and ads use for med spas and aesthetic practices.
+  medspa: {
+    path: '/medspa',
+    title: 'Med spa leads answered in five minutes | Chicago AI Group',
+    description: 'We reply to med spa treatment inquiries in about five minutes, in your voice, and book the consult. Your providers take it from there. Live in 2–4 weeks.',
+  },
   sample: {
     path: '/try-it-free',
     title: 'Sample follow-up sequence | Chicago AI Group',

@@ -32,6 +32,7 @@ export const USE_CASES = [
   { path: '/roofing', label: 'Roofing', blurb: 'Quote requests, booked as inspections' },
   { path: '/hvac', label: 'HVAC', blurb: 'Heating and cooling calls, booked as visits' },
   { path: '/plumbing', label: 'Plumbing', blurb: 'Repairs and estimates, booked as visits' },
+  { path: '/medspa', label: 'Med Spa', blurb: 'Treatment inquiries, booked as consults' },
 ];
 
 export function sectionId(id) {

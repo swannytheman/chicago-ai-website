@@ -8,11 +8,11 @@ import HeroDemo from './HeroDemo.jsx';
 import { HeadshotAvatar } from './Headshot.jsx';
 import { FadeInSection, Section, SectionHeader, AccentRule } from './PageLayout.jsx';
 
-// One template for the trade landing pages (/roofing, /hvac, /plumbing). Each is the one
-// URL sales and ads use for that trade, and has to be the whole pitch for someone who
+// One template for the industry landing pages (/roofing, /hvac, /plumbing, /medspa). Each
+// is the one URL sales and ads use for that industry, and has to be the whole pitch for someone who
 // never sees the homepage, so it carries its own example, pricing, guarantee and close.
 // Structure, prices and the guarantee are shared; every trade-specific line comes from
-// the `content` object the page passes in (see Roofing.jsx, Hvac.jsx, Plumbing.jsx). It
+// the `content` object the page passes in (see Roofing.jsx and MedSpa.jsx). It
 // reuses the homepage's layout primitives and type scale rather than introducing anything new.
 //
 // Section ids that match the global nav (how-it-works, testimonials, services, cta)
@@ -87,6 +87,9 @@ function SampleButton() {
 
 export default function VerticalLanding({ content: c }) {
   usePageMeta(c.meta);
+  // What the visitor calls their own business, in the shared lines: "company" for the
+  // trades, "practice" for med spas.
+  const business = c.business ?? 'company';
   const plans = plansFor(c.pricing.bookItem);
   // The dark card follows the plan the visitor picks, as on the homepage plan picker.
   // Pro (the featured plan) starts selected. Selection is visual emphasis only: each
@@ -183,7 +186,7 @@ export default function VerticalLanding({ content: c }) {
         <FadeInSection delay={200}>
           <p className="mt-14 text-zinc-600 flex items-start gap-3">
             <Shield className="w-5 h-5 text-emerald-600 flex-shrink-0 mt-0.5" aria-hidden="true" />
-            <span>Only people who already contacted your company get a message.</span>
+            <span>Only people who already contacted your {business} get a message.</span>
           </p>
         </FadeInSection>
       </Section>
@@ -321,11 +324,11 @@ export default function VerticalLanding({ content: c }) {
             <div className="grid md:grid-cols-2 gap-8 md:gap-0 md:divide-x divide-emerald-600/15 mt-12 pt-10 border-t border-emerald-600/15 max-w-3xl mx-auto text-left">
               <div className="md:pr-8">
                 <h3 className="t-eyebrow mb-3">What it does not cover</h3>
-                <p className="text-sm text-zinc-700 leading-relaxed">It does not guarantee closed jobs or a volume of new leads.</p>
+                <p className="text-sm text-zinc-700 leading-relaxed">{c.guarantee?.notCovered ?? 'It does not guarantee closed jobs or a volume of new leads.'}</p>
               </div>
               <div className="md:pl-8">
                 <h3 className="t-eyebrow mb-3">What we do not do</h3>
-                <p className="text-sm text-zinc-700 leading-relaxed">We do not run ads, rebuild your website, or close the job.</p>
+                <p className="text-sm text-zinc-700 leading-relaxed">{c.guarantee?.notDone ?? 'We do not run ads, rebuild your website, or close the job.'}</p>
               </div>
             </div>
           </div>
@@ -337,7 +340,7 @@ export default function VerticalLanding({ content: c }) {
         <div className="absolute inset-0 bg-gradient-to-b from-white via-emerald-50/50 to-emerald-50" aria-hidden="true" />
         <div className="relative max-w-4xl mx-auto px-6 py-24 md:py-36 text-center">
           <FadeInSection>
-            <h2 id={`${c.slug}-cta-heading`} className="t-h1 mb-6">Is this worth building for your company?</h2>
+            <h2 id={`${c.slug}-cta-heading`} className="t-h1 mb-6">Is this worth building for your {business}?</h2>
             <p className="t-lede md:text-xl max-w-2xl mx-auto mb-10">One 15-minute call on how {c.close.requests} reach you now, where they go cold, and whether this is worth building. If it is, you&apos;re live in about <span className="whitespace-nowrap">2–4 weeks</span>.</p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <BookButton />
