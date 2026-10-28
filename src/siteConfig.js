@@ -39,10 +39,21 @@ export function sectionId(id) {
   return id.toLowerCase().replace(/[^a-z0-9-]/g, '');
 }
 
-// The public plan prices. The homepage plan picker and the /roofing pricing cards both
-// read from here, so the two pages cannot quote different numbers.
-export const PLAN_PRICES = {
-  Starter: { monthly: '$499', setup: '$2,500' },
-  Pro: { monthly: '$999', setup: '$3,500' },
-  Enterprise: { monthly: '$1,800', setup: '$5,900' },
+// Founding client pricing: 25% off the one-time setup fee on the managed plans for our
+// first 3 clients. Flip to false once 3 founding clients have signed; every page then
+// drops the banner and the struck-through prices and shows the regular setup fee.
+export const FOUNDING_ACTIVE = true;
+
+// The public plan prices. The homepage plan picker and every industry page's pricing
+// cards read from here, so no two pages can quote different numbers. foundingSetup is
+// exactly 75% of setup; monthly prices never change with the founding offer.
+export const PLANS = {
+  Starter: { monthly: '$499', setup: '$2,500', foundingSetup: '$1,875' },
+  Pro: { monthly: '$999', setup: '$3,500', foundingSetup: '$2,625' },
+  Enterprise: { monthly: '$1,800', setup: '$5,900', foundingSetup: '$4,425' },
 };
+
+// Setup Only: we build it and hand it over. One-time fee, no monthly, no ongoing
+// management, a 14-day workmanship guarantee instead of the 60-day Results Guarantee,
+// and never founding pricing.
+export const SETUP_ONLY = { setup: '$1,250', monthly: null };
