@@ -10,7 +10,8 @@ import Hvac from './Hvac.jsx';
 import Plumbing from './Plumbing.jsx';
 import MedSpa from './MedSpa.jsx';
 import { SiteNav, SiteFooter } from './SiteChrome.jsx';
-import { EXTERNAL_URLS, SECURE_LINK_PROPS, PLAN_PRICES, sectionId } from './siteConfig.js';
+import { EXTERNAL_URLS, SECURE_LINK_PROPS, PLANS, sectionId } from './siteConfig.js';
+import { FoundingBanner, SetupPrice, SetupOnlyCard, SetupOnlyGuaranteeNote } from './Pricing.jsx';
 import { usePageMeta } from './usePageMeta.js';
 import { PAGE_META } from './seo.js';
 import EmailPreview from './EmailPreview.jsx';
@@ -68,9 +69,9 @@ function MainSite() {
     // plans differ" rows in #scope; keep the two in step if either changes.
     pricing: [
       {
-        tier: "Starter", ...PLAN_PRICES.Starter,
+        tier: "Starter", ...PLANS.Starter,
         details: "One inbound source. Qualify, follow up, book.",
-        forWho: "Your first inbound source — an owner-led service business that just needs follow-up on.",
+        forWho: "An owner-led service business with one inbound source that needs follow-up.",
         includes: [
           "One inbound lead source (form, ad inbox, or email)",
           "First reply typically within 5 minutes",
@@ -80,7 +81,7 @@ function MainSite() {
         ]
       },
       {
-        tier: "Pro", ...PLAN_PRICES.Pro,
+        tier: "Pro", ...PLANS.Pro,
         details: "Sequences, scoring, and CRM sync on top of Starter.", popular: true,
         forWho: "Teams that already have a CRM, or want SMS and longer sequences.",
         includes: [
@@ -92,7 +93,7 @@ function MainSite() {
         ]
       },
       {
-        tier: "Enterprise", ...PLAN_PRICES.Enterprise,
+        tier: "Enterprise", ...PLANS.Enterprise,
         details: "More sources and locations, copy tests, priority support.",
         forWho: "More than one location, brand, or lead source.",
         includes: [
@@ -100,7 +101,7 @@ function MainSite() {
           "Additional inbound sources and locations",
           "Copy tests",
           "Priority check-ins",
-          "Not cold outbound — more of your existing inbound channels"
+          "Not cold outbound: more of your existing inbound channels"
         ]
       }
     ]
@@ -122,10 +123,11 @@ function MainSite() {
   }), []);
 
   const faqs = useMemo(() => [
-    { q: "Is this software we log into, or do you run it for us?", a: "We run it. We build the agent, train it on how you talk to customers, connect it to your calendar and inbox, and keep managing it after go-live. You approve how it sounds and you take the meetings. There is no tool for your team to learn and nothing technical for you to do — most of our clients are owners, not engineers." },
+    { q: "Is this software we log into, or do you run it for us?", a: "On the managed plans (Starter, Pro and Enterprise), we run it. We build the agent, train it on how you talk to customers, connect it to your calendar and inbox, and keep managing it after go-live. You approve how it sounds and you take the meetings. There is no tool for your team to learn and nothing technical for you to do; most of our clients are owners, not engineers. If you would rather run it yourself, Setup Only is a one-time build we hand over to you." },
     { q: "Who is this for, and who is it not for?", a: "It is for service businesses that already get inbound leads and lose some of them to slow follow-up — commercial insurance, home services and trades, counseling and group practices, property management, and similar appointment businesses. It is not a fit if you have no inbound demand yet, or if what you actually need is a custom CRM rebuild." },
     { q: "What can the agent actually do on day one?", a: "Reply to your inbound leads, qualify them on things like job type, timing and fit, follow up by email (SMS on Pro and above), and book the ones worth your time into your calendar. Which channels it covers is set on the 15-minute call. It only ever contacts people who already reached out to you." },
-    { q: "What does the 60-day guarantee actually cover?", a: "Two things we operate: a first response typically within 5 minutes on inbound leads wired into the agent, and follow-up plus a meeting offer for leads that meet the qualify rules we set with you. The 60 days starts when the agent goes live on your real lead flow, not at the kickoff call. Miss either and you get the setup fee and every monthly fee back. It does not guarantee a number of closed deals or a volume of new leads — if the leads are not coming in, that is not something the agent can fix." },
+    { q: "What does the 60-day guarantee actually cover?", a: "Two things we operate: a first response typically within 5 minutes on inbound leads wired into the agent, and follow-up plus a meeting offer for leads that meet the qualify rules we set with you. The 60 days starts when the agent goes live on your real lead flow, not at the kickoff call. Miss either and you get the setup fee and every monthly fee back. It does not guarantee a number of closed deals or a volume of new leads. If the leads are not coming in, that is not something the agent can fix." },
+    { q: "Does the 60-day guarantee cover Setup Only?", a: "No. Managed plans get the 60-day Results Guarantee. Setup Only gets a 14-day workmanship guarantee." },
     { q: "What do you actually turn on in the first month?", a: "One inbound source you already have, a first reply typically within 5 minutes, the qualify rules we write with you, and booking into the calendar you already use. Pro and Enterprise add the extra channels and systems we name on the call. We do not turn on the whole internet in week four." },
     { q: "How fast can I get started?", a: "Most clients are live within 2-4 weeks. We move fast because we know your time is money. After a quick discovery call, we get to work immediately." },
     { q: "Will it sound like us?", a: "Yes, that's the point. We train it on your business, your tone, and the way your office actually writes to customers, and you approve how it sounds before anything goes out." },
@@ -477,8 +479,11 @@ function MainSite() {
           eyebrow="Pricing"
           headingId="services-heading"
           title="Lead follow-up, built and run for you"
-          lede="We build it, train it on your voice, and manage it for you. Here's exactly what's included — and what it costs."
+          lede="We build it, train it on your voice, and manage it for you. Here's exactly what's included, and what it costs."
         />
+        <FadeInSection delay={100}>
+          <FoundingBanner className="mb-6" />
+        </FadeInSection>
         <FadeInSection delay={150}>
           <div className="rounded-3xl border border-zinc-200 bg-white shadow-[0_1px_2px_rgba(24,24,27,0.04),0_32px_64px_-32px_rgba(24,24,27,0.18)] overflow-hidden">
             <div className="p-6 sm:p-8 md:p-12">
@@ -535,7 +540,7 @@ function MainSite() {
                           </div>
                           <div className="text-right flex-shrink-0 pl-4">
                             <div className="text-2xl font-semibold tracking-[-0.03em] tabular-nums">{plan.monthly}<span className={`text-sm font-normal ${isSelected ? 'text-zinc-400' : 'text-zinc-600'}`}>/mo</span></div>
-                            <div className={`text-sm font-medium tabular-nums ${isSelected ? 'text-zinc-300' : 'text-zinc-700'}`}>+ {plan.setup} setup</div>
+                            <div className={`text-sm font-medium tabular-nums ${isSelected ? 'text-zinc-300' : 'text-zinc-700'}`}>+ <SetupPrice plan={plan} suffix="setup" founding={false} strikeClass={isSelected ? 'text-zinc-500' : 'text-zinc-400'} /></div>
                           </div>
                         </button>
                       );
@@ -543,17 +548,20 @@ function MainSite() {
                   </div>
                   <p className="mt-5 text-sm text-zinc-500 text-center leading-relaxed">Setup is a one-time fee that covers the build, your integrations, and training it on your voice. Monthly billing starts the day you go live.</p>
                   <button onClick={() => scrollTo('guarantee')} className="mt-3 w-full flex items-center justify-center gap-2 text-sm text-emerald-700 hover:text-emerald-800 transition py-2" type="button">
-                    <Shield className="w-4 h-4 flex-shrink-0" aria-hidden="true" /> Both refundable under our 60-day Results Guarantee — response time and follow-up on scoped inbound leads
+                    <Shield className="w-4 h-4 flex-shrink-0" aria-hidden="true" /> Setup and monthly fees on managed plans are refundable under our 60-day Results Guarantee: response time and follow-up on scoped inbound leads.
                   </button>
                 </div>
               </div>
               <div className="mt-10 pt-8 border-t border-zinc-200 flex flex-col sm:flex-row gap-4 items-center">
                 <button onClick={() => scrollTo('cta')} className="w-full sm:w-auto bg-zinc-900 text-white px-8 py-4 rounded-full font-medium hover:bg-zinc-700 transition flex items-center justify-center gap-2" type="button">Book a call about {selectedPlan.tier} <ChevronRight className="w-4 h-4" aria-hidden="true" /></button>
                 <Link to="/try-it-free" className="w-full sm:w-auto text-emerald-700 px-8 py-4 rounded-full font-medium transition flex items-center justify-center gap-2 border border-emerald-600/30 hover:border-emerald-600/60 hover:bg-emerald-500/5">See a sample sequence <ArrowRight className="w-4 h-4" aria-hidden="true" /></Link>
-                <span className="text-zinc-500 text-sm text-center sm:text-left">{selectedPlan.monthly}/mo + {selectedPlan.setup} one-time setup • Cancel anytime<br />Plans start after a 15-minute call — the sample sequence is free either way.</span>
+                <span className="text-zinc-500 text-sm text-center sm:text-left">{selectedPlan.monthly}/mo + <SetupPrice plan={selectedPlan} />. Cancel anytime.<br />Plans start after a 15-minute call. The sample sequence is free either way.</span>
               </div>
             </div>
           </div>
+        </FadeInSection>
+        <FadeInSection delay={100}>
+          <SetupOnlyCard onBook={() => scrollTo('cta')} className="mt-6" />
         </FadeInSection>
       </Section>
 
@@ -576,12 +584,12 @@ function MainSite() {
                   'We build it, train it on your voice, and monitor it. You take the meetings.',
                 ] },
                 { title: 'The 60 days', items: [
-                  'The clock starts when the agent goes live on your real lead flow — not at the kickoff call.',
+                  'The clock starts when the agent goes live on your real lead flow, not at the kickoff call.',
                   'If after 60 days live we are not hitting that response time, or scoped inbound leads are not being followed up and offered a meeting, you get back the one-time setup fee and every monthly fee you have paid.',
                   'Ask through the Contact page. We do not make you chase it.',
                 ] },
                 { title: 'What we need from you', items: [
-                  'The agent stays on and connected to the lead sources we agreed — forms, ads, inbox.',
+                  'The agent stays on and connected to the lead sources we agreed: forms, ads, inbox.',
                   'You still have inbound leads coming in. This is not a lead-generation guarantee.',
                   'You keep the qualify rules and calendar we set up together, and you show up to booked meetings.',
                   'Outreach goes only to people who already contacted you, or where you have permission.',
@@ -602,6 +610,7 @@ function MainSite() {
             </div>
 
             <p className="text-base md:text-lg text-emerald-800 font-medium leading-relaxed mt-12 max-w-2xl mx-auto text-center">If we miss our side of that, we refund you. If there were no leads to work, that is not a system failure.</p>
+            <SetupOnlyGuaranteeNote className="mt-10 max-w-2xl mx-auto" />
           </div>
         </FadeInSection>
       </Section>

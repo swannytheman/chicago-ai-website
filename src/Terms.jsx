@@ -67,7 +67,9 @@ export default function Terms() {
         <p>
           Any commitment about outcomes applies only to paid work and only as written into the agreement we sign with
           you. The 60-day Results Guarantee described on our homepage works that way too: the terms are as published
-          there, and they are confirmed in your client agreement.
+          there, and they are confirmed in your client agreement. It covers the managed plans (Starter, Pro and
+          Enterprise). Setup Only is not covered by it. It has a 14-day workmanship guarantee instead: if
+          something we built does not work as scoped within 14 days of handoff, we fix it at no charge.
         </p>
       </Section>
 

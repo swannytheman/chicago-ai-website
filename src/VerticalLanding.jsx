@@ -2,7 +2,8 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Check, Shield, Star, Inbox, ListChecks, CalendarCheck } from 'lucide-react';
 import { SiteNav, SiteFooter } from './SiteChrome.jsx';
-import { EXTERNAL_URLS, SECURE_LINK_PROPS, PLAN_PRICES } from './siteConfig.js';
+import { EXTERNAL_URLS, SECURE_LINK_PROPS, PLANS } from './siteConfig.js';
+import { FoundingBanner, FoundingTag, SetupPrice, SetupOnlyCard, SetupOnlyGuaranteeNote } from './Pricing.jsx';
 import { usePageMeta } from './usePageMeta.js';
 import HeroDemo from './HeroDemo.jsx';
 import { HeadshotAvatar } from './Headshot.jsx';
@@ -20,12 +21,12 @@ import { FadeInSection, Section, SectionHeader, AccentRule } from './PageLayout.
 // so "Book a 15-minute call" and "Pricing" in the top bar stay on the landing page
 // instead of sending a visitor to the homepage.
 
-// Prices come from PLAN_PRICES in siteConfig.js, shared with the homepage plan picker.
+// Prices come from PLANS in siteConfig.js, shared with the homepage plan picker.
 // The only per-trade line is what Starter books (an inspection, a visit).
 const plansFor = (bookItem) => [
   {
     tier: 'Starter',
-    ...PLAN_PRICES.Starter,
+    ...PLANS.Starter,
     includes: [
       'One inbound source',
       'First response in about five minutes',
@@ -37,7 +38,7 @@ const plansFor = (bookItem) => [
   },
   {
     tier: 'Pro',
-    ...PLAN_PRICES.Pro,
+    ...PLANS.Pro,
     featured: true,
     includes: [
       'Everything in Starter',
@@ -49,7 +50,7 @@ const plansFor = (bookItem) => [
   },
   {
     tier: 'Enterprise',
-    ...PLAN_PRICES.Enterprise,
+    ...PLANS.Enterprise,
     includes: [
       'Everything in Pro',
       'Additional sources or locations',
@@ -251,9 +252,10 @@ export default function VerticalLanding({ content: c }) {
           eyebrow="Pricing"
           headingId={`${c.slug}-pricing-heading`}
           title="Three plans. Same build, more surface area."
-          lede="Setup is one-time and covers the build, the integration, and training it on your voice. Monthly billing starts at go-live. Cancel anytime."
+          lede="Setup is a one-time fee that covers the build, your integrations, and training it on your voice. Monthly billing starts the day you go live. Cancel anytime."
         />
         <FadeInSection delay={100}>
+          <FoundingBanner className="mb-8 lg:mb-10" />
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 lg:items-stretch">
             {plans.map(plan => {
               const selected = plan.tier === selectedTier;
@@ -271,13 +273,16 @@ export default function VerticalLanding({ content: c }) {
               >
                 <div className="flex items-center gap-2 mb-6">
                   <h3 className="text-lg font-semibold tracking-[-0.01em]">{plan.tier}</h3>
-                  {plan.featured && <span className={`text-xs font-medium px-2 py-0.5 rounded-full ${selected ? 'bg-white text-zinc-900' : 'bg-emerald-50 text-emerald-700 border border-emerald-600/20'}`}>Recommended</span>}
+                  {plan.featured && <span className={`text-xs font-medium px-2 py-0.5 rounded-full ${selected ? 'bg-white text-zinc-900' : 'bg-emerald-50 text-emerald-700 border border-emerald-600/20'}`}>Popular</span>}
                 </div>
                 <div className="mb-1">
                   <span className="text-5xl font-semibold tracking-[-0.04em] tabular-nums">{plan.monthly}</span>
                   <span className={`text-base ${selected ? 'text-zinc-400' : 'text-zinc-500'}`}>/mo</span>
                 </div>
-                <div className={`text-sm font-medium tabular-nums mb-8 ${selected ? 'text-zinc-300' : 'text-zinc-700'}`}>+ {plan.setup} one-time setup</div>
+                <div className="mb-8">
+                  <div className={`text-sm font-medium tabular-nums ${selected ? 'text-zinc-300' : 'text-zinc-700'}`}>+ <SetupPrice plan={plan} founding={false} strikeClass={selected ? 'text-zinc-500' : 'text-zinc-400'} /></div>
+                  <FoundingTag className={`mt-1.5 ${selected ? 'text-emerald-400' : 'text-emerald-700'}`} />
+                </div>
                 <ul className={`space-y-3 mb-10 pt-6 border-t ${selected ? 'border-white/15' : 'border-zinc-200'}`}>
                   {plan.includes.map(item => (
                     <li key={item} className="flex gap-3 text-sm leading-relaxed">
@@ -307,6 +312,9 @@ export default function VerticalLanding({ content: c }) {
           <p className="mt-12 text-center text-2xl md:text-[1.75rem] font-medium tracking-[-0.02em] text-zinc-900 text-balance">{c.pricing.payback}</p>
           {c.pricing.paybackNote && <p className="mt-3 text-center text-sm text-zinc-500">{c.pricing.paybackNote}</p>}
         </FadeInSection>
+        <FadeInSection delay={100}>
+          <SetupOnlyCard className="mt-12" />
+        </FadeInSection>
       </Section>
 
       {/* 6. Guarantee, scoped exactly. */}
@@ -331,6 +339,7 @@ export default function VerticalLanding({ content: c }) {
                 <p className="text-sm text-zinc-700 leading-relaxed">{c.guarantee?.notDone ?? 'We do not run ads, rebuild your website, or close the job.'}</p>
               </div>
             </div>
+            <SetupOnlyGuaranteeNote className="mt-10 max-w-3xl mx-auto" />
           </div>
         </FadeInSection>
       </Section>
