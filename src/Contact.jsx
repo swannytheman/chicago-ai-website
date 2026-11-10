@@ -93,9 +93,9 @@ export default function Contact() {
         <div className="max-w-6xl mx-auto px-6">
           <div className="text-center max-w-2xl mx-auto mb-10 md:mb-16">
             <span className="t-eyebrow mb-4">Contact</span>
-            <h1 id="contact-heading" className="t-h1 mb-6">Talk to the Chicago team</h1>
+            <h1 id="contact-heading" className="t-h1 mb-6">Let&apos;s talk about your leads</h1>
             <p className="t-lede">
-              We implement and run AI sales agents that qualify your leads and book meetings, so your team only talks to serious buyers.
+              We reply to your inbound leads in about five minutes, in your voice, and book the ones worth your time. Tell us how leads reach you today.
             </p>
           </div>
 
@@ -112,7 +112,7 @@ export default function Contact() {
               </div>
               <h2 className="text-2xl font-semibold tracking-[-0.025em] mb-3">Book a 15-minute call</h2>
               <p className="text-zinc-700 leading-relaxed mb-8">
-                The fastest way to get answers. We&apos;ll look at how leads reach you today and where an AI agent would actually help.
+                The fastest way to get answers. We&apos;ll look at how leads reach you today and where follow-up is slipping.
               </p>
               <a href={EXTERNAL_URLS.appointments} {...SECURE_LINK_PROPS} className="w-full sm:w-auto bg-zinc-900 text-white px-8 py-4 rounded-full font-medium hover:bg-zinc-700 transition inline-flex items-center justify-center gap-2">
                 Pick a time <ArrowRight className="w-5 h-5" aria-hidden="true" />
@@ -120,7 +120,7 @@ export default function Contact() {
               <ul className="mt-8 space-y-3 text-sm text-zinc-600">
                 <li className="flex items-center gap-3"><Check className="w-4 h-4 text-emerald-600 flex-shrink-0" aria-hidden="true" /> Free, 15 minutes, no obligation</li>
                 <li className="flex items-center gap-3"><Check className="w-4 h-4 text-emerald-600 flex-shrink-0" aria-hidden="true" /> A working session, not a pitch</li>
-                <li className="flex items-center gap-3"><Check className="w-4 h-4 text-emerald-600 flex-shrink-0" aria-hidden="true" /> Talk to the people who build it</li>
+                <li className="flex items-center gap-3"><Check className="w-4 h-4 text-emerald-600 flex-shrink-0" aria-hidden="true" /> You talk to Matt, who builds it</li>
               </ul>
             </div>
 

@@ -14,8 +14,8 @@ export default function Privacy() {
     >
       <Section n={1} title="Who we are">
         <p>
-          The Chicago AI Group is a Chicago-based team that builds and runs AI sales agents for other
-          businesses. This policy covers <strong>chicagoaigroup.com</strong>. It does not cover work we
+          The Chicago AI Group is a Chicago business, run by Matt Swanson, that answers and follows up inbound
+          leads for service businesses, using AI agents we build and run. This policy covers <strong>chicagoaigroup.com</strong>. It does not cover work we
           do inside a client&apos;s own systems under a signed agreement, which is governed by that agreement.
         </p>
       </Section>

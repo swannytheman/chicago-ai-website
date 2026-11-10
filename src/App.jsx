@@ -124,14 +124,14 @@ function MainSite() {
 
   const faqs = useMemo(() => [
     { q: "Is this software we log into, or do you run it for us?", a: "On the managed plans (Starter, Pro and Enterprise), we run it. We build the agent, train it on how you talk to customers, connect it to your calendar and inbox, and keep managing it after go-live. You approve how it sounds and you take the meetings. There is no tool for your team to learn and nothing technical for you to do; most of our clients are owners, not engineers. If you would rather run it yourself, Setup Only is a one-time build we hand over to you." },
-    { q: "Who is this for, and who is it not for?", a: "It is for service businesses that already get inbound leads and lose some of them to slow follow-up — commercial insurance, home services and trades, counseling and group practices, property management, and similar appointment businesses. It is not a fit if you have no inbound demand yet, or if what you actually need is a custom CRM rebuild." },
+    { q: "Who is this for, and who is it not for?", a: "It is for service businesses that already get inbound leads and lose some of them to slow follow-up — commercial insurance, home services and trades, counseling and group practices, property management, and similar appointment businesses. It is not a fit if you have no inbound demand yet, or if what you need is new leads, ads, or a new website." },
     { q: "What can the agent actually do on day one?", a: "Reply to your inbound leads, qualify them on things like job type, timing and fit, follow up by email (SMS on Pro and above), and book the ones worth your time into your calendar. Which channels it covers is set on the 15-minute call. It only ever contacts people who already reached out to you." },
     { q: "What does the 60-day guarantee actually cover?", a: "Two things we operate: a first response typically within 5 minutes on inbound leads wired into the agent, and follow-up plus a meeting offer for leads that meet the qualify rules we set with you. The 60 days starts when the agent goes live on your real lead flow, not at the kickoff call. Miss either and you get the setup fee and every monthly fee back. It does not guarantee a number of closed deals or a volume of new leads. If the leads are not coming in, that is not something the agent can fix." },
     { q: "Does the 60-day guarantee cover Setup Only?", a: "No. Managed plans get the 60-day Results Guarantee. Setup Only gets a 14-day workmanship guarantee." },
     { q: "What do you actually turn on in the first month?", a: "One inbound source you already have, a first reply typically within 5 minutes, the qualify rules we write with you, and booking into the calendar you already use. Pro and Enterprise add the extra channels and systems we name on the call. We do not turn on the whole internet in week four." },
     { q: "How fast can I get started?", a: "Most clients are live within 2-4 weeks. We move fast because we know your time is money. After a quick discovery call, we get to work immediately." },
     { q: "Will it sound like us?", a: "Yes, that's the point. We train it on your business, your tone, and the way your office actually writes to customers, and you approve how it sounds before anything goes out." },
-    { q: "What if something goes wrong?", a: "We've got your back. All plans include support, and Pro/Enterprise clients get priority access plus regular check-ins to make sure everything runs smoothly." }
+    { q: "What if something goes wrong?", a: "On the managed plans we monitor the agent after go-live and fix problems as part of the monthly fee. You do not file a ticket and wait. Enterprise adds priority check-ins. Setup Only is covered by its 14-day workmanship guarantee after handoff." }
   ], []);
 
   const process = useMemo(() => [
@@ -242,7 +242,7 @@ function MainSite() {
         />
         <ol className="grid md:grid-cols-3 gap-x-12 gap-y-14">
           {[
-            { icon: Zap, phase: 'Answer', title: 'Answer every lead, day or night', desc: 'Your agent watches the places your leads actually come from — website forms, ad leads, inbound email, missed calls — and replies within a few minutes, around the clock.' },
+            { icon: Zap, phase: 'Answer', title: 'Answer every lead, day or night', desc: 'Your agent watches the lead source we connect, such as your website form, your ad leads or a shared inbox, and replies within a few minutes, around the clock.' },
             { icon: MessageSquare, phase: 'Follow up', title: 'Follow up until they answer', desc: 'Follow-ups go out by email, and by SMS on Pro and above, written in your voice, and keep going until they reply or opt out. Only people who already contacted you ever get one.' },
             { icon: Calendar, phase: 'Book', title: 'Book the ones worth your time', desc: 'Only leads that pass qualifying reach your calendar, and the whole conversation comes with them. Your team walks in already knowing the context.' },
           ].map((item, idx) => (
@@ -287,7 +287,7 @@ function MainSite() {
             <div className="grid md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-zinc-200">
               {[
                 { stat: '35%', label: 'increase in closed deals', detail: 'Luigi Trucking Insurance' },
-                { stat: '~5 min', label: 'first response to every lead', detail: 'How every agent we build is configured' },
+                { stat: '~5 min', label: 'typical first response to a new lead', detail: 'How every agent we build is configured' },
                 { stat: '2–4 wks', label: 'from kickoff to fully live', detail: 'Typical implementation' },
               ].map((item, idx) => (
                 <div key={idx} className="flex flex-col items-center text-center py-10 md:py-14 px-6">

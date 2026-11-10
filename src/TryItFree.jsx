@@ -1115,14 +1115,14 @@ export default function TryItFree() {
             {/* `sr` spells the same figure out for screen readers, where "5+" and
                 "~5 min" read poorly. The visible label is unchanged.
 
-                Rows 1, 2 and 4 are third-party statistics about follow-up generally.
-                Row 3 is OUR number, so it tracks the real automation -- about five
-                minutes, not the sub-minute figure this used to claim. */}
+                Only figures we can stand behind: what this page sends, how the live
+                system is configured, and the guarantee. The industry statistics that
+                used to sit here had no source, and "3x more replies" was not a result
+                we have measured. */}
             {[
-              { num: 80, suffix: '%', prefix: '',  label: 'of sales need 5+ follow-ups',      sr: '80% of sales need 5 or more follow-ups' },
-              { num: 44, suffix: '%', prefix: '',  label: 'of reps give up after 1 attempt',  sr: '44% of reps give up after 1 attempt' },
-              { num: 5,  suffix: ' min', prefix: '~', label: 'typical first reply',           sr: 'Typically within 5 minutes to first reply' },
-              { num: 3,  suffix: 'x', prefix: '',  label: 'more replies vs manual follow-up', sr: '3x more replies versus manual follow-up' },
+              { num: 3,  suffix: '', prefix: '',  label: 'sample emails, written as your business', sr: '3 sample emails, written as your business' },
+              { num: 5,  suffix: ' min', prefix: '~', label: 'typical first reply once live',       sr: 'Typically within 5 minutes to first reply once live' },
+              { num: 60, suffix: '-day', prefix: '', label: 'Results Guarantee on managed plans',   sr: '60-day Results Guarantee on managed plans' },
             ].map((s, i) => (
               <div className="tif-stat" key={i} role="group" aria-label={s.sr}>
                 <StatNum num={s.num} suffix={s.suffix} prefix={s.prefix} />
