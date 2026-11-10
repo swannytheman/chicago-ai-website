@@ -21,7 +21,7 @@ export default function Terms() {
 
       <Section n={2} title="What this site is">
         <p>
-          It is an informational site for our AI sales-agent service, and a way for interested businesses to get in
+          It is an informational site for our lead follow-up service, and a way for interested businesses to get in
           touch. Everything on it — the descriptions, the plan pricing, the timelines — is here to tell you what we do
           and help you decide whether to talk to us.
         </p>
@@ -29,7 +29,7 @@ export default function Terms() {
 
       <Section n={3} title="No account, and nothing here is the paid product">
         <p>
-          Browsing the site does not create an account. Neither does requesting the free email demo or booking a
+          Browsing the site does not create an account. Neither does requesting the sample sequence or booking a
           call: they are ways to see how we work and to talk to us, not the service itself.
         </p>
         <p>

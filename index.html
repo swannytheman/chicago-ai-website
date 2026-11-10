@@ -32,6 +32,24 @@
     <meta name="twitter:description" content="We reply to your inbound leads in about five minutes, in your voice, and book the ones worth your time. We build it and run it. Live in 2–4 weeks." />
     <meta name="twitter:image" content="https://www.chicagoaigroup.com/og-image.png?v=5" />
 
+    <!-- Who we are, for search engines. A data block, not a script that runs, so the
+         Content-Security-Policy in vercel.json does not apply to it. -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      "name": "The Chicago AI Group",
+      "alternateName": "Chicago AI Group",
+      "url": "https://www.chicagoaigroup.com/",
+      "logo": "https://www.chicagoaigroup.com/brand/mark.png",
+      "image": "https://www.chicagoaigroup.com/og-image.png",
+      "description": "We reply to a service business's inbound leads in about five minutes, in its own voice, and book the ones worth its time. Built and run for you.",
+      "founder": { "@type": "Person", "name": "Matt Swanson" },
+      "address": { "@type": "PostalAddress", "addressLocality": "Chicago", "addressRegion": "IL", "addressCountry": "US" },
+      "areaServed": { "@type": "City", "name": "Chicago" }
+    }
+    </script>
+
   </head>
   <body>
     <div id="root"></div>
